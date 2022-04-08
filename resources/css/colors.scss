@@ -1,0 +1,231 @@
+//$color_text: #1b2d49;
+$color_text: #1e1e1e;
+
+//https://paletton.com/#uid=73U1Q0kFoAG5NM-n2BhMxovW6f1
+//$color_blue: #B8BDDB;
+//$color_blue: #4758BF;
+//$color_blue: #1128BD;
+//$color_blue: #081986;
+//$color_blue: #020D52;
+//$color_green: #B8E1C5;
+//$color_green: #38CA64;
+//$color_green: #00C83D;
+//$color_green: #00902C;
+//$color_green: #00591B;
+//$color_orange: #FFF2D1;
+//$color_orange: #FFCB47;
+//$color_orange: #C38C00;
+//$color_orange: #785600;
+//$color_red: #FFD7D1;
+//$color_red: #FF6047;
+//$color_red: #FF2300;
+//$color_red: #C31B00;
+//$color_red: #781000;
+
+$color_light_gray: #e5e5e5;
+$color_gray: #585858;
+$color_orange: #FFB700;
+$color_green: #14c709;
+$color_dark_green: #147e0e;
+$color_red: #c00c0c;
+$color_dark_red: #810b0b;
+
+$body_background_color: #f9fafd;
+
+$app_menu_text_color: #1e1e1e;
+$app_menu_active_text_color: #1e87f0;
+$app_menu_hover_text_color: #1e87f0;
+$app_menu_submenu_background_color: #ffffff;
+
+$app_logo_border_color: #ededed;
+
+$app_user_menu_icon_color: #d7d7d7;
+$app_user_menu_name_color: #1660ad;
+$app_user_menu_org_color: #4a4a4a;
+
+$page_background_color: #ffffff;
+$page_bar_item_title_color: #626262;
+$page_header_divider_color: #e5e5e5;
+$page_footer_divider_color: #e5e5e5;
+
+$page_message_color: #3d3d3d;
+$page_message_error_color: #e71c1c;
+
+$page_title_color: #525252;
+$page_title_divider_color: #9b9b9b;
+
+$text_container_border_color: #e9e9e9;
+
+$gui_value_title_color: #3f3f3f;
+$gui_value_dots_color: #e5e5e5;
+$gui_hint_color: #3f3f3f;
+
+$actions_menu_color: #1660ad;
+$actions_menu_border_color: #1660ad;
+$actions_menu_background_color: transparent;
+$actions_menu_hover_color: #ffffff;
+$actions_menu_hover_border_color: #1e87f0;
+$actions_menu_hover_background_color: #1e87f0;
+$actions_menu_actions_color: #1660ad;
+$actions_menu_actions_hover_color: #2f8aec;
+$actions_menu_actions_background_color: #ffffff;
+
+$pagination_default_color: #858585;
+$pagination_default_border: transparent;
+$pagination_default_background: transparent;
+$pagination_link_color: #484848;
+$pagination_link_border: #e5e5e5;
+$pagination_link_background: #f7f8fb;
+$pagination_link_hover_color: #484848;
+$pagination_link_hover_border: #858585;
+$pagination_link_hover_background: #f7f8fb;
+$pagination_link_active_color: #fff;
+$pagination_link_active_border: #1e87f0;
+$pagination_link_active_background: #1e87f0;
+
+$loader_color: #1e87f0;
+$loader_background: #ffffff;
+
+$activity_default_color: #595959;
+$activity_active_color: #14c709;
+$activity_inactive_color: #c00c0c;
+
+$link_color: #1660ad;
+$link_hover_color: #2f8aec;
+
+$highlight_background_color: #fff700;
+
+$toast_color: #2475c5;
+$toast_text_color: #ffffff;
+$toast_close_color: #a8c5e1;
+$toast_close_hover_color: #ffffff;
+$toast_success_color: #3d8d38;
+$toast_success_text_color: #ffffff;
+$toast_success_close_color: #a1d59e;
+$toast_success_close_hover_color: #ffffff;
+$toast_info_color: #d58900;
+$toast_info_text_color: #ffffff;
+$toast_info_close_color: #f9d28b;
+$toast_info_close_hover_color: #ffffff;
+$toast_error_color: #b92626;
+$toast_error_text_color: #ffffff;
+$toast_error_close_color: #e3a2a2;
+$toast_error_close_hover_color: #ffffff;
+
+$dialog_color: #1e1e1e;
+$dialog_background_color: #ffffff;
+$dialog_divider_color: #ddd;
+$dialog_color_blue: #147ee8;
+$dialog_color_green: #0e9106;
+$dialog_color_orange: #d58900;
+$dialog_color_red: #c00c0c;
+
+$base_color: #1e1e1e;
+$base_placeholder_color: #757575;
+$base_mask_color: #818181;
+$base_mask_placeholder_color: #757575;
+$base_icon_color: #ababab;
+$base_hover_color: #1e87f0;
+$base_active_color: #1e87f0;
+$base_border_color: #b7b7b7;
+$base_background_color: #ffffff;
+$base_background_changed_color: #ecf4ff;
+$base_disabled_background_color: #e5e5e5;
+$base_error_color: #e71c1c;
+$base_required_color: #e71c1c;
+$base_remove_color: #e71c1c;
+$base_link_color: #1660ad;
+$base_link_hover_color: #2f8aec;
+
+
+$dt_link_color: #1660ad;
+$dt_link_hover_color: #2f8aec;
+$dt_color: #1e1e1e;
+$dt_week_end_color: #c73232;
+
+$dt_current_color: #1e1e1e;
+$dt_current_background_color: transparent;
+$dt_current_border_color: #8ec7ff;
+
+$dt_disabled_color: #a5a5a5;
+$dt_disabled_background_color: transparent;
+$dt_disabled_border_color: transparent;
+
+$dt_selected_color: #fff;
+$dt_selected_background_color: #1e87f0;
+$dt_selected_border_color: #1e87f0;
+
+$dt_preselected_color: #fff;
+$dt_preselected_background_color: #fff;
+$dt_preselected_border_color: #fff;
+
+$base_drop_multi_item_color: #1e1e1e;
+$base_drop_multi_item_border_color: #dbdbdb;
+$base_drop_multi_item_background_color: #fff;
+$base_drop_multi_item_remove_color: #e71c1c;
+
+$base_image_border_color: #cfcfcf;
+$base_image_background_color: #ffffff;
+$base_image_discard_color: #ffffff;
+$base_image_discard_background_color: #e71c1c;
+
+$base_image_target_color: #ffffff;
+$base_image_target_border_color: #147ee8;
+$base_image_target_background_color: #147ee8;
+
+$tab_color: #1660ad;
+$tab_border_color: #e5e5e5;
+$tab_background_color: #f7f7f7;
+$tab_hover_color: #2f8aec;
+$tab_hover_border_color: #e5e5e5;
+$tab_hover_background_color: #f7f7f7;
+$tab_active_color: $color_text;
+$tab_active_border_color: #e5e5e5;
+$tab_active_background_color: #ffffff;
+
+$base_table_header_background_color: #e2eaf3;
+$base_table_header_color: $color_text;
+$base_table_border_color: #e3e3e3;
+$base_table_highlight_background_color: #f9f9f9;
+$base_table_odd_background_color: #ffffff;
+$base_table_even_background_color: #f7f7f7;
+$base_table_hover_background_color: #ebebeb;
+$base_table_cell_color: $color_text;
+
+$base_button_disabled_color: #ffffff;
+$base_button_disabled_border: #787878;
+$base_button_disabled_background_color: #787878;
+
+$base_button_color: #ffffff;
+$base_button_border: #147ee8;
+$base_button_background_color: #147ee8;
+$base_button_hover_color: #ffffff;
+$base_button_hover_border: #1e87f0;
+$base_button_hover_background_color: #1e87f0;
+
+$base_button_green_color: #ffffff;
+$base_button_green_border: #0e9106;
+$base_button_green_background_color: #0e9106;
+$base_button_green_hover_color: #ffffff;
+$base_button_green_hover_border: #17a60f;
+$base_button_green_hover_background_color: #17a60f;
+
+$base_button_red_color: #ffffff;
+$base_button_red_border: #c00c0c;
+$base_button_red_background_color: #c00c0c;
+$base_button_red_hover_color: #ffffff;
+$base_button_red_hover_border: #cc1717;
+$base_button_red_hover_background_color: #cc1717;
+
+
+$drag_item_body_color: $color_text;
+$drag_item_header_color: #565656;
+$drag_item_separator_color: #e1e1e1;
+$drag_item_border_color: #ededed;
+$drag_item_background_color: #fbfbfb;
+$drag_item_head_color: #787878;
+$drag_item_head_inactive_color: #d7d7d7;
+$drag_item_action_on_color: #0e9106;
+$drag_item_action_off_color: #c00c0c;
+$drag_item_action_edit_color: #147ee8;
+$drag_item_action_remove_color: #c00c0c;

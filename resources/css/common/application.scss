@@ -1,0 +1,112 @@
+@import "../variables";
+@import "../colors";
+@import "../shadows";
+@import "../mixins/no-selection";
+
+.application {
+
+    &__menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        height: $header_menu_height;
+        @include noSelection();
+
+        &-item {
+            flex-grow: 0;
+            font-family: $project_font;
+            font-size: 14px;
+            position: relative;
+            color: $app_menu_text_color;
+            transition: color $animation $animation_time, background-color $animation $animation_time;
+            display: flex;
+            align-items: center;
+
+            &-link {
+                cursor: pointer;
+            }
+
+            &-link, &-no-link {
+                text-decoration: none;
+                color: $app_menu_text_color;
+                box-sizing: border-box;
+
+                & > span {
+                    display: block;
+                    padding: 0 10px;
+                }
+
+                &-drop {
+                    width: 8px;
+                    margin-left: 6px;
+                    transition: transform $animation $animation_time;
+                }
+            }
+
+            &-link:hover {
+                color: $app_menu_hover_text_color;
+            }
+
+            &-link.router-link-exact-active {
+                color: $app_menu_active_text_color;
+            }
+
+            &-0 > &-link, &-0 > &-no-link {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            &-0 > &-link:hover, &-0 > &-no-link:hover {
+
+            }
+
+            &-1 > &-link, &-1 > &-no-link {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                line-height: 28px;
+                height: 28px;
+
+                & > span {
+                    padding: 0 10px;
+                }
+            }
+
+            &-1 > &-no-link {
+                color: #8c8c8c;
+                cursor: default;
+            }
+        }
+
+        &-submenu {
+            &-0 {
+                transition: opacity $animation $animation_time, visibility $animation $animation_time;
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: 0;
+                bottom: 10px;
+                transform: translateY(100%);
+                background-color: $app_menu_submenu_background_color;
+                box-sizing: border-box;
+                padding: 15px;
+                box-shadow: $shadow_2;
+                border-radius: 0 0 3px 3px;
+                min-width: 100%;
+                z-index: 200;
+            }
+        }
+    }
+}
+
+.application__menu-item-0.application__menu-item-hovered .application__menu-submenu-0 {
+    opacity: 1;
+    visibility: visible;
+}
+
+.application__menu-item-0.application__menu-item-hovered > .application__menu-item-link .application__menu-item-link-drop,
+.application__menu-item-0.application__menu-item-hovered > .application__menu-item-no-link .application__menu-item-link-drop {
+    transform: rotate(-180deg);
+}

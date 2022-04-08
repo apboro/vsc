@@ -1,0 +1,40 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@vue/compiler-sfc": "^3.0.5",
+        "autoprefixer": "^10.2.4",
+        "axios": "^0.21",
+        "es6-object-assign": "^1.1.0",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "node-sass": "^6.0.1",
+        "normalize.css": "^8.0.1",
+        "postcss": "^8.1.14",
+        "postcss-import": "^14.0.1",
+        "promise-polyfill": "^8.2.1",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.5",
+        "sass-loader": "^12.3.0",
+        "vue": "^3.2.23",
+        "vue-loader": "^16.8.3",
+        "vue-router": "^4.0.12",
+        "xregexp": "^5.1.0",
+        "vuex": "^4.0.2",
+        "resize-observer-polyfill": "^1.5.1",
+        "vue-imask": "^6.4.2",
+        "moment": "^2.29.1"
+    },
+    "dependencies": {
+        "file-saver": "^2.0.5",
+        "print-js": "^1.6.0"
+    }
+}

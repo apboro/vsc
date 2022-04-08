@@ -1,0 +1,18 @@
+@import "../colors";
+@import "../variables";
+
+.link {
+    text-decoration: none;
+    color: $link_color;
+    cursor: pointer;
+    transition: color $animation $animation_time;
+    font-family: $project_font;
+
+    &__bold {
+        font-weight: bold;
+    }
+
+    &:hover {
+        color: $link_hover_color;
+    }
+}
