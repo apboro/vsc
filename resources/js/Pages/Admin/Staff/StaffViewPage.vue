@@ -62,7 +62,7 @@ export default {
         tabs() {
             let tabs = {personal: 'Персональные данные'};
             if (this.can('staff.access')) tabs['access'] = 'Доступ';
-            if (this.can('staff.permissions')) tabs['permissions'] = 'Роли и права';
+            if (this.can('staff.permissions')) tabs['permissions'] = 'Права';//'Роли и права';
             return tabs;
         },
     },

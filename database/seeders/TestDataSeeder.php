@@ -29,10 +29,10 @@ class TestDataSeeder extends Seeder
         // }
 
         $titles = [
-            ['name' => 'Глав.врач'],
-            ['name' => 'Секретарь'],
-            ['name' => 'Мед.сестра'],
-            ['name' => 'Санитар'],
+            ['name' => 'Бухгалтер'],
+            ['name' => 'Менеджер'],
+            ['name' => 'Тренер'],
+            ['name' => 'Охранник'],
         ];
 
         foreach ($titles as &$title) {

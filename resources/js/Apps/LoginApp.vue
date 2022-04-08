@@ -5,8 +5,10 @@
                 <Logo/>
             </div>
             <div class="login__logo-text">
-                <div class="login__logo-text-title">ГОАУЗ «МОЦСВМП»</div>
-                <div class="login__logo-text-description">Система единого электронного документооборота</div>
+                <!--
+                <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>
+                -->
+                <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Ленинградской области»</div>
             </div>
         </div>
         <div class="login__divider"></div>
@@ -15,7 +17,7 @@
             <FormString :form="form" :name="'password'" :autocomplete="'current-password'" :type="'password'" @keyup.enter="enter" ref="password"/>
         </div>
         <div class="login__actions">
-            <GuiButton @clicked="login">Войти</GuiButton>
+            <GuiButton :color="'blue'" @clicked="login">Войти</GuiButton>
         </div>
         <div class="login__actions">
             <span class="link" @click="forgot">Забыл пароль</span>
@@ -118,7 +120,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 430px;
     box-shadow: $shadow_1;
     background-color: #fff;
     border-radius: 3px;
@@ -132,6 +134,19 @@ body {
 
         &-img {
             width: 100px;
+            height: 100px;
+            background-color: #3c8edd;
+            flex-shrink: 0;
+            flex-grow: 0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > * {
+                max-width: 75%;
+                max-height: 75%;
+            }
         }
 
         &-text {
@@ -139,6 +154,8 @@ body {
             color: $base_black_color;
             box-sizing: border-box;
             padding-left: 20px;
+            display: flex;
+            align-items: center;
 
             &-title {
                 font-size: 20px;
@@ -146,8 +163,8 @@ body {
             }
 
             &-description {
-                margin-top: 10px;
-                font-size: 16px;
+                //margin-top: 10px;
+                font-size: 18px;
             }
         }
     }

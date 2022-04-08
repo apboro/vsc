@@ -13,9 +13,9 @@ class PermissionsSeeder extends Seeder
         'dictionaries' => [
             'dictionaries.edit' => 'Редактирование справочников',
         ],
-        'roles' => [
-            'roles.edit' => 'Редактирование ролей',
-        ],
+        // 'roles' => [
+        //     'roles.edit' => 'Редактирование ролей',
+        // ],
         'staff' => [
             'staff.view' => 'Просмотр карточек сотрудников',
             'staff.edit' => 'Добавление и редактирование карточек сотрудников',

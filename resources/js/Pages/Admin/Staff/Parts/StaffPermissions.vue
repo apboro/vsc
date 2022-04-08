@@ -1,6 +1,7 @@
 <template>
     <LoadingProgress :loading="processing">
 
+        <!--
         <GuiContainer mt-30 roles-list>
             <GuiHeading mb-10>Роли</GuiHeading>
             <GuiContainer pl-15>
@@ -15,6 +16,11 @@
 
         <GuiHeading mt-30 :expandable="true" @expand="expandPermissions">Дополнительные права</GuiHeading>
         <div v-show="permissions_shown">
+        -->
+
+        <GuiContainer mt-30 roles-list>
+            <GuiHeading mb-10>Права</GuiHeading>
+
             <GuiContainer mt-30 roles-list v-for="module in modules">
                 <GuiHeading mb-10 text-lg>{{ module['name'] }}</GuiHeading>
                 <GuiContainer pl-15>
@@ -33,8 +39,11 @@
                 <GuiButton v-if="permissions_editing" :color="'blue'" @click="savePermissions">Сохранить</GuiButton>
                 <GuiButton v-if="permissions_editing" @click="cancelPermissions">Отмена</GuiButton>
             </GuiContainer>
-        </div>
 
+        </GuiContainer>
+        <!--
+        </div>
+        -->
     </LoadingProgress>
 </template>
 

@@ -83,6 +83,7 @@ $base_white_color: #ffffff !default;
             padding: 5px;
             display: block;
             border-radius: 50%;
+            background-color: #3c8edd;
 
             &-icon {
                 width: 100%;
