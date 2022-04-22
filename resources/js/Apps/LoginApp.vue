@@ -8,7 +8,7 @@
                 <!--
                 <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>
                 -->
-                <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Ленинградской области»</div>
+                <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Всеволожского района»</div>
             </div>
         </div>
         <div class="login__divider"></div>

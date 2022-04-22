@@ -249,7 +249,7 @@ const form = function (load_url, save_url, options = {}) {
             return false;
         },
 
-        originate() {
+        revert() {
             Object.keys(this.originals).map(key => {
                 this.update(key, this.originals[key]);
             });

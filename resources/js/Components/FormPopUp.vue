@@ -1,5 +1,5 @@
 <template>
-    <PopUp :title="title"
+    <PopUp :title="titleProxy"
            :message="message"
            :buttons="popUpButtons"
            :align="align"
@@ -36,17 +36,22 @@ export default {
     computed: {
         popUpButtons() {
             return [{result: this.saveButton, caption: this.saveButtonCaption, color: 'blue'}, ...this.buttons];
+        },
+        titleProxy() {
+            return this._title !== null ? this._title : this.title;
         }
     },
 
     data: () => ({
         resolve_function: null,
         opts: null,
+        _title: null,
     }),
 
     methods: {
-        show(options = null) {
+        show(options = null, title = null) {
             this.opts = options;
+            this._title = title;
             this.$refs.popup.show();
             return new Promise(resolve => {
                 this.resolve_function = resolve;

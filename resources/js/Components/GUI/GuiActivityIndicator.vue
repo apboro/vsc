@@ -22,7 +22,7 @@ export default {
 <style lang="scss">
 @import "../variables";
 
-$base_disabled_color: #727272 !default;
+$base_gray_color: #8f8f8f !default;
 $base_active_color: #00c500 !default;
 $base_inactive_color: #db0000 !default;
 
@@ -31,7 +31,7 @@ $base_inactive_color: #db0000 !default;
     width: 7px;
     height: 7px;
     vertical-align: baseline;
-    background-color: $base_disabled_color;
+    background-color: $base_gray_color;
     border-radius: 50%;
     margin-right: 8px;
     position: relative;
