@@ -7,6 +7,9 @@ use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
+use App\Models\Dictionaries\SportKind;
+use App\Models\Dictionaries\TrainingBaseContractStatus;
+use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +21,9 @@ class DictionaryController extends ApiController
         'position_statuses' => ['class' => PositionStatus::class, 'allow' => null],
         'position_titles' => ['class' => PositionTitle::class, 'allow' => null],
         'user_statuses' => ['class' => UserStatus::class, 'allow' => null],
+        'sport_kinds' => ['class' => SportKind::class, 'allow' => null],
+        'training_base_statuses' => ['class' => TrainingBaseStatus::class, 'allow' => null],
+        'training_base_contract_statuses' => ['class' => TrainingBaseContractStatus::class, 'allow' => null],
     ];
 
     /**

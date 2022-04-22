@@ -114,7 +114,7 @@ export default {
             this.roles_editing = true;
         },
         cancelRoles() {
-            this.roles.originate();
+            this.roles.revert();
             this.roles_editing = false;
         },
         saveRoles() {
@@ -133,7 +133,7 @@ export default {
             this.permissions_editing = true;
         },
         cancelPermissions() {
-            this.permissions.originate();
+            this.permissions.revert();
             this.permissions_editing = false;
         },
         savePermissions() {

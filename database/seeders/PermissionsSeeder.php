@@ -23,6 +23,13 @@ class PermissionsSeeder extends Seeder
             'staff.access' => 'Управление доступом сотрудников',
             'staff.permissions' => 'Управление правами сотрудников',
         ],
+        'training_base' => [
+            'training_base.view' => 'Просмотр объектов',
+            'training_base.edit' => 'Добавление и редактирование объектов',
+            'training_base.delete' => 'Удаление объектов',
+            'training_base.contracts.view' => 'Просмотр договоров',
+            'training_base.contracts.modify' => 'Добавление, редактирование, удаление договоров',
+        ],
     ];
 
     /**

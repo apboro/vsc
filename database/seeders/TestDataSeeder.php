@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Dictionaries\PositionTitle;
+use App\Models\Dictionaries\SportKind;
 use App\Models\Positions\Position;
 use App\Models\User\User;
 use App\Models\User\UserProfile;
@@ -50,5 +51,19 @@ class TestDataSeeder extends Seeder
                 Position::factory()->create(['user_id' => $user->id, 'title_id' => $titles[random_int(0, count($titles) - 1)]['id']]);
             })
             ->create();
+
+        $sportKinds = [
+            'Гимнастика',
+            'Атлетика',
+            'Футбол',
+            'Хокей',
+            'Дзюдо',
+        ];
+
+        foreach ($sportKinds as $sportKind) {
+            $kind = new SportKind;
+            $kind->name = $sportKind;
+            $kind->save();
+        }
     }
 }

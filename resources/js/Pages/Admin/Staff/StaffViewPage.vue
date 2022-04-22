@@ -13,7 +13,7 @@
 
         <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
 
-        <StaffInfo v-if="tab === 'personal'" :data="data.data" :staff-id="staffId" @update="update"/>
+        <StaffInfo v-if="tab === 'personal'" :data="data.data"/>
         <StaffAccess v-if="tab === 'access' && can('staff.access')" :data="data.data" :staff-id="staffId" :editable="true" @update="update"/>
         <StaffPermissions v-if="tab === 'permissions' && can('staff.permissions')" :data="data.data" :staff-id="staffId" :ready="!processing" @update="update"/>
 
@@ -46,7 +46,6 @@ export default {
     data: () => ({
         data: data('/api/staff/view'),
         tab: null,
-        trips_title: null,
     }),
 
     computed: {

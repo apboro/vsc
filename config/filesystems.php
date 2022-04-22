@@ -40,7 +40,17 @@ return [
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
-
+        'public_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images'),
+            'url' => env('APP_URL') . '/storage/images',
+            'visibility' => 'public',
+        ],
+        'training_base_contracts' => [
+            'driver' => 'local',
+            'root' => storage_path('app/training-base/contracts'),
+            'url' => env('APP_URL') . '/api/training-base/contracts/files',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

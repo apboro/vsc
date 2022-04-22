@@ -8,6 +8,9 @@ import StaffEditPage from "@/Pages/Admin/Staff/StaffEditPage";
 // import RolesEditPage from "@/Pages/Admin/Roles/RolesEditPage";
 // import SettingsPage from "@/Pages/Admin/Settings/SettingsPage";
 import Forbidden from "@/Pages/Forbidden";
+import TrainingBaseListPage from "@/Pages/Admin/TrainingBase/TrainingBaseListPage";
+import TrainingBaseEditPage from "@/Pages/Admin/TrainingBase/TrainingBaseEditPage";
+import TrainingBaseViewPage from "@/Pages/Admin/TrainingBase/TrainingBaseViewPage";
 
 export default [
     {path: '/', name: 'home', component: TasksListPage, meta: {title: 'Список задач'}},
@@ -23,6 +26,10 @@ export default [
     {path: '/staff', name: 'staff-list', component: StaffListPage, meta: {title: 'Список сотрудников', permission: ['staff.view','staff.edit','staff.delete','staff.access','staff.permissions']}},
     {path: '/staff/:id', name: 'staff-view', component: StaffViewPage, meta: {title: 'Карточка сотрудника', permission: ['staff.view','staff.edit','staff.delete','staff.access','staff.permissions']}},
     {path: '/staff/:id/edit', name: 'staff-edit', component: StaffEditPage, meta: {title: 'Редактирование карточки сотрудника', permission: 'staff.edit'}},
+
+    {path: '/bases', name: 'training-base-list', component: TrainingBaseListPage, meta: {title: 'Список объектов', permission: ['training_base.view','training_base.edit','training_base.delete']}},
+    {path: '/bases/:id', name: 'training-base-view', component: TrainingBaseViewPage, meta: {title: 'Карточка объекта', permission: ['training_base.view','training_base.edit','training_base.delete']}},
+    {path: '/bases/:id/edit', name: 'training-base-edit', component: TrainingBaseEditPage, meta: {title: 'Редактирование объекта', permission: 'training_base.edit'}},
 
     {path: '/403', name: '403', component: Forbidden},
     {path: '/:pathMatch(.*)*', name: '404', component: NotFound},

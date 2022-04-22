@@ -12,7 +12,6 @@ use App\Models\Permissions\Role;
 use App\Models\User\User;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -29,8 +28,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property PositionStatus $status
  * @property User $user
  * @property PositionInfo $info
- *
- * @property Collection $ordering
  */
 class Position extends Model implements Statusable
 {
