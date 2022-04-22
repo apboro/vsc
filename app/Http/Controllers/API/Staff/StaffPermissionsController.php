@@ -30,7 +30,7 @@ class StaffPermissionsController extends ApiController
             return APIResponse::notFound('Сотрудник не найден');
         }
 
-        $permissions = Permission::query()->orderBy('name')->get();
+        $permissions = Permission::query()->get();
         $staffPermissions = $user->position->permissions()->pluck('id')->toArray();
         $modules = [];
         $titles = [];
