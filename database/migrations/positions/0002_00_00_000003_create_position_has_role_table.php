@@ -18,7 +18,7 @@ class CreatePositionHasRoleTable extends Migration
             $table->unsignedInteger('position_id');
             $table->unsignedSmallInteger('role_id');
 
-            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('role_id')->references('id')->on('roles')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }

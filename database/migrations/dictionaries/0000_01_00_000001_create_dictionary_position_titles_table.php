@@ -21,7 +21,7 @@ class CreateDictionaryPositionTitlesTable extends Migration
             $table->unsignedSmallInteger('organization_id');
 
             $table->timestamps();
-            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnDelete();
+            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

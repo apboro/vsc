@@ -23,8 +23,8 @@ class CreatePositionsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnDelete();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('status_id')->references('id')->on('dictionary_position_statuses')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreign('title_id')->references('id')->on('dictionary_position_titles')->restrictOnDelete()->cascadeOnUpdate();
         });

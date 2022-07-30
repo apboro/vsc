@@ -18,7 +18,7 @@ class CreatePositionHasPermissionTable extends Migration
             $table->unsignedInteger('position_id');
             $table->unsignedSmallInteger('permission_id');
 
-            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('permission_id')->references('id')->on('permissions')->restrictOnDelete()->cascadeOnUpdate();
         });
     }

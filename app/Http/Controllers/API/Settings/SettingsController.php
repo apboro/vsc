@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Settings;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Settings;
@@ -27,7 +28,7 @@ class SettingsController extends ApiEditController
      */
     public function getGeneral(Request $request): JsonResponse
     {
-        return $this->get('general');
+        return $this->get($request, 'general');
     }
 
     /**
@@ -43,25 +44,27 @@ class SettingsController extends ApiEditController
     }
 
     /**
-     * Get settings for section.
+     * Get settings for a section.
      *
+     * @param Request $request
      * @param string $section
      *
      * @return  JsonResponse
      */
-    protected function get(string $section): JsonResponse
+    protected function get(Request $request, string $section): JsonResponse
     {
         $values = [];
+        $current = Current::get($request);
 
         foreach ($this->settings[$section]['fields'] as $key => $type) {
-            $values[$key] = Settings::get($key, null, $type);
+            $values[$key] = Settings::get($current->organizationId(), $key, null, $type);
         }
 
         return APIResponse::form($values, $this->settings[$section]['rules'], $this->settings[$section]['titles']);
     }
 
     /**
-     * Set settings for section.
+     * Set settings for a section.
      *
      * @param Request $request
      * @param string $section
@@ -76,8 +79,10 @@ class SettingsController extends ApiEditController
             return APIResponse::validationError($errors);
         }
 
+        $current = Current::get($request);
+
         foreach ($this->settings[$section]['fields'] as $key => $type) {
-            Settings::set($key, $data[$key], $type);
+            Settings::set($current->organizationId(), $key, $data[$key], $type);
         }
 
         Settings::save();

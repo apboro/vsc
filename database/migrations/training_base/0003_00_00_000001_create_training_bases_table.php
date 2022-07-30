@@ -25,7 +25,7 @@ class CreateTrainingBasesTable extends Migration
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('dictionary_training_base_statuses')->restrictOnDelete()->cascadeOnUpdate();
-            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnDelete();
+            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

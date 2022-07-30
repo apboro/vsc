@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -10,8 +11,10 @@ class Settings
     public const string = 0;
     public const int = 1;
     public const bool = 2;
+    public const datetime = 3;
+    public const array = 4;
 
-    /** @var string[] Settings store. */
+    /** @var string[][] Settings store. */
     protected static array $settings;
 
     /** @var bool Loaded state. */
@@ -26,13 +29,15 @@ class Settings
      *
      * @return  mixed
      */
-    public static function get(string $key, $default = null, int $type = Settings::string)
+    public static function get(?int $organizationId, string $key, $default = null, int $type = Settings::string)
     {
         if (!self::$loaded) {
             self::load();
         }
 
-        return (self::$settings && array_key_exists($key, self::$settings)) ? self::castTo(self::$settings[$key], $type) : $default;
+        return (self::$settings && array_key_exists($organizationId, self::$settings) && array_key_exists($key, self::$settings[$organizationId]))
+            ? self::castTo(self::$settings[$organizationId][$key], $type)
+            : $default;
     }
 
     /**
@@ -44,13 +49,16 @@ class Settings
      *
      * @return  void
      */
-    public static function set(string $key, $value, int $type = Settings::string): void
+    public static function set(?int $organizationId, string $key, $value, int $type = Settings::string): void
     {
         if (!self::$loaded) {
             self::load();
         }
 
-        self::$settings[$key] = self::castFrom($value, $type);
+        if (!isset(self::$settings[$organizationId])) {
+            self::$settings[$organizationId] = [];
+        }
+        self::$settings[$organizationId][$key] = self::castFrom($value, $type);
     }
 
     /**
@@ -65,7 +73,10 @@ class Settings
         self::$settings = [];
 
         foreach ($settings as $setting) {
-            self::$settings[$setting->key] = $setting->value;
+            if (!isset(self::$settings[$setting->organization_id])) {
+                self::$settings[$setting->organization_id] = [];
+            }
+            self::$settings[$setting->organization_id][$setting->key] = $setting->value;
         }
 
         self::$loaded = true;
@@ -82,8 +93,10 @@ class Settings
             throw new RuntimeException('Settings must be loaded before saving.');
         }
         $values = [];
-        foreach (self::$settings as $key => $value) {
-            $values[] = ['key' => $key, 'value' => $value];
+        foreach (self::$settings as $organizationId => $settings) {
+            foreach ($values as $key => $value) {
+                $values[] = ['key' => $key, 'organization_id' => empty($organizationId) ? null : $organizationId, 'value' => $value];
+            }
         }
         DB::table('settings')->truncate();
         DB::table('settings')->insert($values);
@@ -101,14 +114,18 @@ class Settings
     {
         switch ($type) {
             case self::int:
-                return (int)$value;
+                return $value !== null ? (int)$value : null;
             case self::bool:
                 return (bool)$value;
+            case self::datetime:
+                return $value !== null ? Carbon::parse($value) : null;
+            case self::array:
+                return !empty($value) ? json_decode($value, true, 512, JSON_THROW_ON_ERROR) : null;
             case self::string:
             default:
         }
 
-        return (string)$value;
+        return $value !== null ? (string)$value : null;
     }
 
     /**
@@ -124,7 +141,11 @@ class Settings
         switch ($type) {
             case self::int:
             case self::bool:
-                $value = (string)$value;
+            case self::datetime:
+                $value = $value !== null ? (string)$value : null;
+                break;
+            case self::array:
+                $value = !empty($value) ? json_encode($value, JSON_THROW_ON_ERROR) : null;
                 break;
             case self::string:
             default:
