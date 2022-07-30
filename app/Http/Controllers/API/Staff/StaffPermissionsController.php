@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API\Staff;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Permissions\Permission;
 use App\Models\Permissions\Role;
 use App\Models\User\User;
+use App\Scopes\ForOrganization;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -24,9 +27,16 @@ class StaffPermissionsController extends ApiController
     public function get(Request $request): JsonResponse
     {
         $id = $request->input('id');
+        $current = Current::get($request);
 
         /** @var User $user */
-        if ($id === null || null === ($user = User::query()->where('id', $id)->first())) {
+        if ($id === null || null === ($user = User::query()
+                ->where('id', $id)
+                ->whereHas('position', function (Builder $query) use ($current) {
+                    $query->tap(new ForOrganization($current->organizationId(), true));
+                })
+                ->first()
+            )) {
             return APIResponse::notFound('Сотрудник не найден');
         }
 
@@ -67,9 +77,16 @@ class StaffPermissionsController extends ApiController
     public function update(Request $request): JsonResponse
     {
         $id = $request->input('id');
+        $current = Current::get($request);
 
         /** @var User $user */
-        if ($id === null || null === ($user = User::query()->where('id', $id)->first())) {
+        if ($id === null || null === ($user = User::query()
+                ->where('id', $id)
+                ->whereHas('position', function (Builder $query) use ($current) {
+                    $query->tap(new ForOrganization($current->organizationId(), true));
+                })
+                ->first()
+            )) {
             return APIResponse::notFound('Сотрудник не найден');
         }
 

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API\Staff;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\User\User;
+use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -33,10 +35,15 @@ class StaffListController extends ApiController
      */
     public function list(ApiListRequest $request): JsonResponse
     {
+        $current = Current::get($request);
+
         $query = User::query()
             ->with(['profile', 'position', 'position.info'])
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->select('users.*')
+            ->whereHas('position', function (Builder $query) use ($current){
+                $query->tap(new ForOrganization($current->organizationId(), true));
+            })
             ->orderBy('user_profiles.lastname')
             ->orderBy('user_profiles.firstname')
             ->orderBy('user_profiles.patronymic');

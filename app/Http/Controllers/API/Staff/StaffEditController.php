@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\API\Staff;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Models\Positions\Position;
 use App\Models\User\User;
+use App\Scopes\ForOrganization;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -40,7 +44,7 @@ class StaffEditController extends ApiEditController
     ];
 
     /**
-     * Get edit data for excursion.
+     * Get edit data for user.
      * id === 0 is for new
      *
      * @param Request $request
@@ -53,7 +57,7 @@ class StaffEditController extends ApiEditController
         $user = $this->firstOrNewUser($request, ['profile', 'position', 'position.status', 'position.info', 'position.title']);
 
         if ($user === null) {
-            return APIResponse::notFound('Сотрудник не найен');
+            return APIResponse::notFound('Сотрудник не найден');
         }
 
         // send response
@@ -90,6 +94,7 @@ class StaffEditController extends ApiEditController
     public function update(Request $request): JsonResponse
     {
         $data = $this->getData($request);
+        $current = Current::get($request);
 
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
             return APIResponse::validationError($errors);
@@ -99,7 +104,7 @@ class StaffEditController extends ApiEditController
         $user = $this->firstOrNewUser($request);
 
         if ($user === null) {
-            return APIResponse::notFound('Сотрудник не найен');
+            return APIResponse::notFound('Сотрудник не найден');
         }
 
         if ($user->exists) {
@@ -120,9 +125,11 @@ class StaffEditController extends ApiEditController
         $profile->mobile_phone = $data['mobile_phone'];
         $profile->save();
 
-        $position = $user->position;
-        $position->setStatus($data['status_id']);
+        $position = new Position;
+        $position->user_id = $user->id;
+        $position->setStatus($data['status_id'], false);
         $position->title_id = $data['position_title_id'];
+        $position->organization_id = $current->organizationId();
         $position->save();
 
         $info = $position->info;
@@ -141,7 +148,7 @@ class StaffEditController extends ApiEditController
     }
 
     /**
-     * Retrieve user by id or create new.
+     * Retrieve user by ID or create new.
      *
      * @param Request $request
      * @param array $with
@@ -150,6 +157,8 @@ class StaffEditController extends ApiEditController
      */
     protected function firstOrNewUser(Request $request, array $with = []): ?User
     {
+        $current = Current::get($request);
+
         /** @var User $class */
 
         if (($id = $request->input('id')) === null) {
@@ -159,11 +168,17 @@ class StaffEditController extends ApiEditController
         $id = (int)$id;
 
         if ($id === 0) {
-            return new User;
+            return new User();
         }
 
         /** @var User $user */
-        $user = User::query()->where('id', $id)->with($with)->first();
+        $user = User::query()
+            ->where('id', $id)
+            ->whereHas('position', function (Builder $query) use ($current) {
+                $query->tap(new ForOrganization($current->organizationId(), true));
+            })
+            ->with($with)
+            ->first();
 
         return $user ?? null;
     }

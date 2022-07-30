@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API\Staff;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\User\User;
+use App\Scopes\ForOrganization;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -14,15 +17,19 @@ class StaffViewController extends ApiController
     public function view(Request $request): JsonResponse
     {
         $id = $request->input('id');
+        $current = Current::get($request);
 
         /** @var User $user */
         if ($id === null ||
             null === ($user = User::query()
                 ->with(['profile', 'position', 'position.status', 'position.info'])
                 ->where('id', $id)
+                ->whereHas('position', function (Builder $query) use ($current){
+                    $query->tap(new ForOrganization($current->organizationId(), true));
+                })
                 ->first())
         ) {
-            return APIResponse::notFound('Сотрудник не найен');
+            return APIResponse::notFound('Сотрудник не найден');
         }
 
         $values = [
