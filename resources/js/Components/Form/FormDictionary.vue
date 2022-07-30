@@ -37,7 +37,7 @@ export default {
         name: {type: String, required: true},
         disabled: {type: Boolean, default: false},
         dictionary: {type: String, required: true},
-        fresh: {type: Boolean, default: false},
+        fresh: {type: Boolean, default: true},
         disabledOptions: {type: Boolean, default: false},
         hasNull: {type: Boolean, default: false},
         identifier: {type: String, default: 'id'},

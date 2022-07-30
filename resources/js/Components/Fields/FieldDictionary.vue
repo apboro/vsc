@@ -59,7 +59,7 @@ export default {
         center: {type: Boolean, default: false},
 
         dictionary: String,
-        fresh: {type: Boolean, default: false},
+        fresh: {type: Boolean, default: true},
     },
 
     emits: ['update:modelValue', 'change'],
