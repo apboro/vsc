@@ -1,22 +1,48 @@
 window._ = require('lodash');
 
 import Promise from "promise-polyfill";
+
 window.Promise = Promise;
 
 import ObjectAssign from "es6-object-assign";
+
 ObjectAssign.polyfill();
+
+if (typeof window.organization === "undefined") {
+    window.organization = null;
+}
+
+let stateKey, eventKey;
+const keys = {hidden: "visibilitychange", webkitHidden: "webkitvisibilitychange", mozHidden: "mozvisibilitychange", msHidden: "msvisibilitychange"};
+for (stateKey in keys) {
+    if (stateKey in document) {
+        eventKey = keys[stateKey];
+        break;
+    }
+}
+document.addEventListener(eventKey, () => {
+    document.cookie = 'vsc_organization=' + window.organization + ';path=/';
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // Add a response interceptor
+window.axios.interceptors.request.use(
+    request => {
+        request.headers['X-Vcs-Organization'] = window.organization;
+        return request;
+    },
+    error => {
+        return error;
+    }
+);
 window.axios.interceptors.response.use(
     response => {
         return response;
@@ -34,7 +60,7 @@ window.axios.interceptors.response.use(
                         console.log('Can not retrieve new token', err);
                     });
             });
-        } else if(error.response.status === 401) {
+        } else if (error.response.status === 401) {
             window.location.reload();
         }
 

@@ -40,4 +40,29 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class, 'role_has_permission', 'role_id', 'permission_id');
     }
+
+    /**
+     * Match this role against given.
+     *
+     * @param int|string $role
+     *
+     * @return  bool
+     */
+    public function matches($role): bool
+    {
+        if (is_string($role)) {
+            $role = constant('self::' . $role);
+        }
+        return $this->getAttribute('id') === $role;
+    }
+
+    /**
+     * Get string representation.
+     *
+     * @return  string|null
+     */
+    public function asString(): ?string
+    {
+        return $this->id === self::super ? 'super' : null;
+    }
 }

@@ -49,7 +49,7 @@ export default {
         multi: {type: Boolean, default: false},
 
         dictionary: String,
-        fresh: {type: Boolean, default: false},
+        fresh: {type: Boolean, default: true},
     },
 
     emits: ['update:modelValue', 'change'],

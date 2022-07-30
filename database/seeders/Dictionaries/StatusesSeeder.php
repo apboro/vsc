@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Dictionaries;
 
+use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
@@ -26,6 +27,10 @@ class StatusesSeeder extends GenericSeeder
         TrainingBaseContractStatus::class => [
             TrainingBaseContractStatus::active => ['name' => 'Действующий'],
             TrainingBaseContractStatus::inactive => ['name' => 'Недействующий'],
+        ],
+        OrganizationStatus::class => [
+            OrganizationStatus::active => ['name' => 'Действующая'],
+            OrganizationStatus::blocked => ['name' => 'Недействующая'],
         ],
     ];
 }

@@ -169,12 +169,12 @@ class APIResponse
     /**
      * Make 200 form response with data and payload.
      *
-     * @param string $message
+     * @param string|null $message
      * @param mixed $payload
      *
      * @return  JsonResponse
      */
-    public static function success(string $message, array $payload = []): JsonResponse
+    public static function success(string $message = null, array $payload = []): JsonResponse
     {
         return response()->json([
             'status' => 'OK',

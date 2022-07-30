@@ -19,7 +19,7 @@ class CreateRoleHasPermissionTable extends Migration
             $table->unsignedSmallInteger('permission_id');
 
             $table->foreign('role_id')->references('id')->on('roles')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('permission_id')->references('id')->on('permissions')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreign('permission_id')->references('id')->on('permissions')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

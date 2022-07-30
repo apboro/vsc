@@ -55,7 +55,7 @@ class File extends Model
         }
         // Otherwise, try to search by existing file by hash
         $hash = md5($attributes['content']);
-        if (($file = self::query()->where('hash', $hash)->first()) !== null) {
+        if (($file = self::query()->where(['disk' => $disk, 'hash' => $hash])->first()) !== null) {
             /** @var File $file */
             return $file;
         }

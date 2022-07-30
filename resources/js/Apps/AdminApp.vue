@@ -12,6 +12,8 @@
             </template>
         </LayoutHeader>
 
+        <OrganizationSwitch/>
+
         <router-view/>
 
     </div>
@@ -24,6 +26,7 @@ import LayoutHeader from "../Components/Layout/LayoutHeader";
 import LayoutMenu from "../Components/Layout/LayoutMenu";
 import LayoutUserMenu from "../Components/Layout/LayoutUserMenu";
 import PopUp from "@/Components/PopUp";
+import OrganizationSwitch from "@/Apps/OrganizationSwitch";
 
 export default {
     props: {
@@ -32,6 +35,7 @@ export default {
     },
 
     components: {
+        OrganizationSwitch,
         LayoutUserMenu,
         LayoutHeader,
         LayoutMenu,

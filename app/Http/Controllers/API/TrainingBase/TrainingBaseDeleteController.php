@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\TrainingBase\TrainingBase;
+use App\Scopes\ForOrganization;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -23,9 +25,11 @@ class TrainingBaseDeleteController extends ApiController
     {
         $id = $request->input('id');
 
+        $current = Current::get($request);
+
         /** @var TrainingBase $base */
-        if ($id === null || null === ($base = TrainingBase::query()->where('id', $id)->first())) {
-            return APIResponse::notFound('Объект не найен');
+        if ($id === null || null === ($base = TrainingBase::query()->where('id', $id)->tap(new ForOrganization($current->organizationId()))->first())) {
+            return APIResponse::notFound('Объект не найден');
         }
 
         $name = $base->title;

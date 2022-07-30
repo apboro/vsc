@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
@@ -9,6 +10,7 @@ use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\TrainingBase\TrainingBase;
+use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -36,7 +38,10 @@ class TrainingBaseListController extends ApiController
      */
     public function list(ApiListRequest $request): JsonResponse
     {
+        $current = Current::get($request);
+
         $query = TrainingBase::query()
+            ->tap(new ForOrganization($current->organizationId()))
             ->with(['status', 'info', 'sportKinds'])
             ->orderBy('created_at', 'desc');
 

@@ -11,6 +11,9 @@ import Forbidden from "@/Pages/Forbidden";
 import TrainingBaseListPage from "@/Pages/Admin/TrainingBase/TrainingBaseListPage";
 import TrainingBaseEditPage from "@/Pages/Admin/TrainingBase/TrainingBaseEditPage";
 import TrainingBaseViewPage from "@/Pages/Admin/TrainingBase/TrainingBaseViewPage";
+import OrganizationsListPage from "@/Pages/Admin/Organizations/OrganizationsListPage";
+import OrganizationsViewPage from "@/Pages/Admin/Organizations/OrganizationsViewPage";
+import OrganizationsEditPage from "@/Pages/Admin/Organizations/OrganizationsEditPage";
 
 export default [
     {path: '/', name: 'home', component: TasksListPage, meta: {title: 'Список задач'}},
@@ -30,6 +33,10 @@ export default [
     {path: '/bases', name: 'training-base-list', component: TrainingBaseListPage, meta: {title: 'Список объектов', permission: ['training_base.view','training_base.edit','training_base.delete']}},
     {path: '/bases/:id', name: 'training-base-view', component: TrainingBaseViewPage, meta: {title: 'Карточка объекта', permission: ['training_base.view','training_base.edit','training_base.delete']}},
     {path: '/bases/:id/edit', name: 'training-base-edit', component: TrainingBaseEditPage, meta: {title: 'Редактирование объекта', permission: 'training_base.edit'}},
+
+    {path: '/organizations', name: 'organizations-list', component: OrganizationsListPage, meta: {title: 'Организации', role: 'super'}},
+    {path: '/organizations/:id', name: 'organizations-view', component: OrganizationsViewPage, meta: {title: 'Карточка организации', role: 'super'}},
+    {path: '/organizations/:id/edit', name: 'organizations-edit', component: OrganizationsEditPage, meta: {title: 'Редактирование организации', role: 'super'}},
 
     {path: '/403', name: '403', component: Forbidden},
     {path: '/:pathMatch(.*)*', name: '404', component: NotFound},

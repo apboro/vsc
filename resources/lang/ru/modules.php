@@ -5,4 +5,5 @@ return [
     'staff' => 'Сотрудники',
     'roles' => 'Роли',
     'training_base' => 'Объекты',
+    'organizations' => 'Организации',
 ];

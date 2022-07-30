@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Dictionary;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
@@ -34,7 +35,9 @@ class DictionaryDeleteController extends ApiController
         $class = $this->dictionaries[$name]['class'];
         $title = $this->dictionaries[$name]['name'];
 
-        if (null === ($item = $class::query()->where('id', $id)->first())) {
+        $current = Current::get($request);
+
+        if (null === ($item = $class::query($current)->where('id', $id)->first())) {
             return APIResponse::notFound("Запись в словаре $title не найдена.");
         }
         /** @var AbstractDictionary $item */
@@ -46,7 +49,7 @@ class DictionaryDeleteController extends ApiController
         }
 
         try {
-            $class::query()->where('id', $id)->delete();
+            $class::query($current)->where('id', $id)->delete();
         } catch (QueryException $exception) {
             return APIResponse::error("Невозможно удалить запись \"$name\" в словаре \"$title\". Есть блокирующие связи.");
         } catch (Exception $exception) {

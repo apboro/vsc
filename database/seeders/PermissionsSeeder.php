@@ -30,6 +30,11 @@ class PermissionsSeeder extends Seeder
             'training_base.contracts.view' => 'Просмотр договоров',
             'training_base.contracts.modify' => 'Добавление, редактирование, удаление договоров',
         ],
+        'organizations' => [
+            'organizations.view' => 'Просмотр карточек организаций',
+            'organizations.edit' => 'Добавление и редактирование карточек организаций',
+            'organizations.delete' => 'Удаление карточек организаций',
+        ],
     ];
 
     /**

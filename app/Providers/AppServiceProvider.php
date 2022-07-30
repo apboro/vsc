@@ -33,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'user'));
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'positions'));
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'training_base'));
+            $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'organizations'));
+            $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'services'));
         }
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Current;
 use App\Http\Controllers\Controller;
+use App\Models\Permissions\Role;
 use App\Models\Positions\Position;
 use App\Models\User\User;
 use Illuminate\Http\Request;
@@ -21,29 +23,38 @@ class FrontendController extends Controller
      */
     public function index(Request $request): Response
     {
-        /** @var User $user */
-        $user = $request->user();
+        $current = Current::get($request);
 
-        return $this->adminPage($user->position);
+        return $this->adminPage($current);
     }
 
     /**
      * Render admin page.
      *
-     * @param Position $position
+     * @param Current $current
      *
      * @return Response
      * @throws JsonException
      */
-    protected function adminPage(Position $position): Response
+    protected function adminPage(Current $current): Response
     {
         return response()->view('admin', [
             'user' => json_encode([
-                'name' => $this->e($position->user->profile->compactName),
+                'name' => $this->e($current->position()->user->profile->compactName),
                 'organization' => $this->e(__('common.root account caption')),
-                'position' => $position->title ? $this->e($position->title->name) : null,
+                'position' => $current->position()->title ? $this->e($current->position()->title->name) : null,
             ], JSON_THROW_ON_ERROR),
-            'permissions' => json_encode(array_values($position->getPermissionsList()), JSON_THROW_ON_ERROR),
+            'permissions' => json_encode(array_values($current->position() ? $current->position()->getPermissionsList() : []), JSON_THROW_ON_ERROR),
+            'roles' => json_encode(
+                array_values(
+                    $current->position()->roles->map(function (Role $role) {
+                        return $role->asString();
+                    })
+                        ->filter()
+                        ->toArray()
+                ), JSON_THROW_ON_ERROR
+            ),
+            'organization' => $current->organizationId(),
         ]);
     }
 

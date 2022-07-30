@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API\Dictionary;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\AbstractDictionary;
+use App\Models\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -42,7 +44,8 @@ class DictionaryEditController extends ApiEditController
         /** @var AbstractDictionary $class */
         $class = $this->dictionaries[$name]['class'];
 
-        $all = $class::query()->orderBy('order')->orderBy('name')->get();
+        $current = Current::get($request);
+        $all = $class::query($current)->orderBy('order')->orderBy('name')->get();
 
         return APIResponse::response([
             'items' => $all,
@@ -75,8 +78,9 @@ class DictionaryEditController extends ApiEditController
 
         $data = $request->input('data');
 
+        $current = Current::get($request);
         foreach ($data as $item) {
-            $class::query()->where('id', $item['id'])->update(['order' => $item['order'], 'enabled' => $item['enabled']]);
+            $class::query($current)->where('id', $item['id'])->update(['order' => $item['order'], 'enabled' => $item['enabled']]);
         }
 
         return APIResponse::response([], [], "Справочник $name обновлён");
@@ -110,11 +114,13 @@ class DictionaryEditController extends ApiEditController
             return APIResponse::validationError($errors);
         }
 
+        $current = Current::get($request);
+
         /** @var AbstractDictionary $item */
-        $item = $this->firstOrNew($class, $request);
+        $item = $this->firstOrNewRecord($class, $request, $current);
 
         if ($item === null) {
-            return APIResponse::notFound("Запись в слваре \"$title\" не найдена");
+            return APIResponse::notFound("Запись в словаре \"$title\" не найдена");
         }
 
         foreach ($data as $key => $value) {
@@ -124,6 +130,9 @@ class DictionaryEditController extends ApiEditController
         if (!$item->exists) {
             $order = (int)$class::query()->max('order') + 1;
             $item->order = $order;
+            if($item::isOrganizationBound()) {
+                $item->setAttribute('organization_id', $current->organizationId());
+            }
         }
 
         $item->save();
@@ -133,5 +142,34 @@ class DictionaryEditController extends ApiEditController
             $item->wasRecentlyCreated ? "Запись в словаре \"$title\" добавлена" : "Запись в словаре \"$title\" обновлена",
             $item->toArray()
         );
+    }
+
+    /**
+     * Retrieve model by an ID or create new.
+     *
+     * @param string $class
+     * @param Request $request
+     * @param Current $current
+     *
+     * @return  Model|null
+     */
+    protected function firstOrNewRecord(string $class, Request $request, Current $current): ?Model
+    {
+        /** @var Model $class */
+
+        if (($id = $request->input('id')) === null) {
+            return null;
+        }
+
+        $id = (int)$id;
+
+        if ($id === 0) {
+            return new $class;
+        }
+
+        /** @var Model $model */
+        $model = $class::query($current)->where('id', $id)->first();
+
+        return $model ?? null;
     }
 }

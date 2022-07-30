@@ -20,7 +20,7 @@ class CreateTrainingBaseHasSportKindsTable extends Migration
             $table->timestamps();
 
             $table->foreign('training_base_id')->references('id')->on('training_bases')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('sport_kind_id')->references('id')->on('dictionary_sport_kinds')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreign('sport_kind_id')->references('id')->on('dictionary_sport_kinds')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API\Dictionary;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
+use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Dictionaries\SportKind;
@@ -24,6 +26,7 @@ class DictionaryController extends ApiController
         'sport_kinds' => ['class' => SportKind::class, 'allow' => null],
         'training_base_statuses' => ['class' => TrainingBaseStatus::class, 'allow' => null],
         'training_base_contract_statuses' => ['class' => TrainingBaseContractStatus::class, 'allow' => null],
+        'organization_statuses' => ['class' => OrganizationStatus::class, 'allow' => null],
     ];
 
     /**
@@ -50,10 +53,12 @@ class DictionaryController extends ApiController
         /** @var AbstractDictionary $class */
         $class = $dictionary['class'];
 
+        $current = Current::get($request);
+
         if (method_exists($class, 'asDictionary')) {
-            $query = $class::asDictionary();
+            $query = $class::asDictionary($current);
         } else {
-            $query = $class::query();
+            $query = $class::query($current);
         }
         $actual = $query->clone()->latest('updated_at')->value('updated_at');
         $actual = Carbon::parse($actual)->setTimezone('GMT');

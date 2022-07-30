@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Common\File;
 use App\Models\TrainingBase\TrainingBase;
 use App\Models\TrainingBase\TrainingBaseContract;
+use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -29,7 +31,7 @@ class TrainingBaseContractEditController extends ApiEditController
     /**
      * Update or create training base contract.
      *
-     * id === 0 is for new
+     * ID === 0 is for new
      *
      * @param Request $request
      *
@@ -39,14 +41,16 @@ class TrainingBaseContractEditController extends ApiEditController
     {
         $id = $request->input('id');
         $baseId = $request->input('base_id');
+        $current = Current::get($request);
 
         /** @var TrainingBase $base */
         if ($baseId === null ||
             null === ($base = TrainingBase::query()
                 ->where('id', $baseId)
+                ->tap(new ForOrganization($current->organizationId()))
                 ->first())
         ) {
-            return APIResponse::notFound('Объект не найен');
+            return APIResponse::notFound('Объект не найден');
         }
 
         $data = $this->getData($request);
@@ -59,7 +63,7 @@ class TrainingBaseContractEditController extends ApiEditController
         $contract = $this->firstOrNew(TrainingBaseContract::class, $request);
 
         if (($id !== 0) && ($contract === null || $contract->training_base_id !== $base->id)) {
-            return APIResponse::notFound('Документ не найен');
+            return APIResponse::notFound('Документ не найден');
         }
 
         $contract->start_at = $data['start_at'];

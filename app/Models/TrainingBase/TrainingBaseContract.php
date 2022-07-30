@@ -11,7 +11,9 @@ use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -68,6 +70,18 @@ class TrainingBaseContract extends Model implements Statusable
     {
         $this->checkAndSetStatus(TrainingBaseContractStatus::class, $status, WrongTrainingBaseContractStatusException::class, $save);
     }
+
+
+    /**
+     * Training base this contract belongs to.
+     *
+     * @return  BelongsTo
+     */
+    public function trainingBase(): BelongsTo
+    {
+        return $this->belongsTo(TrainingBase::class, 'training_base_id', 'id');
+    }
+
 
     /**
      * Training base contract files.

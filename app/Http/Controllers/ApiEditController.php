@@ -15,10 +15,11 @@ class ApiEditController extends ApiController
      * @param Request $request
      * @param array $with
      * @param array $withCount
+     * @param array $where
      *
      * @return  Model|null
      */
-    protected function firstOrNew(string $class, Request $request, array $with = [], array $withCount = []): ?Model
+    protected function firstOrNew(string $class, Request $request, array $with = [], array $withCount = [], array $where = []): ?Model
     {
         /** @var Model $class */
 
@@ -33,7 +34,7 @@ class ApiEditController extends ApiController
         }
 
         /** @var Model $model */
-        $model = $class::query()->where('id', $id)->with($with)->withCount($withCount)->first();
+        $model = $class::query()->where('id', $id)->where($where)->with($with)->withCount($withCount)->first();
 
         return $model ?? null;
     }

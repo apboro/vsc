@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Common\Image;
@@ -46,11 +47,13 @@ class TrainingBaseEditController extends ApiEditController
      */
     public function get(Request $request): JsonResponse
     {
+        $current = Current::get($request);
+
         /** @var TrainingBase|null $base */
-        $base = $this->firstOrNew(TrainingBase::class, $request, ['status', 'info']);
+        $base = $this->firstOrNew(TrainingBase::class, $request, ['status', 'info'], [], ['organization_id' => $current->organizationId()]);
 
         if ($base === null) {
-            return APIResponse::notFound('Объект не найен');
+            return APIResponse::notFound('Объект не найден');
         }
 
         // send response
@@ -91,16 +94,19 @@ class TrainingBaseEditController extends ApiEditController
             return APIResponse::validationError($errors);
         }
 
+        $current = Current::get($request);
+
         /** @var TrainingBase|null $base */
-        $base = $this->firstOrNew(TrainingBase::class, $request, ['info']);
+        $base = $this->firstOrNew(TrainingBase::class, $request, ['info'], [], ['organization_id' => $current->organizationId()]);
 
         if ($base === null) {
-            return APIResponse::notFound('Объект не найен');
+            return APIResponse::notFound('Объект не найден');
         }
 
         $base->title = $data['title'];
         $base->short_title = $data['short_title'];
-        $base->setStatus($data['status_id']);
+        $base->setStatus($data['status_id'], false);
+        $base->organization_id = $current->organizationId();
         $base->save();
 
         $base->sportKinds()->sync($data['sport_kinds']);

@@ -2,6 +2,7 @@ export default [
     {
         title: 'НАСТРОЙКИ', route: '', //permission: ['dictionaries.edit'],
         items: [
+            {title: 'Организации', route: 'organizations-list', role: 'super'},
             {title: 'Сотрудники', route: 'staff-list', permission: ['staff.view','staff.edit','staff.delete','staff.access','staff.permissions']},
             {title: 'Объекты', route: 'training-base-list', permission: ['training_base.view','training_base.edit','training_base.delete']},
             {title: 'Справочники', route: 'dictionaries', permission: 'dictionaries.edit'},

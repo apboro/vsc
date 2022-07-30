@@ -24,8 +24,8 @@ class CreateTrainingBaseContractsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('status_id')->references('id')->on('dictionary_training_base_contract_statuses')->restrictOnDelete()->restrictOnUpdate();
-            $table->foreign('training_base_id')->references('id')->on('training_bases')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreign('status_id')->references('id')->on('dictionary_training_base_contract_statuses')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('training_base_id')->references('id')->on('training_bases')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

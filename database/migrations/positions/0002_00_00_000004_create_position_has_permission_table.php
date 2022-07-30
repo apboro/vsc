@@ -15,11 +15,11 @@ class CreatePositionHasPermissionTable extends Migration
     {
         Schema::create('position_has_permission', static function (Blueprint $table) {
 
-            $table->unsignedSmallInteger('position_id');
+            $table->unsignedInteger('position_id');
             $table->unsignedSmallInteger('permission_id');
 
             $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('permission_id')->references('id')->on('permissions')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('permission_id')->references('id')->on('permissions')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

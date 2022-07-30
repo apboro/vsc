@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Common\Image;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\TrainingBase\TrainingBase;
+use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -16,15 +18,17 @@ class TrainingBaseViewController extends ApiController
     public function view(Request $request): JsonResponse
     {
         $id = $request->input('id');
+        $current = Current::get($request);
 
         /** @var TrainingBase $base */
         if ($id === null ||
             null === ($base = TrainingBase::query()
                 ->with(['status', 'info'])
                 ->where('id', $id)
+                ->tap(new ForOrganization($current->organizationId()))
                 ->first())
         ) {
-            return APIResponse::notFound('Объект не найен');
+            return APIResponse::notFound('Объект не найден');
         }
 
         $values = [

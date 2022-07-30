@@ -32,10 +32,15 @@ let user = typeof window.user === "undefined" ? null : JSON.parse(window.user);
 
 router.beforeEach((to, from, next) => {
     let permission = to.meta['permission'];
+    let role = to.meta['role'];
     let passed = true;
     if (typeof permission !== "undefined" && permission !== null && permission !== '') {
         if (typeof permission === "string") permission = [permission];
         passed = Object.keys(permission).some(key => adminStore.getters['permissions/can'](permission[key]));
+    }
+    if (passed && typeof role !== "undefined" && role !== null && role !== '') {
+        if (typeof role === "string") role = [role];
+        passed = Object.keys(role).some(key => adminStore.getters['permissions/hasRole'](role[key]));
     }
     if (!passed) {
         next({name: '403'});

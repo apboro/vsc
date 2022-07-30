@@ -10,10 +10,10 @@ namespace App\Models\Dictionaries;
  */
 class TrainingBaseContractStatus extends AbstractDictionary
 {
-    /** @var int The id of active status */
+    /** @var int The ID of active status */
     public const active = 1;
 
-    /** @var int The id of inactive status */
+    /** @var int The ID of inactive status */
     public const inactive = 2;
 
     /** @var int Default status */

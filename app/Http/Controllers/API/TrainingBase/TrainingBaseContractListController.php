@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\TrainingBase;
 
+use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
@@ -10,6 +11,7 @@ use App\Models\Common\File;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\TrainingBase\TrainingBase;
 use App\Models\TrainingBase\TrainingBaseContract;
+use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -36,14 +38,16 @@ class TrainingBaseContractListController extends ApiController
     public function list(ApiListRequest $request): JsonResponse
     {
         $baseId = $request->input('base_id');
+        $current = Current::get($request);
 
         /** @var TrainingBase $base */
         if ($baseId === null ||
             null === ($base = TrainingBase::query()
                 ->where('id', $baseId)
+                ->tap(new ForOrganization($current->organizationId()))
                 ->first())
         ) {
-            return APIResponse::notFound('Объект не найен');
+            return APIResponse::notFound('Объект не найден');
         }
 
         $query = $base->contracts();

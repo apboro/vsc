@@ -7,17 +7,20 @@ use App\Interfaces\Statusable;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Model;
+use App\Models\Organization\Organization;
 use App\Models\Permissions\Permission;
 use App\Models\Permissions\Role;
 use App\Models\User\User;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
+ * @property int|null $organization_id
  * @property int $user_id
  * @property int $status_id
  * @property int $title_id
@@ -25,9 +28,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Carbon $updated_at
  *
  * @property PositionTitle|null $title
+ * @property Organization|null $organization
  * @property PositionStatus $status
  * @property User $user
  * @property PositionInfo $info
+ * @property Collection $roles
  */
 class Position extends Model implements Statusable
 {
@@ -79,6 +84,32 @@ class Position extends Model implements Statusable
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'position_has_role', 'position_id', 'role_id')->where('active', true);
+    }
+
+    /**
+     * Check if position has role.
+     *
+     * @param int|string $checking
+     * @param bool $fresh
+     *
+     * @return  bool
+     */
+    public function hasRole($checking, bool $fresh = false): bool
+    {
+        if ($fresh && $this->relationLoaded('roles')) {
+            $this->unsetRelation('roles');
+        }
+
+        $this->loadMissing('roles');
+
+        foreach ($this->getRelation('roles') as $role) {
+            /** @var Role $role */
+            if ($role->matches($checking)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -164,6 +195,16 @@ class Position extends Model implements Statusable
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * Position's organization.
+     *
+     * @return  HasOne
+     */
+    public function organization(): HasOne
+    {
+        return $this->hasOne(Organization::class, 'id', 'organization_id');
     }
 
     /**

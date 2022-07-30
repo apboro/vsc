@@ -54,7 +54,7 @@ class Image extends Model
         }
         // Otherwise, try to search by existing image by hash
         $hash = md5($attributes['content']);
-        if (($image = self::query()->where('hash', $hash)->first()) !== null) {
+        if (($image = self::query()->where(['disk' => $disk, 'hash' => $hash])->first()) !== null) {
             /** @var Image $image */
             return $image;
         }
@@ -63,7 +63,7 @@ class Image extends Model
         $parts = explode(';base64,', $attributes['content']);
         $content = base64_decode($parts[1]);
         Storage::disk($disk)->put("$hash.$extension", $content);
-        $image = new Image;
+        $image = new Image();
         $image->setAttribute('hash', $hash);
         $image->setAttribute('disk', $disk);
         $image->setAttribute('filename', "$hash.$extension");
@@ -86,7 +86,7 @@ class Image extends Model
      */
     public static function createFromMany(array $images, string $disk): Collection
     {
-        $collection = new Collection;
+        $collection = new Collection();
 
         foreach ($images as $image) {
             $result = self::createFrom($image, $disk);

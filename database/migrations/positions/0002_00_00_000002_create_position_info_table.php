@@ -14,7 +14,7 @@ class CreatePositionInfoTable extends Migration
     public function up(): void
     {
         Schema::create('position_info', static function (Blueprint $table) {
-            $table->unsignedSmallInteger('position_id')->unique()->primary();
+            $table->unsignedInteger('position_id')->unique()->primary();
 
             $table->string('work_phone')->nullable();
             $table->string('work_phone_additional')->nullable();

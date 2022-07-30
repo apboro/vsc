@@ -10,6 +10,8 @@
     <script>
         window.user = '{!! $user !!}';
         window.permissions = '{!! $permissions !!}';
+        window.roles = '{!! $roles !!}';
+        window.organization = '{!! $organization !!}';
     </script>
 </head>
 <body>

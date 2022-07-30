@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Dictionaries\SportKind;
+use App\Models\Organization\Organization;
 use App\Models\Positions\Position;
 use App\Models\User\User;
 use App\Models\User\UserProfile;
@@ -29,6 +30,13 @@ class TestDataSeeder extends Seeder
         //     $seeder->run();
         // }
 
+        $organization = new Organization();
+        $organization->title = 'ООО Колобок и сыновья';
+        $organization->save();
+        $organization = new Organization();
+        $organization->title = 'ЗАО Бармалей и Ко';
+        $organization->save();
+
         $titles = [
             ['name' => 'Бухгалтер'],
             ['name' => 'Менеджер'],
@@ -37,8 +45,9 @@ class TestDataSeeder extends Seeder
         ];
 
         foreach ($titles as &$title) {
-            $t = new PositionTitle;
+            $t = new PositionTitle();
             $t->name = $title['name'];
+            $t->organization_id = $organization->id;
             $t->save();
             $title['id'] = $t->id;
         }
@@ -46,9 +55,9 @@ class TestDataSeeder extends Seeder
 
         // Create users with profiles and positions
         User::factory(100)
-            ->afterCreating(function (User $user) use ($titles) {
+            ->afterCreating(function (User $user) use ($titles, $organization) {
                 UserProfile::factory()->create(['user_id' => $user->id]);
-                Position::factory()->create(['user_id' => $user->id, 'title_id' => $titles[random_int(0, count($titles) - 1)]['id']]);
+                Position::factory()->create(['user_id' => $user->id, 'organization_id' => $organization->id, 'title_id' => $titles[random_int(0, count($titles) - 1)]['id']]);
             })
             ->create();
 
@@ -61,8 +70,9 @@ class TestDataSeeder extends Seeder
         ];
 
         foreach ($sportKinds as $sportKind) {
-            $kind = new SportKind;
+            $kind = new SportKind();
             $kind->name = $sportKind;
+            $kind->organization_id = $organization->id;
             $kind->save();
         }
     }

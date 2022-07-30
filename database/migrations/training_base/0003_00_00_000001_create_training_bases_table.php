@@ -17,13 +17,15 @@ class CreateTrainingBasesTable extends Migration
         Schema::create('training_bases', static function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedTinyInteger('status_id')->default(TrainingBaseStatus::default);
+            $table->unsignedSmallInteger('organization_id');
 
             $table->string('title');
             $table->string('short_title')->nullable();
 
             $table->timestamps();
 
-            $table->foreign('status_id')->references('id')->on('dictionary_training_base_statuses')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreign('status_id')->references('id')->on('dictionary_training_base_statuses')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnDelete();
         });
     }
 

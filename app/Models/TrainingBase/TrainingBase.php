@@ -8,6 +8,7 @@ use App\Models\Common\Image;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
+use App\Models\Organization\Organization;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property int $id
  * @property int $status_id
- *
+ * @property int $organization_id
  * @property string $title
  * @property string|null $short_title
  *
@@ -30,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property TrainingBaseInfo $info
  * @property Collection $images
  * @property Collection $sportKinds
+ * @property Collection $contracts
+ * @property Organization $organization
  */
 class TrainingBase extends Model implements Statusable
 {
@@ -63,6 +66,16 @@ class TrainingBase extends Model implements Statusable
     public function setStatus($status, bool $save = true): void
     {
         $this->checkAndSetStatus(TrainingBaseStatus::class, $status, WrongTrainingBaseStatusException::class, $save);
+    }
+
+    /**
+     * Organization this base attached to.
+     *
+     * @return  HasOne
+     */
+    public function organization(): HasOne
+    {
+        return $this->hasOne(Organization::class, 'id', 'organization_id');
     }
 
     /**

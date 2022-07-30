@@ -28,6 +28,7 @@
 <script>
 import IconDropdown from "../Icons/IconDropdown";
 import Permissions from "@/Mixins/Permissions";
+
 export default {
     name: "LayoutMenuItem",
 
@@ -55,10 +56,15 @@ export default {
             return typeof this.item.items !== 'undefined' && this.item.items.length > 0 ? this.item.items : null;
         },
         accepted() {
-            return typeof this.item['permission'] === "undefined"
+            const acceptedPermission = typeof this.item['permission'] === "undefined"
                 || this.item['permission'] === null
                 || this.item['permission'] === ''
                 || this.can(this.item['permission']);
+            const acceptedRole = typeof this.item['role'] === "undefined"
+                || this.item['role'] === null
+                || this.item['role'] === ''
+                || this.hasRole(this.item['role']);
+            return acceptedPermission && acceptedRole;
         }
     },
 

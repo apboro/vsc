@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', static function (Blueprint $table) {
 
-            $table->unsignedSmallInteger('id', true);
+            $table->unsignedInteger('id', true);
 
             $table->string('login')->unique()->nullable();
             $table->string('password')->nullable();
@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('status_id')->references('id')->on('dictionary_user_statuses')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreign('status_id')->references('id')->on('dictionary_user_statuses')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

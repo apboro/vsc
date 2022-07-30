@@ -2,7 +2,10 @@
 
 namespace App\Models\Dictionaries;
 
+use App\Current;
 use App\Models\Model;
+use App\Scopes\ForOrganization;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $id
@@ -19,8 +22,11 @@ abstract class AbstractDictionary extends Model
         'updated_at' => 'datetime',
     ];
 
+    /** @var bool Is bound to organization */
+    protected static bool $organizationBound = false;
+
     /**
-     * Get dictionary item instance by id.
+     * Get dictionary item instance by an ID.
      *
      * @param int $id
      *
@@ -32,5 +38,26 @@ abstract class AbstractDictionary extends Model
         $model = self::query()->where('id', $id)->first();
 
         return $model ?? null;
+    }
+
+    public static function isOrganizationBound(): bool
+    {
+        return property_exists(static::class, 'organizationBound') ? static::$organizationBound : false;
+    }
+
+    /**
+     * Begin querying the model.
+     *
+     * @param Current|null $current
+     *
+     * @return Builder
+     */
+    public static function query(?Current $current = null): Builder
+    {
+        if (method_exists(static::class, 'isOrganizationBound') && self::isOrganizationBound()) {
+            return (new static())->newQuery()->tap(new ForOrganization($current ? $current->organizationId() : null));
+        }
+
+        return (new static())->newQuery();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDictionarySportKindsTable extends Migration
+class CreateOrganizationInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDictionarySportKindsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('dictionary_sport_kinds', static function (Blueprint $table) {
-            $table->smallIncrements('id');
-            $table->string('name');
-            $table->boolean('enabled')->nullable()->default(true);
-            $table->unsignedSmallInteger('order')->nullable()->default(0);
+        Schema::create('organization_info', static function (Blueprint $table) {
+
+            $table->unsignedSmallInteger('organization_id')->unique()->primary();
 
             $table->timestamps();
+
+            $table->foreign('organization_id')->references('id')->on('organizations')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateDictionarySportKindsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dictionary_sport_kinds');
+        Schema::dropIfExists('organization_info');
     }
 }

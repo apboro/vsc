@@ -12,4 +12,11 @@ interface AsDictionary
      * @return  Builder
      */
     public static function asDictionary(): Builder;
+
+    /**
+     * Is bound to organization
+     *
+     * @return  bool
+     */
+    public static function isOrganizationBound(): bool;
 }
