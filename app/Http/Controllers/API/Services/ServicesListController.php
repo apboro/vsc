@@ -8,7 +8,7 @@ use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\ServiceStatus;
-use App\Models\Service\Service;
+use App\Models\Services\Service;
 use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\Services;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
-use App\Models\Service\Service;
+use App\Models\Services\Service;
 use App\Scopes\ForOrganization;
 use Exception;
 use Illuminate\Database\QueryException;

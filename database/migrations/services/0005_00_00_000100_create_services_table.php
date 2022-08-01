@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
         Schema::create('services', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedTinyInteger('status_id')->default(ServiceStatus::default);
-            $table->unsignedSmallInteger('organization_id')->nullable();
+            $table->unsignedSmallInteger('organization_id');
 
             $table->unsignedInteger('training_base_id');
             $table->unsignedSmallInteger('sport_kind_id');

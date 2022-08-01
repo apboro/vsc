@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Models\Service;
+namespace App\Models\Services;
 
-use App\Exceptions\TrainingBase\WrongTrainingBaseStatusException;
 use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
-use App\Models\Common\Image;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
@@ -14,10 +12,6 @@ use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 

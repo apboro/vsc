@@ -17,7 +17,7 @@ class CreatePositionsTable extends Migration
         Schema::create('positions', static function (Blueprint $table) {
             $table->unsignedInteger('id', true);
             $table->unsignedSmallInteger('organization_id')->nullable();
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('status_id')->default(PositionStatus::default);
             $table->unsignedSmallInteger('title_id')->nullable();
 
