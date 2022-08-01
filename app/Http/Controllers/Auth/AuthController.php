@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Response;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Positions\Position;
 use App\Models\User\User;
@@ -78,9 +77,6 @@ class AuthController extends Controller
      */
     public function logout(Request $request): JsonResponse
     {
-        /** @var User $user */
-        $user = $request->user();
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

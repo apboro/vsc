@@ -6,7 +6,7 @@ use Exception;
 
 class APIListRequest extends APIRequest
 {
-    /** @var array Values must be remembered in cookies */
+    /** @var array Values to remember in cookies */
     protected array $toRemember = [];
 
     /**
@@ -84,7 +84,7 @@ class APIListRequest extends APIRequest
     }
 
     /**
-     * Get order by parameter.
+     * Get order by a parameter.
      *
      * @param string|null $default
      *
@@ -106,7 +106,7 @@ class APIListRequest extends APIRequest
     }
 
     /**
-     * Get requested number of items page.
+     * Get the requested amount items page.
      *
      * @param int $default
      * @param string|null $key
@@ -121,7 +121,6 @@ class APIListRequest extends APIRequest
 
         return $this->withRememberPerPage($this->input('per_page', $default), $key);
     }
-
 
     /**
      * Get values to remember in response cookies.
@@ -209,7 +208,7 @@ class APIListRequest extends APIRequest
     }
 
     /**
-     * Get per page parameter from request and remember it if possible.
+     * Get items per a page parameter from request and remember it if possible.
      *
      * @param int $perPage
      * @param string|null $key

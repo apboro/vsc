@@ -51,8 +51,8 @@ class StaffRolesController extends ApiController
 
         foreach ($allRoles as $role) {
             /** @var Role $role */
-            $titles["role.{$role->id}"] = $role->name;
-            $values["role.{$role->id}"] = in_array($role->id, $roles, true);
+            $titles["role.$role->id"] = $role->name;
+            $values["role.$role->id"] = in_array($role->id, $roles, true);
             if (!$isAdmin && in_array($role->id, $roles, true)) {
                 $permissions[] = $role->permissions()->pluck('key')->toArray();
             }

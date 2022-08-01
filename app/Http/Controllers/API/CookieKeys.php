@@ -12,6 +12,6 @@ class CookieKeys
 
     public static function getKey(string $key, ?int $organizationId = null): string
     {
-        return $organizationId ? "{$key}_{$organizationId}" : $key;
+        return $organizationId ? "{$key}_$organizationId" : $key;
     }
 }

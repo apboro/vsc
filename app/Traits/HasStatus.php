@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Exceptions\Base\WrongStatusException;
 use App\Models\Dictionaries\AbstractDictionary;
 
 trait HasStatus

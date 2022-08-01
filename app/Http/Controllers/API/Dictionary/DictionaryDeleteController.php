@@ -56,6 +56,6 @@ class DictionaryDeleteController extends ApiController
             return APIResponse::error($exception->getMessage());
         }
 
-        return APIResponse::response([], [], "Запись \"$name\" в словаре \"{$title}\" удалёна");
+        return APIResponse::response([], [], "Запись \"$name\" в словаре \"$title\" удалена");
     }
 }

@@ -39,6 +39,7 @@ class Image extends Model
      * @param string $disk
      *
      * @return  Image|null
+     * @noinspection DuplicatedCode
      */
     public static function createFrom(array $attributes, string $disk): ?Image
     {

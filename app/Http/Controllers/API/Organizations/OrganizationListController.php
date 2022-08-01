@@ -26,7 +26,7 @@ class OrganizationListController extends ApiController
             ->orderBy('id');
 
         // current page automatically resolved from request via `page` parameter
-        $organizations = $query->paginate($request->perPage(10));
+        $organizations = $query->paginate($request->perPage());
 
         /** @var LengthAwarePaginator $organizations */
         $organizations->transform(function (Organization $organization) {

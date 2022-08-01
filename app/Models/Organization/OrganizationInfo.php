@@ -19,9 +19,6 @@ class OrganizationInfo extends Model
     /** @var bool Disable auto-incrementing on model. */
     public $incrementing = false;
 
-    /** @var string[] Fillable attributes. */
-    protected $fillable = [];
-
     /**
      * User this profile belongs to.
      *

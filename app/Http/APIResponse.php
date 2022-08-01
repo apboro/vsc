@@ -163,7 +163,7 @@ class APIResponse
             'rules' => $rules,
             'titles' => $titles,
             'payload' => $payload,
-        ], 200);
+        ]);
     }
 
     /**
@@ -181,7 +181,7 @@ class APIResponse
             'message' => $message,
             'code' => 200,
             'payload' => $payload,
-        ], 200);
+        ]);
     }
 
     /**
@@ -204,8 +204,8 @@ class APIResponse
     }
 
     /**
-     * Add last modifier header to response.
-     * Modified timestamp must be GMT timezone.
+     * Add `last modifier` header to response.
+     * A modified timestamp is date GMT timezone.
      *
      * @param Carbon|null $lastMod
      * @param array $headers

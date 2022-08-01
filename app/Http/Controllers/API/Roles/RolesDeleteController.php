@@ -25,7 +25,7 @@ class RolesDeleteController extends ApiController
 
         /** @var Role $role */
         if ($id === null || null === ($role = Role::query()->where('id', $id)->first())) {
-            return APIResponse::notFound('Роль не найена');
+            return APIResponse::notFound('Роль не найдена');
         }
 
         if ($role->locked) {
@@ -42,6 +42,6 @@ class RolesDeleteController extends ApiController
             return APIResponse::error($exception->getMessage());
         }
 
-        return APIResponse::success(    "Роль \"$name\" удалёна");
+        return APIResponse::success(    "Роль \"$name\" удалена");
     }
 }

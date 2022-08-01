@@ -53,7 +53,7 @@ export default {
             return this.data.is_loaded ? this.data.data['title'] : '...';
         },
         tabs() {
-            // if (this.can(['training_base.contracts.view', 'training_base.contracts.modify'])) tabs['contracts'] = 'Документы';
+            // add tabs here
             return {general: 'Описание'};
         },
     },

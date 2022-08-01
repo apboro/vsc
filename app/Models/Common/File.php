@@ -40,6 +40,7 @@ class File extends Model
      * @param string $disk
      *
      * @return  File|null
+     * @noinspection DuplicatedCode
      */
     public static function createFrom(array $attributes, string $disk): ?File
     {

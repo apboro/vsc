@@ -46,8 +46,6 @@ class SwitchOrganizationController extends ApiController
             return APIResponse::error('Организация не найдена');
         }
 
-        $current = Current::get($request);
-
-        return APIResponse::success();//->withCookie($current->organizationToCookie($organization->id));
+        return APIResponse::success();
     }
 }

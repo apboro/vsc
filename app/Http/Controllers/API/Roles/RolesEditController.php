@@ -37,7 +37,7 @@ class RolesEditController extends ApiEditController
         $role = $this->firstOrNew(Role::class, $request, ['permissions']);
 
         if ($role === null) {
-            return APIResponse::notFound('Роль не найена');
+            return APIResponse::notFound('Роль не найдена');
         }
 
         if ($role->locked === true) {
@@ -56,8 +56,8 @@ class RolesEditController extends ApiEditController
 
         foreach ($permissions as $permission) {
             /** @var Permission $permission */
-            $this->titles["permission.{$permission->key}"] = $permission->name;
-            $values["permission.{$permission->key}"] = in_array($permission->id, $rolePermissions, true);
+            $this->titles["permission.$permission->key"] = $permission->name;
+            $values["permission.$permission->key"] = in_array($permission->id, $rolePermissions, true);
             if (!array_key_exists($permission->module, $modules)) {
                 $modules[$permission->module] = __("modules.$permission->module");
             }
@@ -95,7 +95,7 @@ class RolesEditController extends ApiEditController
         $role = $this->firstOrNew(Role::class, $request);
 
         if ($role === null) {
-            return APIResponse::notFound('Роль не найена');
+            return APIResponse::notFound('Роль не найдена');
         }
 
         if ($role->locked === true) {

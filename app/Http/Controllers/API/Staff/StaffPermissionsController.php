@@ -48,8 +48,8 @@ class StaffPermissionsController extends ApiController
 
         foreach ($permissions as $permission) {
             /** @var Permission $permission */
-            $titles["permission.{$permission->key}"] = $permission->name;
-            $values["permission.{$permission->key}"] = in_array($permission->id, $staffPermissions, true);
+            $titles["permission.$permission->key"] = $permission->name;
+            $values["permission.$permission->key"] = in_array($permission->id, $staffPermissions, true);
             if (!array_key_exists($permission->module, $modules)) {
                 $modules[$permission->module] = __("modules.$permission->module");
             }

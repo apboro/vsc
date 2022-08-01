@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Front;
 use App\Current;
 use App\Http\Controllers\Controller;
 use App\Models\Permissions\Role;
-use App\Models\Positions\Position;
-use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use JsonException;

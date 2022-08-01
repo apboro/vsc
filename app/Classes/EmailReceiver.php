@@ -30,11 +30,10 @@ class EmailReceiver
     /**
      * Route notifications for the mail channel.
      *
-     * @param Notification $notification
-     *
      * @return array|string
+     * @noinspection PhpUnused
      */
-    public function routeNotificationForMail(Notification $notification)
+    public function routeNotificationForMail()
     {
         return empty($this->name) ? $this->email : [$this->email => $this->name];
     }

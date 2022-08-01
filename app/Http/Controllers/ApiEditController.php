@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class ApiEditController extends ApiController
 {
     /**
-     * Retrieve model by id or create new.
+     * Retrieve model by an ID or create new.
      *
      * @param string $class
      * @param Request $request

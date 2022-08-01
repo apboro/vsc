@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\TrainingBase;
 use App\Current;
 use App\Http\Controllers\ApiController;
 use App\Models\Common\File;
+use App\Models\Permissions\Role;
 use App\Models\TrainingBase\TrainingBase;
 use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,7 +34,7 @@ class TrainingBaseContractFileController extends ApiController
         $requestedFile = File::query()->where('filename', $file)->firstOrFail();
 
         // check permission to view file
-        if (!$current->position() && !$current->position()->hasRole(\App\Models\Permissions\Role::super)) {
+        if (!$current->position() && !$current->position()->hasRole(Role::super)) {
             $count = TrainingBase::query()
                 ->tap(new ForOrganization($current->organizationId()))
                 ->whereHas('contracts', function (Builder $query) use ($requestedFile) {
@@ -52,7 +53,7 @@ class TrainingBaseContractFileController extends ApiController
             'Content-Transfer-Encoding' => 'Binary',
             'Content-Length' => $requestedFile->size,
             'Content-Type' => $requestedFile->mime,
-            'Content-Disposition' => "inline; filename=\"{$requestedFile->original_filename}\"",
+            'Content-Disposition' => "inline; filename=\"$requestedFile->original_filename\"",
         ]);
     }
 }
