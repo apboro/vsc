@@ -5,6 +5,7 @@ namespace App\Models\TrainingBase;
 use App\Exceptions\TrainingBase\WrongTrainingBaseStatusException;
 use App\Interfaces\Statusable;
 use App\Models\Common\Image;
+use App\Models\Dictionaries\Interfaces\AsDictionary;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
@@ -12,7 +13,6 @@ use App\Models\Organization\Organization;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -34,9 +34,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Collection $contracts
  * @property Organization $organization
  */
-class TrainingBase extends Model implements Statusable
+class TrainingBase extends Model implements Statusable, AsDictionary
 {
-    use HasStatus, HasFactory;
+    use HasStatus, TrainingBaseAsDictionary;
 
     /** @var array Default attributes. */
     protected $attributes = [

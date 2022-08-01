@@ -14,9 +14,5 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         'vsc_organization',
-        CookieKeys::staff_list,
-        CookieKeys::roles_list,
-        CookieKeys::training_base_list,
-        CookieKeys::training_base_contracts_list,
     ];
 }

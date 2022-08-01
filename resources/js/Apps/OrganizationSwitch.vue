@@ -4,7 +4,16 @@
             Организация
         </div>
         <div class="organization-switch__select">
-            <InputDropDown v-model="current" :options="organizations" :identifier="'id'" :show="'title'" :small="true" :original="current" @change="changeOrganization"/>
+            <InputDropDown
+                v-model="current"
+                :options="organizations"
+                :identifier="'id'"
+                :show="'title'"
+                :small="true"
+                :original="current"
+                :right="true"
+                @change="changeOrganization"
+            />
         </div>
     </div>
 </template>
@@ -41,7 +50,12 @@ export default {
                 .then(() => {
                     window.organization = id;
                     document.cookie = 'vsc_organization=' + id + ';path=/';
-                    window.location.reload();
+                    if(this.$route.meta['change'] !== undefined) {
+                        const to = String(this.$route.meta['change']);
+                        this.$router.push({name: to});
+                    } else {
+                        window.location.reload();
+                    }
                 })
                 .catch(error => {
                     this.$toast.error(error.response.data['message']);
@@ -73,7 +87,18 @@ $base_text_gray_color: #3f3f3f !default;
     }
 
     &__select {
-        width: 200px;
+        &:deep(.input-dropdown) {
+            height: 28px;
+        }
+
+        &:deep(.input-dropdown__value) {
+            line-height: 26px;
+        }
+
+        &:deep(.input-dropdown__toggle) {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
     }
 }
 </style>

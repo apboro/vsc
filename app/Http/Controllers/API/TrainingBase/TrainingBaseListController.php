@@ -40,6 +40,8 @@ class TrainingBaseListController extends ApiController
     {
         $current = Current::get($request);
 
+        $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
+
         $query = TrainingBase::query()
             ->tap(new ForOrganization($current->organizationId()))
             ->with(['status', 'info', 'sportKinds'])

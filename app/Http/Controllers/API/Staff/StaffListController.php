@@ -37,6 +37,8 @@ class StaffListController extends ApiController
     {
         $current = Current::get($request);
 
+        $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
+
         $query = User::query()
             ->with(['profile', 'position', 'position.info'])
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')

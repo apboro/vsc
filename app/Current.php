@@ -46,12 +46,16 @@ class Current
         $this->user = $user;
         $this->position = $user->position;
 
-        if ($request->hasCookie(self::ORGANIZATION_COOKIE_NAME)) {
-            $this->organizationIdOverride = $request->cookie(self::ORGANIZATION_COOKIE_NAME);
-        }
-
-        if ($request->hasHeader('X-Vcs-Organization')) {
-            $this->organizationIdOverride = $request->header('X-Vcs-Organization');
+        // Handle organization override for admin users
+        if ($user->position->hasRole(Role::super)) {
+            if ($request->hasHeader('X-Vcs-Organization')) {
+                $this->organizationIdOverride = $request->header('X-Vcs-Organization');
+            } else if ($request->hasCookie(self::ORGANIZATION_COOKIE_NAME)) {
+                $id = $request->cookie(self::ORGANIZATION_COOKIE_NAME);
+                if (!empty($id) && $id !== 'null') {
+                    $this->organizationIdOverride = $id;
+                }
+            }
         }
     }
 

@@ -4,6 +4,7 @@ namespace Database\Seeders\Dictionaries;
 
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
+use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
@@ -32,5 +33,9 @@ class StatusesSeeder extends GenericSeeder
             OrganizationStatus::active => ['name' => 'Действующая'],
             OrganizationStatus::blocked => ['name' => 'Недействующая'],
         ],
+        ServiceStatus::class => [
+            ServiceStatus::enabled => ['name' => 'Действующая'],
+            ServiceStatus::disabled => ['name' => 'Недействующая'],
+        ]
     ];
 }

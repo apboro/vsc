@@ -9,10 +9,12 @@ use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
+use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
+use App\Models\TrainingBase\TrainingBase;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,10 +25,12 @@ class DictionaryController extends ApiController
         'position_statuses' => ['class' => PositionStatus::class, 'allow' => null],
         'position_titles' => ['class' => PositionTitle::class, 'allow' => null],
         'user_statuses' => ['class' => UserStatus::class, 'allow' => null],
+        'service_statuses' => ['class' => ServiceStatus::class, 'allow' => null],
         'sport_kinds' => ['class' => SportKind::class, 'allow' => null],
         'training_base_statuses' => ['class' => TrainingBaseStatus::class, 'allow' => null],
         'training_base_contract_statuses' => ['class' => TrainingBaseContractStatus::class, 'allow' => null],
         'organization_statuses' => ['class' => OrganizationStatus::class, 'allow' => null],
+        'training_bases' => ['class' => TrainingBase::class, 'allow' => null],
     ];
 
     /**

@@ -30,6 +30,11 @@ class PermissionsSeeder extends Seeder
             'training_base.contracts.view' => 'Просмотр договоров',
             'training_base.contracts.modify' => 'Добавление, редактирование, удаление договоров',
         ],
+        'services' => [
+            'services.view' => 'Просмотр услуг',
+            'services.edit' => 'Добавление и редактирование услуг',
+            'services.delete' => 'Удаление услуг',
+        ],
     ];
 
     /**

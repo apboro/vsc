@@ -40,6 +40,8 @@ class TrainingBaseContractListController extends ApiController
         $baseId = $request->input('base_id');
         $current = Current::get($request);
 
+        $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
+
         /** @var TrainingBase $base */
         if ($baseId === null ||
             null === ($base = TrainingBase::query()
