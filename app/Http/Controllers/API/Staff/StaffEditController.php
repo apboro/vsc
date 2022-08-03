@@ -38,7 +38,7 @@ class StaffEditController extends ApiEditController
         'email' => 'Email',
         'work_phone' => 'Рабочий телефон',
         'work_phone_additional' => 'добавочный',
-        'mobile_phone' => 'Мобильный телефон',
+        'phone' => 'Телефон',
 
         'notes' => 'Заметки',
     ];
@@ -73,7 +73,7 @@ class StaffEditController extends ApiEditController
                 'email' => $user->profile->email,
                 'work_phone' => $user->position->info->work_phone ?? null,
                 'work_phone_additional' => $user->position->info->work_phone_additional ?? null,
-                'mobile_phone' => $user->profile->mobile_phone,
+                'phone' => $user->profile->phone,
                 'notes' => $user->position->info->notes ?? null,
             ],
             $this->rules,
@@ -122,7 +122,7 @@ class StaffEditController extends ApiEditController
         $profile->birthdate = $data['birthdate'] === null ? null : Carbon::parse($data['birthdate'])->toDate();
         $profile->gender = $data['gender'];
         $profile->email = $data['email'];
-        $profile->mobile_phone = $data['mobile_phone'];
+        $profile->phone = $data['phone'];
         $profile->save();
 
         $position = new Position;

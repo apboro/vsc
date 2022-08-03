@@ -47,7 +47,7 @@ class StaffViewController extends ApiController
             'email' => $user->profile->email,
             'work_phone' => $user->position->info->work_phone,
             'work_phone_additional' => $user->position->info->work_phone_additional,
-            'mobile_phone' => $user->profile->mobile_phone,
+            'phone' => $user->profile->phone,
 
             'notes' => $user->position->info->notes,
 

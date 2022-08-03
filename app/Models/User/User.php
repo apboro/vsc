@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Exceptions\User\WrongUserStatusException;
 use App\Interfaces\Statusable;
+use App\Models\Clients\Client;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\UserStatus;
 use App\Models\Positions\Position;
@@ -25,12 +26,13 @@ use Laravel\Sanctum\HasApiTokens;
  * @property UserProfile $profile
  *
  * @property Position $position
+ * @property Client $client
  */
 class User extends Authenticatable implements Statusable
 {
     use HasApiTokens, HasFactory, HasStatus;
 
-    /** @var string Referenced table. */
+    /** @var string A referenced table. */
     protected $table = 'users';
 
     /** @var string[] The attributes that are mass assignable. */
@@ -93,5 +95,15 @@ class User extends Authenticatable implements Statusable
     public function position(): HasOne
     {
         return $this->hasOne(Position::class, 'user_id', 'id');
+    }
+
+    /**
+     User related client.
+     *
+     * @return  HasOne
+     */
+    public function client(): HasOne
+    {
+        return $this->hasOne(Client::class, 'user_id', 'id');
     }
 }

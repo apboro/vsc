@@ -4,6 +4,7 @@ namespace App\Models\Services;
 
 use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\Interfaces\AsDictionary;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
@@ -32,9 +33,9 @@ use InvalidArgumentException;
  * @property SportKind $sportKind
  * @property ServiceSchedule $schedule
  */
-class Service extends Model implements Statusable
+class Service extends Model implements Statusable, AsDictionary
 {
-    use HasStatus;
+    use HasStatus, ServiceAsDictionary;
 
     /** @var array Default attributes. */
     protected $attributes = [

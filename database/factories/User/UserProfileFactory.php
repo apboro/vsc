@@ -26,7 +26,7 @@ class UserProfileFactory extends Factory
             'patronymic' => $this->faker->middleName($gender),
             'gender' => $gender,
             'birthdate' => $this->faker->date('Y-m-d', '-20 years'),
-            'mobile_phone' => $this->faker->numerify('+7 (###) ###-##-##'),
+            'phone' => $this->faker->numerify('+7 (###) ###-##-##'),
             'email' => $this->faker->email,
             'notes' => $this->faker->text,
         ];

@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property string $lastname
  * @property string $firstname
- * @property string $patronymic
- * @property string $gender
- * @property Carbon $birthdate
- * @property string $mobile_phone
- * @property string $email
- * @property string $notes
+ * @property string|null $patronymic
+ * @property string|null $gender
+ * @property Carbon|null $birthdate
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string|null $notes
  *
  * @property User $user
  *
@@ -47,7 +47,7 @@ class UserProfile extends Model
         'patronymic',
         'birthdate',
         'gender',
-        'mobile_phone',
+        'phone',
         'email',
         'notes',
     ];

@@ -54,7 +54,7 @@ class TestDataSeeder extends Seeder
         unset($title);
 
         // Create users with profiles and positions
-        User::factory(100)
+        User::factory(10)
             ->afterCreating(function (User $user) use ($titles, $organization) {
                 UserProfile::factory()->create(['user_id' => $user->id]);
                 Position::factory()->create(['user_id' => $user->id, 'organization_id' => $organization->id, 'title_id' => $titles[random_int(0, count($titles) - 1)]['id']]);

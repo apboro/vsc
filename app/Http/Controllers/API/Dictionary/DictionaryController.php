@@ -6,14 +6,17 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
+use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
+use App\Models\Services\Service;
 use App\Models\TrainingBase\TrainingBase;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -31,6 +34,9 @@ class DictionaryController extends ApiController
         'training_base_contract_statuses' => ['class' => TrainingBaseContractStatus::class, 'allow' => null],
         'organization_statuses' => ['class' => OrganizationStatus::class, 'allow' => null],
         'training_bases' => ['class' => TrainingBase::class, 'allow' => null],
+        'services' => ['class' => Service::class, 'allow' => null],
+        'client_statuses' => ['class' => ClientStatus::class, 'allow' => null],
+        'subscription_statuses' => ['class' => SubscriptionStatus::class, 'allow' => null],
     ];
 
     /**

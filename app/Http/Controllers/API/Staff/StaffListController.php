@@ -84,7 +84,7 @@ class StaffListController extends ApiController
                 'email' => $user->profile->email,
                 'work_phone' => $user->position->info->work_phone,
                 'work_phone_add' => $user->position->info->work_phone_additional,
-                'mobile_phone' => $user->profile->mobile_phone,
+                'mobile_phone' => $user->profile->phone,
                 'has_access' => !empty($user->login) && !empty($user->password) && $user->position->hasStatus(PositionStatus::active),
             ];
         });
@@ -92,7 +92,7 @@ class StaffListController extends ApiController
         return APIResponse::list(
             $users,
             [
-                'ФИО сотрудника', 'Должность', 'Email', 'Рабочий телефон', 'Мобильный телефон',
+                'ФИО сотрудника', 'Должность', 'Email', 'Рабочий телефон', 'Телефон',
             ],
             $filters,
             $this->defaultFilters,

@@ -17,6 +17,12 @@ import OrganizationsEditPage from "@/Pages/Admin/Organizations/OrganizationsEdit
 import ServicesListPage from "@/Pages/Admin/Services/ServicesListPage";
 import ServicesEditPage from "@/Pages/Admin/Services/ServicesEditPage";
 import ServicesViewPage from "@/Pages/Admin/Services/ServicesViewPage";
+import LeadsListPage from "@/Pages/Admin/Leads/LeadsListPage";
+import LeadsViewPage from "@/Pages/Admin/Leads/LeadsViewPage";
+import ClientsListPage from "@/Pages/Admin/Clients/ClientsListPage";
+import ClientsViewPage from "@/Pages/Admin/Clients/ClientsViewPage";
+import SubscriptionsListPage from "@/Pages/Admin/Subscriptions/SubscriptionsListPage";
+import SubscriptionsViewPage from "@/Pages/Admin/Subscriptions/SubscriptionsViewPage";
 
 export default [
     {path: '/', name: 'home', component: TasksListPage, meta: {title: 'Список задач'}},
@@ -44,6 +50,15 @@ export default [
     {path: '/services', name: 'services-list', component: ServicesListPage, meta: {title: 'Список услуг', permission: ['services.view','services.edit','services.delete']}},
     {path: '/services/:id', name: 'services-view', component: ServicesViewPage, meta: {title: 'Карточка услуги', permission: ['services.view','services.edit','services.delete'], change: 'services-list'}},
     {path: '/services/:id/edit', name: 'services-edit', component: ServicesEditPage, meta: {title: 'Редактирование услуги', permission: 'services.edit', change: 'services-list'}},
+
+    {path: '/leads', name: 'leads-list', component: LeadsListPage, meta: {title: 'Список лидов', permission: ['leads.view','leads.register']}},
+    {path: '/leads/:id', name: 'leads-view', component: LeadsViewPage, meta: {title: 'Лид', change: 'leads-list', permission: ['leads.view','leads.register']}},
+
+    {path: '/clients', name: 'clients-list', component: ClientsListPage, meta: {title: 'Клиенты', permission: ['clients.view']}},
+    {path: '/clients/:id', name: 'clients-view', component: ClientsViewPage, meta: {title: 'Клиент', change: 'clients-list', permission: ['clients.view']}},
+
+    {path: '/subscriptions', name: 'subscriptions-list', component: SubscriptionsListPage, meta: {title: 'Подписки на услуги', permission: ['subscriptions.view']}},
+    {path: '/subscriptions/:id', name: 'subscriptions-view', component: SubscriptionsViewPage, meta: {title: 'Подписка на услугу', change: 'subscriptions-list', permission: ['subscriptions.view']}},
 
     {path: '/403', name: '403', component: Forbidden},
     {path: '/:pathMatch(.*)*', name: '404', component: NotFound},

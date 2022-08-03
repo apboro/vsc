@@ -13,6 +13,9 @@ class LeadStatus extends AbstractDictionary
     /** @var int The ID of active status */
     public const new = 1;
 
+    /** @var int The ID of client created status */
+    public const client_created = 50;
+
     /** @var int Default status */
     public const default = self::new;
 

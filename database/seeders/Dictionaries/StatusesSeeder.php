@@ -2,9 +2,12 @@
 
 namespace Database\Seeders\Dictionaries;
 
+use App\Models\Dictionaries\ClientStatus;
+use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
@@ -36,6 +39,16 @@ class StatusesSeeder extends GenericSeeder
         ServiceStatus::class => [
             ServiceStatus::enabled => ['name' => 'Действующая'],
             ServiceStatus::disabled => ['name' => 'Недействующая'],
-        ]
+        ],
+        LeadStatus::class => [
+            LeadStatus::new => ['name' => 'Новый'],
+            LeadStatus::client_created => ['name' => 'Создан клиент'],
+        ],
+        ClientStatus::class => [
+            ClientStatus::active => ['name' => 'Активный'],
+        ],
+        SubscriptionStatus::class => [
+            SubscriptionStatus::new => ['name' => 'Заполнение договора'],
+        ],
     ];
 }

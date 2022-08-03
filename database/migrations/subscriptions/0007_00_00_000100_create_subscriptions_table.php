@@ -20,7 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->unsignedSmallInteger('organization_id');
 
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('client_ward_id');
+            $table->unsignedBigInteger('client_ward_id')->nullable();
 
             $table->unsignedBigInteger('service_id');
 

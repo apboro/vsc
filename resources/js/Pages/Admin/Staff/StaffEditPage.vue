@@ -28,7 +28,7 @@
                     <FormString :form="form" :name="'work_phone_additional'"/>
                 </GuiContainer>
             </GuiContainer>
-            <FormPhone :form="form" :name="'mobile_phone'" :mask="'+7 (###) ###-##-##'"/>
+            <FormPhone :form="form" :name="'phone'" :mask="'+7 (###) ###-##-##'"/>
         </GuiContainer>
 
         <GuiContainer mt-30>

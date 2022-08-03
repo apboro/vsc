@@ -21,11 +21,11 @@ class CreateUserProfilesTable extends Migration
             $table->string('firstname');
             $table->string('patronymic')->nullable();
 
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['male', 'female'])->nullable();
 
             $table->date('birthdate')->nullable();
 
-            $table->string('mobile_phone')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
 
             $table->text('notes')->nullable();

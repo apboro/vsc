@@ -35,6 +35,16 @@ class PermissionsSeeder extends Seeder
             'services.edit' => 'Добавление и редактирование услуг',
             'services.delete' => 'Удаление услуг',
         ],
+        'leads' => [
+            'leads.view' => 'Просмотр лидов',
+            'leads.register' => 'Обработка лидов',
+        ],
+        'clients' => [
+            'clients.view' => 'Просмотр клиентов',
+        ],
+        'subscriptions' => [
+            'subscriptions.view' => 'Просмотр подписок на услуги',
+        ],
     ];
 
     /**

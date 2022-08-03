@@ -40,7 +40,7 @@
                     {{ position['work_phone'] }}<span v-if="position['work_phone_add']"> доб. {{ position['work_phone_add'] }}</span>
                 </ListTableCell>
                 <ListTableCell>
-                    {{ position['mobile_phone'] }}
+                    {{ position['phone'] }}
                 </ListTableCell>
             </ListTableRow>
         </ListTable>

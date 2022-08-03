@@ -9,6 +9,9 @@ class CookieKeys
     public const training_base_list = 'training_base_list';
     public const training_base_contracts_list = 'training_base_contracts_list';
     public const services_list = 'services_list';
+    public const leads_list = 'leads_list';
+    public const clients_list = 'clients_list';
+    public const subscriptions_list = 'subscriptions_list';
 
     public static function getKey(string $key, ?int $organizationId = null): string
     {

@@ -12,6 +12,9 @@ Route::prefix('api')->middleware(['api', 'auth:sanctum'])->group(function () {
     require base_path('routes/api/settings.php');
     require base_path('routes/api/organizations.php');
     require base_path('routes/api/services.php');
+    require base_path('routes/api/leads.php');
+    require base_path('routes/api/clients.php');
+    require base_path('routes/api/subscriptions.php');
 
     Route::any('{any}', [NotFoundController::class, 'notFound'])->where('any', '.*');
 });
