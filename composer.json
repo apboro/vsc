@@ -22,7 +22,6 @@
         "phpoffice/phpspreadsheet": "^1.22.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
