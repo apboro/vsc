@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\HandleLeadCors;
 use App\Http\Middleware\LeadsProtect;
 use App\Http\Middleware\Permit;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
@@ -64,6 +65,12 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
         ],
         'api' => [
+            EnsureFrontendRequestsAreStateful::class,
+            // 'throttle:api',
+            SubstituteBindings::class,
+        ],
+        'leads' => [
+            HandleLeadCors::class,
             EnsureFrontendRequestsAreStateful::class,
             // 'throttle:api',
             SubstituteBindings::class,

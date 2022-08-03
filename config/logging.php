@@ -113,6 +113,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'outgoing_mail_errors' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/outgoing_mail_errors.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];
