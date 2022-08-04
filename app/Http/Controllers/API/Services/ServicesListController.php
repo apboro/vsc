@@ -45,7 +45,7 @@ class ServicesListController extends ApiController
 
         $query = Service::query()
             ->tap(new ForOrganization($current->organizationId()))
-            ->with(['status', 'trainingBase', 'sportKind'])
+            ->with(['status', 'trainingBase', 'trainingBase.info', 'sportKind'])
             ->orderBy('created_at', 'desc');
 
         // apply filters
@@ -80,7 +80,8 @@ class ServicesListController extends ApiController
                 'active' => $service->hasStatus(ServiceStatus::enabled),
                 'title' => $service->title,
                 'sport_kind' => $service->sportKind->name,
-                'training_base' => $service->trainingBase->short_title,
+                'training_base' => $service->trainingBase->short_title ?? $service->trainingBase->title,
+                'training_base_address' => $service->trainingBase->info->address,
             ];
         });
 

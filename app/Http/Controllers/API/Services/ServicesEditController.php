@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Services\Service;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,10 @@ class ServicesEditController extends ApiEditController
         'training_base_id' => 'required',
         'sport_kind_id' => 'required',
         'monthly_price' => 'required',
+        'training_price' => 'required',
+        'trainings_per_week' => 'required',
+        'start_at' => 'required',
+        'end_at' => 'required',
         'schedule' => 'required',
     ];
 
@@ -26,6 +31,10 @@ class ServicesEditController extends ApiEditController
         'training_base_id' => 'Объект',
         'sport_kind_id' => 'Вид спорта',
         'monthly_price' => 'Стоимость в месяц, руб',
+        'training_price' => 'Стоимость за одно занятие, руб',
+        'trainings_per_week' => 'Количество занятий в неделю',
+        'start_at' => 'Дата начала услуги',
+        'end_at' => 'Дата окончания услуги',
         'schedule' => 'График занятий',
     ];
 
@@ -57,6 +66,10 @@ class ServicesEditController extends ApiEditController
                 'training_base_id' => $service->training_base_id,
                 'sport_kind_id' => $service->sport_kind_id,
                 'monthly_price' => $service->monthly_price,
+                'training_price' => $service->training_price,
+                'trainings_per_week' => $service->trainings_per_week,
+                'start_at' => $service->start_at ? $service->start_at->format('Y-m-d') : null,
+                'end_at' => $service->end_at ? $service->end_at->format('Y-m-d') : null,
                 'schedule' => $service->schedule->text,
             ],
             $this->rules,
@@ -96,6 +109,10 @@ class ServicesEditController extends ApiEditController
         $service->training_base_id = $data['training_base_id'];
         $service->sport_kind_id = $data['sport_kind_id'];
         $service->monthly_price = $data['monthly_price'];
+        $service->training_price = $data['training_price'];
+        $service->trainings_per_week = $data['trainings_per_week'];
+        $service->start_at = Carbon::parse($data['start_at']);
+        $service->end_at = Carbon::parse($data['end_at']);
         if (!$service->exists) {
             $service->organization_id = $current->organizationId();
         }

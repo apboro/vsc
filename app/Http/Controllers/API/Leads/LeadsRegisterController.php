@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Leads;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Mail\SubscriptionContractFillLinkMail;
 use App\Models\Clients\Client;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\LeadStatus;
@@ -17,6 +18,8 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class LeadsRegisterController extends ApiEditController
 {
@@ -90,13 +93,18 @@ class LeadsRegisterController extends ApiEditController
                 $subscription->client_id = $client->id;
                 $subscription->service_id = $data['service_id'];
                 $subscription->save();
+
+                // send a link to client
+                try {
+                    Mail::send(new SubscriptionContractFillLinkMail($subscription));
+                } catch (Exception $exception) {
+                    Log::channel('outgoing_mail_errors')->error($exception->getMessage());
+                    throw $exception;
+                }
             });
         } catch (Exception $exception) {
             return APIResponse::error($exception->getMessage());
         }
-
-        // send a link to client
-
 
         return APIResponse::success('Клиент зарегистрирован. Ссылка на заполнение договора отправлена клиенту.');
     }

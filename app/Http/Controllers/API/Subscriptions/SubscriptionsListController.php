@@ -18,13 +18,13 @@ class SubscriptionsListController extends ApiController
     protected array $defaultFilters = [
         'status_id' => null,
         'training_base_id' => null,
-        'sport_kind_id' => null,
+        'service_id' => null,
     ];
 
     protected array $rememberFilters = [
         'status_id',
         'training_base_id',
-        'sport_kind_id',
+        'service_id',
     ];
 
     protected string $rememberKey = CookieKeys::subscriptions_list;
@@ -57,10 +57,8 @@ class SubscriptionsListController extends ApiController
                     $query->where('training_base_id', $filters['training_base_id']);
                 });
             }
-            if (!empty($filters['sport_kind_id'])) {
-                $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('sport_kind_id', $filters['sport_kind_id']);
-                });
+            if (!empty($filters['service_id'])) {
+                $query->where('service_id', $filters['service_id']);
             }
         }
 
@@ -92,14 +90,16 @@ class SubscriptionsListController extends ApiController
                 'client_id' => $subscription->client_id,
                 'status' => $subscription->status->name,
                 'service' => $subscription->service->title,
-                'training_base' => $subscription->service->trainingBase->short_title,
+                'service_id' => $subscription->service_id,
+                'training_base' => $subscription->service->trainingBase->short_title ?? $subscription->service->trainingBase->title,
+                'training_base_address' => $subscription->service->trainingBase->info->address,
                 'sport_kind' => $subscription->service->sportKind->name,
             ];
         });
 
         return APIResponse::list(
             $subscriptions,
-            ['ID', 'Статус', 'Клиент', 'Вид спорта', 'Объект'],
+            ['ID', 'Статус', 'Клиент', 'Услуга', 'Объект'],
             $filters,
             $this->defaultFilters,
             []

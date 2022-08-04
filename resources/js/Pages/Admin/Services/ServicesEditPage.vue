@@ -10,6 +10,10 @@
             <FormDictionary :form="form" :name="'training_base_id'" :dictionary="'training_bases'" :search="true"/>
             <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
             <FormNumber :form="form" :name="'monthly_price'"/>
+            <FormNumber :form="form" :name="'training_price'"/>
+            <FormNumber :form="form" :name="'trainings_per_week'"/>
+            <FormDate :form="form" :name="'start_at'"/>
+            <FormDate :form="form" :name="'end_at'"/>
         </GuiContainer>
 
         <GuiContainer mt-30>
@@ -33,9 +37,11 @@ import FormDictionary from "@/Components/Form/FormDictionary";
 import GuiButton from "@/Components/GUI/GuiButton";
 import FormNumber from "@/Components/Form/FormNumber";
 import FormText from "@/Components/Form/FormText";
+import FormDate from "@/Components/Form/FormDate";
 
 export default {
     components: {
+        FormDate,
         FormText,
         FormNumber,
         GuiButton,

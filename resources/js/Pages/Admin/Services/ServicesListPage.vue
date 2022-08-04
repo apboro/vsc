@@ -60,7 +60,8 @@
                     {{ service['sport_kind'] }}
                 </ListTableCell>
                 <ListTableCell>
-                    {{ service['training_base'] }}
+                    <div>{{ service['training_base'] }}</div>
+                    <div><i>{{ service['training_base_address'] }}</i></div>
                 </ListTableCell>
             </ListTableRow>
         </ListTable>

@@ -20,7 +20,7 @@ class LeadsViewController extends ApiController
         /** @var Lead $lead */
         if ($id === null ||
             null === ($lead = Lead::query()
-                ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile'])
+                ->with(['status', 'service', 'service.trainingBase', 'service.trainingBase.info', 'service.sportKind', 'client.user.profile'])
                 ->where('id', $id)
                 ->tap(new ForOrganization($current->organizationId()))
                 ->first())
@@ -40,7 +40,8 @@ class LeadsViewController extends ApiController
             'created_time' => $lead->created_at->format('H:i'),
             'service' => $lead->service->title ?? null,
             'service_id' => $lead->service_id,
-            'training_base' => $lead->service ? $lead->service->trainingBase->short_title : null,
+            'training_base' => $lead->service ? ($lead->service->trainingBase->short_title ?? $lead->service->trainingBase->title): null,
+            'training_base_address' => $lead->service ? $lead->service->trainingBase->info->address : null,
             'sport_kind' => $lead->service ? $lead->service->sportKind->name : null,
             'client' => $lead->client ? $lead->client->user->profile->compactName : null,
             'client_id' => $lead->client_id,

@@ -22,8 +22,13 @@ class CreateServicesTable extends Migration
             $table->unsignedInteger('training_base_id');
             $table->unsignedSmallInteger('sport_kind_id');
 
+            $table->date('start_at');
+            $table->date('end_at');
+
             $table->string('title');
             $table->unsignedInteger('monthly_price')->nullable();
+            $table->unsignedInteger('training_price')->nullable();
+            $table->unsignedInteger('trainings_per_week')->nullable();
 
             $table->timestamps();
 

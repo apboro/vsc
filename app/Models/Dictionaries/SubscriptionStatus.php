@@ -10,8 +10,11 @@ namespace App\Models\Dictionaries;
  */
 class SubscriptionStatus extends AbstractDictionary
 {
-    /** @var int The ID of active status */
+    /** @var int The ID of new subscription status */
     public const new = 1;
+
+    /** @var int The ID of subscription with filled contract draft status */
+    public const filled = 10;
 
     /** @var int Default status */
     public const default = self::new;

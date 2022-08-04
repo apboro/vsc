@@ -10,6 +10,7 @@
             <GuiValue :title="'Статус'">{{ data['status'] }}</GuiValue>
             <GuiValue :title="'Услуга'">{{ data['service'] }}</GuiValue>
             <GuiValue :title="'Объект'">{{ data['training_base'] }}</GuiValue>
+            <GuiValue :title="'Адрес'">{{ data['training_base_address'] }}</GuiValue>
             <GuiValue :title="'Вид спорта'">{{ data['sport_kind'] }}</GuiValue>
             <GuiValue :title="'Клиент'">
                 <RouterLink v-if="data['client']" class="link" :to="{name: 'clients-view', params: {id: data['client_id']}}">{{ data['client'] }}</RouterLink>

@@ -3,10 +3,12 @@
 namespace Database\Seeders\Dictionaries;
 
 use App\Models\Dictionaries\ClientStatus;
+use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
@@ -29,8 +31,8 @@ class StatusesSeeder extends GenericSeeder
             TrainingBaseStatus::disabled => ['name' => 'Недействующий'],
         ],
         TrainingBaseContractStatus::class => [
-            TrainingBaseContractStatus::active => ['name' => 'Действующий'],
-            TrainingBaseContractStatus::inactive => ['name' => 'Недействующий'],
+            TrainingBaseContractStatus::active => ['name' => 'Договор подписан'],
+            TrainingBaseContractStatus::inactive => ['name' => 'Договор в проекте'],
         ],
         OrganizationStatus::class => [
             OrganizationStatus::active => ['name' => 'Действующая'],
@@ -47,8 +49,16 @@ class StatusesSeeder extends GenericSeeder
         ClientStatus::class => [
             ClientStatus::active => ['name' => 'Активный'],
         ],
+        ClientWardStatus::class => [
+            ClientWardStatus::active => ['name' => 'Активный'],
+        ],
         SubscriptionStatus::class => [
             SubscriptionStatus::new => ['name' => 'Заполнение договора'],
+            SubscriptionStatus::filled => ['name' => 'Договор заполнен'],
+        ],
+        SubscriptionContractStatus::class => [
+            SubscriptionContractStatus::draft => ['name' => 'Заполнен'],
+
         ],
     ];
 }

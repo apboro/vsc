@@ -19,6 +19,9 @@ class CreateSubscriptionContractsTable extends Migration
             $table->unsignedTinyInteger('status_id')->default(SubscriptionContractStatus::default);
             $table->unsignedBigInteger('subscription_id');
 
+            $table->date('start_at');
+            $table->date('end_at');
+
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('dictionary_subscription_contract_statuses')->restrictOnDelete()->cascadeOnUpdate();

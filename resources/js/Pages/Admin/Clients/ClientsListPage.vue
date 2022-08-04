@@ -35,13 +35,14 @@
                     <RouterLink class="link" :to="{name: 'clients-view', params: {id: client['id']}}" v-html="highlight(client['name'])"/>
                 </ListTableCell>
                 <ListTableCell>
+                    {{ client['created_date'] }}
+                </ListTableCell>
+                <ListTableCell>
                     {{ client['status'] }}
                 </ListTableCell>
                 <ListTableCell>
-                    {{ client['email'] }}
-                </ListTableCell>
-                <ListTableCell>
-                    {{ client['phone'] }}
+                    <div>{{ client['email'] }}</div>
+                    <div>{{ client['phone'] }}</div>
                 </ListTableCell>
             </ListTableRow>
         </ListTable>

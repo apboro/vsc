@@ -19,14 +19,15 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
-            <LayoutFiltersItem :title="'Вид спорта'">
+            <LayoutFiltersItem :title="'Услуга'">
                 <DictionaryDropDown
-                    :dictionary="'sport_kinds'"
-                    v-model="list.filters['sport_kind_id']"
-                    :original="list.filters_original['sport_kind_id']"
+                    :dictionary="'services'"
+                    v-model="list.filters['service_id']"
+                    :original="list.filters_original['service_id']"
                     :placeholder="'Все'"
                     :has-null="true"
                     :small="true"
+                    :search="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
@@ -61,10 +62,14 @@
                     <RouterLink class="link" :to="{name: 'clients-view', params: {id: subscription['client_id']}}" v-html="highlight(subscription['client'])"/>
                 </ListTableCell>
                 <ListTableCell>
-                    {{ subscription['sport_kind'] }}
+                    <div>
+                        <RouterLink class="link" :to="{name: 'services-view', params: {id: subscription['service_id']}}">{{ subscription['service'] }}</RouterLink>
+                    </div>
+                    <div><i>({{ subscription['sport_kind'] }})</i></div>
                 </ListTableCell>
                 <ListTableCell>
-                    {{ subscription['training_base'] }}
+                    <div>{{ subscription['training_base'] }}</div>
+                    <div><i>{{ subscription['training_base_address'] }}</i></div>
                 </ListTableCell>
             </ListTableRow>
         </ListTable>

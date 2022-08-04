@@ -83,13 +83,14 @@ class ClientsListController extends ApiController
                 'email' => $user->profile->email,
                 'phone' => $user->profile->phone,
                 'status' => $user->client->status->name,
+                'created_date' => $user->client->created_at->format('d.m.Y'),
                 'user_id' => $user->id,
             ];
         });
 
         return APIResponse::list(
             $users,
-            ['ID', 'ФИО', 'Статус', 'Email', 'Телефон'],
+            ['ID', 'ФИО', 'Дата создания', 'Статус', 'Контакты'],
             $filters,
             $this->defaultFilters,
             []

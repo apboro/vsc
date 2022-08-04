@@ -36,6 +36,11 @@ class ServicesViewController extends ApiController
             'training_base' => $service->trainingBase->title,
             'sport_kind' => $service->sportKind->name,
             'schedule' => $service->schedule->text,
+            'monthly_price' => $service->monthly_price,
+            'training_price' => $service->training_price,
+            'trainings_per_week' => $service->trainings_per_week,
+            'start_at' => $service->start_at->format('d.m.Y'),
+            'end_at' => $service->end_at->format('d.m.Y'),
         ];
 
         // send response

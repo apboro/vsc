@@ -6,43 +6,14 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Middleware\LeadsProtect;
 use App\Models\Dictionaries\LeadStatus;
-use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Leads\Lead;
-use App\Models\Services\Service;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class LeadController extends ApiEditController
+class LeadNewController extends ApiEditController
 {
-    /**
-     * Handle requests to frontend index.
-     *
-     * @param Request $request
-     *
-     * @return  JsonResponse
-     */
-    public function init(Request $request): JsonResponse
-    {
-        $key = self::getKey($request);
-
-        if ($key['organization_id'] === null) {
-            return APIResponse::error('Ошибка сессии');
-        }
-
-        $services = Service::query()
-            ->where(['organization_id' => $key['organization_id'], 'status_id' => ServiceStatus::enabled])
-            ->select(['id', 'title'])
-            ->orderBy('title')
-            ->get();
-
-        return APIResponse::response([
-            'session' => self::makeSession((int)$key['organization_id'], $request->ip()),
-            'services' => $services,
-        ]);
-    }
-
     /**
      * Add new lead.
      *
@@ -96,42 +67,6 @@ class LeadController extends ApiEditController
 
         // response success
         return APIResponse::success('Ваша заявка отправлена.');
-    }
-
-    /**
-     * Get parameters from request.
-     *
-     * @param Request $request
-     *
-     * @return  array
-     */
-    protected static function getKey(Request $request): array
-    {
-        if ($request->hasHeader('X-Vsc-Key')) {
-            $key = Crypt::decrypt($request->header('X-Vsc-Key'));
-        }
-
-        return [
-            'organization_id' => $key ?? null,
-        ];
-    }
-
-    /**
-     * Make encrypted session.
-     *
-     * @param int $organizationId
-     * @param string $ip
-     *
-     * @return  string
-     */
-    protected static function makeSession(int $organizationId, string $ip): string
-    {
-        $session = [
-            'organization_id' => $organizationId,
-            'ip' => $ip,
-        ];
-
-        return Crypt::encrypt($session);
     }
 
     /**

@@ -23,7 +23,11 @@ use InvalidArgumentException;
  * @property int $training_base_id
  * @property int $sport_kind_id
  * @property string $title
- * @property int|null $monthly_price
+ * @property float|null $monthly_price
+ * @property float|null $training_price
+ * @property int|null $trainings_per_week
+ * @property Carbon $start_at
+ * @property Carbon $end_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
@@ -44,6 +48,8 @@ class Service extends Model implements Statusable, AsDictionary
 
     /** @var array Attribute casting */
     protected $casts = [
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -70,6 +76,30 @@ class Service extends Model implements Statusable, AsDictionary
     public function setMonthlyPriceAttribute(?float $value): void
     {
         $this->attributes['monthly_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert monthly price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getTrainingPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert monthly price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setTrainingPriceAttribute(?float $value): void
+    {
+        $this->attributes['training_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 
     /**

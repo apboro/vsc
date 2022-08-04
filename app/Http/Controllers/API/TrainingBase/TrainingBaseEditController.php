@@ -15,12 +15,12 @@ class TrainingBaseEditController extends ApiEditController
     protected array $rules = [
         'status_id' => 'required',
         'title' => 'required',
-        'short_title' => 'required',
+        'short_title' => 'nullable',
         'address' => 'required',
         'sport_kinds' => 'required',
-        'images' => 'required',
-        'email' => 'required|email|bail',
-        'phone' => 'required',
+        'images' => 'nullable',
+        'email' => 'nullable|email|bail',
+        'phone' => 'nullable',
         'description' => 'nullable',
     ];
 

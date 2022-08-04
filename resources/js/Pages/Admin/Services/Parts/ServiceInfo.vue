@@ -8,6 +8,13 @@
                 <GuiActivityIndicator :active="data['active']"/>
                 {{ data['status'] }}
             </GuiValue>
+
+            <GuiValue :title="'Стоимость в месяц, руб'">{{ data['monthly_price'] }}</GuiValue>
+            <GuiValue :title="'Стоимость за одно занятие, руб'">{{ data['training_price'] }}</GuiValue>
+            <GuiValue :title="'Количество занятий в неделю'">{{ data['trainings_per_week'] }}</GuiValue>
+            <GuiValue :title="'Дата начала услуги'">{{ data['start_at'] }}</GuiValue>
+            <GuiValue :title="'Дата окончания услуги'">{{ data['end_at'] }}</GuiValue>
+
             <GuiValueArea :title="'График занятий'" :text-content="data['schedule']"/>
         </GuiContainer>
     </div>
