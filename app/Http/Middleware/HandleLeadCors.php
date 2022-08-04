@@ -30,7 +30,7 @@ class HandleLeadCors
             $response->headers->set('Access-Control-Allow-Methods', 'POST');
             $response->headers->set(
                 'Access-Control-Allow-Headers',
-                'access-control-allow-methods,access-control-allow-origin,content-type,x-requested-with,x-xsrf-token,X-Vsc-Key' . LeadsProtect::HEADER_NAME
+                'access-control-allow-methods,access-control-allow-origin,content-type,x-requested-with,x-xsrf-token,x-vsc-key,' . LeadsProtect::HEADER_NAME
             );
 
             return $response;

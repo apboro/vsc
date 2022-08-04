@@ -40,7 +40,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        HandleCors::class,
+        // HandleCors::class, TODO change to selective cors handler
+        HandleLeadCors::class,
+
         // \App\Http\Middleware\TrustHosts::class,
         TrustProxies::class,
         PreventRequestsDuringMaintenance::class,
@@ -71,9 +73,8 @@ class Kernel extends HttpKernel
         ],
         'leads' => [
             HandleLeadCors::class,
-            EnsureFrontendRequestsAreStateful::class,
-            // 'throttle:api',
-            SubstituteBindings::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
         ],
     ];
 
