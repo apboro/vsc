@@ -30,7 +30,7 @@ class HandleLeadCors
             $response->headers->set('Access-Control-Allow-Methods', 'POST');
             $response->headers->set(
                 'Access-Control-Allow-Headers',
-                'access-control-allow-methods,access-control-allow-origin,content-type,x-requested-with,x-xsrf-token,' . LeadsProtect::HEADER_NAME
+                'access-control-allow-methods,access-control-allow-origin,content-type,x-requested-with,x-xsrf-token,X-Vsc-Key' . LeadsProtect::HEADER_NAME
             );
 
             return $response;
@@ -42,7 +42,7 @@ class HandleLeadCors
         $response->headers->set('Access-Control-Allow-Origin', $request->header('access-control-allow-origin', '*'));
         $response->headers->set('Access-Control-Allow-Credentials', 'true');
         $response->headers->set('Access-Control-Allow-Methods', 'POST');
-        $response->headers->set('Access-Control-Expose-Headers', LeadsProtect::HEADER_NAME);
+        $response->headers->set('Access-Control-Expose-Headers', LeadsProtect::HEADER_NAME . ',X-Vsc-Key');
 
         return $response;
     }
