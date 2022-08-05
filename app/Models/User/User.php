@@ -5,6 +5,7 @@ namespace App\Models\User;
 use App\Exceptions\User\WrongUserStatusException;
 use App\Interfaces\Statusable;
 use App\Models\Clients\Client;
+use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\UserStatus;
 use App\Models\Positions\Position;
@@ -27,6 +28,7 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @property Position $position
  * @property Client $client
+ * @property ClientWard $clientWard
  */
 class User extends Authenticatable implements Statusable
 {
@@ -105,5 +107,15 @@ class User extends Authenticatable implements Statusable
     public function client(): HasOne
     {
         return $this->hasOne(Client::class, 'user_id', 'id');
+    }
+
+    /**
+     User related client ward.
+     *
+     * @return  HasOne
+     */
+    public function clientWard(): HasOne
+    {
+        return $this->hasOne(ClientWard::class, 'user_id', 'id');
     }
 }

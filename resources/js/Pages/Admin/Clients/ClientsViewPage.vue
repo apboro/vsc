@@ -7,6 +7,7 @@
         <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
 
         <ClientInfo v-if="tab === 'general'" :data="data.data"/>
+        <ClientWardsList v-if="tab === 'wards'" :client-id="clientId" :ready="data.is_loaded"/>
         <SubscriptionsList v-if="tab === 'subscriptions'" :client-id="clientId" :ready="data.is_loaded"/>
     </LayoutPage>
 </template>
@@ -18,9 +19,11 @@ import GuiContainer from "@/Components/GUI/GuiContainer";
 import ClientInfo from "@/Pages/Admin/Clients/Parts/ClientInfo";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
 import SubscriptionsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsList";
+import ClientWardsList from "@/Pages/Admin/Clients/Parts/ClientWardsList";
 
 export default {
     components: {
+        ClientWardsList,
         SubscriptionsList,
         LayoutRoutedTabs,
         ClientInfo,
