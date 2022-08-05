@@ -26,7 +26,7 @@ import LoadingProgress from "@/Components/LoadingProgress";
 import ListTable from "@/Components/ListTable/ListTable";
 import ListTableRow from "@/Components/ListTable/ListTableRow";
 import ListTableCell from "@/Components/ListTable/ListTableCell";
-import GuiMessage from "@/Apps/LeadApp";
+import GuiMessage from "@/Components/GUI/GuiMessage";
 import Pagination from "@/Components/Pagination";
 
 export default {
