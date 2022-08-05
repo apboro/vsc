@@ -104,8 +104,6 @@ class LeadContractController extends ApiEditController
             DB::transaction(static function () use ($subscription, $data) {
                 // add contract
                 $contract = new SubscriptionContract();
-                $contract->start_at = Carbon::now()->startOfDay();
-                $contract->end_at = $subscription->service->end_at;
                 $contract->subscription_id = $subscription->id;
                 $contract->setStatus(SubscriptionContractStatus::draft, false);
                 $contract->save();
@@ -147,6 +145,7 @@ class LeadContractController extends ApiEditController
 
                 // update subscription status
                 $subscription->setStatus(SubscriptionStatus::filled, false);
+                $subscription->client_ward_id = $ward->id;
                 $subscription->save();
             });
         } catch (Exception $exception) {

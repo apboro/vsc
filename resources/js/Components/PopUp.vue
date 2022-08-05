@@ -1,6 +1,7 @@
 <template>
-    <div class="dialogs__overlay" v-if="shown" :class="{'dialogs__overlay-hide': hiding, 'dialogs__overlay-shown': showing}" @click="popupClose">
-        <div class="dialogs__dialog">
+    <div class="dialogs__overlay" v-if="shown" :class="{'dialogs__overlay-hide': hiding, 'dialogs__overlay-shown': showing, 'dialogs__overlay-scrollable': scrollable}"
+         @click="popupClose">
+        <div class="dialogs__dialog" :class="{'dialogs__dialog-scrollable': scrollable}">
             <LoadingProgress :loading="processing">
                 <div class="dialogs__dialog-wrapper">
                     <div class="dialogs__dialog-title" v-if="title">{{ title }}</div>
@@ -38,6 +39,7 @@ export default {
         manual: {type: Boolean, default: false},
         resolving: {type: Function, default: null},
         closeOnOverlay: {type: Boolean, default: false},
+        scrollable: {type: Boolean, default: false},
     },
 
     data: () => ({
@@ -138,6 +140,12 @@ $base_light_gray_color: #e5e5e5 !default;
         visibility: hidden;
         transition: opacity $animation $animation_time, visibility $animation $animation_time;
 
+        &-scrollable {
+            padding-top: 20px;
+            align-items: flex-start;
+            overflow-y: auto;
+        }
+
         &-shown {
             opacity: 1;
             visibility: visible;
@@ -156,6 +164,10 @@ $base_light_gray_color: #e5e5e5 !default;
         padding: 15px;
         box-shadow: $shadow_2;
         max-height: 95%;
+
+        &-scrollable {
+            max-height: unset;
+        }
 
         &-wrapper {
             box-sizing: border-box;

@@ -29,7 +29,20 @@ class ServicesViewController extends ApiController
             return APIResponse::notFound('Услуга не найдена');
         }
 
-        $values = [
+        $values = self::composeServiceData($service);
+
+        // send response
+        return APIResponse::response($values);
+    }
+
+    public static function composeServiceData(Service $service): array
+    {
+        $service->loadMissing('status');
+        $service->loadMissing('trainingBase');
+        $service->loadMissing('sportKind');
+        $service->loadMissing('schedule');
+
+        return [
             'status' => $service->status->name,
             'active' => $service->hasStatus(ServiceStatus::enabled),
             'title' => $service->title,
@@ -42,8 +55,5 @@ class ServicesViewController extends ApiController
             'start_at' => $service->start_at->format('d.m.Y'),
             'end_at' => $service->end_at->format('d.m.Y'),
         ];
-
-        // send response
-        return APIResponse::response($values);
     }
 }

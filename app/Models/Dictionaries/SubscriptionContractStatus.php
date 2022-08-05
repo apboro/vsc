@@ -13,6 +13,9 @@ class SubscriptionContractStatus extends AbstractDictionary
     /** @var int The ID of active status */
     public const draft = 1;
 
+    /** @var int The ID of contract data accepted status */
+    public const accepted = 10;
+
     /** @var int Default status */
     public const default = self::draft;
 

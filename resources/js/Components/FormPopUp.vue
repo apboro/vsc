@@ -6,6 +6,7 @@
            :close-on-overlay="closeOnOverlay"
            :manual="true"
            :resolving="resolved"
+           :scrollable="scrollable"
            ref="popup"
     >
         <slot/>
@@ -31,6 +32,7 @@ export default {
         closeOnOverlay: {type: Boolean, default: false},
         form: {type: Object, default: null},
         options: {type: Object, default: () => ({})},
+        scrollable: {type: Boolean, default: false},
     },
 
     computed: {

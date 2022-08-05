@@ -23,6 +23,7 @@ import ClientsListPage from "@/Pages/Admin/Clients/ClientsListPage";
 import ClientsViewPage from "@/Pages/Admin/Clients/ClientsViewPage";
 import SubscriptionsListPage from "@/Pages/Admin/Subscriptions/SubscriptionsListPage";
 import SubscriptionsViewPage from "@/Pages/Admin/Subscriptions/SubscriptionsViewPage";
+import ClientSubscriptionsViewPage from "@/Pages/Admin/Clients/ClientSubscriptionsViewPage";
 
 export default [
     {path: '/', name: 'home', component: TasksListPage, meta: {title: 'Список задач'}},
@@ -56,6 +57,7 @@ export default [
 
     {path: '/clients', name: 'clients-list', component: ClientsListPage, meta: {title: 'Клиенты', permission: ['clients.view']}},
     {path: '/clients/:id', name: 'clients-view', component: ClientsViewPage, meta: {title: 'Клиент', change: 'clients-list', permission: ['clients.view']}},
+    {path: '/clients/:client/subscription/:id', name: 'clients-subscriptions-view', component: ClientSubscriptionsViewPage, meta: {title: 'Подписка на услугу', change: 'clients-list', permission: ['clients.view']}},
 
     {path: '/subscriptions', name: 'subscriptions-list', component: SubscriptionsListPage, meta: {title: 'Подписки на услуги', permission: ['subscriptions.view']}},
     {path: '/subscriptions/:id', name: 'subscriptions-view', component: SubscriptionsViewPage, meta: {title: 'Подписка на услугу', change: 'subscriptions-list', permission: ['subscriptions.view']}},

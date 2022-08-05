@@ -2,28 +2,41 @@
     <div class="layout-page">
         <loading-progress :loading="loading">
             <div class="layout-page__header">
-                <slot name="header" v-if="$slots.header"/>
-                <template v-else>
-                    <div class="layout-page__header-main">
-                        <div class="layout-page__header-main-breadcrumbs" v-if="breadcrumbs">
-                            <template v-for="link in breadcrumbs">
-                                <router-link class="layout-page__header-main-breadcrumbs-link" :to="link['to']">{{ link['caption'] }}</router-link>
-                                <span class="layout-page__header-main-breadcrumbs-divider">{{ divider }}</span>
+                <div class="layout-page__header-wrapper">
+                    <slot name="header" v-if="$slots.header"/>
+                    <template v-else>
+                        <div class="layout-page__header-main">
+                            <div class="layout-page__header-main-breadcrumbs" v-if="breadcrumbs" :class="{'layout-page__header-main-breadcrumbs-small':titleNewLine}">
+                                <template v-for="link in breadcrumbs">
+                                    <router-link v-if="link['to']" class="layout-page__header-main-breadcrumbs-link" :to="link['to']">{{ link['caption'] }}</router-link>
+                                    <span v-else class="layout-page__header-main-breadcrumbs-link">{{ link['caption'] }}</span>
+                                    <span class="layout-page__header-main-breadcrumbs-divider">{{ divider }}</span>
+                                </template>
+                            </div>
+                            <template v-if="!titleNewLine">
+                                <router-link v-if="titleLink" :to="titleLink" class="layout-page__header-main-title-link">{{ title }}</router-link>
+                                <span v-else class="layout-page__header-main-title">{{ title }}</span>
                             </template>
                         </div>
-                        <router-link v-if="titleLink" :to="titleLink" class="layout-page__header-main-title-link">{{ title }}</router-link>
-                        <span v-else class="layout-page__header-main-title">{{ title }}</span>
-                    </div>
-                    <div class="layout-page__header-actions" v-if="$slots.actions || link">
-                        <div class="layout-page__header-actions-link" v-if="link">
-                            <router-link :class="'layout-page__header-actions-link-href'" :to="link">{{ linkTitle }}</router-link>
+                        <div class="layout-page__header-actions" v-if="canViewPage && ($slots.actions || link)">
+                            <div class="layout-page__header-actions-link" v-if="link">
+                                <router-link :class="'layout-page__header-actions-link-href'" :to="link">{{ linkTitle }}</router-link>
+                            </div>
+                            <slot name="actions" v-if="$slots.actions"/>
                         </div>
-                        <slot name="actions" v-if="$slots.actions"/>
-                    </div>
+                    </template>
+                </div>
+                <template v-if="titleNewLine">
+                    <router-link v-if="titleLink" :to="titleLink" class="layout-page__header-main-title-link layout-page__header-main-title-link-mt">{{ title }}</router-link>
+                    <span v-else class="layout-page__header-main-title layout-page__header-main-title-mt">{{ title }}</span>
                 </template>
+                <div class="layout-page__header-comments" v-if="canViewPage && $slots.comments">
+                    <slot name="comments"/>
+                </div>
             </div>
             <div class="layout-page__body">
-                <slot/>
+                <slot v-if="canViewPage"/>
+                <GuiMessage v-else text-red>У Вас недостаточно прав для просмотра этой страницы.</GuiMessage>
             </div>
             <div class="layout-page__footer" v-if="$slots.footer">
                 <slot name="footer"/>
@@ -34,15 +47,18 @@
 
 <script>
 import LoadingProgress from "@/Components/LoadingProgress";
+import GuiMessage from "@/Components/GUI/GuiMessage";
 
 export default {
-    components: {LoadingProgress},
+    components: {GuiMessage, LoadingProgress},
 
     props: {
         title: {type: String, default: null},
         titleLink: {type: Object, default: null},
+        titleNewLine: {type: Boolean, default: false},
 
         loading: {type: Boolean, default: false},
+        isForbidden: {type: Boolean, default: false},
 
         breadcrumbs: {type: Array, default: null},
         divider: {type: String, default: '/'},
@@ -50,6 +66,21 @@ export default {
         link: {type: Object, default: null},
         linkTitle: {type: String, default: null},
     },
+
+    computed: {
+        canViewPage() {
+            if (this.isForbidden) {
+                return false;
+            }
+            let permission = typeof this.$route.meta['permission'] !== "undefined" ? this.$route.meta['permission'] : null;
+            let passed = true;
+            if (permission !== null && permission !== '') {
+                if (typeof permission === "string") permission = [permission];
+                passed = Object.keys(permission).some(key => this.$store.getters['permissions/can'](permission[key]));
+            }
+            return passed;
+        }
+    }
 }
 </script>
 
@@ -88,24 +119,37 @@ $base_primary_hover_color: lighten(#0D74D7, 10%) !default;
         padding-bottom: 20px;
         border-bottom: 1px solid $base_light_gray_color;
         display: flex;
-        flex-direction: row;
-        height: $base_size_unit;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: $base_size_unit;
+        font-family: $project_font;
+        font-size: 20px;
+
+        &-wrapper {
+            min-height: $base_size_unit;
+            display: flex;
+            width: 100%;
+        }
 
         &-main {
-            flex-shrink: 0;
+            flex-shrink: 1;
             flex-grow: 1;
-            font-family: $project_font;
-            font-size: 20px;
             display: flex;
             flex-direction: row;
             align-items: center;
             box-sizing: border-box;
 
             &-breadcrumbs {
+                &-small {
+                    font-size: 16px;
+                }
+
                 &-link {
                     color: $base_primary_color;
                     text-decoration: none;
                     font-weight: bold;
+                    white-space: nowrap;
 
                     &:hover {
                         color: $base_primary_hover_color
@@ -121,6 +165,10 @@ $base_primary_hover_color: lighten(#0D74D7, 10%) !default;
             &-title, &-title-link {
                 font-weight: bold;
                 color: $base_text_gray_color;
+
+                &-mt {
+                    margin-top: 15px;
+                }
             }
 
             &-title-link {
@@ -148,6 +196,11 @@ $base_primary_hover_color: lighten(#0D74D7, 10%) !default;
                     }
                 }
             }
+        }
+
+        &-comments {
+            font-size: 16px;
+            margin-top: 20px;
         }
     }
 

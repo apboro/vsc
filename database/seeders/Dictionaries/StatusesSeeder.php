@@ -58,7 +58,7 @@ class StatusesSeeder extends GenericSeeder
         ],
         SubscriptionContractStatus::class => [
             SubscriptionContractStatus::draft => ['name' => 'Заполнен'],
-
+            SubscriptionContractStatus::accepted => ['name' => 'Договор сформирован'],
         ],
     ];
 }

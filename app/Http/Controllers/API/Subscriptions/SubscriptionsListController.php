@@ -42,9 +42,16 @@ class SubscriptionsListController extends ApiController
 
         $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
 
+        $clientId = $request->input('client_id');
+
         $query = Subscription::query()
             ->tap(new ForOrganization($current->organizationId()))
             ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile'])
+            ->when($clientId, function (Builder $query) use ($clientId) {
+                $query->whereHas('client', function (Builder $query) use ($clientId) {
+                    $query->where('id', $clientId);
+                });
+            })
             ->orderBy('created_at', 'desc');
 
         // apply filters
@@ -88,6 +95,7 @@ class SubscriptionsListController extends ApiController
                 'id' => $subscription->id,
                 'client' => $subscription->client->user->profile->fullName,
                 'client_id' => $subscription->client_id,
+                'title' => "Подписка на услугу \"" . $subscription->service->title . "\"",
                 'status' => $subscription->status->name,
                 'service' => $subscription->service->title,
                 'service_id' => $subscription->service_id,
@@ -99,7 +107,7 @@ class SubscriptionsListController extends ApiController
 
         return APIResponse::list(
             $subscriptions,
-            ['ID', 'Статус', 'Клиент', 'Услуга', 'Объект'],
+            ['ID', '', 'Статус', 'Клиент', 'Услуга', 'Объект'],
             $filters,
             $this->defaultFilters,
             []

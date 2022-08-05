@@ -14,8 +14,8 @@ use InvalidArgumentException;
  * @property int $id
  * @property int $status_id
  * @property int $subscription_id
- * @property Carbon $start_at
- * @property Carbon $end_at
+ * @property Carbon|null $start_at
+ * @property Carbon|null $end_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *

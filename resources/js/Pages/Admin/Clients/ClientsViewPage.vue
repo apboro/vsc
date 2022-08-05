@@ -4,7 +4,10 @@
                 :link="{name: 'clients-list'}"
                 :link-title="'К списку клиентов'"
     >
-        <ClientInfo :data="data.data"/>
+        <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
+
+        <ClientInfo v-if="tab === 'general'" :data="data.data"/>
+        <SubscriptionsList v-if="tab === 'subscriptions'" :client-id="clientId" :ready="data.is_loaded"/>
     </LayoutPage>
 </template>
 
@@ -13,9 +16,13 @@ import data from "@/Core/Data";
 import LayoutPage from "@/Components/Layout/LayoutPage";
 import GuiContainer from "@/Components/GUI/GuiContainer";
 import ClientInfo from "@/Pages/Admin/Clients/Parts/ClientInfo";
+import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
+import SubscriptionsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsList";
 
 export default {
     components: {
+        SubscriptionsList,
+        LayoutRoutedTabs,
         ClientInfo,
         GuiContainer,
         LayoutPage,
@@ -23,6 +30,7 @@ export default {
 
     data: () => ({
         data: data('/api/clients/view'),
+        tab: null,
     }),
 
     computed: {
@@ -35,6 +43,13 @@ export default {
         title() {
             return this.data.is_loaded ? this.data.data['title'] : '...';
         },
+        tabs() {
+            return {
+                general: 'Данные клиента',
+                wards: 'Занимающиеся',
+                subscriptions: 'Подписки на услуги',
+            }
+        }
     },
 
     created() {
