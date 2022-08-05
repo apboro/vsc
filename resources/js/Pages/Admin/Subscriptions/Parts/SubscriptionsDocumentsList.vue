@@ -7,6 +7,11 @@
                 </ListTableCell>
                 <ListTableCell>
                     {{ document['title'] }}
+                    (
+                    <a class="link" :href="'/api/subscriptions/documents/view/'+document['id']" target="_blank">просмотр</a>
+                    /
+                    <span class="link" @click="save(document)">скачать</span>
+                    )
                 </ListTableCell>
                 <ListTableCell>
                     {{ document['status'] }}
@@ -77,6 +82,7 @@ import GuiHeading from "@/Components/GUI/GuiHeading";
 import FormString from "@/Components/Form/FormString";
 import FormPhone from "@/Components/Form/FormPhone";
 import FormDate from "@/Components/Form/FormDate";
+import {saveAs} from "file-saver";
 
 export default {
     props: {
@@ -117,6 +123,24 @@ export default {
             this.$refs.form.show({id: document['id'], subscription_id: this.subscriptionId})
                 .then(() => {
                     this.list.reload();
+                });
+        },
+
+        save(document) {
+            axios.post('/api/subscriptions/documents/download', {id: document['id']})
+                .then(response => {
+                    let contract = atob(response.data.data['contract']);
+                    let byteNumbers = new Array(contract.length);
+                    for (let i = 0; i < contract.length; i++) {
+                        byteNumbers[i] = contract.charCodeAt(i);
+                    }
+                    let byteArray = new Uint8Array(byteNumbers);
+                    let blob = new Blob([byteArray], {type: "application/pdf;charset=utf-8"});
+
+                    saveAs(blob, response.data.data['file_name'], {autoBom: true});
+                })
+                .catch(error => {
+                    this.$toast.error(error.response.data['message']);
                 });
         },
     }

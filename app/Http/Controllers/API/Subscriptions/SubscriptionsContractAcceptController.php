@@ -5,13 +5,17 @@ namespace App\Http\Controllers\API\Subscriptions;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Mail\SubscriptionContractMail;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class SubscriptionsContractAcceptController extends ApiEditController
 {
@@ -172,7 +176,13 @@ class SubscriptionsContractAcceptController extends ApiEditController
         $contract->end_at = $contract->subscription->service->end_at;
         $contract->save();
 
-        // TODO send email
+        // send a link to client
+        try {
+            Mail::send(new SubscriptionContractMail($contract));
+        } catch (Exception $exception) {
+            Log::channel('outgoing_mail_errors')->error($exception->getMessage());
+            throw $exception;
+        }
 
         return APIResponse::success('договор на оказание услуг сформирован и отправлен клиенту');
     }
