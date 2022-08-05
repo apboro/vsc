@@ -4,6 +4,7 @@
                 :link="{name: backLink}"
                 :link-title="backLinkTitle"
                 :loading="data.is_loading"
+                :title-new-line="true"
     >
         <template #comments v-if="data.is_loaded">
             <div class="inline mr-20"><b>статус</b>: {{ data.data['status'] }}</div>
