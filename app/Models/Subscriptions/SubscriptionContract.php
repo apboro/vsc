@@ -3,10 +3,13 @@
 namespace App\Models\Subscriptions;
 
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Model;
+use App\Scopes\ForOrganization;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 
@@ -14,6 +17,8 @@ use InvalidArgumentException;
  * @property int $id
  * @property int $status_id
  * @property int $subscription_id
+ * @property int|null $discount_id
+ * @property int|null $number
  * @property Carbon|null $start_at
  * @property Carbon|null $end_at
  * @property Carbon $created_at
@@ -22,6 +27,7 @@ use InvalidArgumentException;
  * @property SubscriptionContractStatus $status
  * @property Subscription $subscription
  * @property SubscriptionContractData $contractData
+ * @property Discount|null $discount
  */
 class SubscriptionContract extends Model implements Statusable
 {
@@ -66,6 +72,24 @@ class SubscriptionContract extends Model implements Statusable
     }
 
     /**
+     * Get new contract number.
+     *
+     * @param int $organizationId
+     *
+     * @return  int
+     */
+    public static function getNewNumber(int $organizationId): int
+    {
+        $last = self::query()
+            ->whereHas('subscription', function (Builder $query) use ($organizationId) {
+                $query->tap(new ForOrganization($organizationId));
+            })
+            ->max('number');
+
+        return $last === null ? 1 : $last + 1;
+    }
+
+    /**
      * Subscription this contract for.
      *
      * @return  HasOne
@@ -73,6 +97,16 @@ class SubscriptionContract extends Model implements Statusable
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class, 'id', 'subscription_id');
+    }
+
+    /**
+     * Discount for this subscription this contract.
+     *
+     * @return  HasOne
+     */
+    public function discount(): HasOne
+    {
+        return $this->hasOne(Discount::class, 'id', 'discount_id');
     }
 
     /**

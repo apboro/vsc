@@ -64,8 +64,11 @@
                     {{ lead['status'] }}
                 </ListTableCell>
                 <ListTableCell>
-                    <div>{{ lead['service'] }}</div>
-                    <div><i>{{ lead['sport_kind'] }}, {{ lead['training_base'] }}</i></div>
+                    <span v-if="lead['need_help']">Нужна помощь с выбором</span>
+                    <template v-else>
+                        <div>{{ lead['service'] }}</div>
+                        <div><i>{{ lead['sport_kind'] }}, {{ lead['training_base'] }}</i></div>
+                    </template>
                 </ListTableCell>
                 <ListTableCell>
                     <RouterLink v-if="lead['client']" class="link" :to="{name: 'clients-view', params: {id: lead['client_id']}}">{{ lead['client'] }}</RouterLink>

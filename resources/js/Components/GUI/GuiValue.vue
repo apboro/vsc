@@ -61,6 +61,7 @@ $base_light_gray_color: #e5e5e5 !default;
         color: $base_text_gray_color;
         display: flex;
         align-items: center;
+        padding-right: 10px;
     }
 
     &__value {

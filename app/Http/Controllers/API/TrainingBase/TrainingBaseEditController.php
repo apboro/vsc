@@ -17,6 +17,7 @@ class TrainingBaseEditController extends ApiEditController
         'title' => 'required',
         'short_title' => 'nullable',
         'address' => 'required',
+        'region_id' => 'required',
         'sport_kinds' => 'required',
         'images' => 'nullable',
         'email' => 'nullable|email|bail',
@@ -31,6 +32,7 @@ class TrainingBaseEditController extends ApiEditController
         'sport_kinds' => 'Виды спорта',
         'images' => 'Изображения',
         'address' => 'Адрес',
+        'region_id' => 'Район',
         'email' => 'Email',
         'phone' => 'Телефон',
         'description' => 'Описание',
@@ -63,6 +65,7 @@ class TrainingBaseEditController extends ApiEditController
                 'title' => $base->title,
                 'short_title' => $base->short_title,
                 'address' => $base->info->address,
+                'region_id' => $base->region_id,
                 'email' => $base->info->email,
                 'phone' => $base->info->phone,
                 'description' => $base->info->description,
@@ -105,6 +108,7 @@ class TrainingBaseEditController extends ApiEditController
 
         $base->title = $data['title'];
         $base->short_title = $data['short_title'];
+        $base->region_id = $data['region_id'];
         $base->setStatus($data['status_id'], false);
         $base->organization_id = $current->organizationId();
         $base->save();

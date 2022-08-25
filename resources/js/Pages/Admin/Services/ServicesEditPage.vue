@@ -9,15 +9,18 @@
             <FormDictionary :form="form" :name="'status_id'" :dictionary="'service_statuses'"/>
             <FormDictionary :form="form" :name="'training_base_id'" :dictionary="'training_bases'" :search="true"/>
             <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
+            <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
+            <FormNumber :form="form" :name="'trainings_per_month'"/>
+            <FormNumber :form="form" :name="'trainings_per_week'"/>
+            <FormDaysOfWeek :form="form" :name="'schedule_days'"/>
+            <FormTime :form="form" :name="'schedule_start_time'"/>
             <FormNumber :form="form" :name="'monthly_price'"/>
             <FormNumber :form="form" :name="'training_price'"/>
-            <FormNumber :form="form" :name="'trainings_per_week'"/>
+            <FormNumber :form="form" :name="'training_return_price'"/>
+            <FormNumber :form="form" :name="'training_duration'"/>
+            <FormNumber :form="form" :name="'group_limit'"/>
             <FormDate :form="form" :name="'start_at'"/>
             <FormDate :form="form" :name="'end_at'"/>
-        </GuiContainer>
-
-        <GuiContainer mt-30>
-            <FormText :form="form" :name="'schedule'"/>
         </GuiContainer>
 
         <GuiContainer mt-30>
@@ -38,9 +41,15 @@ import GuiButton from "@/Components/GUI/GuiButton";
 import FormNumber from "@/Components/Form/FormNumber";
 import FormText from "@/Components/Form/FormText";
 import FormDate from "@/Components/Form/FormDate";
+import FormDateTime from "../../../Components/Form/FormDateTime";
+import FormDaysOfWeek from "../../../Components/Form/FormDaysOfWeek";
+import FormTime from "../../../Components/Form/FormTime";
 
 export default {
     components: {
+        FormTime,
+        FormDaysOfWeek,
+        FormDateTime,
         FormDate,
         FormText,
         FormNumber,

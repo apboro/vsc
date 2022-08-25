@@ -13,6 +13,7 @@
             <FormImages :form="form" :name="'images'"/>
 
             <FormString :form="form" :name="'address'"/>
+            <FormDictionary :form="form" :name="'region_id'" :dictionary="'regions'"/>
             <FormString :form="form" :name="'email'"/>
             <FormPhone :form="form" :name="'phone'"/>
 

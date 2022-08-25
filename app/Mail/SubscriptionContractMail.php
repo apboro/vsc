@@ -41,7 +41,7 @@ class SubscriptionContractMail extends Mailable
             ->from(env('MAIL_FROM_ADDRESS'), $this->contract->subscription->organization->title)
             ->subject('Договор на оказание услуг')
             ->text('mail.subscriptions.contract.contract', [
-                'text' => 'Договор',
+                'text' => 'Ура, нашего полку прибыло! Рады будем увидеть Чемпиона в рядах своих воспитанников на ближайшей по расписанию тренировке. Напоминаем, что регулярные занятия можно оплатить по реквизитам, указанным в Договоре.',
             ]);
 
         $mail->to($this->contract->subscription->client->user->profile->email, $this->contract->subscription->client->user->profile->compactName);

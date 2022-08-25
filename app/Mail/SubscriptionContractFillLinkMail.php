@@ -40,11 +40,18 @@ class SubscriptionContractFillLinkMail extends Mailable
 
         $link = route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
 
+        $lines = [
+            'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',
+            'Нам с Вами осталось заполнить договор, перейдя по ссылке:',
+            $link . ', и мы можем начинать тренировки/тренировочные мероприятия/соревнования. Точнее, наши сотрудники - тренировать, Вы сопровождать и встречать будущего Чемпиона (воспитанника), а будущий Чемпион - сможет начинать побеждать.',
+            'Все вопросы можно задать на email kudrovo.sport@yandex.ru. Работает и группа в ВК, и телефоны, указанные в договоре. До встречи.',
+        ];
+
         $mail = $this
             ->from(env('MAIL_FROM_ADDRESS'), $this->subscription->organization->title)
             ->subject('Ссылка на форму заполнения договора')
             ->text('mail.subscriptions.contract.form_link', [
-                'link' => $link,
+                'lines' => $lines,
             ]);
 
         $mail->to($this->subscription->client->user->profile->email, $this->subscription->client->user->profile->compactName);

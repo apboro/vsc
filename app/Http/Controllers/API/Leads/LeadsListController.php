@@ -43,7 +43,16 @@ class LeadsListController extends ApiController
 
         $query = Lead::query()
             ->tap(new ForOrganization($current->organizationId()))
-            ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile'])
+            ->with([
+                'status',
+                'service',
+                'subscription.service',
+                'service.trainingBase',
+                'subscription.service.trainingBase',
+                'service.sportKind',
+                'subscription.service.sportKind',
+                'subscription.client.user.profile',
+            ])
             ->orderBy('created_at', 'desc');
 
         // apply filters
@@ -73,17 +82,32 @@ class LeadsListController extends ApiController
         $leads = $query->paginate($request->perPage(10, $this->rememberKey));
 
         $leads->transform(function (Lead $lead) {
+            if ($lead->subscription) {
+                $service = $lead->subscription->service->title;
+                $trainingBase = $lead->subscription->service->trainingBase->title;
+                $sportKind = $lead->subscription->service->sportKind->name;
+                $needHelp = false;
+            } else {
+                $service = $lead->service->title ?? null;
+                $trainingBase = $lead->service ? $lead->service->trainingBase->short_title : null;
+                $sportKind = $lead->service ? $lead->service->sportKind->name : null;
+                $needHelp = $lead->need_help;
+            }
+
             return [
                 'id' => $lead->id,
                 'lastname' => $lead->lastname,
                 'firstname' => $lead->firstname,
                 'patronymic' => $lead->patronymic,
                 'status' => $lead->status->name,
-                'service' => $lead->service->title ?? null,
-                'training_base' => $lead->service ? $lead->service->trainingBase->short_title : null,
-                'sport_kind' => $lead->service ? $lead->service->sportKind->name : null,
-                'client' => $lead->client ? $lead->client->user->profile->compactName : null,
-                'client_id' => $lead->client_id,
+
+                'service' => $service,
+                'training_base' => $trainingBase,
+                'sport_kind' => $sportKind,
+                'need_help' => $needHelp,
+
+                'client' => $lead->subscription && $lead->subscription->client ? $lead->subscription->client->user->profile->compactName : null,
+                'client_id' => $lead->subscription ? $lead->subscription->client_id : null,
                 'created_date' => $lead->created_at->format('d.m.Y'),
                 'created_time' => $lead->created_at->format('H:i'),
             ];

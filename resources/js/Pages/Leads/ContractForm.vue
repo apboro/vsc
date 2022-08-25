@@ -3,17 +3,36 @@
         <template v-if="!message">
 
             <GuiHeading>Заполнение формы договора</GuiHeading>
+            <div style="margin-top: 20px"></div>
+            <GuiText>
+                Настоящая анкета является основой для формирования договора об оказании услуг, который в последующем направляется заказчику с резолюцией исполнителя по электронной
+                почте для ответного подписания. При необходимости заказчик может получить получения копию договора на физическом носителе в офисе школы.
+            </GuiText>
+            <div style="margin-top: 20px"></div>
+            <GuiText>
+                В случае заполнения настоящей формы на сайте предоставление договора на бумажном носителе перед началом тренировочного процесса не требуется.
+            </GuiText>
+            <div style="margin-top: 20px"></div>
+            <GuiText>
+                Настоящая анкета включает в себя комплекс обязательных для ознакомления сведений и данных, а также предусматривает необходимость выражения согласия заказчика с
+                условиями оказания исполнителем услуг по договору. В целях сообщения верной корректной информации, а также во избежание неполной осведомленности о сути, процессе и
+                правилах оказания услуг, настоятельно просим внимательно ознакомиться с содержанием заполняемой формы.
+            </GuiText>
 
+            <div style="margin-top: 20px"></div>
             <GuiHeading>Услуга</GuiHeading>
 
+            <div style="margin-top: 20px"></div>
             <GuiValue :title="'Услуга'" :dots="false">{{ serviceData['title'] }}</GuiValue>
             <GuiValue :title="'Вид спорта'" :dots="false">{{ serviceData['sport_kind'] }}</GuiValue>
             <GuiValue :title="'Тренировочная база'" :dots="false">{{ serviceData['training_base_title'] }}</GuiValue>
             <GuiValue :title="'Адрес'" :dots="false">{{ serviceData['training_base_address'] }}</GuiValue>
             <GuiValue :title="'График занятий'" :dots="false">{{ serviceData['schedule'] }}</GuiValue>
 
+            <div style="margin-top: 20px"></div>
             <GuiHeading>Данные для договора</GuiHeading>
 
+            <div style="margin-top: 20px"></div>
             <GuiContainer>
                 <FormString :form="form" :name="'lastname'"/>
                 <FormString :form="form" :name="'firstname'"/>
@@ -22,6 +41,7 @@
                 <FormString :form="form" :name="'email'"/>
             </GuiContainer>
 
+            <div style="margin-top: 20px"></div>
             <GuiContainer>
                 <FormNumber :form="form" :name="'passport_serial'"/>
                 <FormNumber :form="form" :name="'passport_number'"/>
@@ -31,8 +51,10 @@
                 <FormString :form="form" :name="'registration_address'"/>
             </GuiContainer>
 
+            <div style="margin-top: 20px"></div>
             <GuiHeading>Данные ребёнка</GuiHeading>
 
+            <div style="margin-top: 20px"></div>
             <GuiContainer>
                 <FormString :form="form" :name="'ward_lastname'"/>
                 <FormString :form="form" :name="'ward_firstname'"/>
@@ -42,6 +64,13 @@
                 <FormDate :form="form" :name="'ward_document_date'"/>
             </GuiContainer>
 
+            <div style="margin-top: 20px"></div>
+            <div style="margin-top: 10px; padding-left: 200px; box-sizing: border-box;">
+                <InputCheckbox v-model="discount" :label="'Я могу рассчитывать на льготу'" @change="discountChanged"/>
+            </div>
+            <FormDropdown :form="form" :name="'discount'" :options="discounts" :show="'name'" :identifier="'id'" :top="true" :disabled="!discount"/>
+
+            <div style="margin-top: 20px"></div>
             <GuiContainer>
                 <GuiButton :color="'blue'" @clicked="sendContract">Отправить</GuiButton>
             </GuiContainer>
@@ -62,9 +91,11 @@ import GuiMessage from "@/Components/GUI/GuiMessage";
 import GuiValue from "@/Components/GUI/GuiValue";
 import FormDate from "@/Components/Form/FormDate";
 import FormNumber from "@/Components/Form/FormNumber";
+import GuiText from "../../Components/GUI/GuiText";
+import InputCheckbox from "../../Components/Inputs/InputCheckbox";
 
 export default {
-    components: {FormNumber, FormDate, GuiValue, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
+    components: {InputCheckbox, GuiText, FormNumber, FormDate, GuiValue, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
 
     props: {
         crm_url: {type: String, default: null},
@@ -73,11 +104,13 @@ export default {
         subscriptionId: {type: Number, default: null},
         subscriptionData: {type: Object, default: null},
         serviceData: {type: Object, default: null},
+        discounts: {type: Array, default: null},
     },
 
     data: () => ({
         form: form(null, null),
         message: null,
+        discount: false,
     }),
 
     created() {
@@ -101,6 +134,8 @@ export default {
         this.form.set('ward_birth_date', this.getData('ward_birth_date'), 'required', 'Дата рождения', true);
         this.form.set('ward_document', this.getData('ward_document'), 'required', 'Свидетельство о рождении', true);
         this.form.set('ward_document_date', this.getData('ward_document_date'), 'required', 'Дата выдачи', true);
+
+        this.form.set('discount', null, null, 'Основание для льготы', true);
 
         this.form.load();
     },
@@ -135,7 +170,11 @@ export default {
                 .finally(() => {
                     this.form.is_saving = false;
                 })
-        }
+        },
+
+        discountChanged() {
+            this.form.update('discount', null);
+        },
     }
 }
 </script>

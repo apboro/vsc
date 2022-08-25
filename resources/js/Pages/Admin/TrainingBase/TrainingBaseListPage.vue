@@ -17,6 +17,17 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Район'">
+                <DictionaryDropDown
+                    :dictionary="'regions'"
+                    v-model="list.filters['region_id']"
+                    :original="list.filters_original['region_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
             <LayoutFiltersItem :title="'Виды спорта'">
                 <DictionaryDropDown
                     :dictionary="'sport_kinds'"
@@ -44,6 +55,9 @@
                         <router-link class="link" :to="{ name: 'training-base-view', params: { id: base['id'] }}" v-html="highlight(base['title'])"/>
                     </div>
                     <div class="text-sm text-gray" v-html="highlight(base['address'])"></div>
+                </ListTableCell>
+                <ListTableCell>
+                    {{ base['region'] }}
                 </ListTableCell>
                 <ListTableCell>
                     {{ base['sport_kinds'].join(', ') }}

@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -37,6 +38,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
         'ward_birth_date' => 'required',
         'ward_document' => 'required',
         'ward_document_date' => 'required',
+        'discount_id' => 'nullable',
     ];
 
     protected array $titles = [
@@ -57,6 +59,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
         'ward_birth_date' => 'Дата рождения',
         'ward_document' => 'Свидетельство о рождении',
         'ward_document_date' => 'Дата выдачи',
+        'discount_id' => 'Льгота',
     ];
 
     /**
@@ -110,6 +113,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 'ward_birth_date' => $contract->contractData->ward_birth_date->format('Y-m-d'),
                 'ward_document' => $contract->contractData->ward_document,
                 'ward_document_date' => $contract->contractData->ward_document_date->format('Y-m-d'),
+                'discount_id' => $contract->discount_id,
             ],
             $this->rules,
             $this->titles,
@@ -122,6 +126,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
      * @param Request $request
      *
      * @return  JsonResponse
+     * @throws Exception
      */
     public function update(Request $request): JsonResponse
     {
@@ -172,9 +177,16 @@ class SubscriptionsContractAcceptController extends ApiEditController
         $contract->contractData->save();
 
         $contract->setStatus(SubscriptionContractStatus::accepted, false);
+        $contract->discount_id = $data['discount_id'];
         $contract->start_at = Carbon::now()->startOfDay();
         $contract->end_at = $contract->subscription->service->end_at;
         $contract->save();
+
+        // Assign contract number
+        DB::transaction(function () use ($contract, $current) {
+            $contract->number = SubscriptionContract::getNewNumber($current->organizationId());
+            $contract->save();
+        });
 
         // send a link to client
         try {

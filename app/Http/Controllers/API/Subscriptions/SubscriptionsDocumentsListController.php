@@ -39,7 +39,7 @@ class SubscriptionsDocumentsListController extends ApiController
                     ->where('id', $subscriptionId)
                     ->tap(new ForOrganization($current->organizationId()));
             })
-            ->with(['status', 'subscription'])
+            ->with(['status', 'subscription', 'discount'])
             ->orderBy('created_at', 'desc');
 
         // current page automatically resolved from request via `page` parameter
@@ -49,17 +49,19 @@ class SubscriptionsDocumentsListController extends ApiController
         $contracts->transform(function (SubscriptionContract $contract) use ($current) {
             return [
                 'id' => $contract->id,
-                'title' => 'Договор',
+                'title' => $contract->number ? 'Договор №' . $contract->number : 'Проект договора',
                 'status' => $contract->status->name,
                 'start_at' => $contract->start_at ? $contract->start_at->format('d.m.Y') : null,
                 'end_at' => $contract->end_at ? $contract->end_at->format('d.m.Y') : null,
                 'is_acceptable' => $contract->hasStatus(SubscriptionContractStatus::draft) && $current->can('subscriptions.accept.document'),
+                'discount' => $contract->discount->name ?? null,
+                'discount_amount' => $contract->discount->discount ?? null,
             ];
         });
 
         return APIResponse::list(
             $contracts,
-            ['ID', 'Документ', 'Статус', 'Дата создания', 'Дата окончания'],
+            ['ID', 'Документ', 'Статус', 'Льгота', 'Дата создания', 'Дата окончания'],
             [],
             [],
             []

@@ -2,7 +2,7 @@
     <FieldCheckBox
         :model-value="value"
         :name="name"
-        :title="title"
+        :title="withoutTitle ? null : title"
         :hide-title="hideTitle"
         :original="original"
         :valid="valid"
@@ -25,6 +25,7 @@ export default {
     props: {
         disabled: {type: Boolean, default: false},
         hideTitle: {type: Boolean, default: false},
+        withoutTitle: {type: Boolean, default: false},
 
         val: {type: [Number, String, Boolean], default: null},
 

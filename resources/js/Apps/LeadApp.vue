@@ -6,6 +6,7 @@
                      :crm_url="crm_url"
                      :debug="debug"
                      :services="services"
+                     :regions="regions"
             />
             <ContractForm v-if="!is_initializing && subscription_id !== null && message === null"
                           :session="session"
@@ -14,6 +15,7 @@
                           :subscription-id="subscription_id"
                           :subscription-data="subscription_data"
                           :service-data="service_data"
+                          :discounts="discounts"
             />
             <GuiMessage v-if="!is_initializing && message !== null">
                 {{ message }}
@@ -43,10 +45,12 @@ export default {
         key: null,
         session: null,
         services: [],
+        regions: [],
         subscriptionKey: null,
         subscription_id: null,
         subscription_data: null,
         service_data: null,
+        discounts: null,
 
         is_initializing: true,
         message: null,
@@ -68,9 +72,11 @@ export default {
             .then(response => {
                 this.session = response.data.data['session'];
                 this.services = response.data.data['services'];
+                this.regions = response.data.data['regions'];
                 this.subscription_id = response.data.data['subscription_id'];
                 this.subscription_data = response.data.data['subscription_data'];
                 this.service_data = response.data.data['service_data'];
+                this.discounts = response.data.data['discounts'];
             })
             .catch(error => {
                 this.message = error.response.data['message'];

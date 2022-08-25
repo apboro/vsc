@@ -7,13 +7,16 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractFillLinkMail;
 use App\Models\Clients\Client;
+use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientStatus;
+use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Leads\Lead;
 use App\Models\Subscriptions\Subscription;
 use App\Models\User\User;
 use App\Scopes\ForOrganization;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,6 +32,10 @@ class LeadsRegisterController extends ApiEditController
         'patronymic' => 'required',
         'phone' => 'required',
         'email' => 'required|email|bail',
+        'ward_lastname' => 'required',
+        'ward_firstname' => 'required',
+        'ward_patronymic' => 'required',
+        'ward_birth_date' => 'required',
         'service_id' => 'required',
     ];
     protected array $titles = [
@@ -37,6 +44,10 @@ class LeadsRegisterController extends ApiEditController
         'patronymic' => 'Отчество',
         'phone' => 'Телефон',
         'email' => 'Email',
+        'ward_lastname' => 'Фамилия занимающегося',
+        'ward_firstname' => 'Имя занимающегося',
+        'ward_patronymic' => 'Отчество занимающегося',
+        'ward_birth_date' => 'Дата рождения занимающегося',
         'service_id' => 'Услуга',
     ];
 
@@ -48,12 +59,16 @@ class LeadsRegisterController extends ApiEditController
         /** @var Lead $lead */
         if ($id === null ||
             null === ($lead = Lead::query()
-                ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile'])
+                ->with(['status', 'service', 'service.trainingBase', 'service.sportKind'])
                 ->where('id', $id)
                 ->tap(new ForOrganization($current->organizationId()))
                 ->first())
         ) {
             return APIResponse::notFound('Лид не найден');
+        }
+
+        if($lead->subscription_id !== null) {
+            return APIResponse::error('По этому лиду уже создана подписка.');
         }
 
         // validate data
@@ -81,18 +96,37 @@ class LeadsRegisterController extends ApiEditController
                 $client->user_id = $user->id;
                 $client->save();
 
-                // attach the client to the lead
-                $lead->client_id = $client->id;
-                $lead->setStatus(LeadStatus::client_created, false);
-                $lead->save();
+                // create client ward
+                $user = new User();
+                $user->save();
+
+                $user->profile->firstname = $data['ward_lastname'];
+                $user->profile->lastname = $data['ward_firstname'];
+                $user->profile->patronymic = $data['ward_patronymic'];
+                $user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
+                $user->profile->save();
+
+                $ward = new ClientWard;
+                $ward->user_id = $user->id;
+                $ward->setStatus(ClientWardStatus::active, false);
+                $ward->save();
+
+                // attach ward to client
+                $client->wards()->attach($ward->id);
 
                 // create subscription
                 $subscription = new Subscription();
                 $subscription->setStatus(SubscriptionStatus::new, false);
                 $subscription->organization_id = $current->organizationId();
                 $subscription->client_id = $client->id;
+                $subscription->client_ward_id = $ward->id;
                 $subscription->service_id = $data['service_id'];
                 $subscription->save();
+
+                // attach the client to the lead
+                $lead->subscription_id = $subscription->id;
+                $lead->setStatus(LeadStatus::client_created, false);
+                $lead->save();
 
                 // send a link to client
                 try {

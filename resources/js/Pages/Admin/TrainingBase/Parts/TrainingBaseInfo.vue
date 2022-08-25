@@ -4,6 +4,7 @@
             <GuiValue :title="'Краткое наименование'">{{ data['short_title'] }}</GuiValue>
             <GuiValue :title="'Полное наименование'">{{ data['title'] }}</GuiValue>
             <GuiValue :title="'Адрес'">{{ data['address'] }}</GuiValue>
+            <GuiValue :title="'Район'">{{ data['region'] }}</GuiValue>
             <GuiValue :title="'Статус'">
                 <GuiActivityIndicator :active="data['active']"/>
                 {{ data['status'] }}

@@ -6,6 +6,7 @@ use App\Exceptions\TrainingBase\WrongTrainingBaseStatusException;
 use App\Interfaces\Statusable;
 use App\Models\Common\Image;
 use App\Models\Dictionaries\Interfaces\AsDictionary;
+use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $organization_id
  * @property string $title
  * @property string|null $short_title
+ * @property int|null $region_id
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -33,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Collection $sportKinds
  * @property Collection $contracts
  * @property Organization $organization
+ * @property Region $region
  */
 class TrainingBase extends Model implements Statusable, AsDictionary
 {
@@ -76,6 +79,16 @@ class TrainingBase extends Model implements Statusable, AsDictionary
     public function organization(): HasOne
     {
         return $this->hasOne(Organization::class, 'id', 'organization_id');
+    }
+
+    /**
+     * Region of this training base.
+     *
+     * @return  HasOne
+     */
+    public function region(): HasOne
+    {
+        return $this->hasOne(Region::class, 'id', 'region_id');
     }
 
     /**

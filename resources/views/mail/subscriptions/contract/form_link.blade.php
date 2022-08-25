@@ -1,1 +1,3 @@
-{!! strip_tags($link) !!}
+@foreach($lines as $line)
+    {!! strip_tags($line) !!}
+@endforeach

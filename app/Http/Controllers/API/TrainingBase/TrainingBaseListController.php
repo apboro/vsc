@@ -44,7 +44,7 @@ class TrainingBaseListController extends ApiController
 
         $query = TrainingBase::query()
             ->tap(new ForOrganization($current->organizationId()))
-            ->with(['status', 'info', 'sportKinds'])
+            ->with(['status', 'info', 'sportKinds', 'region'])
             ->orderBy('created_at', 'desc');
 
         // apply filters
@@ -56,6 +56,9 @@ class TrainingBaseListController extends ApiController
                 $query->whereHas('sportKinds', function (Builder $query) use ($filters) {
                     $query->whereIn('id', $filters['sport_kinds']);
                 });
+            }
+            if (!empty($filters['region_id'])) {
+                $query->where('region_id', $filters['region_id']);
             }
         }
 
@@ -84,6 +87,7 @@ class TrainingBaseListController extends ApiController
                 'active' => $base->hasStatus(TrainingBaseStatus::enabled),
                 'title' => $base->title,
                 'address' => $base->info->address,
+                'region' => $base->region ? $base->region->name : null,
                 'email' => $base->info->email,
                 'phone' => $base->info->phone,
                 'sport_kinds' => $base->sportKinds->map(function (SportKind $kind) {
@@ -95,7 +99,7 @@ class TrainingBaseListController extends ApiController
         return APIResponse::list(
             $bases,
             [
-                'Название объекта', 'Виды спорта', 'Контакты',
+                'Название объекта', 'Район', 'Виды спорта', 'Контакты',
             ],
             $filters,
             $this->defaultFilters,

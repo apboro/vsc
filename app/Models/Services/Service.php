@@ -5,6 +5,7 @@ namespace App\Models\Services;
 use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
 use App\Models\Dictionaries\Interfaces\AsDictionary;
+use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
@@ -25,7 +26,12 @@ use InvalidArgumentException;
  * @property string $title
  * @property float|null $monthly_price
  * @property float|null $training_price
+ * @property int|null $training_return_price
  * @property int|null $trainings_per_week
+ * @property int|null $trainings_per_month
+ * @property int|null $training_duration
+ * @property int|null $group_limit
+ * @property int|null $requisites_id
  * @property Carbon $start_at
  * @property Carbon $end_at
  * @property Carbon $created_at
@@ -36,6 +42,7 @@ use InvalidArgumentException;
  * @property TrainingBase $trainingBase
  * @property SportKind $sportKind
  * @property ServiceSchedule $schedule
+ * @property OrganizationRequisites $requisites
  */
 class Service extends Model implements Statusable, AsDictionary
 {
@@ -103,6 +110,30 @@ class Service extends Model implements Statusable, AsDictionary
     }
 
     /**
+     * Convert monthly price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getTrainingReturnPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert monthly price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setTrainingReturnPriceAttribute(?float $value): void
+    {
+        $this->attributes['training_return_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
      * Service status.
      *
      * @return  HasOne
@@ -135,6 +166,16 @@ class Service extends Model implements Statusable, AsDictionary
     public function organization(): HasOne
     {
         return $this->hasOne(Organization::class, 'id', 'organization_id');
+    }
+
+    /**
+     * Organization requisites for this service.
+     *
+     * @return  HasOne
+     */
+    public function requisites(): HasOne
+    {
+        return $this->hasOne(OrganizationRequisites::class, 'id', 'requisites_id');
     }
 
     /**

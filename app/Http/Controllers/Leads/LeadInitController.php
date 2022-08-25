@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Leads;
 
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Http\Controllers\Leads\Helpers\LeadSession;
+use App\Models\Dictionaries\Discount;
+use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Services\Service;
@@ -12,6 +15,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class LeadInitController extends ApiEditController
 {
@@ -35,7 +39,7 @@ class LeadInitController extends ApiEditController
                 return APIResponse::error('Ошибка параметров.');
             }
             /** @var Subscription|null $subscription */
-            $subscription = Subscription::query()->where('id', $subscriptionId)->first();
+            $subscription = Subscription::query()->where('id', $subscriptionId)->with(['client', 'clientWard', 'service'])->first();
             if ($subscription === null) {
                 return APIResponse::error('Ошибка параметров.');
             }
@@ -49,6 +53,10 @@ class LeadInitController extends ApiEditController
                 'patronymic' => $subscription->client->user->profile->patronymic,
                 'phone' => $subscription->client->user->profile->phone,
                 'email' => $subscription->client->user->profile->email,
+                'ward_lastname' => $subscription->clientWard->user->profile->lastname,
+                'ward_firstname' => $subscription->clientWard->user->profile->firstname,
+                'ward_patronymic' => $subscription->clientWard->user->profile->patronymic,
+                'ward_birth_date' => $subscription->clientWard->user->profile->birthdate->format('Y-m-d'),
             ];
             $serviceData = [
                 'title' => $subscription->service->title,
@@ -57,62 +65,47 @@ class LeadInitController extends ApiEditController
                 'training_base_address' => $subscription->service->trainingBase->info->address,
                 'schedule' => $subscription->service->schedule->text,
             ];
+            $discounts = Discount::queryRaw()
+                ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
+                ->select(['id', 'name', 'description as hint'])
+                ->orderBy('order')
+                ->get();
         } else {
-            $key = self::getKey($request);
+            $key = LeadSession::getKey($request);
         }
 
         if ($key['organization_id'] === null) {
             return APIResponse::error('Ошибка сессии');
         }
 
+        $regions = Region::queryRaw()
+            ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
+            ->select(['id', 'name'])
+            ->orderBy('order')
+            ->get();
+
         $services = Service::query()
-            ->where(['organization_id' => $key['organization_id'], 'status_id' => ServiceStatus::enabled])
-            ->select(['id', 'title'])
-            ->orderBy('title')
+            ->leftJoin('training_bases', 'training_bases.id', '=', 'services.training_base_id')
+            ->leftJoin('training_base_info', 'training_bases.id', '=', 'training_base_info.base_id')
+            ->where(['services.organization_id' => $key['organization_id'], 'services.status_id' => ServiceStatus::enabled])
+            ->select([
+                'services.id',
+                'services.title',
+                DB::raw('IFNULL(training_bases.short_title, training_bases.title) as base'),
+                'training_base_info.address',
+                'training_bases.region_id',
+            ])
+            ->orderBy('services.title')
             ->get();
 
         return APIResponse::response([
-            'session' => self::makeSession((int)$key['organization_id'], $request->ip()),
+            'session' => LeadSession::makeSession((int)$key['organization_id'], $request->ip()),
+            'regions' => $regions,
             'services' => $services,
             'subscription_id' => $subscription->id ?? null,
             'subscription_data' => $subscriptionData ?? null,
             'service_data' => $serviceData ?? null,
+            'discounts' => $discounts ?? null,
         ]);
-    }
-
-    /**
-     * Get parameters from request.
-     *
-     * @param Request $request
-     *
-     * @return  array
-     */
-    protected static function getKey(Request $request): array
-    {
-        if ($request->hasHeader('X-Vsc-Key')) {
-            $key = Crypt::decrypt($request->header('X-Vsc-Key'));
-        }
-
-        return [
-            'organization_id' => $key ?? null,
-        ];
-    }
-
-    /**
-     * Make encrypted session.
-     *
-     * @param int $organizationId
-     * @param string $ip
-     *
-     * @return  string
-     */
-    protected static function makeSession(int $organizationId, string $ip): string
-    {
-        $session = [
-            'organization_id' => $organizationId,
-            'ip' => $ip,
-        ];
-
-        return Crypt::encrypt($session);
     }
 }

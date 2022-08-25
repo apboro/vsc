@@ -7,9 +7,12 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\ClientStatus;
+use App\Models\Dictionaries\Discount;
+use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
+use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\SubscriptionStatus;
@@ -37,6 +40,9 @@ class DictionaryController extends ApiController
         'services' => ['class' => Service::class, 'allow' => null],
         'client_statuses' => ['class' => ClientStatus::class, 'allow' => null],
         'subscription_statuses' => ['class' => SubscriptionStatus::class, 'allow' => null],
+        'regions' => ['class' => Region::class, 'allow' => null],
+        'organization_requisites' => ['class' => OrganizationRequisites::class, 'allow' => null],
+        'discounts' => ['class' => Discount::class, 'allow' => null],
     ];
 
     /**

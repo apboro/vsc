@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Leads;
 
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
-use App\Http\Middleware\LeadsProtect;
+use App\Http\Controllers\Leads\Helpers\LeadSession;
 use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\SubscriptionContractStatus;
@@ -17,7 +17,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -32,7 +31,7 @@ class LeadContractController extends ApiEditController
      */
     public function contract(Request $request): JsonResponse
     {
-        $organizationId = self::getOrganizationId($request);
+        $organizationId = LeadSession::getOrganizationId($request);
 
         if ($organizationId === null) {
             return APIResponse::error('Ошибка сессии.', ['oid is null']);
@@ -76,6 +75,7 @@ class LeadContractController extends ApiEditController
             'ward_birth_date' => 'required',
             'ward_document' => 'required',
             'ward_document_date' => 'required',
+            'discount' => 'nullable',
         ];
         $titles = [
             'lastname' => 'Фамилия',
@@ -95,6 +95,7 @@ class LeadContractController extends ApiEditController
             'ward_birth_date' => 'Дата рождения',
             'ward_document' => 'Свидетельство о рождении',
             'ward_document_date' => 'Дата выдачи',
+            'discount' => 'Основание для льготы',
         ];
         if ($errors = $this->validate($data, $rules, $titles)) {
             return APIResponse::validationError($errors);
@@ -105,6 +106,7 @@ class LeadContractController extends ApiEditController
                 // add contract
                 $contract = new SubscriptionContract();
                 $contract->subscription_id = $subscription->id;
+                $contract->discount_id = $data['discount'];
                 $contract->setStatus(SubscriptionContractStatus::draft, false);
                 $contract->save();
 
@@ -128,24 +130,10 @@ class LeadContractController extends ApiEditController
                 $contract->contractData->ward_document_date = Carbon::parse($data['ward_document_date']);
                 $contract->contractData->save();
 
-                // add client ward
-                $user = new User;
-                $user->save();
-                $user->profile->lastname = $data['ward_lastname'];
-                $user->profile->firstname = $data['ward_firstname'];
-                $user->profile->patronymic = $data['ward_patronymic'];
-                $user->profile->birthdate = $data['ward_birth_date'];
-                $user->profile->save();
-
-                $ward = new ClientWard();
-                $ward->user_id = $user->id;
-                $ward->setStatus(ClientWardStatus::active, false);
-                $ward->save();
-                $subscription->client->wards()->attach($ward->id);
+                // TODO update client and ward data
 
                 // update subscription status
                 $subscription->setStatus(SubscriptionStatus::filled, false);
-                $subscription->client_ward_id = $ward->id;
                 $subscription->save();
             });
         } catch (Exception $exception) {
@@ -155,25 +143,5 @@ class LeadContractController extends ApiEditController
 
         // response success
         return APIResponse::success('Ваша заявка отправлена.');
-    }
-
-    /**
-     * Get organization ID.
-     *
-     * @param Request $request
-     *
-     * @return  int|null
-     */
-    protected static function getOrganizationId(Request $request): ?int
-    {
-        if ($request->hasHeader(LeadsProtect::HEADER_NAME)) {
-            try {
-                $session = Crypt::decrypt($request->header(LeadsProtect::HEADER_NAME));
-            } catch (Exception $exception) {
-                return null;
-            }
-        }
-
-        return $session['organization_id'] ?? null;
     }
 }

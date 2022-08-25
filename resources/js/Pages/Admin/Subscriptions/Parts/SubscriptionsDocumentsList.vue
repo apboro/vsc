@@ -17,6 +17,10 @@
                     {{ document['status'] }}
                 </ListTableCell>
                 <ListTableCell>
+                    <span v-if="document['discount']">{{ document['discount_amount'] }}%, {{ document['discount'] }}</span>
+                    <span v-else>нет</span>
+                </ListTableCell>
+                <ListTableCell>
                     {{ document['start_at'] ? document['start_at'] : '—' }}
                 </ListTableCell>
                 <ListTableCell>
@@ -60,6 +64,7 @@
                     <FormDate :form="form" :name="'ward_birth_date'"/>
                     <FormString :form="form" :name="'ward_document'"/>
                     <FormDate :form="form" :name="'ward_document_date'"/>
+                    <FormDictionary :form="form" :name="'discount_id'" :dictionary="'discounts'" :top="true"/>
                 </GuiContainer>
             </GuiContainer>
         </FormPopUp>
@@ -83,6 +88,7 @@ import FormString from "@/Components/Form/FormString";
 import FormPhone from "@/Components/Form/FormPhone";
 import FormDate from "@/Components/Form/FormDate";
 import {saveAs} from "file-saver";
+import FormDictionary from "../../../../Components/Form/FormDictionary";
 
 export default {
     props: {
@@ -91,6 +97,7 @@ export default {
     },
 
     components: {
+        FormDictionary,
         FormDate,
         FormPhone,
         FormString,

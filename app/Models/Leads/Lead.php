@@ -3,11 +3,12 @@
 namespace App\Models\Leads;
 
 use App\Interfaces\Statusable;
-use App\Models\Clients\Client;
 use App\Models\Dictionaries\LeadStatus;
+use App\Models\Dictionaries\Region;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Services\Service;
+use App\Models\Subscriptions\Subscription;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -17,20 +18,37 @@ use InvalidArgumentException;
  * @property int $id
  * @property int $status_id
  * @property int $organization_id
+ *
  * @property string|null $lastname
  * @property string|null $firstname
  * @property string|null $patronymic
  * @property string|null $email
  * @property string|null $phone
+ *
+ * @property string|null $ward_lastname
+ * @property string|null $ward_firstname
+ * @property string|null $ward_patronymic
+ * @property Carbon|null $ward_birth_date
+ *
+ * @property bool $ward_inv
+ * @property bool $ward_hro
+ * @property bool $ward_uch
+ * @property bool $ward_spe
+ *
+ * @property int|null $region_id
  * @property int|null $service_id
- * @property int|null $client_id
+ * @property bool $need_help
+ *
+ * @property int|null $subscription_id
+ *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property LeadStatus $status
  * @property Organization $organization
+ * @property Region|null $region
  * @property Service|null $service
- * @property Client|null $client
+ * @property Subscription|null $subscription
  */
 class Lead extends Model implements Statusable
 {
@@ -45,6 +63,12 @@ class Lead extends Model implements Statusable
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'ward_birth_date' => 'date',
+        'ward_inv' => 'bool',
+        'ward_hro' => 'bool',
+        'ward_uch' => 'bool',
+        'ward_spe' => 'bool',
+        'need_help' => 'bool',
     ];
 
     /**
@@ -93,12 +117,22 @@ class Lead extends Model implements Statusable
     }
 
     /**
-     * Client of this lead.
+     * Region this lead assigned to.
      *
      * @return  HasOne
      */
-    public function client(): HasOne
+    public function region(): HasOne
     {
-        return $this->hasOne(Client::class, 'id', 'client_id');
+        return $this->hasOne(Region::class, 'id', 'region_id');
+    }
+
+    /**
+     * Subscription created from this lead (with client and ward).
+     *
+     * @return  HasOne
+     */
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class, 'id', 'subscription_id');
     }
 }

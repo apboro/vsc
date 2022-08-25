@@ -26,7 +26,7 @@
                       :class="{'input-dropdown__list-item-current' : modelValue === null}" @click="value = null">{{ placeholder }}</span>
                 <span class="input-dropdown__list-item" v-for="(val, key) in displayableOptions"
                       :class="{'input-dropdown__list-item-current' : isCurrent(val['key'])}"
-                      :key="key" @click="value = val['key']" v-html="displayValue(val['value'])"></span>
+                      :key="key" @click="value = val['key']" v-html="displayValue(val)"></span>
             </scroll-box>
         </div>
     </InputWrapper>
@@ -104,7 +104,7 @@ export default {
                             (!this.search || empty(this.terms) || String(value).toLowerCase().search(this.terms.toLowerCase()) !== -1) &&
                             (!this.multi || this.modelValue === null || typeof this.modelValue === "object" && this.modelValue.indexOf(option[this.identifier]) === -1)
                         ) {
-                            options.push({key: key, value: value});
+                            options.push({key: key, value: value, hint: option['hint']});
                         }
                     } else {
                         if (!this.multi || this.modelValue !== null && typeof this.modelValue === "object" && this.modelValue.indexOf(option) === -1) {
@@ -203,8 +203,13 @@ export default {
             }
         },
         displayValue(value) {
-            if (this.search && this.terms) value = this.$highlight(value, this.terms);
-            return value;
+            let val = value['value'];
+            if (this.search && this.terms) val = this.$highlight(val, this.terms);
+            val = '<span class="input-dropdown__list-item-value">' + val + '</span>';
+            if (value['hint']) {
+                val += '<span class="input-dropdown__list-item-hint">' + value['hint'] + '</span>';
+            }
+            return val;
         },
         toggle() {
             if (this.disabled) return;
@@ -462,11 +467,10 @@ $input_remove_color: #FF1E00 !default;
             display: block;
             font-family: $project_font;
             font-size: 14px;
-            height: $base_size_unit * 0.8;
-            line-height: $base_size_unit * 0.8;
-            padding: 0 10px;
+            //height: $base_size_unit * 0.8;
+            line-height: $base_size_unit * 0.5;
+            padding: 4px 10px;
             transition: color $animation $animation_time;
-            white-space: nowrap;
 
             &-current {
                 color: $base_primary_color;
@@ -482,6 +486,16 @@ $input_remove_color: #FF1E00 !default;
 
             &:last-child {
                 margin-bottom: 5px;
+            }
+
+            &-value {
+                white-space: nowrap;
+            }
+
+            &-hint {
+                font-style: italic;
+                opacity: 0.7;
+                display: block;
             }
         }
     }

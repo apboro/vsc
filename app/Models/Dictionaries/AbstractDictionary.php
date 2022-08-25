@@ -60,4 +60,14 @@ abstract class AbstractDictionary extends Model
 
         return (new static())->newQuery();
     }
+
+    /**
+     * Begin querying the model.
+     *
+     * @return Builder
+     */
+    public static function queryRaw(): Builder
+    {
+        return (new static())->newQuery();
+    }
 }

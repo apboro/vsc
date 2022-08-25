@@ -23,7 +23,7 @@ class TrainingBaseViewController extends ApiController
         /** @var TrainingBase $base */
         if ($id === null ||
             null === ($base = TrainingBase::query()
-                ->with(['status', 'info'])
+                ->with(['status', 'info', 'region'])
                 ->where('id', $id)
                 ->tap(new ForOrganization($current->organizationId()))
                 ->first())
@@ -37,6 +37,7 @@ class TrainingBaseViewController extends ApiController
             'title' => $base->title,
             'short_title' => $base->short_title,
             'address' => $base->info->address,
+            'region' => $base->region ? $base->region->name : null,
             'email' => $base->info->email,
             'phone' => $base->info->phone,
             'description' => $base->info->description,
