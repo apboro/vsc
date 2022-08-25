@@ -137,7 +137,12 @@ class SubscriptionsContractAcceptController extends ApiEditController
 
         /** @var SubscriptionContract|null $contract */
         $contract = SubscriptionContract::query()
-            ->with(['contractData', 'subscription.service'])
+            ->with([
+                'contractData',
+                'subscription.service.requisites',
+                'subscription.service.sportKind',
+                'subscription.service.trainingBase.info',
+            ])
             ->where('id', $id)
             ->whereHas('subscription', function (Builder $query) use ($current, $subscriptionId) {
                 $query
@@ -173,6 +178,27 @@ class SubscriptionsContractAcceptController extends ApiEditController
         $contract->contractData->ward_birth_date = Carbon::parse($data['ward_birth_date']);
         $contract->contractData->ward_document = $data['ward_document'];
         $contract->contractData->ward_document_date = Carbon::parse($data['ward_document_date']);
+
+        $contract->contractData->organization_title = $contract->subscription->service->requisites->organization_title;
+        $contract->contractData->organization_inn = $contract->subscription->service->requisites->organization_inn;
+        $contract->contractData->organization_kpp = $contract->subscription->service->requisites->organization_kpp;
+        $contract->contractData->bank_account = $contract->subscription->service->requisites->bank_account;
+        $contract->contractData->bank_title = $contract->subscription->service->requisites->bank_title;
+        $contract->contractData->bank_bik = $contract->subscription->service->requisites->bank_bik;
+        $contract->contractData->bank_ks = $contract->subscription->service->requisites->bank_ks;
+
+        $contract->contractData->service_start_date = $contract->subscription->service->start_at;
+        $contract->contractData->service_end_date = $contract->subscription->service->end_at;
+
+        $contract->contractData->trainings_per_week = $contract->subscription->service->trainings_per_week;
+        $contract->contractData->trainings_per_month = $contract->subscription->service->trainings_per_month;
+        $contract->contractData->training_duration = $contract->subscription->service->training_duration;
+
+        $contract->contractData->sport_kind = $contract->subscription->service->sportKind->name;
+        $contract->contractData->training_base_address = $contract->subscription->service->trainingBase->info->address;
+
+        $contract->contractData->monthly_price = $contract->subscription->service->monthly_price;
+        $contract->contractData->training_return_price = $contract->subscription->service->training_return_price;
 
         $contract->contractData->save();
 

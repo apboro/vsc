@@ -2,41 +2,119 @@
 
 namespace App\Models\Subscriptions;
 
+use App\Helpers\PriceConverter;
 use App\Models\Model;
 use Carbon\Carbon;
 
 /**
  * @property int $subscription_contract_id
  *
- * @property string $lastname
- * @property string $firstname
- * @property string $patronymic
- * @property string $phone
- * @property string $email
- * @property string $passport_serial
- * @property string $passport_number
- * @property string $passport_place
- * @property Carbon $passport_date
- * @property string $passport_code
- * @property string $registration_address
- * @property string $ward_lastname
- * @property string $ward_firstname
- * @property string $ward_patronymic
- * @property Carbon $ward_birth_date
- * @property string $ward_document
- * @property Carbon $ward_document_date
+ * @property string|null $lastname
+ * @property string|null $firstname
+ * @property string|null $patronymic
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string|null $passport_serial
+ * @property string|null $passport_number
+ * @property string|null $passport_place
+ * @property Carbon|null $passport_date
+ * @property string|null $passport_code
+ * @property string|null $registration_address
+ *
+ * @property string|null $ward_lastname
+ * @property string|null $ward_firstname
+ * @property string|null $ward_patronymic
+ * @property Carbon|null $ward_birth_date
+ * @property string|null $ward_document
+ * @property Carbon|null $ward_document_date
+ *
+ * @property string|null $organization_title
+ * @property string|null $organization_inn
+ * @property string|null $organization_kpp
+ * @property string|null $bank_account
+ * @property string|null $bank_title
+ * @property string|null $bank_bik
+ * @property string|null $bank_ks
+ *
+ * @property Carbon|null $service_start_date
+ * @property Carbon|null $service_end_date
+ *
+ * @property int|null $trainings_per_week
+ * @property int|null $trainings_per_month
+ * @property int|null $training_duration
+ *
+ * @property string|null $sport_kind
+ * @property string|null $training_base_address
+ *
+ * @property float|null $monthly_price
+ * @property float|null $training_return_price
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
 class SubscriptionContractData extends Model
 {
+    /** @var string The primary key associated with the table. */
+    protected $primaryKey = 'subscription_contract_id';
+
+    /** @var bool Disable auto-incrementing on model. */
+    public $incrementing = false;
+
     /** @var array Attribute casting */
     protected $casts = [
-        'passport_date' => 'datetime',
-        'ward_birth_date' => 'datetime',
-        'ward_document_date' => 'datetime',
+        'passport_date' => 'date',
+        'ward_birth_date' => 'date',
+        'ward_document_date' => 'date',
+        'service_start_date' => 'date',
+        'service_end_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * Convert monthly price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getMonthlyPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert monthly price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setMonthlyPriceAttribute(?float $value): void
+    {
+        $this->attributes['monthly_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+    /**
+     * Convert monthly price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getTrainingReturnPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert monthly price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setTrainingReturnPriceAttribute(?float $value): void
+    {
+        $this->attributes['training_return_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
 }

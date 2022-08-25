@@ -40,7 +40,11 @@ class LeadContractController extends ApiEditController
         $subscriptionId = $request->input('subscription_id');
 
         $subscription = Subscription::query()
-            ->with(['service'])
+            ->with([
+                'service',
+                'client.user.profile',
+                'clientWard.user.profile',
+            ])
             ->tap(new ForOrganization($organizationId))
             ->where('id', $subscriptionId)
             ->first();
@@ -130,7 +134,20 @@ class LeadContractController extends ApiEditController
                 $contract->contractData->ward_document_date = Carbon::parse($data['ward_document_date']);
                 $contract->contractData->save();
 
-                // TODO update client and ward data
+                $client = $subscription->client;
+                $client->user->profile->lastname = $data['lastname'];
+                $client->user->profile->firstname = $data['firstname'];
+                $client->user->profile->patronymic = $data['patronymic'];
+                $client->user->profile->phone = $data['phone'];
+                $client->user->profile->email = $data['email'];
+                $client->user->profile->save();
+
+                $ward = $subscription->clientWard;
+                $ward->user->profile->lastname = $data['ward_lastname'];
+                $ward->user->profile->firstname = $data['ward_firstname'];
+                $ward->user->profile->patronymic = $data['ward_patronymic'];
+                $ward->user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
+                $ward->user->profile->save();
 
                 // update subscription status
                 $subscription->setStatus(SubscriptionStatus::filled, false);
