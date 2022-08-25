@@ -71,8 +71,26 @@
             <FormDropdown :form="form" :name="'discount'" :options="discounts" :show="'name'" :identifier="'id'" :top="true" :disabled="!discount"/>
 
             <div style="margin-top: 20px"></div>
+            <InputCheckbox v-model="agreement_1">Подтверждаю свое согласие на обработку моих персональных данных и персональных данных воспитанника</InputCheckbox>
+            <div style="margin-top: 15px"></div>
+            <InputCheckbox v-model="agreement_2">Подтверждаю свое согласие на фото- и видеосъемку спортивных занятий с возможностью публикации таких материалов в сети Интернет, в
+                том числе, в рекламных и информационных целях
+            </InputCheckbox>
+            <div style="margin-top: 15px"></div>
+            <InputCheckbox v-model="agreement_3">Уведомлен о необходимости предоставления справки об отсутствии медицинских противопоказаний для занятия выбранным видом спорта,
+                справку об отсутствии у воспитанника * в случае посещения бассейна
+            </InputCheckbox>
+            <div style="margin-top: 15px"></div>
+            <InputCheckbox v-model="agreement_4">Уведомлен о том, что воспитанник не допускается до занятий в случае наличия признаков острого респираторного заболевания, вирусной
+                инфекции, covid-19, иных симптомов, свидетельствующих о плохом самочувствии воспитанника, в случае нахождения в больничном воспитанника либо лиц, совместно
+                проживающих с воспитанником (состояние временной нетрудоспособности, карантин, самоизоляция)
+            </InputCheckbox>
+            <div style="margin-top: 15px"></div>
+            <InputCheckbox v-model="agreement_5">Я ознакомлен с <a :href="crm_url + '/leads/contract/' + subscriptionKey" target="_blank">Договором и Приложениями</a> и подтверждаю свое согласие с всеми правилами и условиями</InputCheckbox>
+
+            <div style="margin-top: 20px"></div>
             <GuiContainer>
-                <GuiButton :color="'blue'" @clicked="sendContract">Отправить</GuiButton>
+                <GuiButton :color="'blue'" @clicked="sendContract" :disabled="!agree">Отправить</GuiButton>
             </GuiContainer>
         </template>
         <GuiMessage v-else>{{ message }}</GuiMessage>
@@ -101,16 +119,28 @@ export default {
         crm_url: {type: String, default: null},
         debug: {type: Boolean, default: false},
         session: {type: String, default: null},
+        subscriptionKey: {type: String, default: null},
         subscriptionId: {type: Number, default: null},
         subscriptionData: {type: Object, default: null},
         serviceData: {type: Object, default: null},
         discounts: {type: Array, default: null},
     },
 
+    computed: {
+        agree() {
+            return this.agreement_1 & this.agreement_2 & this.agreement_3 & this.agreement_4 & this.agreement_5;
+        }
+    },
+
     data: () => ({
         form: form(null, null),
         message: null,
         discount: false,
+        agreement_1: false,
+        agreement_2: false,
+        agreement_3: false,
+        agreement_4: false,
+        agreement_5: false,
     }),
 
     created() {

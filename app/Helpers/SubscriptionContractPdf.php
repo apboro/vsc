@@ -42,12 +42,12 @@ class SubscriptionContractPdf
             'client_address' => $contract->contractData->registration_address,
             'client_passport_serial' => $contract->contractData->passport_serial,
             'client_passport_number' => $contract->contractData->passport_number,
-            'client_passport_date' => $contract->contractData->passport_date->format('d.m.Y'),
+            'client_passport_date' => $contract->contractData->passport_date ? $contract->contractData->passport_date->format('d.m.Y') : '____',
             'client_passport_place' => $contract->contractData->passport_place,
             'client_passport_code' => $contract->contractData->passport_code,
 
             'ward_name' => $contract->contractData->ward_lastname . ' ' . $contract->contractData->ward_firstname . ' ' . $contract->contractData->ward_patronymic,
-            'ward_birth_date' => $contract->contractData->ward_birth_date->format('d.m.Y'),
+            'ward_birth_date' => $contract->contractData->ward_birth_date ? $contract->contractData->ward_birth_date->format('d.m.Y') : '____',
 
             'service_start_date' => self::formatDate($contract->contractData->service_start_date ?? $contract->subscription->service->start_at, 'года'),
             'service_end_date' => self::formatDate($contract->contractData->service_end_date ?? $contract->subscription->service->end_at, 'года'),

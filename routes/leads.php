@@ -14,4 +14,5 @@ Route::middleware(['leads'])->group(function () {
     Route::post('/leads/info', [LeadInfoController::class, 'info'])->middleware('leads.protect');
     Route::post('/leads/send', [LeadNewController::class, 'send'])->middleware('leads.protect');
     Route::post('/leads/contract', [LeadContractController::class, 'contract'])->middleware('leads.protect');
+    Route::get('/leads/contract/{subscriptionKey}', [LeadContractController::class, 'preview']);
 });

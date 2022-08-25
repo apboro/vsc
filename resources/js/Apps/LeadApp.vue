@@ -12,6 +12,7 @@
                           :session="session"
                           :crm_url="crm_url"
                           :debug="debug"
+                          :subscription-key="subscriptionKey"
                           :subscription-id="subscription_id"
                           :subscription-data="subscription_data"
                           :service-data="service_data"

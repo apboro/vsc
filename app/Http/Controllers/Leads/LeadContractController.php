@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Leads;
 
+use App\Helpers\SubscriptionContractPdf;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Controllers\Leads\Helpers\LeadSession;
@@ -11,12 +12,13 @@ use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\Subscription;
 use App\Models\Subscriptions\SubscriptionContract;
-use App\Models\User\User;
+use App\Models\Subscriptions\SubscriptionContractData;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -160,5 +162,55 @@ class LeadContractController extends ApiEditController
 
         // response success
         return APIResponse::success('Ваша заявка отправлена.');
+    }
+
+    public function preview(?string $subscriptionKey)
+    {
+        if (empty($subscriptionKey)) {
+            abort(404);
+        }
+
+        try {
+            $subscriptionId = Crypt::decrypt($subscriptionKey);
+        } catch (Exception $exception) {
+            abort(404);
+        }
+
+        /** @var Subscription|null $subscription */
+        $subscription = Subscription::query()->where('id', $subscriptionId)->with(['client', 'clientWard', 'service'])->first();
+
+        // make dummy contract
+        $contract = new SubscriptionContract();
+        $contract->contractData = new SubscriptionContractData();
+
+        $contract->contractData->lastname = '____________';
+        $contract->contractData->firstname = '____________';
+        $contract->contractData->patronymic = '____________';
+        $contract->contractData->phone = '____________';
+        $contract->contractData->email = '____________';
+        $contract->contractData->passport_serial = '____________';
+        $contract->contractData->passport_number = '____________';
+        $contract->contractData->passport_place = '____________';
+        $contract->contractData->passport_date = null;
+        $contract->contractData->passport_code = '____________';
+        $contract->contractData->registration_address = '____________';
+        $contract->contractData->ward_lastname = '____________';
+        $contract->contractData->ward_firstname = '____________';
+        $contract->contractData->ward_patronymic = '____________';
+        $contract->contractData->ward_birth_date = null;
+        $contract->contractData->ward_document = '____________';
+        $contract->contractData->ward_document_date = null;
+
+
+        $contract->subscription_id = $subscription->id;
+
+        $pdf = SubscriptionContractPdf::generate($contract);
+
+        return response($pdf, 200, [
+            'Cache-Control' => 'public',
+            'Content-Transfer-Encoding' => 'Binary',
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "inline; filename=\"договор.pdf\"",
+        ]);
     }
 }
