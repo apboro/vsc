@@ -133,11 +133,10 @@ export default {
 
         this.form.set('phone', null, 'required', 'Телефон', true);
         this.form.set('email', null, 'required|email|bail', 'Email', true);
-        this.form.set('region_id', null, 'required', 'Район', true);
+        this.form.set('region_id', null, null, 'Район', true);
         this.form.set('service_id', null, 'required_if:need_help,false', 'Услуга', true);
         this.form.set('need_help', false, null, 'Не могу определиться с секцией, прошу со мной связаться', true);
 
-        this.form.set('region_id', null, 'required', 'Район', true);
         this.form.load();
     },
 

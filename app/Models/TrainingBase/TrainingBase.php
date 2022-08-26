@@ -11,6 +11,7 @@ use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
+use App\Models\Services\Service;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Collection $contracts
  * @property Organization $organization
  * @property Region $region
+ * @property Collection $services
  */
 class TrainingBase extends Model implements Statusable, AsDictionary
 {
@@ -129,5 +131,15 @@ class TrainingBase extends Model implements Statusable, AsDictionary
     public function contracts(): HasMany
     {
         return $this->hasMany(TrainingBaseContract::class, 'training_base_id', 'id');
+    }
+
+    /**
+     * Services of this training base.
+     *
+     * @return  HasMany
+     */
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class, 'training_base_id', 'id');
     }
 }

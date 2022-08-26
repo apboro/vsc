@@ -37,6 +37,7 @@ class LeadsRegisterController extends ApiEditController
         'ward_patronymic' => 'required',
         'ward_birth_date' => 'required',
         'service_id' => 'required',
+        'contract_comment' => 'nullable',
     ];
     protected array $titles = [
         'lastname' => 'Фамилия',
@@ -49,6 +50,7 @@ class LeadsRegisterController extends ApiEditController
         'ward_patronymic' => 'Отчество занимающегося',
         'ward_birth_date' => 'Дата рождения занимающегося',
         'service_id' => 'Услуга',
+        'contract_comment' => 'Комментарий клиенту',
     ];
 
     public function register(Request $request): JsonResponse
@@ -130,7 +132,7 @@ class LeadsRegisterController extends ApiEditController
 
                 // send a link to client
                 try {
-                    Mail::send(new SubscriptionContractFillLinkMail($subscription));
+                    Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
                 } catch (Exception $exception) {
                     Log::channel('outgoing_mail_errors')->error($exception->getMessage());
                     throw $exception;

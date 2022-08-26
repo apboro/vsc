@@ -7,7 +7,10 @@ use App\Http\Controllers\ApiEditController;
 use App\Http\Controllers\Leads\Helpers\LeadSession;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Leads\Lead;
+use App\Models\Services\Service;
+use App\Models\TrainingBase\TrainingBase;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -45,7 +48,7 @@ class LeadNewController extends ApiEditController
             'ward_hro' => 'nullable',
             'ward_uch' => 'nullable',
             'ward_spe' => 'nullable',
-            'region_id' => 'required',
+            'region_id' => 'nullable',
             'service_id' => 'nullable',
             'need_help' => 'nullable',
         ];
@@ -89,13 +92,23 @@ class LeadNewController extends ApiEditController
         $lead->ward_hro = $data['ward_hro'];
         $lead->ward_uch = $data['ward_uch'];
         $lead->ward_spe = $data['ward_spe'];
-        $lead->region_id = $data['region_id'];
+        if ($data['region_id'] === null && $data['service_id'] !== null) {
+            $lead->region_id = TrainingBase::query()
+                ->whereHas('services', function (Builder $query) use ($data) {
+                    $query->where('id', $data['service_id']);
+                })
+                ->value('region_id');
+        } else {
+            $lead->region_id = $data['region_id'];
+        }
         $lead->service_id = $data['service_id'];
         $lead->need_help = $data['need_help'];
 
         $lead->save();
 
         // response success
-        return APIResponse::success('Благодарим за заявку! В течение одного дня Вы получите ответ на указанную электронную почту или с вами свяжется менеджер для уточнения деталей.');
+        return APIResponse::success(
+            'Благодарим за заявку! В течение одного дня Вы получите ответ на указанную электронную почту или с вами свяжется менеджер для уточнения деталей.'
+        );
     }
 }

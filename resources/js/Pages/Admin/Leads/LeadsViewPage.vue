@@ -13,21 +13,23 @@
         <LeadInfo :data="data.data"/>
 
         <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'" class="registration-form" ref="registration">
-            <GuiContainer w-500px>
-                <FormString :form="registration_form" :name="'lastname'"/>
-                <FormString :form="registration_form" :name="'firstname'"/>
-                <FormString :form="registration_form" :name="'patronymic'"/>
-                <FormPhone :form="registration_form" :name="'phone'"/>
-                <FormString :form="registration_form" :name="'email'"/>
-                <div class="mt-10"></div>
-                <FormString :form="registration_form" :name="'ward_lastname'"/>
-                <FormString :form="registration_form" :name="'ward_firstname'"/>
-                <FormString :form="registration_form" :name="'ward_patronymic'"/>
-                <FormDate :form="registration_form" :name="'ward_birth_date'"/>
-                <div class="mt-10"></div>
-
-                <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true" :top="true" @change="regionChanged"/>
-                <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true" :top="true"/>
+            <GuiContainer>
+                <GuiContainer w-450px mr-20 inline>
+                    <FormString :form="registration_form" :name="'lastname'"/>
+                    <FormString :form="registration_form" :name="'firstname'"/>
+                    <FormString :form="registration_form" :name="'patronymic'"/>
+                    <FormPhone :form="registration_form" :name="'phone'"/>
+                    <FormString :form="registration_form" :name="'email'"/>
+                    <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true" :top="true" @change="regionChanged"/>
+                    <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true" :top="true"/>
+                </GuiContainer>
+                <GuiContainer w-450px inline>
+                    <FormString :form="registration_form" :name="'ward_lastname'"/>
+                    <FormString :form="registration_form" :name="'ward_firstname'"/>
+                    <FormString :form="registration_form" :name="'ward_patronymic'"/>
+                    <FormDate :form="registration_form" :name="'ward_birth_date'"/>
+                    <FormText :form="registration_form" :name="'contract_comment'"/>
+                </GuiContainer>
             </GuiContainer>
         </FormPopUp>
     </LayoutPage>
@@ -46,9 +48,11 @@ import FormDictionary from "@/Components/Form/FormDictionary";
 import GuiContainer from "@/Components/GUI/GuiContainer";
 import FormDate from "../../../Components/Form/FormDate";
 import FormDropdown from "../../../Components/Form/FormDropdown";
+import FormText from "../../../Components/Form/FormText";
 
 export default {
     components: {
+        FormText,
         FormDropdown,
         FormDate,
         GuiContainer,
@@ -80,9 +84,9 @@ export default {
             return this.data.is_loaded && this.data.data['is_registrable'];
         },
         regionServices() {
-            if(!this.data.payload['services']) return [];
+            if (!this.data.payload['services']) return [];
             return this.data.payload['services'].filter(
-                service => service.region_id === this.registration_form.values['region_id']
+                service => this.registration_form.values['region_id'] === null || service.region_id === this.registration_form.values['region_id']
             ).map(
                 service => ({id: service['id'], title: service['title'], hint: service['address']})
             );
@@ -111,6 +115,7 @@ export default {
             this.registration_form.set('ward_birth_date', this.data.data['ward_birth_date'], 'required', 'Дата рождения занимающегося', true);
             this.registration_form.set('region_id', this.data.data['region_id'], 'required', 'Район', true);
             this.registration_form.set('service_id', this.data.data['service_id'], 'required', 'Услуга', true);
+            this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
             this.registration_form.load();
             this.$refs.registration.show({lead_id: this.leadId})
                 .then(() => {
@@ -129,8 +134,9 @@ export default {
     :deep(.input-field__title) {
         width: 150px;
     }
+
     :deep(.input-field__wrapper) {
-        width: 350px;
+        width: 300px;
     }
 }
 </style>

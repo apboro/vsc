@@ -16,14 +16,18 @@ class SubscriptionContractFillLinkMail extends Mailable
     /** @var Subscription To be processed */
     protected Subscription $subscription;
 
+    /** @var string|null Comments to send to client */
+    protected ?string $comments;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Subscription $subscription)
+    public function __construct(Subscription $subscription, ?string $comments = null)
     {
         $this->subscription = $subscription;
+        $this->comments = $comments;
     }
 
     /**
@@ -52,6 +56,7 @@ class SubscriptionContractFillLinkMail extends Mailable
             ->subject('Ссылка на форму заполнения договора')
             ->text('mail.subscriptions.contract.form_link', [
                 'lines' => $lines,
+                'comments' => "\n" . $this->comments,
             ]);
 
         $mail->to($this->subscription->client->user->profile->email, $this->subscription->client->user->profile->compactName);
