@@ -12,10 +12,11 @@ class SubscriptionContractPdf
      * Generate ticket PDF.
      *
      * @param SubscriptionContract $contract
+     * @param bool $signed
      *
      * @return  string|null
      */
-    public static function generate(SubscriptionContract $contract): ?string
+    public static function generate(SubscriptionContract $contract, bool $signed = false): ?string
     {
         $contract->loadMissing([
             'contractData',
@@ -30,6 +31,8 @@ class SubscriptionContractPdf
         $trainingReturnPrice = $contract->contractData->training_return_price ?? $contract->subscription->service->training_return_price;
 
         $view = View::make('pdf/subscription_contract', [
+            'signed' => $signed,
+
             'contract_number' => $contract->number ?? '*не назначен*',
             'contract_date' => self::formatDate($contract->start_at, 'г.'),
 

@@ -64,7 +64,7 @@
                     <FormDate :form="form" :name="'ward_birth_date'"/>
                     <FormString :form="form" :name="'ward_document'"/>
                     <FormDate :form="form" :name="'ward_document_date'"/>
-                    <FormDictionary :form="form" :name="'discount_id'" :dictionary="'discounts'" :top="true"/>
+                    <FormDictionary :form="form" :name="'discount_id'" :dictionary="'discounts'" :top="true" :placeholder="'Без льготы'" :has-null="true"/>
                 </GuiContainer>
             </GuiContainer>
         </FormPopUp>

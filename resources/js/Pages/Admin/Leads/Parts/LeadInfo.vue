@@ -29,11 +29,10 @@
             <GuiValue :title="'Дата рождения занимающегося'">{{ data['ward_birth_date_info'] }} {{ data['ward_age'] ? `(${data['ward_age']})` : '' }}</GuiValue>
         </GuiContainer>
         <GuiContainer w-50 mt-30 pr-10 inline>
-            <GuiValue :title="'Наличие инвалидности'"><span :class="{'text-red': data['ward_inv']}">{{ data['ward_inv'] ? 'да' : 'нет' }}</span></GuiValue>
-            <GuiValue :title="'Наличие хронических заболеваний'"><span :class="{'text-red': data['ward_hro']}">{{ data['ward_hro'] ? 'да' : 'нет' }}</span></GuiValue>
-            <GuiValue :title="'Состоит на учете у медицинских специалистов'"><span :class="{'text-red': data['ward_uch']}">{{ data['ward_uch'] ? 'да' : 'нет' }}</span></GuiValue>
             <GuiValue :title="'Индивидуальные особенности воспитанника (физические, психологические)'"><span
                 :class="{'text-red': data['ward_spe']}">{{ data['ward_spe'] ? 'да' : 'нет' }}</span></GuiValue>
+            <GuiValue :title="'Состоит на учете у медицинских специалистов'"><span :class="{'text-red': data['ward_uch']}">{{ data['ward_uch'] ? 'да' : 'нет' }}</span></GuiValue>
+            <GuiValue :title="'Наличие инвалидности'"><span :class="{'text-red': data['ward_inv']}">{{ data['ward_inv'] ? 'да' : 'нет' }}</span></GuiValue>
         </GuiContainer>
     </div>
 </template>

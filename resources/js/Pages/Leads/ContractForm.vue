@@ -78,7 +78,7 @@
             </InputCheckbox>
             <div style="margin-top: 15px"></div>
             <InputCheckbox v-model="agreement_3">Уведомлен о необходимости предоставления справки об отсутствии медицинских противопоказаний для занятия выбранным видом спорта,
-                справку об отсутствии у воспитанника * в случае посещения бассейна
+                результаты анализа на энтеробиозу детей до 12 лет в случае посещения бассейна
             </InputCheckbox>
             <div style="margin-top: 15px"></div>
             <InputCheckbox v-model="agreement_4">Уведомлен о том, что воспитанник не допускается до занятий в случае наличия признаков острого респираторного заболевания, вирусной
@@ -86,7 +86,9 @@
                 проживающих с воспитанником (состояние временной нетрудоспособности, карантин, самоизоляция)
             </InputCheckbox>
             <div style="margin-top: 15px"></div>
-            <InputCheckbox v-model="agreement_5">Я ознакомлен с <a :href="crm_url + '/leads/contract/' + subscriptionKey" target="_blank">Договором и Приложениями</a> и подтверждаю свое согласие с всеми правилами и условиями</InputCheckbox>
+            <InputCheckbox v-model="agreement_5">Я ознакомлен с <a :href="crm_url + '/leads/contract/' + subscriptionKey" target="_blank">Договором и Приложениями</a> и подтверждаю
+                свое согласие с всеми правилами и условиями
+            </InputCheckbox>
 
             <div style="margin-top: 20px"></div>
             <GuiContainer>

@@ -25,16 +25,15 @@
 
                 <div style="margin-top: 10px"/>
 
-                <FormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>
-                <FormCheckBox :form="form" :name="'ward_hro'" :hide-title="true"/>
-                <FormCheckBox :form="form" :name="'ward_uch'" :hide-title="true"/>
                 <FormCheckBox :form="form" :name="'ward_spe'" :hide-title="true"/>
+                <FormCheckBox :form="form" :name="'ward_uch'" :hide-title="true"/>
+                <FormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>
 
                 <div style="margin-top: 20px"/>
 
-                <FormDropdown :form="form" :name="'region_id'" :options="regions" :identifier="'id'" :show="'name'" :placeholder="'Выберите район'" @change="regionChanged"/>
-                <FormDropdown class="vsc-services-drop" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
-                              :placeholder="'Выберите услугу'" :disabled="form.values['region_id'] === null || form.values['need_help'] === true"
+                <FormDropdown :top="true" :form="form" :name="'region_id'" :options="regions" :identifier="'id'" :show="'name'" :placeholder="'Любой район'" :has-null="true" @change="regionChanged"/>
+                <FormDropdown :top="true" class="vsc-services-drop" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
+                              :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
                               @change="serviceChanged"
                 />
                 <FormCheckBox :form="form" :name="'need_help'" :without-title="true" @change="needHelpChanged"/>
@@ -102,7 +101,7 @@ export default {
     computed: {
         regionServices() {
             return this.services.filter(
-                service => service.region_id === this.form.values['region_id']
+                service => this.form.values['region_id'] === null || service.region_id === this.form.values['region_id']
             ).map(
                 service => ({id: service['id'], title: service['title'], hint: service['address']})
             );

@@ -46,7 +46,7 @@ class SubscriptionContractMail extends Mailable
 
         $mail->to($this->contract->subscription->client->user->profile->email, $this->contract->subscription->client->user->profile->compactName);
 
-        $mail->attachData(SubscriptionContractPdf::generate($this->contract), "Договор.pdf");
+        $mail->attachData(SubscriptionContractPdf::generate($this->contract, true), "Договор.pdf");
 
         return $mail;
     }
