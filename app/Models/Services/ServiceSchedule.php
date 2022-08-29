@@ -18,7 +18,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property boolean $fri
  * @property boolean $sat
  * @property boolean $sun
- * @property Carbon|null $start_time
+ * @property Carbon|null $mon_start_time
+ * @property Carbon|null $tue_start_time
+ * @property Carbon|null $wed_start_time
+ * @property Carbon|null $thu_start_time
+ * @property Carbon|null $fri_start_time
+ * @property Carbon|null $sat_start_time
+ * @property Carbon|null $sun_start_time
  *
  * @property Service $service
  */
@@ -44,7 +50,13 @@ class ServiceSchedule extends Model
         'fri' => 'bool',
         'sat' => 'bool',
         'sun' => 'bool',
-        'start_time' => 'datetime:H:i',
+        'mon_start_time' => 'datetime:H:i',
+        'tue_start_time' => 'datetime:H:i',
+        'wed_start_time' => 'datetime:H:i',
+        'thu_start_time' => 'datetime:H:i',
+        'fri_start_time' => 'datetime:H:i',
+        'sat_start_time' => 'datetime:H:i',
+        'sun_start_time' => 'datetime:H:i',
     ];
 
     /**

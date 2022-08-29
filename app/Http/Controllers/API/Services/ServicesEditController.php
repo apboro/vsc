@@ -18,7 +18,7 @@ class ServicesEditController extends ApiEditController
         'training_base_id' => 'required',
         'sport_kind_id' => 'required',
         'monthly_price' => 'required',
-        'training_price' => 'required',
+        'training_price' => 'nullable',
         'trainings_per_week' => 'required',
         'trainings_per_month' => 'required',
         'training_return_price' => 'required',
@@ -27,8 +27,20 @@ class ServicesEditController extends ApiEditController
         'start_at' => 'required',
         'end_at' => 'required',
         'requisites_id' => 'required',
-        'schedule_days' => 'required',
-        'schedule_start_time' => 'required',
+        'schedule_day_mon' => 'nullable',
+        'schedule_day_tue' => 'nullable',
+        'schedule_day_wed' => 'nullable',
+        'schedule_day_thu' => 'nullable',
+        'schedule_day_fri' => 'nullable',
+        'schedule_day_sat' => 'nullable',
+        'schedule_day_sun' => 'nullable',
+        'schedule_time_mon' => 'nullable',
+        'schedule_time_tue' => 'nullable',
+        'schedule_time_wed' => 'nullable',
+        'schedule_time_thu' => 'nullable',
+        'schedule_time_fri' => 'nullable',
+        'schedule_time_sat' => 'nullable',
+        'schedule_time_sun' => 'nullable',
     ];
 
     protected array $titles = [
@@ -46,8 +58,20 @@ class ServicesEditController extends ApiEditController
         'start_at' => 'Дата начала услуги',
         'end_at' => 'Дата окончания услуги',
         'requisites_id' => 'Реквизиты для договора',
-        'schedule_days' => 'Дни занятий',
-        'schedule_start_time' => 'Время начала занятий',
+        'schedule_day_mon' => 'Занятия в пн.',
+        'schedule_day_tue' => 'Занятия в вт.',
+        'schedule_day_wed' => 'Занятия в ср.',
+        'schedule_day_thu' => 'Занятия в чт.',
+        'schedule_day_fri' => 'Занятия в пт.',
+        'schedule_day_sat' => 'Занятия в сб.',
+        'schedule_day_sun' => 'Занятия в вс.',
+        'schedule_time_mon' => 'Время начала занятий в пн.',
+        'schedule_time_tue' => 'Время начала занятий в вт.',
+        'schedule_time_wed' => 'Время начала занятий в ср.',
+        'schedule_time_thu' => 'Время начала занятий в чт.',
+        'schedule_time_fri' => 'Время начала занятий в пт.',
+        'schedule_time_sat' => 'Время начала занятий в сб.',
+        'schedule_time_sun' => 'Время начала занятий в вс.',
     ];
 
     /**
@@ -87,20 +111,21 @@ class ServicesEditController extends ApiEditController
                 'start_at' => $service->start_at ? $service->start_at->format('Y-m-d') : null,
                 'end_at' => $service->end_at ? $service->end_at->format('Y-m-d') : null,
                 'requisites_id' => $service->requisites_id,
-                'schedule_days' => array_values(
-                    array_filter([
-                        $service->schedule->mon ? 1 : null,
-                        $service->schedule->tue ? 2 : null,
-                        $service->schedule->wed ? 3 : null,
-                        $service->schedule->thu ? 4 : null,
-                        $service->schedule->fri ? 5 : null,
-                        $service->schedule->sat ? 6 : null,
-                        $service->schedule->sun ? 0 : null,
-                    ], function ($day) {
-                        return $day !== null;
-                    })
-                ),
-                'schedule_start_time' => $service->schedule->start_time ? $service->schedule->start_time->format('H:i') : null,
+
+                'schedule_day_mon' => $service->schedule->mon,
+                'schedule_day_tue' => $service->schedule->tue,
+                'schedule_day_wed' => $service->schedule->wed,
+                'schedule_day_thu' => $service->schedule->thu,
+                'schedule_day_fri' => $service->schedule->fri,
+                'schedule_day_sat' => $service->schedule->sat,
+                'schedule_day_sun' => $service->schedule->sun,
+                'schedule_time_mon' => $service->schedule->mon_start_time ? $service->schedule->mon_start_time->format('H:i') : null,
+                'schedule_time_tue' => $service->schedule->tue_start_time ? $service->schedule->tue_start_time->format('H:i') : null,
+                'schedule_time_wed' => $service->schedule->wed_start_time ? $service->schedule->wed_start_time->format('H:i') : null,
+                'schedule_time_thu' => $service->schedule->thu_start_time ? $service->schedule->thu_start_time->format('H:i') : null,
+                'schedule_time_fri' => $service->schedule->fri_start_time ? $service->schedule->fri_start_time->format('H:i') : null,
+                'schedule_time_sat' => $service->schedule->sat_start_time ? $service->schedule->sat_start_time->format('H:i') : null,
+                'schedule_time_sun' => $service->schedule->sun_start_time ? $service->schedule->sun_start_time->format('H:i') : null,
             ],
             $this->rules,
             $this->titles,
@@ -153,14 +178,20 @@ class ServicesEditController extends ApiEditController
         }
         $service->save();
 
-        $service->schedule->mon = in_array(1, $data['schedule_days'] ?? []);
-        $service->schedule->tue = in_array(2, $data['schedule_days'] ?? []);
-        $service->schedule->wed = in_array(3, $data['schedule_days'] ?? []);
-        $service->schedule->thu = in_array(4, $data['schedule_days'] ?? []);
-        $service->schedule->fri = in_array(5, $data['schedule_days'] ?? []);
-        $service->schedule->sat = in_array(6, $data['schedule_days'] ?? []);
-        $service->schedule->sun = in_array(0, $data['schedule_days'] ?? []);
-        $service->schedule->start_time = $data['schedule_start_time'];
+        $service->schedule->mon = $data['schedule_day_mon'];
+        $service->schedule->tue = $data['schedule_day_tue'];
+        $service->schedule->wed = $data['schedule_day_wed'];
+        $service->schedule->thu = $data['schedule_day_thu'];
+        $service->schedule->fri = $data['schedule_day_fri'];
+        $service->schedule->sat = $data['schedule_day_sat'];
+        $service->schedule->sun = $data['schedule_day_sun'];
+        $service->schedule->mon_start_time = $data['schedule_time_mon'] ? Carbon::parse($data['schedule_time_mon']) : null;
+        $service->schedule->tue_start_time = $data['schedule_time_tue'] ? Carbon::parse($data['schedule_time_tue']) : null;
+        $service->schedule->wed_start_time = $data['schedule_time_wed'] ? Carbon::parse($data['schedule_time_wed']) : null;
+        $service->schedule->thu_start_time = $data['schedule_time_thu'] ? Carbon::parse($data['schedule_time_thu']) : null;
+        $service->schedule->fri_start_time = $data['schedule_time_fri'] ? Carbon::parse($data['schedule_time_fri']) : null;
+        $service->schedule->sat_start_time = $data['schedule_time_sat'] ? Carbon::parse($data['schedule_time_sat']) : null;
+        $service->schedule->sun_start_time = $data['schedule_time_sun'] ? Carbon::parse($data['schedule_time_sun']) : null;
         $service->schedule->save();
 
         return APIResponse::success(

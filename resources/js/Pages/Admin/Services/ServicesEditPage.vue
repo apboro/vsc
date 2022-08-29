@@ -12,8 +12,28 @@
             <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
             <FormNumber :form="form" :name="'trainings_per_month'"/>
             <FormNumber :form="form" :name="'trainings_per_week'"/>
-            <FormDaysOfWeek :form="form" :name="'schedule_days'"/>
-            <FormTime :form="form" :name="'schedule_start_time'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_mon'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_mon'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_tue'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_tue'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_wed'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_wed'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_thu'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_thu'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_fri'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_fri'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_sat'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_sat'"/>
+
+            <FormCheckBox :form="form" :name="'schedule_day_sun'" :without-title="true"/>
+            <FormTime :form="form" :name="'schedule_time_sun'"/>
+
             <FormNumber :form="form" :name="'monthly_price'"/>
             <FormNumber :form="form" :name="'training_price'"/>
             <FormNumber :form="form" :name="'training_return_price'"/>
@@ -42,13 +62,13 @@ import FormNumber from "@/Components/Form/FormNumber";
 import FormText from "@/Components/Form/FormText";
 import FormDate from "@/Components/Form/FormDate";
 import FormDateTime from "../../../Components/Form/FormDateTime";
-import FormDaysOfWeek from "../../../Components/Form/FormDaysOfWeek";
 import FormTime from "../../../Components/Form/FormTime";
+import FormCheckBox from "../../../Components/Form/FormCheckBox";
 
 export default {
     components: {
+        FormCheckBox,
         FormTime,
-        FormDaysOfWeek,
         FormDateTime,
         FormDate,
         FormText,

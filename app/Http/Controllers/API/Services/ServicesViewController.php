@@ -49,21 +49,20 @@ class ServicesViewController extends ApiController
             'title' => $service->title,
             'training_base' => $service->trainingBase->title,
             'sport_kind' => $service->sportKind->name,
-            'schedule_days' => implode(
-                ', ',
+            'schedule' => implode(
+                "\n",
                 array_filter([
-                    $service->schedule->mon ? 'пн' : null,
-                    $service->schedule->tue ? 'вт' : null,
-                    $service->schedule->wed ? 'ср' : null,
-                    $service->schedule->thu ? 'чт' : null,
-                    $service->schedule->fri ? 'пт' : null,
-                    $service->schedule->sat ? 'вб' : null,
-                    $service->schedule->sun ? 'вс' : null,
+                    $service->schedule->mon ? ('пн' . ($service->schedule->mon_start_time ? $service->schedule->mon_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->tue ? ('вт' . ($service->schedule->tue_start_time ? $service->schedule->tue_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->wed ? ('ср' . ($service->schedule->wed_start_time ? $service->schedule->wed_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->thu ? ('чт' . ($service->schedule->thu_start_time ? $service->schedule->thu_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->fri ? ('пт' . ($service->schedule->fri_start_time ? $service->schedule->fri_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->sat ? ('вб' . ($service->schedule->sat_start_time ? $service->schedule->sat_start_time->format(' - H:i') : null)) : null,
+                    $service->schedule->sun ? ('вс' . ($service->schedule->sun_start_time ? $service->schedule->sun_start_time->format(' - H:i') : null)) : null,
                 ], function ($day) {
                     return $day !== null;
                 })
             ),
-            'schedule_start_time' => $service->schedule->start_time ? $service->schedule->start_time->format('H:i') : null,
             'monthly_price' => $service->monthly_price,
             'training_price' => $service->training_price,
             'trainings_per_week' => $service->trainings_per_week,
