@@ -12,7 +12,7 @@
         <GuiContainer w-50 mt-30 pr-20 inline>
             <GuiValue :title="'Дата начала услуги'">{{ data['start_at'] }}</GuiValue>
             <GuiValue :title="'Дата окончания услуги'">{{ data['end_at'] }}</GuiValue>
-            <GuiValueArea :title="'Расписание анятий'" :text-content="data['schedule']"/>
+            <GuiValueArea :title="'Расписание занятий'" :text-content="data['schedule']"/>
             <GuiContainer mt-20>
                 <GuiValue :title="'Максимальное количество мест в группе'">{{ data['group_limit'] }}</GuiValue>
                 <GuiValue :title="'Количество занятий в неделю'">{{ data['trainings_per_week'] }}</GuiValue>

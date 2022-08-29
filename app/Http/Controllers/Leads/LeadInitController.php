@@ -63,7 +63,20 @@ class LeadInitController extends ApiEditController
                 'sport_kind' => $subscription->service->sportKind->name,
                 'training_base_title' => $subscription->service->trainingBase->title,
                 'training_base_address' => $subscription->service->trainingBase->info->address,
-                'schedule' => $subscription->service->schedule->text,
+                'schedule' => implode(
+                    "\n",
+                    array_filter([
+                        $subscription->service->schedule->mon ? ('пн' . ($subscription->service->schedule->mon_start_time ? $subscription->service->schedule->mon_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->tue ? ('вт' . ($subscription->service->schedule->tue_start_time ? $subscription->service->schedule->tue_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->wed ? ('ср' . ($subscription->service->schedule->wed_start_time ? $subscription->service->schedule->wed_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->thu ? ('чт' . ($subscription->service->schedule->thu_start_time ? $subscription->service->schedule->thu_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->fri ? ('пт' . ($subscription->service->schedule->fri_start_time ? $subscription->service->schedule->fri_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->sat ? ('вб' . ($subscription->service->schedule->sat_start_time ? $subscription->service->schedule->sat_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->sun ? ('вс' . ($subscription->service->schedule->sun_start_time ? $subscription->service->schedule->sun_start_time->format(' - H:i') : null)) : null,
+                    ], function ($day) {
+                        return $day !== null;
+                    })
+                ),
             ];
             $discounts = Discount::queryRaw()
                 ->where(['organization_id' => $key['organization_id'], 'enabled' => true])

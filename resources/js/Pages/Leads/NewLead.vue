@@ -49,8 +49,7 @@
                     <GuiValue :title="'Занятий в месяц'">{{ service_info['service_trainings_per_month'] }}</GuiValue>
                     <GuiValue :title="'Продолжительность занятия'">{{ service_info['service_training_duration'] }} мин.</GuiValue>
                     <GuiValue :title="'Период занятий'">{{ service_info['service_start_at'] }} - {{ service_info['service_end_at'] }}</GuiValue>
-                    <GuiValue :title="'Дни занятий'">{{ service_info['schedule_days'] }}</GuiValue>
-                    <GuiValue :title="'Время начала занятий'">{{ service_info['schedule_start_time'] }}</GuiValue>
+                    <GuiValueArea :title="'Расписание занятий'" :text-content="service_info['schedule']"></GuiValueArea>
                 </div>
             </GuiContainer>
 
@@ -86,9 +85,10 @@ import FormCheckBox from "../../Components/Form/FormCheckBox";
 import InputCheckbox from "../../Components/Inputs/InputCheckbox";
 import GuiHint from "../../Components/GUI/GuiHint";
 import GuiValue from "../../Components/GUI/GuiValue";
+import GuiValueArea from "../../Components/GUI/GuiValueArea";
 
 export default {
-    components: {GuiValue, GuiHint, InputCheckbox, FormCheckBox, FormDate, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
+    components: {GuiValueArea, GuiValue, GuiHint, InputCheckbox, FormCheckBox, FormDate, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
 
     props: {
         crm_url: {type: String, default: null},

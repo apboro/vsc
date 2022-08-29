@@ -27,7 +27,7 @@
             <GuiValue :title="'Вид спорта'" :dots="false">{{ serviceData['sport_kind'] }}</GuiValue>
             <GuiValue :title="'Тренировочная база'" :dots="false">{{ serviceData['training_base_title'] }}</GuiValue>
             <GuiValue :title="'Адрес'" :dots="false">{{ serviceData['training_base_address'] }}</GuiValue>
-            <GuiValue :title="'График занятий'" :dots="false">{{ serviceData['schedule'] }}</GuiValue>
+            <GuiValueArea :title="'Расписание занятий'" :dots="false" :text-content="serviceData['schedule']"/>
 
             <div style="margin-top: 20px"></div>
             <GuiHeading>Данные для договора</GuiHeading>
@@ -113,9 +113,10 @@ import FormDate from "@/Components/Form/FormDate";
 import FormNumber from "@/Components/Form/FormNumber";
 import GuiText from "../../Components/GUI/GuiText";
 import InputCheckbox from "../../Components/Inputs/InputCheckbox";
+import GuiValueArea from "../../Components/GUI/GuiValueArea";
 
 export default {
-    components: {InputCheckbox, GuiText, FormNumber, FormDate, GuiValue, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
+    components: {GuiValueArea, InputCheckbox, GuiText, FormNumber, FormDate, GuiValue, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
 
     props: {
         crm_url: {type: String, default: null},

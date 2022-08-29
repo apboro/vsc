@@ -40,17 +40,20 @@ class LeadInfoController extends ApiEditController
             return APIResponse::error('Услуга не найдена');
         }
 
-        $scheduleDays = array_filter([
-            $service->schedule->mon ? 'пн' : null,
-            $service->schedule->tue ? 'вт' : null,
-            $service->schedule->wed ? 'ср' : null,
-            $service->schedule->thu ? 'чт' : null,
-            $service->schedule->fri ? 'пт' : null,
-            $service->schedule->sat ? 'вб' : null,
-            $service->schedule->sun ? 'вс' : null,
-        ], function ($day) {
-            return $day !== null;
-        });
+        $schedule = implode(
+            "\n",
+            array_filter([
+                $service->schedule->mon ? ('пн' . ($service->schedule->mon_start_time ? $service->schedule->mon_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->tue ? ('вт' . ($service->schedule->tue_start_time ? $service->schedule->tue_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->wed ? ('ср' . ($service->schedule->wed_start_time ? $service->schedule->wed_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->thu ? ('чт' . ($service->schedule->thu_start_time ? $service->schedule->thu_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->fri ? ('пт' . ($service->schedule->fri_start_time ? $service->schedule->fri_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->sat ? ('вб' . ($service->schedule->sat_start_time ? $service->schedule->sat_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->sun ? ('вс' . ($service->schedule->sun_start_time ? $service->schedule->sun_start_time->format(' - H:i') : null)) : null,
+            ], function ($day) {
+                return $day !== null;
+            })
+        );
 
         // response success
         return APIResponse::response([
@@ -63,8 +66,7 @@ class LeadInfoController extends ApiEditController
             'service_training_duration' => $service->training_duration,
             'service_start_at' => $service->start_at->format('d.m.Y'),
             'service_end_at' => $service->end_at->format('d.m.Y'),
-            'schedule_days' => empty($scheduleDays) ? null : implode(', ', $scheduleDays),
-            'schedule_start_time' => $service->schedule->start_time ? $service->schedule->start_time->format('H:i') : null,
+            'schedule' => empty($schedule) ? null : $schedule,
         ]);
     }
 
