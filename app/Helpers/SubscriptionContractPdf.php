@@ -74,6 +74,10 @@ class SubscriptionContractPdf
             'discount_3_monthly_price' => ($monthlyPrice * 0.9) . ' руб.',
             'discount_3_monthly_price_string' => PriceConverter::toString(($monthlyPrice * 0.9)),
 
+            'training_base_phone' => $contract->subscription->service->trainingBase->info->phone,
+            'training_base_email' => $contract->subscription->service->trainingBase->info->email,
+            'training_base_homepage' => $contract->subscription->service->trainingBase->info->homepage,
+
             'organization_title' => $contract->contractData->organization_title ?? $contract->subscription->service->requisites->organization_title,
             'organization_inn' => $contract->contractData->organization_inn ?? $contract->subscription->service->requisites->organization_inn,
             'organization_kpp' => $contract->contractData->organization_kpp ?? $contract->subscription->service->requisites->organization_kpp,
@@ -81,6 +85,10 @@ class SubscriptionContractPdf
             'bank_title' => $contract->contractData->bank_title ?? $contract->subscription->service->requisites->bank_title,
             'bank_bik' => $contract->contractData->bank_bik ?? $contract->subscription->service->requisites->bank_bik,
             'bank_ks' => $contract->contractData->bank_ks ?? $contract->subscription->service->requisites->bank_ks,
+
+            'organization_phone' => '89500332309',
+            'organization_email' => 'kudrovo.sport.doc@yandex.ru',
+            'organization_homepage' => 'https://vk.com/cskudrovo',
         ]);
         $html = $view->render();
 

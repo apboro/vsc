@@ -20,8 +20,9 @@ class TrainingBaseEditController extends ApiEditController
         'region_id' => 'required',
         'sport_kinds' => 'required',
         'images' => 'nullable',
-        'email' => 'nullable|email|bail',
-        'phone' => 'nullable',
+        'email' => 'required|email|bail',
+        'phone' => 'required',
+        'homepage' => 'required',
         'description' => 'nullable',
     ];
 
@@ -35,6 +36,7 @@ class TrainingBaseEditController extends ApiEditController
         'region_id' => 'Район',
         'email' => 'Email',
         'phone' => 'Телефон',
+        'homepage' => 'Страница в сети интернет',
         'description' => 'Описание',
     ];
 
@@ -68,6 +70,7 @@ class TrainingBaseEditController extends ApiEditController
                 'region_id' => $base->region_id,
                 'email' => $base->info->email,
                 'phone' => $base->info->phone,
+                'homepage' => $base->info->homepage,
                 'description' => $base->info->description,
                 'images' => $base->images->map(function (Image $image) {
                     return ['id' => $image->id, 'url' => $image->url];
@@ -122,6 +125,7 @@ class TrainingBaseEditController extends ApiEditController
         $base->info->address = $data['address'];
         $base->info->email = $data['email'];
         $base->info->phone = $data['phone'];
+        $base->info->homepage = $data['homepage'];
         $base->info->description = $data['description'];
         $base->info->save();
 

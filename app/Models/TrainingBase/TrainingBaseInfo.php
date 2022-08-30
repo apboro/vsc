@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $base_id
- * @property string $address
- * @property string $phone
- * @property string $email
- * @property string $description
+ * @property string|null $address
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string|null $homepage
+ * @property string|null $description
  */
 class TrainingBaseInfo extends Model
 {

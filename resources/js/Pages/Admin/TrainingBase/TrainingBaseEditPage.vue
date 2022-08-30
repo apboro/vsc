@@ -16,6 +16,7 @@
             <FormDictionary :form="form" :name="'region_id'" :dictionary="'regions'"/>
             <FormString :form="form" :name="'email'"/>
             <FormPhone :form="form" :name="'phone'"/>
+            <FormString :form="form" :name="'homepage'"/>
 
             <FormText :form="form" :name="'description'"/>
 

@@ -11,7 +11,10 @@
             </GuiValue>
             <GuiValue :title="'Телефон'">{{ data['phone'] }}</GuiValue>
             <GuiValue :title="'Email'">
-                <a class="link" v-if="data.email" target="_blank" :href="'mailto:'+data.email">{{ data['email'] }}</a>
+                <a class="link" v-if="data['email']" target="_blank" :href="'mailto:'+data['email']">{{ data['email'] }}</a>
+            </GuiValue>
+            <GuiValue :title="'Страница в сети интернет'">
+                <a class="link" v-if="data['homepage']" target="_blank" :href="data['homepage']">{{ data['homepage'] }}</a>
             </GuiValue>
             <GuiValue :title="'Виды спорта'">{{ data['sport_kinds'] ? data['sport_kinds'].join(', ') : null }}</GuiValue>
         </GuiContainer>

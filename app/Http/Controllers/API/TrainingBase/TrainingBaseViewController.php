@@ -40,6 +40,7 @@ class TrainingBaseViewController extends ApiController
             'region' => $base->region ? $base->region->name : null,
             'email' => $base->info->email,
             'phone' => $base->info->phone,
+            'homepage' => $base->info->homepage,
             'description' => $base->info->description,
             'images' => $base->images->map(function (Image $image) {
                 return $image->url;
