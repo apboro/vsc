@@ -43,6 +43,7 @@
 
             <div style="margin-top: 20px"></div>
             <GuiContainer>
+                <FormDate :form="form" :name="'birth_date'"/>
                 <FormNumber :form="form" :name="'passport_serial'"/>
                 <FormNumber :form="form" :name="'passport_number'"/>
                 <FormString :form="form" :name="'passport_place'"/>
@@ -154,6 +155,7 @@ export default {
         this.form.set('phone', this.getData('phone'), 'required', 'Телефон', true);
         this.form.set('email', this.getData('email'), 'required|email|bail', 'Email', true);
 
+        this.form.set('birth_date', this.getData('birth_date'), 'required', 'Дата рождения', true);
         this.form.set('passport_serial', this.getData('passport_serial'), 'required', 'Серия паспорта', true);
         this.form.set('passport_number', this.getData('passport_number'), 'required', 'Номер паспорта', true);
         this.form.set('passport_place', this.getData('passport_place'), 'required', 'Кем выдан', true);

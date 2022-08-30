@@ -43,6 +43,7 @@ class SubscriptionContractPdf
             'client_phone' => $contract->contractData->phone,
             'client_email' => $contract->contractData->email,
             'client_address' => $contract->contractData->registration_address,
+            'client_birth_date' => $contract->contractData->birth_date ? $contract->contractData->birth_date->format('d.m.Y') : '____',
             'client_passport_serial' => $contract->contractData->passport_serial,
             'client_passport_number' => $contract->contractData->passport_number,
             'client_passport_date' => $contract->contractData->passport_date ? $contract->contractData->passport_date->format('d.m.Y') : '____',
@@ -52,12 +53,30 @@ class SubscriptionContractPdf
             'ward_name' => $contract->contractData->ward_lastname . ' ' . $contract->contractData->ward_firstname . ' ' . $contract->contractData->ward_patronymic,
             'ward_birth_date' => $contract->contractData->ward_birth_date ? $contract->contractData->ward_birth_date->format('d.m.Y') : '____',
 
+            'ward_document' => $contract->contractData->ward_document ?? '____',
+            'ward_document_date' => $contract->contractData->ward_document_date ? $contract->contractData->ward_document_date->format('d.m.Y') : '____',
+
             'service_start_date' => self::formatDate($contract->contractData->service_start_date ?? $contract->subscription->service->start_at, 'года'),
             'service_end_date' => self::formatDate($contract->contractData->service_end_date ?? $contract->subscription->service->end_at, 'года'),
 
             'trainings_per_week' => $contract->contractData->trainings_per_week ?? $contract->subscription->service->trainings_per_week,
             'trainings_per_month' => $contract->contractData->trainings_per_month ?? $contract->subscription->service->trainings_per_month,
             'training_duration' => $contract->contractData->training_duration ?? $contract->subscription->service->training_duration,
+
+            'schedule' => implode(
+                ", ",
+                array_filter([
+                    $contract->subscription->service->schedule->mon ? ('пн' . ($contract->subscription->service->schedule->mon_start_time ? ' с ' . $contract->subscription->service->schedule->mon_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->tue ? ('вт' . ($contract->subscription->service->schedule->tue_start_time ? ' с ' . $contract->subscription->service->schedule->tue_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->wed ? ('ср' . ($contract->subscription->service->schedule->wed_start_time ? ' с ' . $contract->subscription->service->schedule->wed_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->thu ? ('чт' . ($contract->subscription->service->schedule->thu_start_time ? ' с ' . $contract->subscription->service->schedule->thu_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->fri ? ('пт' . ($contract->subscription->service->schedule->fri_start_time ? ' с ' . $contract->subscription->service->schedule->fri_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->sat ? ('сб' . ($contract->subscription->service->schedule->sat_start_time ? ' с ' . $contract->subscription->service->schedule->sat_start_time->format('H:i') : null)) : null,
+                    $contract->subscription->service->schedule->sun ? ('вс' . ($contract->subscription->service->schedule->sun_start_time ? ' с ' . $contract->subscription->service->schedule->sun_start_time->format('H:i') : null)) : null,
+                ], function ($day) {
+                    return $day !== null;
+                })
+            ),
 
             'sport_kind' => $contract->contractData->sport_kind ?? $contract->subscription->service->sportKind->name,
             'training_base_address' => $contract->contractData->training_base_address ?? $contract->subscription->service->trainingBase->info->address,

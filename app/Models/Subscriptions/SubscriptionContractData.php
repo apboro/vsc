@@ -20,6 +20,7 @@ use Carbon\Carbon;
  * @property Carbon|null $passport_date
  * @property string|null $passport_code
  * @property string|null $registration_address
+ * @property Carbon|null $birth_date
  *
  * @property string|null $ward_lastname
  * @property string|null $ward_firstname
@@ -27,6 +28,13 @@ use Carbon\Carbon;
  * @property Carbon|null $ward_birth_date
  * @property string|null $ward_document
  * @property Carbon|null $ward_document_date
+ *
+ * @property string|null $ward_passport_serial
+ * @property string|null $ward_passport_number
+ * @property string|null $ward_passport_place
+ * @property Carbon|null $ward_passport_date
+ * @property string|null $ward_passport_code
+ * @property string|null $ward_registration_address
  *
  * @property string|null $organization_title
  * @property string|null $organization_inn
@@ -62,8 +70,10 @@ class SubscriptionContractData extends Model
 
     /** @var array Attribute casting */
     protected $casts = [
+        'birth_date' => 'date',
         'passport_date' => 'date',
         'ward_birth_date' => 'date',
+        'ward_passport_date' => 'date',
         'ward_document_date' => 'date',
         'service_start_date' => 'date',
         'service_end_date' => 'date',
@@ -94,6 +104,7 @@ class SubscriptionContractData extends Model
     {
         $this->attributes['monthly_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
+
     /**
      * Convert monthly price from store value to real price.
      *

@@ -69,6 +69,7 @@ class LeadContractController extends ApiEditController
             'patronymic' => 'required',
             'phone' => 'required',
             'email' => 'required|email|bail',
+            'birth_date' => 'required',
             'passport_serial' => 'required',
             'passport_number' => 'required',
             'passport_place' => 'required',
@@ -89,6 +90,7 @@ class LeadContractController extends ApiEditController
             'patronymic' => 'Отчество',
             'phone' => 'Телефон',
             'email' => 'Email',
+            'birth_date' => 'Дата рождения',
             'passport_serial' => 'Серия паспорта',
             'passport_number' => 'Номер паспорта',
             'passport_place' => 'Кем выдан',
@@ -122,6 +124,7 @@ class LeadContractController extends ApiEditController
                 $contract->contractData->patronymic = $data['patronymic'];
                 $contract->contractData->phone = $data['phone'];
                 $contract->contractData->email = $data['email'];
+                $contract->contractData->birth_date = Carbon::parse($data['birth_date']);
                 $contract->contractData->passport_serial = $data['passport_serial'];
                 $contract->contractData->passport_number = $data['passport_number'];
                 $contract->contractData->passport_place = $data['passport_place'];
@@ -142,6 +145,7 @@ class LeadContractController extends ApiEditController
                 $client->user->profile->patronymic = $data['patronymic'];
                 $client->user->profile->phone = $data['phone'];
                 $client->user->profile->email = $data['email'];
+                $client->user->profile->birthdate = Carbon::parse($data['email']);
                 $client->user->profile->save();
 
                 $ward = $subscription->clientWard;
