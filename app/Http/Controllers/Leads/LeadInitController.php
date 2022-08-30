@@ -71,7 +71,7 @@ class LeadInitController extends ApiEditController
                         $subscription->service->schedule->wed ? ('ср' . ($subscription->service->schedule->wed_start_time ? $subscription->service->schedule->wed_start_time->format(' - H:i') : null)) : null,
                         $subscription->service->schedule->thu ? ('чт' . ($subscription->service->schedule->thu_start_time ? $subscription->service->schedule->thu_start_time->format(' - H:i') : null)) : null,
                         $subscription->service->schedule->fri ? ('пт' . ($subscription->service->schedule->fri_start_time ? $subscription->service->schedule->fri_start_time->format(' - H:i') : null)) : null,
-                        $subscription->service->schedule->sat ? ('вб' . ($subscription->service->schedule->sat_start_time ? $subscription->service->schedule->sat_start_time->format(' - H:i') : null)) : null,
+                        $subscription->service->schedule->sat ? ('сб' . ($subscription->service->schedule->sat_start_time ? $subscription->service->schedule->sat_start_time->format(' - H:i') : null)) : null,
                         $subscription->service->schedule->sun ? ('вс' . ($subscription->service->schedule->sun_start_time ? $subscription->service->schedule->sun_start_time->format(' - H:i') : null)) : null,
                     ], function ($day) {
                         return $day !== null;

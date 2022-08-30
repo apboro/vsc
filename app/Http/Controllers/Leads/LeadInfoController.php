@@ -48,7 +48,7 @@ class LeadInfoController extends ApiEditController
                 $service->schedule->wed ? ('ср' . ($service->schedule->wed_start_time ? $service->schedule->wed_start_time->format(' - H:i') : null)) : null,
                 $service->schedule->thu ? ('чт' . ($service->schedule->thu_start_time ? $service->schedule->thu_start_time->format(' - H:i') : null)) : null,
                 $service->schedule->fri ? ('пт' . ($service->schedule->fri_start_time ? $service->schedule->fri_start_time->format(' - H:i') : null)) : null,
-                $service->schedule->sat ? ('вб' . ($service->schedule->sat_start_time ? $service->schedule->sat_start_time->format(' - H:i') : null)) : null,
+                $service->schedule->sat ? ('сб' . ($service->schedule->sat_start_time ? $service->schedule->sat_start_time->format(' - H:i') : null)) : null,
                 $service->schedule->sun ? ('вс' . ($service->schedule->sun_start_time ? $service->schedule->sun_start_time->format(' - H:i') : null)) : null,
             ], function ($day) {
                 return $day !== null;
