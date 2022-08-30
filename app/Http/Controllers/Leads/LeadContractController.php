@@ -145,7 +145,7 @@ class LeadContractController extends ApiEditController
                 $client->user->profile->patronymic = $data['patronymic'];
                 $client->user->profile->phone = $data['phone'];
                 $client->user->profile->email = $data['email'];
-                $client->user->profile->birthdate = Carbon::parse($data['email']);
+                $client->user->profile->birthdate = Carbon::parse($data['birth_date']);
                 $client->user->profile->save();
 
                 $ward = $subscription->clientWard;
