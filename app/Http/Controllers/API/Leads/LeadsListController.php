@@ -96,9 +96,12 @@ class LeadsListController extends ApiController
 
             return [
                 'id' => $lead->id,
-                'lastname' => $lead->lastname,
-                'firstname' => $lead->firstname,
-                'patronymic' => $lead->patronymic,
+                'ward_lastname' => $lead->ward_lastname,
+                'ward_firstname' => $lead->ward_firstname,
+                'ward_patronymic' => $lead->ward_patronymic,
+                'client_lastname' => $lead->lastname,
+                'client_firstname' => $lead->firstname,
+                'client_patronymic' => $lead->patronymic,
                 'status' => $lead->status->name,
 
                 'service' => $service,
@@ -108,6 +111,8 @@ class LeadsListController extends ApiController
 
                 'client' => $lead->subscription && $lead->subscription->client ? $lead->subscription->client->user->profile->compactName : null,
                 'client_id' => $lead->subscription ? $lead->subscription->client_id : null,
+                'ward' => $lead->subscription && $lead->subscription->clientWard ? $lead->subscription->clientWard->user->profile->compactName : null,
+                'ward_id' => $lead->subscription ? $lead->subscription->client_ward_id : null,
                 'created_date' => $lead->created_at->format('d.m.Y'),
                 'created_time' => $lead->created_at->format('H:i'),
             ];
@@ -115,7 +120,7 @@ class LeadsListController extends ApiController
 
         return APIResponse::list(
             $leads,
-            ['Дата', 'ФИО', 'Статус', 'Услуга', 'Клиент'],
+            ['Дата', 'ФИО занимающегося', 'ФИО представителя', 'Статус', 'Услуга'],
             $filters,
             $this->defaultFilters,
             []

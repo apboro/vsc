@@ -57,7 +57,12 @@
                 </ListTableCell>
                 <ListTableCell>
                     <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}">
-                        {{ lead['lastname'] }} {{ lead['firstname'] }} {{ lead['patronymic'] }}
+                        {{ lead['ward_lastname'] }} {{ lead['ward_firstname'] }} {{ lead['ward_patronymic'] }}
+                    </RouterLink>
+                </ListTableCell>
+                <ListTableCell>
+                    <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}">
+                        {{ lead['client_lastname'] }} {{ lead['client_firstname'] }} {{ lead['client_patronymic'] }}
                     </RouterLink>
                 </ListTableCell>
                 <ListTableCell>
@@ -69,10 +74,6 @@
                         <div>{{ lead['service'] }}</div>
                         <div><i>{{ lead['sport_kind'] }}, {{ lead['training_base'] }}</i></div>
                     </template>
-                </ListTableCell>
-                <ListTableCell>
-                    <RouterLink v-if="lead['client']" class="link" :to="{name: 'clients-view', params: {id: lead['client_id']}}">{{ lead['client'] }}</RouterLink>
-                    <span v-else>—</span>
                 </ListTableCell>
             </ListTableRow>
         </ListTable>
