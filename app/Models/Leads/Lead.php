@@ -39,6 +39,9 @@ use InvalidArgumentException;
  * @property int|null $service_id
  * @property bool $need_help
  *
+ * @property string|null $client_comments
+ * @property string|null $comments
+ *
  * @property int|null $subscription_id
  *
  * @property Carbon $created_at

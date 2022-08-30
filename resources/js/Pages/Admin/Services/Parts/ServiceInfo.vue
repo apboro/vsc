@@ -22,7 +22,7 @@
         </GuiContainer>
         <GuiContainer w-50 mt-30 inline>
             <GuiValue :title="'Стоимость в месяц, руб'">{{ data['monthly_price'] }}</GuiValue>
-            <GuiValue :title="'Стоимость за одно занятие, руб'">{{ data['training_price'] }}</GuiValue>
+            <GuiValue :title="'Себестоимость за 1 занятие, руб'">{{ data['training_price'] }}</GuiValue>
             <GuiValue :title="'Стоимость за 1 занятие при перерасчете, руб'">{{ data['training_return_price'] }}</GuiValue>
             <GuiValue :title="'Реквизиты для договора'">{{ data['requisites'] ? data['requisites'] : '—' }}</GuiValue>
         </GuiContainer>

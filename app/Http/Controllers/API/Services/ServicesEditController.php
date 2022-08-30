@@ -49,7 +49,7 @@ class ServicesEditController extends ApiEditController
         'training_base_id' => 'Объект',
         'sport_kind_id' => 'Вид спорта',
         'monthly_price' => 'Стоимость в месяц, руб',
-        'training_price' => 'Стоимость за одно занятие, руб',
+        'training_price' => 'Себестоимость за 1 занятие, руб',
         'trainings_per_week' => 'Количество занятий в неделю',
         'trainings_per_month' => 'Количество занятий в месяц',
         'training_return_price' => 'Стоимость за 1 занятие при перерасчете',

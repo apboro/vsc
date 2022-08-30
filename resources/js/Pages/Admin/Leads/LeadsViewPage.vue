@@ -10,7 +10,7 @@
             </GuiActionsMenu>
         </template>
 
-        <LeadInfo :data="data.data"/>
+        <LeadInfo :data="data.data" :lead-id="leadId" @update="load"/>
 
         <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'" class="registration-form" ref="registration">
             <GuiContainer>

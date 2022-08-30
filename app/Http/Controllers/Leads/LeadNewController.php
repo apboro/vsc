@@ -103,6 +103,7 @@ class LeadNewController extends ApiEditController
         }
         $lead->service_id = $data['service_id'];
         $lead->need_help = $data['need_help'];
+        $lead->client_comments = $data['client_comments'];
 
         $lead->save();
 

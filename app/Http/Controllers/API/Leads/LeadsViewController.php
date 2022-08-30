@@ -12,7 +12,6 @@ use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class LeadsViewController extends ApiController
 {
@@ -75,6 +74,9 @@ class LeadsViewController extends ApiController
             'training_base' => $lead->service ? ($lead->service->trainingBase->short_title ?? $lead->service->trainingBase->title) : null,
             'training_base_address' => $lead->service ? $lead->service->trainingBase->info->address : null,
             'sport_kind' => $lead->service ? $lead->service->sportKind->name : null,
+
+            'client_comments' => $lead->client_comments,
+            'comments' => $lead->comments,
 
             'is_registrable' => $isRegisterable,
         ];

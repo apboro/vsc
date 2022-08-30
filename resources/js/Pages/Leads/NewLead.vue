@@ -56,6 +56,10 @@
 
             <div style="margin-top: 20px"/>
 
+            <FormText :form="form" :name="'client_comments'"/>
+
+            <div style="margin-top: 20px"/>
+
             <GuiContainer>
                 <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
                 <div style="margin-top: 10px"/>
@@ -86,9 +90,12 @@ import InputCheckbox from "../../Components/Inputs/InputCheckbox";
 import GuiHint from "../../Components/GUI/GuiHint";
 import GuiValue from "../../Components/GUI/GuiValue";
 import GuiValueArea from "../../Components/GUI/GuiValueArea";
+import FormText from "../../Components/Form/FormText";
 
 export default {
-    components: {GuiValueArea, GuiValue, GuiHint, InputCheckbox, FormCheckBox, FormDate, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
+    components: {
+        FormText,
+        GuiValueArea, GuiValue, GuiHint, InputCheckbox, FormCheckBox, FormDate, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
 
     props: {
         crm_url: {type: String, default: null},
@@ -136,6 +143,8 @@ export default {
         this.form.set('region_id', null, null, 'Район', true);
         this.form.set('service_id', null, 'required_if:need_help,false', 'Услуга', true);
         this.form.set('need_help', false, null, 'Не могу определиться с секцией, прошу со мной связаться', true);
+
+        this.form.set('client_comments', null, null, 'Комментарии', true);
 
         this.form.load();
     },
