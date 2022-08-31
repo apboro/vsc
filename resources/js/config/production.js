@@ -1,4 +1,4 @@
 module.exports = {
-    crm_url: 'https://vsc.opxx.ru',
-    debug: true,
+    crm_url: 'https://sportskolalo.ru',
+    debug: false,
 };
