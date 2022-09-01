@@ -37,8 +37,11 @@ class SubscriptionContractFillLinkMail extends Mailable
      */
     public function build(): SubscriptionContractFillLinkMail
     {
-        $this->subscription->loadMissing('client.user.profile');
-        $this->subscription->loadMissing('organization');
+        $this->subscription->loadMissing([
+            'organization',
+            'client.user.profile',
+            'service.trainingBase.info',
+        ]);
 
         $id = $this->subscription->id;
 
@@ -48,7 +51,15 @@ class SubscriptionContractFillLinkMail extends Mailable
             'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',
             'Нам с Вами осталось заполнить договор, перейдя по ссылке:',
             $link . ', и мы можем начинать тренировки/тренировочные мероприятия/соревнования. Точнее, наши сотрудники - тренировать, Вы сопровождать и встречать будущего Чемпиона (воспитанника), а будущий Чемпион - сможет начинать побеждать.',
-            'Все вопросы можно задать на email kudrovo.sport.doc@yandex.ru. Работает и группа в ВК, и телефоны, указанные в договоре. До встречи.',
+
+            'Наши контакты для связи',
+            '- группа в контакте: ' . $this->subscription->service->trainingBase->info->homepage,
+            '- телефон: '. $this->subscription->service->trainingBase->info->phone,
+            '- почта: '. $this->subscription->service->trainingBase->info->email,
+            '- сайт: vsev-sportcenter.ru',
+            'В начале учебного года обращений много, мы отвечаем с той скоростью на которую физически способны.',
+            'Благодарим за понимание!',
+            'Ваша команда Центра Школьного Спорта',
         ];
 
         $mail = $this

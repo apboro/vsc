@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\Discount;
+use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
@@ -32,6 +33,7 @@ class DictionaryController extends ApiController
         'position_titles' => ['class' => PositionTitle::class, 'allow' => null],
         'user_statuses' => ['class' => UserStatus::class, 'allow' => null],
         'service_statuses' => ['class' => ServiceStatus::class, 'allow' => null],
+        'lead_statuses' => ['class' => LeadStatus::class, 'allow' => null],
         'sport_kinds' => ['class' => SportKind::class, 'allow' => null],
         'training_base_statuses' => ['class' => TrainingBaseStatus::class, 'allow' => null],
         'training_base_contract_statuses' => ['class' => TrainingBaseContractStatus::class, 'allow' => null],

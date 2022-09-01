@@ -37,7 +37,7 @@
                 />
             </LayoutFiltersItem>
             <template #search>
-                <LayoutFiltersItem :title="'Поиск по ФИО клиента'" v-if="clientId === null">
+                <LayoutFiltersItem :title="'Поиск по ФИО'" v-if="clientId === null">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
             </template>
@@ -46,17 +46,17 @@
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
             <ListTableRow v-for="subscription in list.list">
                 <ListTableCell>
-                    {{ subscription['id'] }}
-                </ListTableCell>
-                <ListTableCell>
-                    <RouterLink v-if="clientId===null" class="link" :to="{name: 'subscriptions-view', params: {id: subscription['id']}}">{{ subscription['title'] }}</RouterLink>
+                    <RouterLink v-if="clientId===null" class="link" :to="{name: 'subscriptions-view', params: {id: subscription['id']}}">{{ subscription['id'] }}</RouterLink>
                     <RouterLink v-else class="link" :to="{name: 'clients-subscriptions-view', params: {client: clientId, id: subscription['id']}}">{{
-                            subscription['title']
+                            subscription['id']
                         }}
                     </RouterLink>
                 </ListTableCell>
                 <ListTableCell>
                     {{ subscription['status'] }}
+                </ListTableCell>
+                <ListTableCell>
+                    <span v-html="highlight(subscription['ward'])"/>
                 </ListTableCell>
                 <ListTableCell>
                     <RouterLink class="link" :to="{name: 'clients-view', params: {id: subscription['client_id']}}" v-html="highlight(subscription['client'])"/>

@@ -9,21 +9,24 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Leads\Lead;
 use App\Scopes\ForOrganization;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class LeadsListController extends ApiController
 {
     protected array $defaultFilters = [
-//        'status_id' => ServiceStatus::enabled,
+        'status_id' => null,
         'training_base_id' => null,
         'sport_kind_id' => null,
+        'region_id' => null,
     ];
 
     protected array $rememberFilters = [
-//        'status_id',
+        'status_id',
         'training_base_id',
         'sport_kind_id',
+        'region_id',
     ];
 
     protected string $rememberKey = CookieKeys::leads_list;
@@ -57,25 +60,38 @@ class LeadsListController extends ApiController
 
         // apply filters
         if (!empty($filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey))) {
-//            if (!empty($filters['status_id'])) {
-//                $query->where('status_id', $filters['status_id']);
-//            }
-//            if (!empty($filters['training_base_id'])) {
-//                $query->where('training_base_id', $filters['training_base_id']);
-//            }
-//            if (!empty($filters['sport_kind_id'])) {
-//                $query->where('sport_kind_id', $filters['sport_kind_id']);
-//            }
+            if (!empty($filters['status_id'])) {
+                $query->where('status_id', $filters['status_id']);
+            }
+            if (!empty($filters['training_base_id'])) {
+                $query->whereHas('service', function (Builder $query) use ($filters) {
+                    $query->where('training_base_id', $filters['training_base_id']);
+                });
+            }
+            if (!empty($filters['sport_kind_id'])) {
+                $query->whereHas('service', function (Builder $query) use ($filters) {
+                    $query->where('sport_kind_id', $filters['sport_kind_id']);
+                });
+            }
+            if (!empty($filters['region_id'])) {
+                $query->where('region_id', $filters['region_id']);
+            }
         }
 
         // apply search
-//        if (!empty($search = $request->search())) {
-//            foreach ($search as $term) {
-//                $query->where(function (Builder $query) use ($term) {
-//                    $query->where('title', 'LIKE', "%$term%");
-//                });
-//            }
-//        }
+        if (!empty($search = $request->search())) {
+            foreach ($search as $term) {
+                $query->where(function (Builder $query) use ($term) {
+                        $query
+                            ->where('lastname', 'LIKE', "%$term%")
+                            ->orWhere('firstname', 'LIKE', "%$term%")
+                            ->orWhere('patronymic', 'LIKE', "%$term%")
+                            ->where('ward_lastname', 'LIKE', "%$term%")
+                            ->orWhere('ward_firstname', 'LIKE', "%$term%")
+                            ->orWhere('ward_patronymic', 'LIKE', "%$term%");
+                });
+            }
+        }
 
         // current page automatically resolved from request via `page` parameter
         /** @var LengthAwarePaginator $leads */

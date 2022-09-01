@@ -6,10 +6,11 @@
                 <router-link class="link" :to="{ name: 'services-edit', params: { id: 0 }}">Добавить услугу</router-link>
             </GuiActionsMenu>
         </template>
+        -->
         <LayoutFilters>
-            <LayoutFiltersItem :title="'Статус услуги'">
+            <LayoutFiltersItem :title="'Статус'">
                 <DictionaryDropDown
-                    :dictionary="'service_statuses'"
+                    :dictionary="'lead_statuses'"
                     v-model="list.filters['status_id']"
                     :original="list.filters_original['status_id']"
                     :placeholder="'Все'"
@@ -41,13 +42,23 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Район'">
+                <DictionaryDropDown
+                    :dictionary="'regions'"
+                    v-model="list.filters['region_id']"
+                    :original="list.filters_original['region_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
             <template #search>
-                <LayoutFiltersItem :title="'Поиск по названию'">
+                <LayoutFiltersItem :title="'Поиск по ФИО'">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
             </template>
         </LayoutFilters>
-            -->
 
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
             <ListTableRow v-for="lead in list.list">
@@ -56,14 +67,14 @@
                     <div>{{ lead['created_time'] }}</div>
                 </ListTableCell>
                 <ListTableCell>
-                    <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}">
-                        {{ lead['ward_lastname'] }} {{ lead['ward_firstname'] }} {{ lead['ward_patronymic'] }}
-                    </RouterLink>
+                    <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}"
+                                v-html="highlight(lead['ward_lastname'] + ' ' + lead['ward_firstname'] + ' ' + lead['ward_patronymic'])"
+                    />
                 </ListTableCell>
                 <ListTableCell>
-                    <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}">
-                        {{ lead['client_lastname'] }} {{ lead['client_firstname'] }} {{ lead['client_patronymic'] }}
-                    </RouterLink>
+                    <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}"
+                                v-html="highlight(lead['client_lastname'] + ' ' + lead['client_firstname'] + ' ' + lead['client_patronymic'])"
+                    />
                 </ListTableCell>
                 <ListTableCell>
                     {{ lead['status'] }}

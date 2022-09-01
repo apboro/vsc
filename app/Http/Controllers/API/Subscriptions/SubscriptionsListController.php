@@ -46,7 +46,7 @@ class SubscriptionsListController extends ApiController
 
         $query = Subscription::query()
             ->tap(new ForOrganization($current->organizationId()))
-            ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile'])
+            ->with(['status', 'service', 'service.trainingBase', 'service.sportKind', 'client.user.profile', 'clientWard.user.profile'])
             ->when($clientId, function (Builder $query) use ($clientId) {
                 $query->whereHas('client', function (Builder $query) use ($clientId) {
                     $query->where('id', $clientId);
@@ -73,15 +73,25 @@ class SubscriptionsListController extends ApiController
         if (!empty($search = $request->search())) {
             foreach ($search as $term) {
                 $query->where(function (Builder $query) use ($term) {
-                    $query->whereHas('client', function (Builder $query) use ($term) {
-                        $query->whereHas('user', function (Builder $query) use ($term) {
-                            $query->whereHas('profile', function (Builder $query) use ($term) {
-                                $query->where('lastname', 'LIKE', "%$term%")
-                                    ->orWhere('firstname', 'LIKE', "%$term%")
-                                    ->orWhere('patronymic', 'LIKE', "%$term%");
+                    $query
+                        ->whereHas('client', function (Builder $query) use ($term) {
+                            $query->whereHas('user', function (Builder $query) use ($term) {
+                                $query->whereHas('profile', function (Builder $query) use ($term) {
+                                    $query->where('lastname', 'LIKE', "%$term%")
+                                        ->orWhere('firstname', 'LIKE', "%$term%")
+                                        ->orWhere('patronymic', 'LIKE', "%$term%");
+                                });
+                            });
+                        })
+                        ->orWhereHas('clientWard', function (Builder $query) use ($term) {
+                            $query->whereHas('user', function (Builder $query) use ($term) {
+                                $query->whereHas('profile', function (Builder $query) use ($term) {
+                                    $query->where('lastname', 'LIKE', "%$term%")
+                                        ->orWhere('firstname', 'LIKE', "%$term%")
+                                        ->orWhere('patronymic', 'LIKE', "%$term%");
+                                });
                             });
                         });
-                    });
                 });
             }
         }
@@ -95,7 +105,8 @@ class SubscriptionsListController extends ApiController
                 'id' => $subscription->id,
                 'client' => $subscription->client->user->profile->fullName,
                 'client_id' => $subscription->client_id,
-                'title' => "Подписка на услугу \"" . $subscription->service->title . "\"",
+                'ward' => $subscription->clientWard->user->profile->fullName,
+                'ward_id' => $subscription->client_ward_id,
                 'status' => $subscription->status->name,
                 'service' => $subscription->service->title,
                 'service_id' => $subscription->service_id,
@@ -107,7 +118,7 @@ class SubscriptionsListController extends ApiController
 
         return APIResponse::list(
             $subscriptions,
-            ['ID', '', 'Статус', 'Клиент', 'Услуга', 'Объект'],
+            ['ID', 'Статус', 'Занимающийся', 'Клиент', 'Услуга', 'Объект'],
             $filters,
             $this->defaultFilters,
             []
