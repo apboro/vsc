@@ -30,7 +30,7 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
-            <LayoutFiltersItem :title="'Объект'">
+            <LayoutFiltersItem :title="'Объект'" class="w-200px">
                 <DictionaryDropDown
                     :dictionary="'training_bases'"
                     v-model="list.filters['training_base_id']"
