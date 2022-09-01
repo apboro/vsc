@@ -102,8 +102,8 @@ class LeadsRegisterController extends ApiEditController
                 $user = new User();
                 $user->save();
 
-                $user->profile->firstname = $data['ward_lastname'];
-                $user->profile->lastname = $data['ward_firstname'];
+                $user->profile->lastname = $data['ward_lastname'];
+                $user->profile->firstname = $data['ward_firstname'];
                 $user->profile->patronymic = $data['ward_patronymic'];
                 $user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
                 $user->profile->save();
