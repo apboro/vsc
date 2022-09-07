@@ -44,7 +44,7 @@ class SubscriptionContractMail extends Mailable
                 'text' => 'Ура, нашего полку прибыло! Рады будем увидеть Чемпиона в рядах своих воспитанников на ближайшей по расписанию тренировке. Напоминаем, что регулярные занятия можно оплатить по реквизитам, указанным в Договоре.',
             ]);
 
-        $mail->to($this->contract->subscription->client->user->profile->email, $this->contract->subscription->client->user->profile->compactName);
+        $mail->to(trim($this->contract->subscription->client->user->profile->email), $this->contract->subscription->client->user->profile->compactName);
 
         $mail->attachData(SubscriptionContractPdf::generate($this->contract, true), "Договор.pdf");
 

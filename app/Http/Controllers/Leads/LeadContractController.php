@@ -119,39 +119,39 @@ class LeadContractController extends ApiEditController
                 $contract->save();
 
                 // fill contract data
-                $contract->contractData->lastname = $data['lastname'];
-                $contract->contractData->firstname = $data['firstname'];
-                $contract->contractData->patronymic = $data['patronymic'];
+                $contract->contractData->lastname = trim($data['lastname']);
+                $contract->contractData->firstname = trim($data['firstname']);
+                $contract->contractData->patronymic = trim($data['patronymic']);
                 $contract->contractData->phone = $data['phone'];
-                $contract->contractData->email = $data['email'];
+                $contract->contractData->email = trim($data['email']);
                 $contract->contractData->birth_date = Carbon::parse($data['birth_date']);
-                $contract->contractData->passport_serial = $data['passport_serial'];
-                $contract->contractData->passport_number = $data['passport_number'];
-                $contract->contractData->passport_place = $data['passport_place'];
+                $contract->contractData->passport_serial = trim($data['passport_serial']);
+                $contract->contractData->passport_number = trim($data['passport_number']);
+                $contract->contractData->passport_place = trim($data['passport_place']);
                 $contract->contractData->passport_date = Carbon::parse($data['passport_date']);
-                $contract->contractData->passport_code = $data['passport_code'];
-                $contract->contractData->registration_address = $data['registration_address'];
-                $contract->contractData->ward_lastname = $data['ward_lastname'];
-                $contract->contractData->ward_firstname = $data['ward_firstname'];
-                $contract->contractData->ward_patronymic = $data['ward_patronymic'];
+                $contract->contractData->passport_code = trim($data['passport_code']);
+                $contract->contractData->registration_address = trim($data['registration_address']);
+                $contract->contractData->ward_lastname = trim($data['ward_lastname']);
+                $contract->contractData->ward_firstname = trim($data['ward_firstname']);
+                $contract->contractData->ward_patronymic = trim($data['ward_patronymic']);
                 $contract->contractData->ward_birth_date = Carbon::parse($data['ward_birth_date']);
-                $contract->contractData->ward_document = $data['ward_document'];
+                $contract->contractData->ward_document = trim($data['ward_document']);
                 $contract->contractData->ward_document_date = Carbon::parse($data['ward_document_date']);
                 $contract->contractData->save();
 
                 $client = $subscription->client;
-                $client->user->profile->lastname = $data['lastname'];
-                $client->user->profile->firstname = $data['firstname'];
-                $client->user->profile->patronymic = $data['patronymic'];
+                $client->user->profile->lastname = trim($data['lastname']);
+                $client->user->profile->firstname = trim($data['firstname']);
+                $client->user->profile->patronymic = trim($data['patronymic']);
                 $client->user->profile->phone = $data['phone'];
-                $client->user->profile->email = $data['email'];
+                $client->user->profile->email = trim($data['email']);
                 $client->user->profile->birthdate = Carbon::parse($data['birth_date']);
                 $client->user->profile->save();
 
                 $ward = $subscription->clientWard;
-                $ward->user->profile->lastname = $data['ward_lastname'];
-                $ward->user->profile->firstname = $data['ward_firstname'];
-                $ward->user->profile->patronymic = $data['ward_patronymic'];
+                $ward->user->profile->lastname = trim($data['ward_lastname']);
+                $ward->user->profile->firstname = trim($data['ward_firstname']);
+                $ward->user->profile->patronymic = trim($data['ward_patronymic']);
                 $ward->user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
                 $ward->user->profile->save();
 

@@ -155,6 +155,8 @@ export default {
         },
 
         sendLead() {
+            // remove whitespaces in email
+            this.form.values['email'] = this.form.values['email'] ? String(this.form.values['email']).trim() : null;
             if (!this.form.validate()) {
                 return;
             }

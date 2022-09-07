@@ -70,7 +70,7 @@ class SubscriptionContractFillLinkMail extends Mailable
                 'comments' => "\n" . $this->comments,
             ]);
 
-        $mail->to($this->subscription->client->user->profile->email, $this->subscription->client->user->profile->compactName);
+        $mail->to(trim($this->subscription->client->user->profile->email), $this->subscription->client->user->profile->compactName);
 
         return $mail;
     }

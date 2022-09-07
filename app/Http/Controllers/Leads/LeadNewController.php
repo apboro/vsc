@@ -79,14 +79,14 @@ class LeadNewController extends ApiEditController
         $lead->organization_id = $organizationId;
         $lead->status_id = LeadStatus::new;
 
-        $lead->lastname = mb_strtoupper(mb_substr($data['lastname'], 0, 1)) . mb_strtolower(mb_substr($data['lastname'], 1));
-        $lead->firstname = mb_strtoupper(mb_substr($data['firstname'], 0, 1)) . mb_strtolower(mb_substr($data['firstname'], 1));
-        $lead->patronymic = mb_strtoupper(mb_substr($data['patronymic'], 0, 1)) . mb_strtolower(mb_substr($data['patronymic'], 1));
+        $lead->lastname = mb_strtoupper(mb_substr(trim($data['lastname']), 0, 1)) . mb_strtolower(mb_substr(trim($data['lastname']), 1));
+        $lead->firstname = mb_strtoupper(mb_substr(trim($data['firstname']), 0, 1)) . mb_strtolower(mb_substr(trim($data['firstname']), 1));
+        $lead->patronymic = mb_strtoupper(mb_substr(trim($data['patronymic']), 0, 1)) . mb_strtolower(mb_substr(trim($data['patronymic']), 1));
         $lead->phone = $data['phone'];
-        $lead->email = $data['email'];
-        $lead->ward_lastname = $data['ward_lastname'];
-        $lead->ward_firstname = $data['ward_firstname'];
-        $lead->ward_patronymic = $data['ward_patronymic'];
+        $lead->email = trim($data['email']);
+        $lead->ward_lastname = mb_strtoupper(mb_substr(trim($data['ward_lastname']), 0, 1)) . mb_strtolower(mb_substr(trim($data['ward_lastname']), 1));
+        $lead->ward_firstname = mb_strtoupper(mb_substr(trim($data['ward_firstname']), 0, 1)) . mb_strtolower(mb_substr(trim($data['ward_firstname']), 1));
+        $lead->ward_patronymic = mb_strtoupper(mb_substr(trim($data['ward_patronymic']), 0, 1)) . mb_strtolower(mb_substr(trim($data['ward_patronymic']), 1));
         $lead->ward_birth_date = Carbon::parse($data['ward_birth_date']);
         $lead->ward_inv = $data['ward_inv'];
         $lead->ward_hro = $data['ward_hro'];
