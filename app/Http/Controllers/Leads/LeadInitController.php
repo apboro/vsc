@@ -84,7 +84,11 @@ class LeadInitController extends ApiEditController
                 ->orderBy('order')
                 ->get();
         } else {
-            $key = LeadSession::getKey($request);
+            try {
+                $key = LeadSession::getKey($request);
+            } catch (Exception $exception) {
+                return APIResponse::error('Ошибка параметра');
+            }
         }
 
         if ($key['organization_id'] === null) {
