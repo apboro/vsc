@@ -21,13 +21,15 @@
             <div class="input-dropdown__list-search" v-if="search">
                 <InputSearch v-model="terms" @change="updateHeight" @click.stop="false" ref="search"/>
             </div>
-            <scroll-box :mode="'vertical'" :scrollable-class="'input-dropdown__list-wrapper'" v-if="dropped">
+<!--            <scroll-box :mode="'vertical'" :scrollable-class="'input-dropdown__list-wrapper'" v-if="dropped">-->
+            <div class="input-dropdown__list-wrapper">
                 <span class="input-dropdown__list-item" v-if="hasNull && !multi"
                       :class="{'input-dropdown__list-item-current' : modelValue === null}" @click="value = null">{{ placeholder }}</span>
                 <span class="input-dropdown__list-item" v-for="(val, key) in displayableOptions"
                       :class="{'input-dropdown__list-item-current' : isCurrent(val['key'])}"
                       :key="key" @click="value = val['key']" v-html="displayValue(val)"></span>
-            </scroll-box>
+            </div>
+<!--            </scroll-box>-->
         </div>
     </InputWrapper>
 </template>
@@ -458,6 +460,27 @@ $input_remove_color: #FF1E00 !default;
         &-wrapper {
             display: flex;
             flex-direction: column;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            /* W3C standard - сейчас только для Firefox */
+            scrollbar-color: #8c82ce #ededed;
+            scrollbar-width: thin;
+
+            /* для Chrome/Edge/Safari */
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: #ededed;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #8c82ce;
+                border-radius: 2px;
+            }
         }
 
         &-item {
