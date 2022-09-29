@@ -43,7 +43,7 @@ class LeadInitController extends ApiEditController
             if ($subscription === null) {
                 return APIResponse::error('Ошибка параметров.');
             }
-            if (!$subscription->hasStatus(SubscriptionStatus::new)) {
+            if (!$subscription->hasStatus(SubscriptionStatus::new) && !$subscription->hasStatus(SubscriptionStatus::fill)) {
                 return APIResponse::error('Форма уже заполнена.');
             }
             $key['organization_id'] = $subscription->organization_id;

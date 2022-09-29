@@ -54,7 +54,7 @@ class LeadContractController extends ApiEditController
         if ($subscription === null) {
             return APIResponse::error('Ошибка параметров.');
         }
-        if (!$subscription->hasStatus(SubscriptionStatus::new)) {
+        if (!$subscription->hasStatus(SubscriptionStatus::new) && !$subscription->hasStatus(SubscriptionStatus::fill)) {
             return APIResponse::error('Форма уже заполнена.');
         }
 
@@ -204,7 +204,6 @@ class LeadContractController extends ApiEditController
         $contract->contractData->ward_birth_date = null;
         $contract->contractData->ward_document = '____________';
         $contract->contractData->ward_document_date = null;
-
 
         $contract->subscription_id = $subscription->id;
 

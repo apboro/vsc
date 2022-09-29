@@ -54,11 +54,13 @@ class StatusesSeeder extends GenericSeeder
         ],
         SubscriptionStatus::class => [
             SubscriptionStatus::new => ['name' => 'Заполнение договора'],
+            SubscriptionStatus::fill => ['name' => 'Повторное заполнение договора'],
             SubscriptionStatus::filled => ['name' => 'Договор заполнен'],
         ],
         SubscriptionContractStatus::class => [
             SubscriptionContractStatus::draft => ['name' => 'Заполнен'],
             SubscriptionContractStatus::accepted => ['name' => 'Договор сформирован'],
+            SubscriptionContractStatus::closed => ['name' => 'Договор закрыт'],
         ],
     ];
 }

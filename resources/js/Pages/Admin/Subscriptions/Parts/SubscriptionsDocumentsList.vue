@@ -1,5 +1,10 @@
 <template>
-    <LoadingProgress :loading="ready && list.is_loading">
+    <LoadingProgress :loading="ready && (list.is_loading || processing)">
+        <div style="text-align: right; margin-bottom: 10px;">
+            <GuiActionsMenu v-if="can('subscriptions.create.document')">
+                <span class="link" @click="sendLink">Отправить ссылку на заполнение договора</span>
+            </GuiActionsMenu>
+        </div>
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles" :has-action="true">
             <ListTableRow v-for="document in list.list">
                 <ListTableCell>
@@ -27,8 +32,10 @@
                     {{ document['end_at'] ? document['end_at'] : '—' }}
                 </ListTableCell>
                 <ListTableCell>
-                    <GuiActionsMenu :title="null" v-if="document['is_acceptable']">
+                    <GuiActionsMenu :title="null" v-if="document['is_acceptable'] || document['is_repeatable'] || document['is_closeable']">
                         <span class="link" v-if="document['is_acceptable']" @click="accept(document)">Подтвердить данные</span>
+                        <span class="link" v-if="document['is_repeatable']" @click="resend(document)">Отправить договор повторно</span>
+                        <span class="link" v-if="document['is_closeable']" @click="close(document)">Закрыть договор</span>
                     </GuiActionsMenu>
                 </ListTableCell>
             </ListTableRow>
@@ -89,12 +96,16 @@ import FormPhone from "@/Components/Form/FormPhone";
 import FormDate from "@/Components/Form/FormDate";
 import {saveAs} from "file-saver";
 import FormDictionary from "../../../../Components/Form/FormDictionary";
+import ProcessEntry from "../../../../Mixins/ProcessEntry";
+import Permissions from "../../../../Mixins/Permissions";
 
 export default {
     props: {
         subscriptionId: {type: Number, default: null},
         ready: {type: Boolean, default: true},
     },
+
+    mixins: [ProcessEntry, Permissions],
 
     components: {
         FormDictionary,
@@ -133,6 +144,23 @@ export default {
                 });
         },
 
+        resend(document) {
+            this.processEntry('Отправить повторно <b>' + document['title'] + '</b> на почту клиента?', 'Отправить повторно', '/api/subscriptions/documents/resend', {
+                id: document['id'],
+                subscription_id: this.subscriptionId
+            });
+        },
+
+        close(document) {
+            this.processEntry('Закрыть <b>' + document['title'] + '</b>?', 'Закрыть договор', '/api/subscriptions/documents/close', {
+                id: document['id'],
+                subscription_id: this.subscriptionId
+            })
+                .then(() => {
+                    this.list.reload();
+                })
+        },
+
         save(document) {
             axios.post('/api/subscriptions/documents/download', {id: document['id']})
                 .then(response => {
@@ -149,6 +177,11 @@ export default {
                 .catch(error => {
                     this.$toast.error(error.response.data['message']);
                 });
+        },
+
+        sendLink() {
+            this.processEntry('Отправить ссылку на заполнение договора повторно на почту клиента?', 'Отправить повторно',
+                '/api/subscriptions/documents/send_link', {subscription_id: this.subscriptionId});
         },
     }
 }

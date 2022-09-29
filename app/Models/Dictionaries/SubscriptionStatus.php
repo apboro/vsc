@@ -13,6 +13,9 @@ class SubscriptionStatus extends AbstractDictionary
     /** @var int The ID of new subscription status */
     public const new = 1;
 
+    /** @var int The ID of subscription contract fill repeat status */
+    public const fill = 3;
+
     /** @var int The ID of subscription with filled contract draft status */
     public const filled = 10;
 
