@@ -21,6 +21,7 @@ use InvalidArgumentException;
  * @property int|null $number
  * @property Carbon|null $start_at
  * @property Carbon|null $end_at
+ * @property Carbon|null $closed_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
@@ -42,6 +43,7 @@ class SubscriptionContract extends Model implements Statusable
     protected $casts = [
         'start_at' => 'datetime',
         'end_at' => 'datetime',
+        'closed_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

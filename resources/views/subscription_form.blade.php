@@ -6,6 +6,10 @@
 
     <title>{{ $title ?? 'Заполнение формы договора' }}</title>
 
+    <script id="vsc-lead-config" type="application/json">{
+        "crm_url_override": "{{ env('APP_URL') }}"
+    }</script>
+
     <style>
         body {
             display: flex;

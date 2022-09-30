@@ -58,6 +58,7 @@ class SubscriptionsDocumentsListController extends ApiController
                 'discount_amount' => $contract->discount->discount ?? null,
                 'is_repeatable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.send.document'),
                 'is_closeable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.close.document'),
+                'is_editable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.edit.document'),
             ];
         });
 

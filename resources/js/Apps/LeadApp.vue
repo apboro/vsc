@@ -3,14 +3,14 @@
         <LoadingProgress :loading="is_initializing">
             <NewLead v-if="!is_initializing && subscription_id === null && message === null"
                      :session="session"
-                     :crm_url="crm_url"
+                     :crm_url="crmUrl"
                      :debug="debug"
                      :services="services"
                      :regions="regions"
             />
             <ContractForm v-if="!is_initializing && subscription_id !== null && message === null"
                           :session="session"
-                          :crm_url="crm_url"
+                          :crm_url="crmUrl"
                           :debug="debug"
                           :subscription-key="subscriptionKey"
                           :subscription-id="subscription_id"
@@ -42,6 +42,12 @@ export default {
         debug: {type: Boolean, default: false},
     },
 
+    computed: {
+        crmUrl() {
+            return this.crm_url_override ? this.crm_url_override : this.crm_url;
+        },
+    },
+
     data: () => ({
         key: null,
         session: null,
@@ -55,13 +61,16 @@ export default {
 
         is_initializing: true,
         message: null,
+        crm_url_override: null,
     }),
 
     created() {
         const configElement = document.getElementById('vsc-lead-config');
         const config = configElement !== null ? JSON.parse(configElement.innerHTML) : null;
+        console.log(config);
         if (config) {
             this.key = config['key'];
+            this.crm_url_override = config['crm_url_override'];
         }
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -95,7 +104,7 @@ export default {
          * @returns {string}
          */
         url(path) {
-            return this.crm_url + path + (this.debug ? '?XDEBUG_SESSION_START=PHPSTORM' : '');
+            return this.crmUrl + path + (this.debug ? '?XDEBUG_SESSION_START=PHPSTORM' : '');
         },
     },
 }

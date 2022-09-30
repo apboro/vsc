@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractMail;
 use App\Models\Dictionaries\SubscriptionContractStatus;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
@@ -221,6 +222,8 @@ class SubscriptionsContractAcceptController extends ApiEditController
             Log::channel('outgoing_mail_errors')->error($exception->getMessage());
             throw $exception;
         }
+
+        $contract->subscription->setStatus(SubscriptionStatus::sent);
 
         return APIResponse::success('договор на оказание услуг сформирован и отправлен клиенту');
     }

@@ -19,6 +19,12 @@ class SubscriptionStatus extends AbstractDictionary
     /** @var int The ID of subscription with filled contract draft status */
     public const filled = 10;
 
+    /** @var int The ID of subscription with signed contract status */
+    public const sent = 20;
+
+    /** @var int The ID of subscription closed status */
+    public const closed = 100;
+
     /** @var int Default status */
     public const default = self::new;
 

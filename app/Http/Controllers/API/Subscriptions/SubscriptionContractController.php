@@ -12,6 +12,7 @@ use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\Subscription;
 use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -62,7 +63,9 @@ class SubscriptionContractController extends ApiController
             return APIResponse::error('Документ не найден');
         }
 
-        $contract->setStatus(SubscriptionContractStatus::closed);
+        $contract->closed_at = Carbon::now();
+        $contract->setStatus(SubscriptionContractStatus::closed, false);
+        $contract->save();
 
         return APIResponse::success('Договор закрыт');
     }

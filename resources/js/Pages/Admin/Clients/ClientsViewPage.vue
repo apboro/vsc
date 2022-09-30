@@ -6,7 +6,7 @@
     >
         <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
 
-        <ClientInfo v-if="tab === 'general'" :data="data.data"/>
+        <ClientInfo v-if="tab === 'general'" :client-id="clientId" :data="data.data" @update="load"/>
         <ClientWardsList v-if="tab === 'wards'" :client-id="clientId" :ready="data.is_loaded"/>
         <SubscriptionsList v-if="tab === 'subscriptions'" :client-id="clientId" :ready="data.is_loaded"/>
     </LayoutPage>
