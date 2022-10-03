@@ -8,7 +8,27 @@
 
         <ClientInfo v-if="tab === 'general'" :client-id="clientId" :data="data.data" @update="load"/>
         <ClientWardsList v-if="tab === 'wards'" :client-id="clientId" :ready="data.is_loaded"/>
-        <SubscriptionsList v-if="tab === 'subscriptions'" :client-id="clientId" :ready="data.is_loaded"/>
+        <div v-if="tab === 'subscriptions'">
+            <div v-if="can('subscriptions.create')" style="text-align: right;">
+                <GuiActionsMenu>
+                    <span class="link" @click="addSubscription">Добавить подписку</span>
+                </GuiActionsMenu>
+            </div>
+            <SubscriptionsList :client-id="clientId" :ready="data.is_loaded" ref="subscriptions"/>
+        </div>
+
+        <FormPopUp :form="subscription_form" :title="'Добавить подписку'" :save-button-caption="'Добавить'" class="subscription-form" ref="subscription">
+            <GuiContainer w-600px>
+                <FormDictionary :form="subscription_form" :name="'region_id'" :dictionary="'regions'" :search="true" @change="regionChanged"/>
+                <FormDropdown :form="subscription_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true"/>
+                <FormDropdown :form="subscription_form" :name="'ward_id'" :options="clientWards" :identifier="'id'" :show="'name'" :search="true" :has-null="true" :placeholder="'Добавить нового'"/>
+                <FormString :form="subscription_form" :name="'ward_lastname'" v-if="subscription_form.values['ward_id'] === null"/>
+                <FormString :form="subscription_form" :name="'ward_firstname'" v-if="subscription_form.values['ward_id'] === null"/>
+                <FormString :form="subscription_form" :name="'ward_patronymic'" v-if="subscription_form.values['ward_id'] === null"/>
+                <FormDate :form="subscription_form" :name="'ward_birth_date'" v-if="subscription_form.values['ward_id'] === null"/>
+                <FormText :form="subscription_form" :name="'contract_comment'" v-if="subscription_form.values['ward_id'] === null"/>
+            </GuiContainer>
+        </FormPopUp>
     </LayoutPage>
 </template>
 
@@ -20,9 +40,25 @@ import ClientInfo from "@/Pages/Admin/Clients/Parts/ClientInfo";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
 import SubscriptionsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsList";
 import ClientWardsList from "@/Pages/Admin/Clients/Parts/ClientWardsList";
+import Permissions from "../../../Mixins/Permissions";
+import GuiActionsMenu from "../../../Components/GUI/GuiActionsMenu";
+import FormPopUp from "../../../Components/FormPopUp";
+import form from "../../../Core/Form";
+import FormDictionary from "../../../Components/Form/FormDictionary";
+import FormDropdown from "../../../Components/Form/FormDropdown";
+import FormString from "../../../Components/Form/FormString";
+import FormDate from "../../../Components/Form/FormDate";
+import FormText from "../../../Components/Form/FormText";
 
 export default {
     components: {
+        FormText,
+        FormDate,
+        FormString,
+        FormDropdown,
+        FormDictionary,
+        FormPopUp,
+        GuiActionsMenu,
         ClientWardsList,
         SubscriptionsList,
         LayoutRoutedTabs,
@@ -31,9 +67,12 @@ export default {
         LayoutPage,
     },
 
+    mixins: [Permissions],
+
     data: () => ({
         data: data('/api/clients/view'),
         tab: null,
+        subscription_form: form('/api/clients/add_subscription/get', '/api/clients/add_subscription/update'),
     }),
 
     computed: {
@@ -41,7 +80,7 @@ export default {
             return Number(this.$route.params.id);
         },
         processing() {
-            return this.data.is_loading;
+            return this.data.is_loading || this.subscription_form.is_loading || this.subscription_form.is_saving;
         },
         title() {
             return this.data.is_loaded ? this.data.data['title'] : '...';
@@ -52,7 +91,21 @@ export default {
                 wards: 'Занимающиеся',
                 subscriptions: 'Подписки на услуги',
             }
-        }
+        },
+        regionServices() {
+            if (!this.subscription_form.payload['services']) return [];
+            return this.subscription_form.payload['services'].filter(
+                service => this.subscription_form.values['region_id'] === null || service.region_id === this.subscription_form.values['region_id']
+            ).map(
+                service => ({id: service['id'], title: service['title'], hint: service['address']})
+            );
+        },
+        clientWards() {
+            if (!this.subscription_form.payload['wards']) return [];
+            return this.subscription_form.payload['wards'].map(
+                ward => ({id: ward['id'], name: ward['name']})
+            );
+        },
     },
 
     created() {
@@ -63,6 +116,19 @@ export default {
         load() {
             this.data.load({id: this.clientId})
                 .catch(response => response.code === 404 && this.$router.replace({name: '404'}));
+        },
+        regionChanged() {
+            this.subscription_form.update('service_id', null);
+        },
+        addSubscription() {
+            this.subscription_form.load({client_id: this.clientId})
+                .then(() => {
+                    this.$refs.subscription.show({client_id: this.clientId})
+                        .then(() => {
+                            this.load();
+                            this.$refs.subscriptions.reload();
+                        })
+                })
         },
     }
 }

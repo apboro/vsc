@@ -129,6 +129,9 @@ export default {
         highlight(text) {
             return this.$highlight(text, this.list.search);
         },
+        reload() {
+            this.list.reload();
+        },
     },
 }
 </script>

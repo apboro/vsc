@@ -48,10 +48,10 @@ class PermissionsSeeder extends Seeder
             'subscriptions.close' => 'Закрытие подписки на услугу',
             'subscriptions.create' => 'Создание подписки на услугу',
             'subscriptions.accept.document' => 'Формирование договора на оказание услуг',
-            'subscriptions.send.document' => 'Повторная отправка договора на оказание услуг',
+            'subscriptions.create.document' => 'Создавать новые договора на оказание услуг',
             'subscriptions.edit.document' => 'Изменение данных в договоре на оказание услуг',
             'subscriptions.close.document' => 'Закрытие договора на оказание услуг',
-            'subscriptions.create.document' => 'Создавать новые договора на оказание услуг',
+            'subscriptions.send.document' => 'Повторная отправка договора на оказание услуг',
         ],
     ];
 

@@ -33,6 +33,7 @@
                 </ListTableCell>
                 <ListTableCell>
                     <GuiActionsMenu :title="null" v-if="document['is_acceptable'] || document['is_repeatable'] || document['is_closeable']">
+                        <span class="link" v-if="document['is_editable']" @click="edit(document)">Изменить данные</span>
                         <span class="link" v-if="document['is_acceptable']" @click="accept(document)">Подтвердить данные</span>
                         <span class="link" v-if="document['is_repeatable']" @click="resend(document)">Отправить договор повторно</span>
                         <span class="link" v-if="document['is_closeable']" @click="close(document)">Закрыть договор</span>
@@ -105,6 +106,8 @@ export default {
         ready: {type: Boolean, default: true},
     },
 
+    emits: ['update'],
+
     mixins: [ProcessEntry, Permissions],
 
     components: {
@@ -136,18 +139,29 @@ export default {
     },
 
     methods: {
+        reload() {
+            this.list.reload();
+        },
+
         accept(document) {
             this.form.load({id: document['id'], subscription_id: this.subscriptionId});
             this.$refs.form.show({id: document['id'], subscription_id: this.subscriptionId})
                 .then(() => {
                     this.list.reload();
+                    this.$emit('update');
                 });
+        },
+
+        edit(document) {
+
         },
 
         resend(document) {
             this.processEntry('Отправить повторно <b>' + document['title'] + '</b> на почту клиента?', 'Отправить повторно', '/api/subscriptions/documents/resend', {
                 id: document['id'],
                 subscription_id: this.subscriptionId
+            }).then(() => {
+                this.$emit('update');
             });
         },
 
@@ -158,7 +172,8 @@ export default {
             })
                 .then(() => {
                     this.list.reload();
-                })
+                    this.$emit('update');
+                });
         },
 
         save(document) {
@@ -181,7 +196,10 @@ export default {
 
         sendLink() {
             this.processEntry('Отправить ссылку на заполнение договора повторно на почту клиента?', 'Отправить повторно',
-                '/api/subscriptions/documents/send_link', {subscription_id: this.subscriptionId});
+                '/api/subscriptions/documents/send_link', {subscription_id: this.subscriptionId})
+                .then(() => {
+                    this.$emit('update');
+                });
         },
     }
 }

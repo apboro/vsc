@@ -10,6 +10,8 @@ use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Services\Service;
 use App\Traits\HasStatus;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 
@@ -27,6 +29,7 @@ use InvalidArgumentException;
  * @property Client $client
  * @property ClientWard $clientWard
  * @property Service $service
+ * @property Collection $contracts
  */
 class Subscription extends Model implements Statusable
 {
@@ -106,5 +109,15 @@ class Subscription extends Model implements Statusable
     public function clientWard(): HasOne
     {
         return $this->hasOne(ClientWard::class, 'id', 'client_ward_id');
+    }
+
+    /**
+     * Subscription contracts.
+     *
+     * @return  HasMany
+     */
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(SubscriptionContract::class, 'subscription_id', 'id');
     }
 }

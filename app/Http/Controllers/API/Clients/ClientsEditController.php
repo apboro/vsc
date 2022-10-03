@@ -21,9 +21,9 @@ class ClientsEditController extends ApiEditController
     ];
 
     protected array $titles = [
-        'ward_lastname' => 'Фамилия',
-        'ward_firstname' => 'Имя',
-        'ward_patronymic' => 'Отчество',
+        'lastname' => 'Фамилия',
+        'firstname' => 'Имя',
+        'patronymic' => 'Отчество',
         'phone' => 'Телефон',
         'email' => 'Email',
     ];

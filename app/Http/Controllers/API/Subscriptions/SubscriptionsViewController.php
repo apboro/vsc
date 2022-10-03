@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\API\Services\ServicesViewController;
 use App\Http\Controllers\ApiController;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\Subscription;
 use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,6 +44,8 @@ class SubscriptionsViewController extends ApiController
             'client' => $subscription->client->user->profile->compactName,
             'client_id' => $subscription->client_id,
             'service' => ServicesViewController::composeServiceData($subscription->service),
+            'is_closeable' => !$subscription->hasStatus(SubscriptionStatus::closed),
+            'is_changeable' => !$subscription->hasStatus(SubscriptionStatus::closed),
         ];
 
         return APIResponse::response($values);

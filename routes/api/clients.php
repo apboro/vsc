@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Clients\ClientsAddSubscriptionController;
 use App\Http\Controllers\API\Clients\ClientsEditController;
 use App\Http\Controllers\API\Clients\ClientsListController;
 use App\Http\Controllers\API\Clients\ClientsViewController;
@@ -14,3 +15,6 @@ Route::post('/clients/view', [ClientsViewController::class, 'view'])->middleware
 Route::post('/clients/wards', [ClientsWardsListController::class, 'list'])->middleware('permit:clients.view');
 Route::post('/clients/wards/get', [ClientsWardsEditController::class, 'get'])->middleware('permit:clients.edit');
 Route::post('/clients/wards/update', [ClientsWardsEditController::class, 'update'])->middleware('permit:clients.edit');
+
+Route::post('/clients/add_subscription/get', [ClientsAddSubscriptionController::class, 'get'])->middleware('permit:subscriptions.create');
+Route::post('/clients/add_subscription/update', [ClientsAddSubscriptionController::class, 'update'])->middleware('permit:subscriptions.create');
