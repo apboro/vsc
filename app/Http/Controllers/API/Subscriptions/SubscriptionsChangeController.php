@@ -4,8 +4,6 @@ namespace App\Http\Controllers\API\Subscriptions;
 
 use App\Current;
 use App\Http\APIResponse;
-use App\Http\Controllers\API\Services\ServicesViewController;
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractFillLinkMail;
 use App\Models\Dictionaries\ServiceStatus;
@@ -17,7 +15,6 @@ use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,12 +25,14 @@ class SubscriptionsChangeController extends ApiEditController
 {
     protected array $rules = [
         'region_id' => 'nullable',
+        'object_id' => 'nullable',
         'service_id' => 'required',
         'contract_comment' => 'nullable',
     ];
 
     protected array $titles = [
         'region_id' => 'Район',
+        'object_id' => 'Объект',
         'service_id' => 'Услуга',
         'contract_comment' => 'Комментарий клиенту',
     ];
@@ -58,6 +57,7 @@ class SubscriptionsChangeController extends ApiEditController
         return APIResponse::form(
             [
                 'region_id' => $subscription->service->trainingBase->region_id,
+                'object_id' => $subscription->service->training_base_id,
                 'service_id' => $subscription->service_id,
                 'contract_comment' => null,
             ],
@@ -71,6 +71,7 @@ class SubscriptionsChangeController extends ApiEditController
                     ->select([
                         'services.id',
                         'services.title',
+                        'services.training_base_id',
                         DB::raw('IFNULL(training_bases.short_title, training_bases.title) as base'),
                         'training_base_info.address',
                         'training_bases.region_id',

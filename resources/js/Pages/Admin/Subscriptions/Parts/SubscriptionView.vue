@@ -25,9 +25,12 @@
         <SubscriptionsDocumentsList v-if="tab === 'contracts'" :subscription-id="subscriptionId" :subscription-repeatable="data.data['is_repeatable']" :ready="data.is_loaded" @update="load" ref="contracts"/>
 
         <FormPopUp :form="subscription_form" :title="'Заменить подписку'" :save-button-caption="'Заменить'" class="subscription-form" ref="subscription">
-            <GuiContainer w-600px>
-                <FormDictionary :form="subscription_form" :name="'region_id'" :dictionary="'regions'" :search="true" @change="regionChanged"/>
-                <FormDropdown :form="subscription_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true"/>
+            <GuiContainer w-600px subscription-change>
+                <FormDictionary :form="subscription_form" :name="'region_id'" :dictionary="'regions'" :search="true" @change="regionChanged" :has-null="true"
+                                :placeholder="'Все районы'"/>
+                <FormDropdown :form="subscription_form" :name="'object_id'" :options="objects" :identifier="'id'" :show="'name'" :search="true" @change="objectChanged"
+                              :has-null="true" :placeholder="'Все объекты'"/>
+                <FormDropdown :form="subscription_form" :name="'service_id'" :options="services" :identifier="'id'" :show="'title'" :search="true"/>
                 <FormText :form="subscription_form" :name="'contract_comment'"/>
                 <GuiText mt-15>Данная подписка будет закрыта, ссылка на заполнение договора будет отправлена клиенту на почту.</GuiText>
             </GuiContainer>
@@ -93,11 +96,23 @@ export default {
         backLinkTitle() {
             return this.clientId === null ? 'К списку подписок' : 'К списку клиентов';
         },
-        regionServices() {
-            if (!this.subscription_form.payload['services']) return [];
-            return this.subscription_form.payload['services'].filter(
-                service => this.subscription_form.values['region_id'] === null || service.region_id === this.subscription_form.values['region_id']
+        objects() {
+            if (!this.objectsCache) return [];
+            return this.objectsCache.filter(
+                object => this.subscription_form.values['region_id'] === null || object.region_id === this.subscription_form.values['region_id']
             ).map(
+                object => ({id: object['id'], name: object['name'], hint: object['address']})
+            );
+        },
+        services() {
+            if (!this.subscription_form.payload['services']) return [];
+
+            return this.subscription_form.payload['services'].filter(service => {
+                if(this.subscription_form.values['object_id'] !== null) {
+                    return service.training_base_id === this.subscription_form.values['object_id'];
+                }
+                return this.subscription_form.values['region_id'] === null || service.region_id === this.subscription_form.values['region_id'];
+            }).map(
                 service => ({id: service['id'], title: service['title'], hint: service['address']})
             );
         },
@@ -107,6 +122,7 @@ export default {
         data: data('/api/subscriptions/view'),
         tab: null,
         subscription_form: form('/api/subscriptions/change/get', '/api/subscriptions/change/update'),
+        objectsCache: [],
     }),
 
     created() {
@@ -129,10 +145,21 @@ export default {
                     }
                 });
         },
+        updateObjects() {
+            this.$store.dispatch('dictionary/refresh', 'training_bases')
+                .then(() => {
+                    this.objectsCache = this.$store.getters['dictionary/dictionary']('training_bases');
+                });
+        },
         regionChanged() {
+            this.subscription_form.update('service_id', null);
+            this.subscription_form.update('object_id', null);
+        },
+        objectChanged() {
             this.subscription_form.update('service_id', null);
         },
         changeSubscription() {
+            this.updateObjects();
             this.subscription_form.load({subscription_id: this.subscriptionId})
                 .then(() => {
                     this.$refs.subscription.show({subscription_id: this.subscriptionId})
@@ -147,3 +174,9 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+.subscription-change:deep(.input-field__input) {
+    width: 400px;
+}
+</style>
