@@ -67,7 +67,6 @@ export default {
     created() {
         const configElement = document.getElementById('vsc-lead-config');
         const config = configElement !== null ? JSON.parse(configElement.innerHTML) : null;
-        console.log(config);
         if (config) {
             this.key = config['key'];
             this.crm_url_override = config['crm_url_override'];

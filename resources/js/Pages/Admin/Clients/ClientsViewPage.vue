@@ -27,6 +27,7 @@
                 <FormString :form="subscription_form" :name="'ward_patronymic'" v-if="subscription_form.values['ward_id'] === null"/>
                 <FormDate :form="subscription_form" :name="'ward_birth_date'" v-if="subscription_form.values['ward_id'] === null"/>
                 <FormText :form="subscription_form" :name="'contract_comment'" v-if="subscription_form.values['ward_id'] === null"/>
+                <GuiText mt-15>Ссылка на заполнение договора будет отправлена клиенту на почту.</GuiText>
             </GuiContainer>
         </FormPopUp>
     </LayoutPage>
@@ -49,9 +50,11 @@ import FormDropdown from "../../../Components/Form/FormDropdown";
 import FormString from "../../../Components/Form/FormString";
 import FormDate from "../../../Components/Form/FormDate";
 import FormText from "../../../Components/Form/FormText";
+import GuiText from "../../../Components/GUI/GuiText";
 
 export default {
     components: {
+        GuiText,
         FormText,
         FormDate,
         FormString,
@@ -110,6 +113,7 @@ export default {
 
     created() {
         this.load();
+        this.subscription_form.toaster = this.$toast;
     },
 
     methods: {

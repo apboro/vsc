@@ -46,7 +46,7 @@
 
         <Pagination :pagination="list.pagination" @pagination="(page, per_page) => list.load(page, per_page)"/>
 
-        <FormPopUp :form="form" :title="''" :save-button-caption="'Сформировать договор и отправить клиенту'" :scrollable="true" ref="form">
+        <FormPopUp :form="form" :title="''" :save-button-caption="create ? 'Сформировать договор и отправить клиенту' : 'Сохранить'" :scrollable="true" ref="form">
             <GuiContainer w-600px>
                 <GuiHeading mb-15>Данные клиента</GuiHeading>
                 <GuiContainer mb-15>
@@ -130,6 +130,7 @@ export default {
     data: () => ({
         list: list('/api/subscriptions/documents'),
         form: form('/api/subscriptions/documents/get', '/api/subscriptions/documents/update'),
+        create: false,
     }),
 
     created() {
@@ -144,8 +145,9 @@ export default {
         },
 
         accept(document) {
+            this.create = true;
             this.form.load({id: document['id'], subscription_id: this.subscriptionId});
-            this.$refs.form.show({id: document['id'], subscription_id: this.subscriptionId})
+            this.$refs.form.show({id: document['id'], subscription_id: this.subscriptionId, create: true})
                 .then(() => {
                     this.list.reload();
                     this.$emit('update');
@@ -153,7 +155,13 @@ export default {
         },
 
         edit(document) {
-
+            this.create = false;
+            this.form.load({id: document['id'], subscription_id: this.subscriptionId});
+            this.$refs.form.show({id: document['id'], subscription_id: this.subscriptionId, create: false})
+                .then(() => {
+                    this.list.reload();
+                    this.$emit('update');
+                });
         },
 
         resend(document) {

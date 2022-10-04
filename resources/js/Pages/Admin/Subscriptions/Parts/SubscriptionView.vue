@@ -13,9 +13,9 @@
             </div>
         </template>
         <template #actions>
-            <GuiActionsMenu v-if="can('subscriptions.close') && data.data['is_closeable'] || can ('subscriptions.create') && data.data['is_changeable']">
+            <GuiActionsMenu v-if="can('subscriptions.close') && data.data['is_closeable'] || can('subscriptions.change') && data.data['is_changeable']">
                 <span class="link" v-if="can('subscriptions.close') && data.data['is_closeable']" @click="closeSubscription">Закрыть подписку</span>
-                <span class="link" v-if="can('subscriptions.create') && data.data['is_changeable']">Заменить подписку</span>
+                <span class="link" v-if="can('subscriptions.change') && data.data['is_changeable']" @click="changeSubscription">Заменить подписку</span>
             </GuiActionsMenu>
         </template>
         <LayoutRoutedTabs :tabs="{service: 'Услуга', contracts: 'Документы', /*payments: 'Оплаты'*/}" @change="tab = $event"/>
@@ -24,6 +24,14 @@
 
         <SubscriptionsDocumentsList v-if="tab === 'contracts'" :subscription-id="subscriptionId" :ready="data.is_loaded" @update="load" ref="contracts"/>
 
+        <FormPopUp :form="subscription_form" :title="'Заменить подписку'" :save-button-caption="'Заменить'" class="subscription-form" ref="subscription">
+            <GuiContainer w-600px>
+                <FormDictionary :form="subscription_form" :name="'region_id'" :dictionary="'regions'" :search="true" @change="regionChanged"/>
+                <FormDropdown :form="subscription_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true"/>
+                <FormText :form="subscription_form" :name="'contract_comment'"/>
+                <GuiText mt-15>Данная подписка будет закрыта, ссылка на заполнение договора будет отправлена клиенту на почту.</GuiText>
+            </GuiContainer>
+        </FormPopUp>
     </LayoutPage>
 </template>
 
@@ -33,9 +41,17 @@ import data from "@/Core/Data";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
 import ServiceInfo from "@/Pages/Admin/Services/Parts/ServiceInfo";
 import SubscriptionsDocumentsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsDocumentsList";
-import GuiActionsMenu from "../../../../Components/GUI/GuiActionsMenu";
-import Permissions from "../../../../Mixins/Permissions";
-import ProcessEntry from "../../../../Mixins/ProcessEntry";
+import GuiActionsMenu from "@/Components/GUI/GuiActionsMenu";
+import Permissions from "@/Mixins/Permissions";
+import ProcessEntry from "@/Mixins/ProcessEntry";
+import FormPopUp from "@/Components/FormPopUp";
+import GuiContainer from "@/Components/GUI/GuiContainer";
+import FormDictionary from "@/Components/Form/FormDictionary";
+import FormDropdown from "@/Components/Form/FormDropdown";
+import FormText from "@/Components/Form/FormText";
+import form from "../../../../Core/Form";
+import GuiHint from "../../../../Components/GUI/GuiHint";
+import GuiText from "../../../../Components/GUI/GuiText";
 
 export default {
     props: {
@@ -44,6 +60,13 @@ export default {
     },
 
     components: {
+        GuiText,
+        GuiHint,
+        FormText,
+        FormDropdown,
+        FormDictionary,
+        GuiContainer,
+        FormPopUp,
         GuiActionsMenu,
         SubscriptionsDocumentsList,
         ServiceInfo,
@@ -70,15 +93,25 @@ export default {
         backLinkTitle() {
             return this.clientId === null ? 'К списку подписок' : 'К списку клиентов';
         },
+        regionServices() {
+            if (!this.subscription_form.payload['services']) return [];
+            return this.subscription_form.payload['services'].filter(
+                service => this.subscription_form.values['region_id'] === null || service.region_id === this.subscription_form.values['region_id']
+            ).map(
+                service => ({id: service['id'], title: service['title'], hint: service['address']})
+            );
+        },
     },
 
     data: () => ({
         data: data('/api/subscriptions/view'),
         tab: null,
+        subscription_form: form('/api/subscriptions/change/get', '/api/subscriptions/change/update'),
     }),
 
     created() {
         this.load();
+        this.subscription_form.toaster = this.$toast;
     },
 
     methods: {
@@ -94,6 +127,21 @@ export default {
                     if (this.tab === 'contracts') {
                         this.$refs.contracts.reload();
                     }
+                });
+        },
+        regionChanged() {
+            this.subscription_form.update('service_id', null);
+        },
+        changeSubscription() {
+            this.subscription_form.load({subscription_id: this.subscriptionId})
+                .then(() => {
+                    this.$refs.subscription.show({subscription_id: this.subscriptionId})
+                        .then(() => {
+                            this.load();
+                            if (this.tab === 'contracts') {
+                                this.$refs.contracts.reload();
+                            }
+                        });
                 });
         },
     }
