@@ -29,7 +29,8 @@ use InvalidArgumentException;
 class ClientsAddSubscriptionController extends ApiEditController
 {
     protected array $rules = [
-        'region_id' => 'required',
+        'region_id' => 'nullable',
+        'object_id' => 'nullable',
         'service_id' => 'required',
         'ward_id' => 'nullable',
         'ward_lastname' => 'required_if:ward_id,null',
@@ -41,6 +42,7 @@ class ClientsAddSubscriptionController extends ApiEditController
 
     protected array $titles = [
         'region_id' => 'Район',
+        'object_id' => 'Объект',
         'service_id' => 'Услуга',
         'ward_id' => 'Занимающийся',
         'ward_lastname' => 'Фамилия занимающегося',
@@ -78,6 +80,7 @@ class ClientsAddSubscriptionController extends ApiEditController
 
         $values = [
             'region_id' => null,
+            'object_id' => null,
             'service_id' => null,
             'ward_id' => $ward ? $ward->id : null,
             'ward_lastname' => null,
@@ -100,6 +103,7 @@ class ClientsAddSubscriptionController extends ApiEditController
                     ->select([
                         'services.id',
                         'services.title',
+                        'services.training_base_id',
                         DB::raw('IFNULL(training_bases.short_title, training_bases.title) as base'),
                         'training_base_info.address',
                         'training_bases.region_id',

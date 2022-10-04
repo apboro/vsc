@@ -46,6 +46,7 @@ class SubscriptionsViewController extends ApiController
             'service' => ServicesViewController::composeServiceData($subscription->service),
             'is_closeable' => !$subscription->hasStatus(SubscriptionStatus::closed),
             'is_changeable' => !$subscription->hasStatus(SubscriptionStatus::closed),
+            'is_repeatable' => !$subscription->hasStatus(SubscriptionStatus::closed),
         ];
 
         return APIResponse::response($values);

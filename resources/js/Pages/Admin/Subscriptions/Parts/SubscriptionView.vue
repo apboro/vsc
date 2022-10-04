@@ -22,7 +22,7 @@
 
         <ServiceInfo v-if="tab === 'service' && data.is_loaded" :data="data.data['service']"/>
 
-        <SubscriptionsDocumentsList v-if="tab === 'contracts'" :subscription-id="subscriptionId" :ready="data.is_loaded" @update="load" ref="contracts"/>
+        <SubscriptionsDocumentsList v-if="tab === 'contracts'" :subscription-id="subscriptionId" :subscription-repeatable="data.data['is_repeatable']" :ready="data.is_loaded" @update="load" ref="contracts"/>
 
         <FormPopUp :form="subscription_form" :title="'Заменить подписку'" :save-button-caption="'Заменить'" class="subscription-form" ref="subscription">
             <GuiContainer w-600px>

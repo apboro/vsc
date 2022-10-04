@@ -1,7 +1,7 @@
 <template>
     <LoadingProgress :loading="ready && (list.is_loading || processing)">
         <div style="text-align: right; margin-bottom: 10px;">
-            <GuiActionsMenu v-if="can('subscriptions.create.document')">
+            <GuiActionsMenu v-if="can('subscriptions.create.document') && subscriptionRepeatable">
                 <span class="link" @click="sendLink">Отправить ссылку на заполнение договора</span>
             </GuiActionsMenu>
         </div>
@@ -103,6 +103,7 @@ import Permissions from "../../../../Mixins/Permissions";
 export default {
     props: {
         subscriptionId: {type: Number, default: null},
+        subscriptionRepeatable: {type: Boolean, default: false},
         ready: {type: Boolean, default: true},
     },
 
