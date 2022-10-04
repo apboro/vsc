@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Subscriptions\SubscriptionsViewController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/subscriptions', [SubscriptionsListController::class, 'list'])->middleware('permit:subscriptions.view');
+Route::post('/subscriptions/export', [SubscriptionsListController::class, 'export'])->middleware('permit:subscriptions.view');
 Route::post('/subscriptions/view', [SubscriptionsViewController::class, 'view'])->middleware('permit:subscriptions.view');
 Route::post('/subscriptions/close', [SubscriptionsController::class, 'close'])->middleware('permit:subscriptions.close');
 Route::post('/subscriptions/change/get', [SubscriptionsChangeController::class, 'get'])->middleware('permit:subscriptions.change');

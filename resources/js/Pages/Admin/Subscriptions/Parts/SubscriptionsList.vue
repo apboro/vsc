@@ -40,6 +40,11 @@
                 <LayoutFiltersItem :title="'Поиск по ФИО'" v-if="clientId === null">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
+                <div v-if="clientId === null" style="display: flex; align-items: flex-end; margin-left: 10px;">
+                    <GuiActionsMenu :title="null">
+                        <span class="link" @click="excelExport">Экспорт в Excel</span>
+                    </GuiActionsMenu>
+                </div>
             </template>
         </LayoutFilters>
 
@@ -56,10 +61,22 @@
                     {{ subscription['status'] }}
                 </ListTableCell>
                 <ListTableCell>
-                    <span v-html="highlight(subscription['ward'])"/>
+                    <div>
+                        <RouterLink class="link" :to="{name: 'clients-view', params: {id: subscription['client_id']}}" v-html="highlight(subscription['client'])"/>
+                    </div>
+                    <div>
+                        <span v-html="highlight(subscription['ward'])"/>
+                    </div>
                 </ListTableCell>
                 <ListTableCell>
-                    <RouterLink class="link" :to="{name: 'clients-view', params: {id: subscription['client_id']}}" v-html="highlight(subscription['client'])"/>
+                    <div v-for="contract in subscription['contracts']">
+                        <div style="margin-bottom: 5px;">{{ contract['title'] }}</div>
+                        <div style="font-size: 12px; margin-bottom: 5px; color: #555; white-space: nowrap">{{ contract['start_at'] }} - {{ contract['end_at'] }}</div>
+                        <div v-if="contract['discount']" style="font-size: 12px; margin-bottom: 5px; color: #555; white-space: nowrap">{{ contract['discount'] }}%
+                            {{ contract['discount_name'] }}
+                        </div>
+                        <div style="font-size: 12px; color: #555; white-space: nowrap">{{ contract['monthly_price'] }} руб./мес.</div>
+                    </div>
                 </ListTableCell>
                 <ListTableCell>
                     <div>
@@ -118,6 +135,7 @@ export default {
 
     data: () => ({
         list: list('/api/subscriptions'),
+        is_exporting: false,
     }),
 
     created() {
@@ -131,6 +149,43 @@ export default {
         },
         reload() {
             this.list.reload();
+        },
+        excelExport() {
+            this.$dialog.show('Экспортировать ' + this.list.pagination.total + ' записей в Excel?',
+                null,
+                'blue',
+                [
+                    this.$dialog.button('yes', 'Экспортировать', 'blue'),
+                    this.$dialog.button('no', 'Отмена', 'default'),
+                ]
+            )
+                .then(result => {
+                    if (result === 'yes') {
+                        this.is_exporting = true;
+                        let options = {
+                            filters: this.list.filters,
+                            search: this.list.search,
+                        }
+                        axios.post('/api/subscriptions/export', options)
+                            .then(response => {
+                                let file = atob(response.data.data['file']);
+                                let byteNumbers = new Array(file.length);
+                                for (let i = 0; i < file.length; i++) {
+                                    byteNumbers[i] = file.charCodeAt(i);
+                                }
+                                let byteArray = new Uint8Array(byteNumbers);
+                                let blob = new Blob([byteArray], {type: response.data.data['type']});
+
+                                saveAs(blob, response.data.data['file_name'], {autoBom: true});
+                            })
+                            .catch(error => {
+                                this.$toast.error(error.response.data['message']);
+                            })
+                            .finally(() => {
+                                this.is_exporting = false;
+                            });
+                    }
+                });
         },
     },
 }

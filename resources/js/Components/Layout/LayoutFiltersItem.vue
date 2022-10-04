@@ -29,6 +29,7 @@ $base_text_gray_color: #3f3f3f !default;
 .layout-filters-item {
     display: flex;
     flex-direction: column;
+    max-width: 250px;
 
     &__title {
         flex-grow: 1;
