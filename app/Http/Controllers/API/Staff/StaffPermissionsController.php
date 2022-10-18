@@ -107,12 +107,14 @@ class StaffPermissionsController extends ApiController
 
         $data = $request->input('data');
 
-        $raw = Arr::undot($data);
-        $keys = array_key_exists('permission', $raw) ? Arr::dot($raw['permission']) : [];
-        $keys = array_filter($keys, static function ($value) {
+        $keys = array_filter($data, static function ($value) {
             return $value;
         });
-        $keys = array_keys($keys);
+
+        $keys = array_map(function ($permission) {
+            return substr($permission, strlen('permission.'));
+        }, array_keys($keys));
+
         $ids = Permission::query()->whereIn('key', $keys)->pluck('id')->toArray();
 
         $set = $user->position->permissions()->pluck('id')->toArray();
