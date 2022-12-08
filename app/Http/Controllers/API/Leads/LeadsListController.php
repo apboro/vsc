@@ -144,7 +144,7 @@ class LeadsListController extends ApiController
                 'region' => $lead->region ? $lead->region->name : "—",
                 'training_base' => $trainingBase ? $trainingBase->info->address : "—",
                 'service' => $service,
-                'lead_converted_to_client' => $lead->converted ? $lead->converted->format('d.m.Y') : "—",
+                'lead_converted_to_client' => $lead->converted_at ? $lead->converted_at->format('d.m.Y') : "—",
             ];
         });
 
