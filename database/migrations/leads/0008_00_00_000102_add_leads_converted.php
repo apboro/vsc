@@ -21,10 +21,11 @@ class AddLeadsConverted extends Migration
         $leads = Lead::get();
         foreach ($leads as $lead)
         {
-            if ($lead->status_id === LeadStatus::client_created)
-            {
-                $lead->converted_at = $lead->subscription->client->created_at;
-                $lead->save();
+            if ($lead->subscription) {
+                if ($lead->subscription->client) {
+                    $lead->converted_at = $lead->subscription->client->created_at;
+                    $lead->save();
+                }
             }
         }
     }
