@@ -52,7 +52,7 @@ use InvalidArgumentException;
  * @property Region|null $region
  * @property Service|null $service
  * @property Subscription|null $subscription
- * @property Carbon $converted
+ * @property Carbon $converted_at
  */
 class Lead extends Model implements Statusable
 {
@@ -73,7 +73,7 @@ class Lead extends Model implements Statusable
         'ward_uch' => 'bool',
         'ward_spe' => 'bool',
         'need_help' => 'bool',
-        'converted' => 'datetime',
+        'converted_at' => 'datetime',
     ];
 
     /**
