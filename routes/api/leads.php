@@ -10,3 +10,4 @@ Route::post('/leads', [LeadsListController::class, 'list'])->middleware('permit:
 Route::post('/leads/view', [LeadsViewController::class, 'view'])->middleware('permit:leads.view,leads.register');
 Route::post('/leads/register', [LeadsRegisterController::class, 'register'])->middleware('permit:leads.register');
 Route::post('/leads/comment', [LeadsCommentController::class, 'comment'])->middleware('permit:leads.register');
+Route::post('/leads/export', [LeadsListController::class, 'export'])->middleware('permit:leads.view');

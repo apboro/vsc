@@ -9,9 +9,13 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Leads\Lead;
 use App\Scopes\ForOrganization;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class LeadsListController extends ApiController
 {
@@ -44,54 +48,9 @@ class LeadsListController extends ApiController
 
         $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
 
-        $query = Lead::query()
-            ->tap(new ForOrganization($current->organizationId()))
-            ->with([
-                'status',
-                'service',
-                'subscription.service',
-                'service.trainingBase',
-                'subscription.service.trainingBase',
-                'service.sportKind',
-                'subscription.service.sportKind',
-                'subscription.client.user.profile',
-            ])
-            ->orderBy('created_at', 'desc');
+        $filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey);
 
-        // apply filters
-        if (!empty($filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey))) {
-            if (!empty($filters['status_id'])) {
-                $query->where('status_id', $filters['status_id']);
-            }
-            if (!empty($filters['training_base_id'])) {
-                $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('training_base_id', $filters['training_base_id']);
-                });
-            }
-            if (!empty($filters['sport_kind_id'])) {
-                $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('sport_kind_id', $filters['sport_kind_id']);
-                });
-            }
-            if (!empty($filters['region_id'])) {
-                $query->where('region_id', $filters['region_id']);
-            }
-        }
-
-        // apply search
-        if (!empty($search = $request->search())) {
-            foreach ($search as $term) {
-                $query->where(function (Builder $query) use ($term) {
-                        $query
-                            ->where('lastname', 'LIKE', "%$term%")
-                            ->orWhere('firstname', 'LIKE', "%$term%")
-                            ->orWhere('patronymic', 'LIKE', "%$term%")
-                            ->where('ward_lastname', 'LIKE', "%$term%")
-                            ->orWhere('ward_firstname', 'LIKE', "%$term%")
-                            ->orWhere('ward_patronymic', 'LIKE', "%$term%");
-                });
-            }
-        }
+        $query = $this->getListQuery($request, $filters, $current);
 
         // current page automatically resolved from request via `page` parameter
         /** @var LengthAwarePaginator $leads */
@@ -142,4 +101,138 @@ class LeadsListController extends ApiController
             []
         )->withCookie(cookie($this->rememberKey, $request->getToRemember()));
     }
+
+    public function export(ApiListRequest $request): JsonResponse
+    {
+        $current = Current::get($request);
+
+        $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
+
+        $filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey);
+
+        $query = $this->getListQuery($request, $filters, $current);
+
+        $leads = $query->get();
+        $now = Carbon::now();
+
+        $titles = [
+            'ID лида',
+            'ФИО клиента',
+            'Дата создания ЛИДА',
+            'Статус',
+            'Район',
+            'Адрес (объекта)',
+            'Услуга',
+            'Дата конвертации лида'
+        ];
+
+        /** @var Collection $leads */
+        $leads->transform(function (Lead $lead) {
+            if ($lead->subscription) {
+                $service = $lead->subscription->service->title;
+                $trainingBase = $lead->subscription->service->trainingBase;
+            } else {
+                $service = $lead->service->title ?? "—";
+                $trainingBase = $lead->service ? $lead->service->trainingBase : null;
+            }
+
+            return [
+                'id' => $lead->id,
+                'client_FIO' => "$lead->lastname $lead->firstname $lead->patronymic",
+                'created_date' => $lead->created_at->format('d.m.Y'),
+                'status' => $lead->status->name,
+                'region' => $lead->region ? $lead->region->name : "—",
+                'training_base' => $trainingBase ? $trainingBase->info->address : "—",
+                'service' => $service,
+                'lead_converted_to_client' => $lead->converted ? $lead->converted->format('d.m.Y') : "—",
+            ];
+        });
+
+        $spreadsheet = new Spreadsheet();
+
+        $spreadsheet->setActiveSheetIndex(0)->setTitle('Лиды')->setShowRowColHeaders(true);
+
+        $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
+        $spreadsheet->getActiveSheet()->fromArray($leads->toArray(), '—', 'A2');
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as $col) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        ob_start();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        $export = ob_get_clean();
+
+        return APIResponse::response([
+            'file' => base64_encode($export),
+            'file_name' => 'Лиды ' . $now->format('Y-m-d H:i'),
+            'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+    }
+
+    /**
+     * Make subscriptions query with filters and search.
+     *
+     * @param APIListRequest $request
+     * @param int|null $clientId
+     * @param array $filters
+     * @param Current $current
+     *
+     * @return  Builder
+     */
+    protected function getListQuery(ApiListRequest $request, array $filters, Current $current): Builder
+    {
+        $query = Lead::query()
+            ->tap(new ForOrganization($current->organizationId()))
+            ->with([
+                'status',
+                'service',
+                'subscription.service',
+                'service.trainingBase',
+                'subscription.service.trainingBase',
+                'service.sportKind',
+                'subscription.service.sportKind',
+                'subscription.client.user.profile',
+            ])
+            ->orderBy('created_at', 'desc');
+
+        // apply filters
+        if (!empty($filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey))) {
+            if (!empty($filters['status_id'])) {
+                $query->where('status_id', $filters['status_id']);
+            }
+            if (!empty($filters['training_base_id'])) {
+                $query->whereHas('service', function (Builder $query) use ($filters) {
+                    $query->where('training_base_id', $filters['training_base_id']);
+                });
+            }
+            if (!empty($filters['sport_kind_id'])) {
+                $query->whereHas('service', function (Builder $query) use ($filters) {
+                    $query->where('sport_kind_id', $filters['sport_kind_id']);
+                });
+            }
+            if (!empty($filters['region_id'])) {
+                $query->where('region_id', $filters['region_id']);
+            }
+        }
+
+        // apply search
+        if (!empty($search = $request->search())) {
+            foreach ($search as $term) {
+                $query->where(function (Builder $query) use ($term) {
+                    $query
+                        ->where('lastname', 'LIKE', "%$term%")
+                        ->orWhere('firstname', 'LIKE', "%$term%")
+                        ->orWhere('patronymic', 'LIKE', "%$term%")
+                        ->where('ward_lastname', 'LIKE', "%$term%")
+                        ->orWhere('ward_firstname', 'LIKE', "%$term%")
+                        ->orWhere('ward_patronymic', 'LIKE', "%$term%");
+                });
+            }
+        }
+
+        return  $query;
+    }
+
+
 }

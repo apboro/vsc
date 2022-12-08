@@ -127,6 +127,7 @@ class LeadsRegisterController extends ApiEditController
 
                 // attach the client to the lead
                 $lead->subscription_id = $subscription->id;
+                $lead->converted = now();
                 $lead->setStatus(LeadStatus::client_created, false);
                 $lead->save();
 

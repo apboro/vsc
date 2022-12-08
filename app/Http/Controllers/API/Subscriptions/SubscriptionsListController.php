@@ -128,10 +128,8 @@ class SubscriptionsListController extends ApiController
             'Вид спорта',
             'Объект',
             'Адрес',
-        ];
-
-        $widths = [
-
+            'Дата создания ЛИДА',
+            'Район',
         ];
 
         /** @var Collection $subscriptions */
@@ -141,7 +139,7 @@ class SubscriptionsListController extends ApiController
             $subscription->contracts->map(function (SubscriptionContract $contract) use (&$contracts) {
                 $contracts .= implode('; ', array_filter([
                     'Договор №' . $contract->number,
-                    ($contract->start_at ? $contract->start_at->format('d.m.Y') : null) . '-' . ($contract->end_at ? $contract->end_at->format('d.m.Y') : null),
+                    ($contract->start_at ? $contract->start_at->format('d.m.Y') : null) . '-' . ($contract->end_at ? $contract->end_at->format('d.m.Y') : '—'),
                     $contract->discount ? $contract->discount->discount . '% ' . $contract->discount->name : null,
                     $contract->contractData->monthly_price . 'руб./мес.',
                 ]));
@@ -158,6 +156,8 @@ class SubscriptionsListController extends ApiController
                 'sport_kind' => $subscription->service->sportKind->name,
                 'training_base' => $subscription->service->trainingBase->short_title ?? $subscription->service->trainingBase->title,
                 'training_base_address' => $subscription->service->trainingBase->info->address,
+                'date_lead_created_at' => $subscription->lead && $subscription->lead->created_at ? $subscription->lead->created_at->format('d.m.Y, H:i') : null,
+                'district' => $subscription->service->trainingBase->region->name ?? '—',
             ];
         });
 
@@ -167,7 +167,7 @@ class SubscriptionsListController extends ApiController
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
         $spreadsheet->getActiveSheet()->fromArray($subscriptions->toArray(), '—', 'A2');
-        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] as $col) {
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
 

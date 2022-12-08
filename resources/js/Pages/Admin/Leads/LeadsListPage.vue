@@ -57,6 +57,11 @@
                 <LayoutFiltersItem :title="'Поиск по ФИО'">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
+                <div style="display: flex; align-items: flex-end; margin-left: 10px;">
+                    <GuiActionsMenu :title="null">
+                        <span class="link" @click="excelExport">Экспорт в Excel</span>
+                    </GuiActionsMenu>
+                </div>
             </template>
         </LayoutFilters>
 
@@ -136,6 +141,44 @@ export default {
         highlight(text) {
             return this.$highlight(text, this.list.search);
         },
+        excelExport() {
+            this.$dialog.show('Экспортировать ' + this.list.pagination.total + ' записей в Excel?',
+                null,
+                'blue',
+                [
+                    this.$dialog.button('yes', 'Экспортировать', 'blue'),
+                    this.$dialog.button('no', 'Отмена', 'default'),
+                ]
+            )
+                .then(result => {
+                    if (result === 'yes') {
+                        this.is_exporting = true;
+                        let options = {
+                            filters: this.list.filters,
+                            search: this.list.search,
+                        }
+                        axios.post('/api/leads/export', options)
+                            .then(response => {
+                                let file = atob(response.data.data['file']);
+                                let byteNumbers = new Array(file.length);
+                                for (let i = 0; i < file.length; i++) {
+                                    byteNumbers[i] = file.charCodeAt(i);
+                                }
+                                let byteArray = new Uint8Array(byteNumbers);
+                                let blob = new Blob([byteArray], {type: response.data.data['type']});
+
+                                saveAs(blob, response.data.data['file_name'], {autoBom: true});
+                            })
+                            .catch(error => {
+                                this.$toast.error(error.response.data['message']);
+                            })
+                            .finally(() => {
+                                this.is_exporting = false;
+                            });
+                    }
+                });
+        },
+
     },
 }
 </script>

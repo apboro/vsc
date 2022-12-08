@@ -6,6 +6,7 @@ use App\Interfaces\Statusable;
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\SubscriptionStatus;
+use App\Models\Leads\Lead;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Services\Service;
@@ -30,6 +31,7 @@ use InvalidArgumentException;
  * @property ClientWard $clientWard
  * @property Service $service
  * @property Collection $contracts
+ * @property Lead|null $lead
  */
 class Subscription extends Model implements Statusable
 {
@@ -119,5 +121,15 @@ class Subscription extends Model implements Statusable
     public function contracts(): HasMany
     {
         return $this->hasMany(SubscriptionContract::class, 'subscription_id', 'id');
+    }
+
+    /**
+     * Subscription lead.
+     *
+     * @return  HasOne
+     */
+    public function lead(): HasOne
+    {
+        return $this->hasOne(Lead::class, 'subscription_id', 'id');
     }
 }
