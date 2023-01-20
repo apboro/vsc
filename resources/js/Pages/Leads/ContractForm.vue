@@ -44,8 +44,8 @@
             <div style="margin-top: 20px"></div>
             <GuiContainer>
                 <FormDate :form="form" :name="'birth_date'"/>
-                <FormNumber :form="form" :name="'passport_serial'"/>
-                <FormNumber :form="form" :name="'passport_number'"/>
+                <FormString :form="form" :name="'passport_serial'"/>
+                <FormString :form="form" :name="'passport_number'"/>
                 <FormString :form="form" :name="'passport_place'"/>
                 <FormDate :form="form" :name="'passport_date'"/>
                 <FormString :form="form" :name="'passport_code'"/>
