@@ -77,8 +77,10 @@ $base_white_color: #ffffff !default;
         align-items: center;
 
         &-link {
-            height: calc(#{$page_header_height} - 10px);
-            width: calc(#{$page_header_height} - 10px);
+            //height: calc(#{$page_header_height} - 10px);
+            //width: calc(#{$page_header_height} - 10px);
+            width: 30px;
+            height: 30px;
             box-sizing: border-box;
             padding: 5px;
             display: block;

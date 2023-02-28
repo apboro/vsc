@@ -7,8 +7,9 @@
             <div class="login__logo-text">
                 <!--
                 <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>
-                -->
                 <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Всеволожского района»</div>
+                -->
+                <div class="login__logo-text-description">CRM Управление школьным спортом</div>
             </div>
         </div>
         <div class="login__divider"></div>
@@ -133,8 +134,10 @@ body {
         display: flex;
 
         &-img {
-            width: 100px;
-            height: 100px;
+            width: 20px;
+            height: 20px;
+            //width: 100px;
+            //height: 100px;
             background-color: #3c8edd;
             flex-shrink: 0;
             flex-grow: 0;

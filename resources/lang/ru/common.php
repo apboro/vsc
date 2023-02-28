@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'root organization' => 'ОО «ЦСШВР»',
-    'root account caption' => 'ОО «ЦСШВР»',
+    'root organization' => '',
+    'root account caption' => '',
 ];
