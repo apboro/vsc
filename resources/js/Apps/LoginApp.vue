@@ -1,9 +1,11 @@
 <template>
     <div class="login">
         <div class="login__logo">
+            <!--
             <div class="login__logo-img">
                 <Logo/>
             </div>
+            -->
             <div class="login__logo-text">
                 <!--
                 <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>

@@ -1,12 +1,14 @@
 <template>
     <header class="application__header">
         <div class="application__header-wrapper">
+            <!--
             <div class="application__header-title">
                 <router-link :to="{name:'home'}" :class="'application__header-title-link'">
                     <IconLogo :class="'application__header-title-link-icon'"/>
                 </router-link>
                 <span class="application__header-title-text">{{ user.organization }}</span>
             </div>
+            -->
             <div class="application__header-menu">
                 <slot name="menu"/>
             </div>
