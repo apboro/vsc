@@ -11,3 +11,4 @@ Route::post('/services/view', [ServicesViewController::class, 'view'])->middlewa
 Route::post('/services/get', [ServicesEditController::class, 'get'])->middleware('permit:services.edit');
 Route::post('/services/update', [ServicesEditController::class, 'update'])->middleware('permit:services.edit');
 Route::post('/services/delete', [ServicesDeleteController::class, 'delete'])->middleware('permit:services.delete');
+Route::get('/services/type-programs', [ServicesViewController::class, 'typePrograms'])->middleware('permit:services.view');

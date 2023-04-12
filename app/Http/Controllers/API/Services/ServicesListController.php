@@ -59,6 +59,16 @@ class ServicesListController extends ApiController
             if (!empty($filters['sport_kind_id'])) {
                 $query->where('sport_kind_id', $filters['sport_kind_id']);
             }
+            if (!empty($filters['service_type_id'])) {
+                $query->whereHas('typeProgram', function (Builder $query) use ($filters) {
+                    $query->where('service_type_id', $filters['service_type_id']);
+                });
+            }
+            if (!empty($filters['service_category_id'])) {
+                $query->whereHas('typeProgram', function (Builder $query) use ($filters) {
+                    $query->where('service_category_id', $filters['service_category_id']);
+                });
+            }
         }
 
         // apply search

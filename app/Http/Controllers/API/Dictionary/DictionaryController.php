@@ -7,14 +7,18 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\ClientStatus;
+use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\OrganizationStatus;
+use App\Models\Dictionaries\Pattern;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Dictionaries\Region;
+use App\Models\Dictionaries\ServiceCategories;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
@@ -22,6 +26,7 @@ use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
 use App\Models\Services\Service;
 use App\Models\TrainingBase\TrainingBase;
+use App\Models\TypesPrograms\TypeProgram;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -32,7 +37,9 @@ class DictionaryController extends ApiController
         'position_statuses' => ['class' => PositionStatus::class, 'allow' => null],
         'position_titles' => ['class' => PositionTitle::class, 'allow' => null],
         'user_statuses' => ['class' => UserStatus::class, 'allow' => null],
+        'service_categories' => ['class' => ServiceCategories::class, 'allow' => null],
         'service_statuses' => ['class' => ServiceStatus::class, 'allow' => null],
+        'service_types' => ['class' => ServiceTypes::class, 'allow' => null],
         'lead_statuses' => ['class' => LeadStatus::class, 'allow' => null],
         'sport_kinds' => ['class' => SportKind::class, 'allow' => null],
         'training_base_statuses' => ['class' => TrainingBaseStatus::class, 'allow' => null],
@@ -45,6 +52,9 @@ class DictionaryController extends ApiController
         'regions' => ['class' => Region::class, 'allow' => null],
         'organization_requisites' => ['class' => OrganizationRequisites::class, 'allow' => null],
         'discounts' => ['class' => Discount::class, 'allow' => null],
+        'types_programs' => ['class' => TypeProgram::class, 'allow' => null],
+        'contracts' => ['class' => Contracts::class, 'allow' => null],
+        'patterns' => ['class' => Pattern::class, 'allow' => null],
     ];
 
     /**

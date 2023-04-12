@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API\Services;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Services\Service;
+use App\Models\TypesPrograms\TypeProgram;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,14 +17,16 @@ class ServicesEditController extends ApiEditController
     protected array $rules = [
         'title' => 'required',
         'status_id' => 'required',
+        'type_program_id' => 'required',
         'training_base_id' => 'required',
+        'contract_id' => 'required',
         'sport_kind_id' => 'required',
-        'monthly_price' => 'required',
+        'monthly_price' => 'nullable',
         'training_price' => 'nullable',
-        'trainings_per_week' => 'required',
-        'trainings_per_month' => 'required',
-        'training_return_price' => 'required',
-        'training_duration' => 'required',
+        'trainings_per_week' => 'nullable',
+        'trainings_per_month' => 'nullable',
+        'training_return_price' => 'nullable',
+        'training_duration' => 'nullable',
         'group_limit' => 'required',
         'start_at' => 'required',
         'end_at' => 'required',
@@ -41,6 +45,14 @@ class ServicesEditController extends ApiEditController
         'schedule_time_fri' => 'nullable',
         'schedule_time_sat' => 'nullable',
         'schedule_time_sun' => 'nullable',
+        'description' => 'nullable',
+        'price' => 'nullable',
+        'date_deposit_funds' => 'nullable',
+        'advance_payment' => 'nullable',
+        'date_advance_payment' => 'nullable',
+        'refund_amount' => 'nullable',
+        'daily_price' => 'nullable',
+        'price_deduction_advance' => 'nullable',
     ];
 
     protected array $titles = [
@@ -48,6 +60,9 @@ class ServicesEditController extends ApiEditController
         'status_id' => 'Статус услуги',
         'training_base_id' => 'Объект',
         'sport_kind_id' => 'Вид спорта',
+        'type_program_id' => 'Тип программы',
+        'price' => 'Стоимость услуги руб.',
+        'description' => 'Описание услуги',
         'monthly_price' => 'Стоимость в месяц, руб',
         'training_price' => 'Себестоимость за 1 занятие, руб',
         'trainings_per_week' => 'Количество занятий в неделю',
@@ -57,7 +72,14 @@ class ServicesEditController extends ApiEditController
         'group_limit' => 'Максимальное количество мест в группе',
         'start_at' => 'Дата начала услуги',
         'end_at' => 'Дата окончания услуги',
+        'date_deposit_funds' => 'Дата внесения средств',
+        'advance_payment' => 'Авансовый платеж',
+        'date_advance_payment' => 'Дата внесения аванса',
+        'refund_amount' => 'Сумма возврата при расторжении договора по инициативе клиента, в день',
+        'daily_price' => 'Стоимость за 1 день, руб',
+        'price_deduction_advance' => 'Стоимость услуги за вычетом аванса, руб',
         'requisites_id' => 'Реквизиты для договора',
+        'contract_id' => 'Шаблон договора',
         'schedule_day_mon' => 'Занятия в пн.',
         'schedule_day_tue' => 'Занятия в вт.',
         'schedule_day_wed' => 'Занятия в ср.',
@@ -98,6 +120,8 @@ class ServicesEditController extends ApiEditController
         return APIResponse::form(
             [
                 'status_id' => $service->status_id,
+                'type_program_id' => $service->type_program_id,
+                'contract_id' => $service->contract_id,
                 'title' => $service->title,
                 'training_base_id' => $service->training_base_id,
                 'sport_kind_id' => $service->sport_kind_id,
@@ -111,6 +135,14 @@ class ServicesEditController extends ApiEditController
                 'start_at' => $service->start_at ? $service->start_at->format('Y-m-d') : null,
                 'end_at' => $service->end_at ? $service->end_at->format('Y-m-d') : null,
                 'requisites_id' => $service->requisites_id,
+                'description' => $service->description,
+                'price' => $service->price,
+                'date_deposit_funds' => $service->date_deposit_funds,
+                'advance_payment' => $service->advance_payment,
+                'date_advance_payment' => $service->date_advance_payment,
+                'refund_amount' => $service->refund_amount,
+                'daily_price' => $service->daily_price,
+                'price_deduction_advance' => $service->price_deduction_advance,
 
                 'schedule_day_mon' => $service->schedule->mon,
                 'schedule_day_tue' => $service->schedule->tue,
@@ -155,6 +187,56 @@ class ServicesEditController extends ApiEditController
         /** @var Service|null $service */
         $service = $this->firstOrNew(Service::class, $request, [], [], ['organization_id' => $current->organizationId()]);
 
+        $regulars = TypeProgram::query()->select('id')
+            ->where('service_type_id', ServiceTypes::regular)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+        $singleType = TypeProgram::query()->select('id')
+            ->where('service_type_id', ServiceTypes::one_time)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
+        $rules = $this->rules;
+        if (in_array($data['type_program_id'], $regulars)) {
+            $rules['monthly_price'] = 'required';
+            $rules['training_price'] = 'required';
+            $rules['training_return_price'] = 'required';
+            $rules['training_duration'] = 'required';
+            $rules['trainings_per_month'] = 'required';
+            $rules['trainings_per_week'] = 'required';
+
+            $rules['price'] = 'nullable';
+            $rules['date_deposit_funds'] = 'nullable';
+            $rules['advance_payment'] = 'nullable';
+            $rules['date_advance_payment'] = 'nullable';
+            $rules['refund_amount'] = 'nullable';
+            $rules['daily_price'] = 'nullable';
+            $rules['price_deduction_advance'] = 'nullable';
+        }
+
+        if (in_array($data['type_program_id'], $singleType)) {
+            $rules['price'] = 'required';
+            $rules['date_deposit_funds'] = 'required';
+            $rules['advance_payment'] = 'required';
+            $rules['date_advance_payment'] = 'required';
+            $rules['refund_amount'] = 'required';
+            $rules['daily_price'] = 'required';
+            $rules['price_deduction_advance'] = 'required';
+
+            $rules['monthly_price'] = 'nullable';
+            $rules['training_price'] = 'nullable';
+            $rules['training_return_price'] = 'nullable';
+            $rules['training_duration'] = 'nullable';
+            $rules['trainings_per_month'] = 'nullable';
+            $rules['trainings_per_week'] = 'nullable';
+        }
+
+        if ($errors = $this->validate($data, $rules, $this->titles)) {
+            return APIResponse::validationError($errors);
+        }
+
         if ($service === null) {
             return APIResponse::notFound('Услуга не найдена');
         }
@@ -162,6 +244,8 @@ class ServicesEditController extends ApiEditController
         $service->title = $data['title'];
         $service->setStatus($data['status_id'], false);
         $service->training_base_id = $data['training_base_id'];
+        $service->type_program_id = $data['type_program_id'];
+        $service->contract_id = $data['contract_id'];
         $service->sport_kind_id = $data['sport_kind_id'];
         $service->monthly_price = $data['monthly_price'];
         $service->training_price = $data['training_price'];
@@ -173,6 +257,14 @@ class ServicesEditController extends ApiEditController
         $service->start_at = Carbon::parse($data['start_at']);
         $service->end_at = Carbon::parse($data['end_at']);
         $service->requisites_id = $data['requisites_id'];
+        $service->description = $data['description'];
+        $service->date_deposit_funds = $data['date_deposit_funds'];
+        $service->advance_payment = $data['advance_payment'];
+        $service->date_advance_payment = $data['date_advance_payment'];
+        $service->refund_amount = $data['refund_amount'];
+        $service->daily_price = $data['daily_price'];
+        $service->price_deduction_advance = $data['price_deduction_advance'];
+        $service->price = $data['price'];
         if (!$service->exists) {
             $service->organization_id = $current->organizationId();
         }

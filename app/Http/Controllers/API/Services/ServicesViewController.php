@@ -6,7 +6,9 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Services\Service;
+use App\Models\TypesPrograms\TypeProgram;
 use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -74,5 +76,26 @@ class ServicesViewController extends ApiController
             'end_at' => $service->end_at->format('d.m.Y'),
             'requisites' => $service->requisites ? $service->requisites->name : null,
         ];
+    }
+
+    public function typePrograms(): JsonResponse
+    {
+        $regulars = TypeProgram::query()->select('id')
+            ->where('service_type_id', ServiceTypes::regular)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+        $singleType = TypeProgram::query()->select('id')
+            ->where('service_type_id', ServiceTypes::one_time)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
+        $values = [
+            'regulars' => $regulars,
+            'singleType' => $singleType,
+        ];
+
+        return APIResponse::response($values);
     }
 }

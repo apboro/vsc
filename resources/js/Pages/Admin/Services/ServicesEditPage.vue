@@ -7,9 +7,14 @@
         <GuiContainer mt-30>
             <FormString :form="form" :name="'title'"/>
             <FormDictionary :form="form" :name="'status_id'" :dictionary="'service_statuses'"/>
+            <FormDictionary :form="form" :name="'type_program_id'" :dictionary="'types_programs'"/>
             <FormDictionary :form="form" :name="'training_base_id'" :dictionary="'training_bases'" :search="true"/>
-            <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
-            <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
+            <FormDate :form="form" :name="'start_at'"/>
+            <FormDate :form="form" :name="'end_at'"/>
+        </GuiContainer>
+
+        <GuiContainer mt-30 v-if="regularTypeProgram.includes(form.values['type_program_id'])">
+            <FormNumber :form="form" :name="'training_duration'"/>
             <FormNumber :form="form" :name="'trainings_per_month'"/>
             <FormNumber :form="form" :name="'trainings_per_week'"/>
 
@@ -33,14 +38,34 @@
 
             <FormCheckBox :form="form" :name="'schedule_day_sun'" :without-title="true"/>
             <FormTime :form="form" :name="'schedule_time_sun'"/>
+        </GuiContainer>
 
+        <GuiContainer mt-30>
+            <FormNumber :form="form" :name="'group_limit'"/>
+            <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
+        </GuiContainer>
+
+        <GuiContainer mt-30 v-if="regularTypeProgram.includes(form.values['type_program_id'])">
             <FormNumber :form="form" :name="'monthly_price'"/>
             <FormNumber :form="form" :name="'training_price'"/>
             <FormNumber :form="form" :name="'training_return_price'"/>
-            <FormNumber :form="form" :name="'training_duration'"/>
-            <FormNumber :form="form" :name="'group_limit'"/>
-            <FormDate :form="form" :name="'start_at'"/>
-            <FormDate :form="form" :name="'end_at'"/>
+        </GuiContainer>
+
+        <GuiContainer mt-30 v-if="singleTypeProgram.includes(form.values['type_program_id'])">
+            <FormNumber :form="form" :name="'price'"/>
+            <FormDate :form="form" :name="'date_deposit_funds'"/>
+            <FormNumber :form="form" :name="'advance_payment'"/>
+            <FormDate :form="form" :name="'date_advance_payment'"/>
+            <FormNumber :form="form" :name="'refund_amount'"/>
+            <FormNumber :form="form" :name="'daily_price'"/>
+            <FormNumber :form="form" :name="'price_deduction_advance'"/>
+        </GuiContainer>
+
+
+        <GuiContainer mt-30>
+            <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
+            <FormDictionary :form="form" :name="'contract_id'" :dictionary="'contracts'"/>
+            <FormText :form="form" :name="'description'"/>
         </GuiContainer>
 
         <GuiContainer mt-30>
@@ -64,9 +89,11 @@ import FormDate from "@/Components/Form/FormDate";
 import FormDateTime from "../../../Components/Form/FormDateTime";
 import FormTime from "../../../Components/Form/FormTime";
 import FormCheckBox from "../../../Components/Form/FormCheckBox";
+import FieldText from "@/Components/Fields/FieldText.vue";
 
 export default {
     components: {
+        FieldText,
         FormCheckBox,
         FormTime,
         FormDateTime,
@@ -83,6 +110,8 @@ export default {
 
     data: () => ({
         form: form('/api/services/get', '/api/services/update'),
+        regularTypeProgram: [],
+        singleTypeProgram: [],
     }),
 
     computed: {
@@ -97,6 +126,7 @@ export default {
     created() {
         this.form.toaster = this.$toast;
         this.form.load({id: this.serviceId});
+        this.typePrograms();
     },
 
     methods: {
@@ -120,6 +150,13 @@ export default {
                 this.$router.push({name: 'services-view', params: {id: this.serviceId}});
             }
         },
+        typePrograms() {
+            axios.get('/api/services/type-programs')
+                .then(response => {
+                    this.regularTypeProgram = response.data.data['regulars'];
+                    this.singleTypeProgram = response.data.data['singleType'];
+                });
+        }
     }
 }
 </script>

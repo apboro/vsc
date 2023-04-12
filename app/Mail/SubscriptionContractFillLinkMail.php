@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Subscriptions\Subscription;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Crypt;
@@ -45,7 +45,12 @@ class SubscriptionContractFillLinkMail extends Mailable
 
         $id = $this->subscription->id;
 
-        $link = route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
+        if (!isset($this->subscription->service->typeProgram) || $this->subscription->service->typeProgram->service_type_id === ServiceTypes::regular) {
+            $link = route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
+        } else {
+            $link = route('leads_single.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
+        }
+
 
         $lines = [
             'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',

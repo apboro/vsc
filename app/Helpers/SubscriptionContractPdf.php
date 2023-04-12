@@ -23,14 +23,16 @@ class SubscriptionContractPdf
             'subscription',
             'discount',
             'subscription.service',
+            'subscription.service.contract.pattern',
             'subscription.service.sportKind',
             'subscription.service.trainingBase.info',
         ]);
 
+        $view = $contract->subscription->service->contract->pattern->pattern ?? 'pdf/subscription_contract';
         $monthlyPrice = $contract->contractData->monthly_price ?? $contract->subscription->service->monthly_price;
         $trainingReturnPrice = $contract->contractData->training_return_price ?? $contract->subscription->service->training_return_price;
 
-        $view = View::make('pdf/subscription_contract', [
+        $view = View::make($view, [
             'signed' => $signed,
 
             'contract_number' => $contract->number ?? '*не назначен*',
@@ -52,6 +54,7 @@ class SubscriptionContractPdf
 
             'ward_name' => $contract->contractData->ward_lastname . ' ' . $contract->contractData->ward_firstname . ' ' . $contract->contractData->ward_patronymic,
             'ward_birth_date' => $contract->contractData->ward_birth_date ? $contract->contractData->ward_birth_date->format('d.m.Y') : '____',
+            'service_name' => $contract->contractData->service_name,
 
             'ward_document' => $contract->contractData->ward_document ?? '____',
             'ward_document_date' => $contract->contractData->ward_document_date ? $contract->contractData->ward_document_date->format('d.m.Y') : '____',
@@ -59,6 +62,12 @@ class SubscriptionContractPdf
             'service_start_date' => self::formatDate($contract->contractData->service_start_date ?? $contract->subscription->service->start_at, 'года'),
             'service_end_date' => self::formatDate($contract->contractData->service_end_date ?? $contract->subscription->service->end_at, 'года'),
 
+            'price' => $contract->contractData->price,
+            'advance_payment' => $contract->contractData->advance_payment,
+            'refund_amount' => $contract->contractData->refund_amount,
+            'date_advance_payment' => self::formatDate($contract->contractData->date_advance_payment, 'года'),
+            'date_deposit_funds' => self::formatDate($contract->contractData->date_deposit_funds, 'года'),
+            'training_base_name' => $contract->contractData->training_base_name,
             'trainings_per_week' => $contract->contractData->trainings_per_week ?? $contract->subscription->service->trainings_per_week,
             'trainings_per_month' => $contract->contractData->trainings_per_month ?? $contract->subscription->service->trainings_per_month,
             'training_duration' => $contract->contractData->training_duration ?? $contract->subscription->service->training_duration,

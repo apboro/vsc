@@ -90,6 +90,13 @@
                 <template v-for="(type, name) in data.data['fields']">
                     <FormNumber v-if="type === 'number'" :form="form" :name="name"/>
                     <FormText v-else-if="type === 'text'" :form="form" :name="name"/>
+                    <FormDictionary
+                        :form="form"
+                        v-else-if="type === 'select'"
+                        :name="name"
+                        :dictionary="name === 'service_type_id' ? 'service_types' : 'service_categories'"
+                        :placeholder="'Выберите статус организации'"/>
+
                     <FormString v-else :form="form" :name="name"/>
                 </template>
             </GuiContainer>
@@ -115,9 +122,11 @@ import form from "@/Core/Form";
 import FormNumber from "@/Components/Form/FormNumber";
 import FormText from "@/Components/Form/FormText";
 import FormString from "@/Components/Form/FormString";
+import FormDictionary from "@/Components/Form/FormDictionary.vue";
 
 export default {
     components: {
+        FormDictionary,
         FormString,
         FormText,
         FormNumber,

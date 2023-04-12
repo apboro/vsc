@@ -40,6 +40,30 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Вид услуг'">
+                <DictionaryDropDown
+                    :dictionary="'service_types'"
+                    v-model="list.filters['service_type_id']"
+                    :original="list.filters_original['service_type_id']"
+                    :placeholder="'Выберите значение (по умолчанию)'"
+                    :has-null="true"
+                    :small="true"
+                    :search="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Категории услуг'">
+                <DictionaryDropDown
+                    :dictionary="'service_categories'"
+                    v-model="list.filters['service_category_id']"
+                    :original="list.filters_original['service_category_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    :search="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
             <template #search>
                 <LayoutFiltersItem :title="'Поиск по названию'">
                     <InputSearch v-model="list.search" @change="list.load()"/>

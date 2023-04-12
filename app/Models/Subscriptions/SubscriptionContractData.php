@@ -17,6 +17,7 @@ use Carbon\Carbon;
  * @property string|null $passport_serial
  * @property string|null $passport_number
  * @property string|null $passport_place
+ * @property string|null $service_name
  * @property Carbon|null $passport_date
  * @property string|null $passport_code
  * @property string|null $registration_address
@@ -44,10 +45,16 @@ use Carbon\Carbon;
  * @property string|null $bank_bik
  * @property string|null $bank_ks
  *
+ * @property Carbon|null $date_advance_payment
+ * @property Carbon|null $date_deposit_funds
  * @property Carbon|null $service_start_date
  * @property Carbon|null $service_end_date
  *
+ * @property string|null $training_base_name
  * @property int|null $trainings_per_week
+ * @property int|null $price
+ * @property int|null $advance_payment
+ * @property int|null $refund_amount
  * @property int|null $trainings_per_month
  * @property int|null $training_duration
  *
@@ -77,6 +84,8 @@ class SubscriptionContractData extends Model
         'ward_document_date' => 'date',
         'service_start_date' => 'date',
         'service_end_date' => 'date',
+        'date_advance_payment' => 'date',
+        'date_deposit_funds' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

@@ -4,6 +4,7 @@ namespace App\Models\Services;
 
 use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Interfaces\AsDictionary;
 use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\ServiceStatus;
@@ -12,10 +13,12 @@ use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
+use App\Models\TypesPrograms\TypeProgram;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
+use Nette\Utils\Type;
 
 /**
  * @property int $id
@@ -36,6 +39,16 @@ use InvalidArgumentException;
  * @property Carbon $end_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property int|null $type_program_id
+ * @property int|null $contract_id
+ * @property string $description
+ * @property Carbon $date_deposit_funds
+ * @property int|null $advance_payment
+ * @property Carbon $date_advance_payment
+ * @property int|null $refund_amount
+ * @property int|null $daily_price
+ * @property int|null $price_deduction_advance
+ * @property int|null $price
  *
  * @property ServiceStatus $status
  * @property Organization $organization
@@ -56,6 +69,8 @@ class Service extends Model implements Statusable, AsDictionary
     /** @var array Attribute casting */
     protected $casts = [
         'start_at' => 'datetime',
+        'date_advance_payment' => 'datetime',
+        'date_deposit_funds' => 'datetime',
         'end_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -206,5 +221,25 @@ class Service extends Model implements Statusable, AsDictionary
     public function sportKind(): HasOne
     {
         return $this->hasOne(SportKind::class, 'id', 'sport_kind_id');
+    }
+
+    /**
+     * Type program this service for.
+     *
+     * @return  HasOne
+     */
+    public function typeProgram(): HasOne
+    {
+        return $this->hasOne(TypeProgram::class, 'id', 'type_program_id');
+    }
+
+    /**
+     * Contract this service for.
+     *
+     * @return  HasOne
+     */
+    public function contract(): HasOne
+    {
+        return $this->hasOne(Contracts::class, 'id', 'contract_id');
     }
 }
