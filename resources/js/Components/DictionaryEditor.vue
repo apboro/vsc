@@ -88,15 +88,17 @@
         >
             <GuiContainer w-600px>
                 <template v-for="(type, name) in data.data['fields']">
-                    <FormNumber v-if="type === 'number'" :form="form" :name="name"/>
-                    <FormText v-else-if="type === 'text'" :form="form" :name="name"/>
-                    <FormDictionary
-                        :form="form"
-                        v-else-if="type.split('|')[0] === 'dictionary'"
-                        :name="name"
-                        :dictionary="type.split('|')[1]"
-                        :placeholder="type.split('|')[2]"/>
-                    <FormString v-else :form="form" :name="name"/>
+                    <template v-if="type !== null">
+                        <FormNumber v-if="type === 'number'" :form="form" :name="name"/>
+                        <FormText v-else-if="type === 'text'" :form="form" :name="name"/>
+                        <FormDictionary
+                            :form="form"
+                            v-else-if="type.split('|')[0] === 'dictionary'"
+                            :name="name"
+                            :dictionary="type.split('|')[1]"
+                            :placeholder="type.split('|')[2]"/>
+                        <FormString v-else :form="form" :name="name"/>
+                    </template>
                 </template>
             </GuiContainer>
         </FormPopUp>

@@ -7,10 +7,13 @@ use App\Models\Dictionaries\ServiceCategories;
 use App\Models\Dictionaries\ServiceTypes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property ServiceTypes $serviceType
+ * @property ServiceCategories $serviceCategory
+ */
 class ServiceProgram extends AbstractDictionary
 {
     protected $table = 'service_programs';
-
 
     /** @var array Default attributes. */
     protected $attributes = [
@@ -20,6 +23,10 @@ class ServiceProgram extends AbstractDictionary
 
     /** @var bool Is bound to organization */
     protected static bool $organizationBound = true;
+
+    protected $with = ['serviceType', 'serviceCategory'];
+
+    protected $appends = ['type', 'category'];
 
     /**
      * Organization this base attached to.
@@ -39,5 +46,15 @@ class ServiceProgram extends AbstractDictionary
     public function serviceCategory(): HasOne
     {
         return $this->hasOne(ServiceCategories::class, 'id', 'service_category_id');
+    }
+
+    public function getTypeAttribute(): string
+    {
+        return $this->serviceType->name;
+    }
+
+    public function getCategoryAttribute(): string
+    {
+        return $this->serviceCategory->name;
     }
 }

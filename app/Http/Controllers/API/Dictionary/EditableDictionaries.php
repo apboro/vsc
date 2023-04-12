@@ -111,14 +111,19 @@ trait EditableDictionaries
             ],
             'titles' => [
                 'name' => 'Название',
+                'type' => 'Вид услуги',
+                'category' => 'Категория услуги',
                 'service_type_id' => 'Вид услуги',
                 'service_category_id' => 'Категория услуги',
             ],
             'fields' => [
                 'name' => 'string',
+                'type' => null,
+                'category' => null,
                 'service_type_id' => 'dictionary|service_types|Выберите вид услуги',
                 'service_category_id' => 'dictionary|service_categories|Выберите категорию услуги',
             ],
+            'hide' => ['service_type_id', 'service_category_id'],
         ],
     ];
 }
