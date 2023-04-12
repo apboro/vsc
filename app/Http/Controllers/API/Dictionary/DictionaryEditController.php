@@ -103,7 +103,7 @@ class DictionaryEditController extends ApiEditController
         $class = $this->dictionaries[$name]['class'];
         $title = $this->dictionaries[$name]['name'];
 
-        $fields = $this->dictionaries[$name]['fields'];
+        $fields = array_filter($this->dictionaries[$name]['fields']);
         $titles = $this->dictionaries[$name]['titles'];
         $validation = $this->dictionaries[$name]['validation'];
 
