@@ -26,7 +26,7 @@ use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
 use App\Models\Services\Service;
 use App\Models\TrainingBase\TrainingBase;
-use App\Models\TypesPrograms\TypeProgram;
+use App\Models\Services\ServiceProgram;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class DictionaryController extends ApiController
         'regions' => ['class' => Region::class, 'allow' => null],
         'organization_requisites' => ['class' => OrganizationRequisites::class, 'allow' => null],
         'discounts' => ['class' => Discount::class, 'allow' => null],
-        'types_programs' => ['class' => TypeProgram::class, 'allow' => null],
+        'service_programs' => ['class' => ServiceProgram::class, 'allow' => null],
         'contracts' => ['class' => Contracts::class, 'allow' => null],
         'patterns' => ['class' => Pattern::class, 'allow' => null],
     ];

@@ -92,11 +92,10 @@
                     <FormText v-else-if="type === 'text'" :form="form" :name="name"/>
                     <FormDictionary
                         :form="form"
-                        v-else-if="type === 'select'"
+                        v-else-if="type.split('|')[0] === 'dictionary'"
                         :name="name"
-                        :dictionary="name === 'service_type_id' ? 'service_types' : 'service_categories'"
-                        :placeholder="'Выберите статус организации'"/>
-
+                        :dictionary="type.split('|')[1]"
+                        :placeholder="type.split('|')[2]"/>
                     <FormString v-else :form="form" :name="name"/>
                 </template>
             </GuiContainer>

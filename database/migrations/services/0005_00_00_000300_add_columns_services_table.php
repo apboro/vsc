@@ -29,7 +29,7 @@ class AddColumnsServicesTable extends Migration
                     $table->unsignedInteger('daily_price')->nullable();
                     $table->unsignedInteger('price_deduction_advance')->nullable();
 
-                    $table->foreign('type_program_id')->references('id')->on('types_programs')->restrictOnDelete()->cascadeOnUpdate();
+                    $table->foreign('type_program_id')->references('id')->on('service_programs')->restrictOnDelete()->cascadeOnUpdate();
                     $table->foreign('contract_id')->references('id')->on('dictionary_contracts')->restrictOnDelete()->cascadeOnUpdate();
                 });
             }

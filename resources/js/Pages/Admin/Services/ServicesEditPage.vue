@@ -7,7 +7,7 @@
         <GuiContainer mt-30>
             <FormString :form="form" :name="'title'"/>
             <FormDictionary :form="form" :name="'status_id'" :dictionary="'service_statuses'"/>
-            <FormDictionary :form="form" :name="'type_program_id'" :dictionary="'types_programs'"/>
+            <FormDictionary :form="form" :name="'type_program_id'" :dictionary="'service_programs'"/>
             <FormDictionary :form="form" :name="'training_base_id'" :dictionary="'training_bases'" :search="true"/>
             <FormDate :form="form" :name="'start_at'"/>
             <FormDate :form="form" :name="'end_at'"/>

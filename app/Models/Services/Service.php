@@ -13,12 +13,11 @@ use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
-use App\Models\TypesPrograms\TypeProgram;
+use App\Models\Services\ServiceProgram;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
-use Nette\Utils\Type;
 
 /**
  * @property int $id
@@ -230,7 +229,7 @@ class Service extends Model implements Statusable, AsDictionary
      */
     public function typeProgram(): HasOne
     {
-        return $this->hasOne(TypeProgram::class, 'id', 'type_program_id');
+        return $this->hasOne(ServiceProgram::class, 'id', 'type_program_id');
     }
 
     /**

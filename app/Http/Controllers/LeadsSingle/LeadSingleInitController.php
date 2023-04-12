@@ -12,7 +12,7 @@ use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Services\Service;
 use App\Models\Subscriptions\Subscription;
-use App\Models\TypesPrograms\TypeProgram;
+use App\Models\Services\ServiceProgram;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -78,7 +78,7 @@ class LeadSingleInitController extends ApiEditController
             return APIResponse::error('Ошибка сессии');
         }
 
-        $singleType = TypeProgram::select('id')
+        $singleType = ServiceProgram::select('id')
             ->where('service_type_id', ServiceTypes::one_time)
             ->get()
             ->pluck('id')

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesProgramsTable extends Migration
+class CreateServiceProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateTypesProgramsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('types_programs', static function (Blueprint $table) {
+        Schema::create('service_programs', static function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedTinyInteger('service_type_id')->default(ServiceTypes::regular);
@@ -40,6 +40,6 @@ class CreateTypesProgramsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types_programs');
+        Schema::dropIfExists('service_programs');
     }
 }

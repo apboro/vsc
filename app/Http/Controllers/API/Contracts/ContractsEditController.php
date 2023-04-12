@@ -36,9 +36,14 @@ class ContractsEditController extends ApiEditController
     {
         /** @var Contracts|null $contract */
         $current = Current::get($request);
-        $contract = Contracts::where('id', $request['id'])
-            ->tap(new ForOrganization($current->organizationId(), true))
-            ->first();
+        if (!isset($request['id']) || $request['id'] === 0) {
+            $contract = new Contracts();
+        } else {
+            $contract = Contracts::where('id', $request['id'])
+                ->tap(new ForOrganization($current->organizationId(), true))
+                ->first();
+        }
+
 
         if ($contract === null) {
             return APIResponse::notFound('Организация не найдена');
@@ -75,10 +80,14 @@ class ContractsEditController extends ApiEditController
         }
 
         /** @var Contracts|null $contract */
-        $current = Current::get($request);
-        $contract = Contracts::where('id', $request['id'])
-            ->tap(new ForOrganization($current->organizationId(), true))
-            ->first();
+        if (!isset($request['id']) || $request['id'] === 0) {
+            $contract = new Contracts();
+        } else {
+            $current = Current::get($request);
+            $contract = Contracts::where('id', $request['id'])
+                ->tap(new ForOrganization($current->organizationId(), true))
+                ->first();
+        }
 
         if ($contract === null) {
             return APIResponse::notFound('Организация не найдена');

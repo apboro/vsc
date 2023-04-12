@@ -7,7 +7,7 @@ use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\PositionTitle;
 use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\SportKind;
-use App\Models\TypesPrograms\TypeProgram;
+use App\Models\Services\ServiceProgram;
 
 trait EditableDictionaries
 {
@@ -100,9 +100,9 @@ trait EditableDictionaries
             ],
             'auto' => 'description',
         ],
-        'types_programs' => [
+        'service_programs' => [
             'name' => 'Типы программ',
-            'class' => TypeProgram::class,
+            'class' => ServiceProgram::class,
             'item_name' => 'тип программы',
             'validation' => [
                 'name' => 'required',
@@ -116,8 +116,8 @@ trait EditableDictionaries
             ],
             'fields' => [
                 'name' => 'string',
-                'service_type_id' => 'select',
-                'service_category_id' => 'select',
+                'service_type_id' => 'dictionary|service_types|Выберите вид услуги',
+                'service_category_id' => 'dictionary|service_categories|Выберите категорию услуги',
             ],
         ],
     ];

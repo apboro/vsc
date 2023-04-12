@@ -28,7 +28,10 @@ class SubscriptionContractPdf
             'subscription.service.trainingBase.info',
         ]);
 
-        $view = $contract->subscription->service->contract->pattern->pattern ?? 'pdf/subscription_contract';
+        $view = 'pdf/subscription_contract';
+        if (isset($contract->subscription->service->contract) && isset($contract->subscription->service->contract->pattern)) {
+            $view = $contract->subscription->service->contract->pattern->pattern;
+        }
         $monthlyPrice = $contract->contractData->monthly_price ?? $contract->subscription->service->monthly_price;
         $trainingReturnPrice = $contract->contractData->training_return_price ?? $contract->subscription->service->training_return_price;
 

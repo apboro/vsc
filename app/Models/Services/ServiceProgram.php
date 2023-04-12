@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\TypesPrograms;
+namespace App\Models\Services;
 
 use App\Models\Dictionaries\AbstractDictionary;
 use App\Models\Dictionaries\ServiceCategories;
 use App\Models\Dictionaries\ServiceTypes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class TypeProgram extends AbstractDictionary
+class ServiceProgram extends AbstractDictionary
 {
-    protected $table = 'types_programs';
+    protected $table = 'service_programs';
 
 
     /** @var array Default attributes. */

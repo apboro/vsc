@@ -40,13 +40,6 @@ class SubscriptionsContractAcceptController extends ApiEditController
         'ward_document' => 'required',
         'ward_document_date' => 'required',
         'discount_id' => 'nullable',
-        'service_name' => 'nullable',
-        'price' => 'nullable',
-        'advance_payment' => 'nullable',
-        'refund_amount' => 'nullable',
-        'date_advance_payment' => 'nullable',
-        'date_deposit_funds' => 'nullable',
-        'training_base_name' => 'nullable',
     ];
 
     protected array $titles = [
@@ -68,13 +61,6 @@ class SubscriptionsContractAcceptController extends ApiEditController
         'ward_document' => 'Свидетельство о рождении',
         'ward_document_date' => 'Дата выдачи',
         'discount_id' => 'Льгота',
-        'service_name' => 'Название услуги',
-        'price' => 'Стоимость услуги руб',
-        'advance_payment' => 'Авансовый платеж',
-        'refund_amount' => 'Сумма возврата при расторжении договора по инициативе клиента, в день',
-        'date_advance_payment' => 'Дата внесения аванса',
-        'date_deposit_funds' => 'Дата внесения средств',
-        'training_base_name' => 'Название объекта',
     ];
 
     /**

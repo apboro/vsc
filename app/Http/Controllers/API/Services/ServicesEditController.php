@@ -7,7 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Services\Service;
-use App\Models\TypesPrograms\TypeProgram;
+use App\Models\Services\ServiceProgram;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -187,12 +187,12 @@ class ServicesEditController extends ApiEditController
         /** @var Service|null $service */
         $service = $this->firstOrNew(Service::class, $request, [], [], ['organization_id' => $current->organizationId()]);
 
-        $regulars = TypeProgram::query()->select('id')
+        $regulars = ServiceProgram::query()->select('id')
             ->where('service_type_id', ServiceTypes::regular)
             ->get()
             ->pluck('id')
             ->toArray();
-        $singleType = TypeProgram::query()->select('id')
+        $singleType = ServiceProgram::query()->select('id')
             ->where('service_type_id', ServiceTypes::one_time)
             ->get()
             ->pluck('id')
