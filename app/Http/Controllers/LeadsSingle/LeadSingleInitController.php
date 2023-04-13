@@ -66,6 +66,13 @@ class LeadSingleInitController extends ApiEditController
                 ->select(['id', 'name', 'description as hint'])
                 ->orderBy('order')
                 ->get();
+
+            $serviceData = [
+                'title' => $subscription->service->title,
+                'training_base_title' => $subscription->service->trainingBase->title,
+                'training_base_address' => $subscription->service->trainingBase->info->address,
+                'service_start_date' => self::formatDate($subscription->service->start_at, 'года'),
+            ];
         } else {
             try {
                 $key = LeadSession::getKey($request);
@@ -99,25 +106,20 @@ class LeadSingleInitController extends ApiEditController
             ->orderBy('services.title')
             ->get();
 
-        $arrRegions = $services->pluck('region_id')->toArray();
+        if (isset($services) && count($services) > 0) {
+            $arrRegions = [];
+            $regions = Region::queryRaw()
+                ->whereIn('id', $arrRegions)
+                ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
+                ->select(['id', 'name'])
+                ->orderBy('order')
+                ->get();
+        }
 
-        $regions = Region::queryRaw()
-            ->whereIn('id', $arrRegions)
-            ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
-            ->select(['id', 'name'])
-            ->orderBy('order')
-            ->get();
-
-        $serviceData = [
-            'title' => $subscription->service->title,
-            'training_base_title' => $subscription->service->trainingBase->title,
-            'training_base_address' => $subscription->service->trainingBase->info->address,
-            'service_start_date' => self::formatDate($subscription->service->start_at, 'года'),
-        ];
 
         return APIResponse::response([
             'session' => LeadSession::makeSession((int)$key['organization_id'], $request->ip()),
-            'regions' => $regions,
+            'regions' => $regions ?? null,
             'services' => $services,
             'subscription_data' => $subscriptionData ?? null,
             'subscription_id' => $subscription->id ?? null,
