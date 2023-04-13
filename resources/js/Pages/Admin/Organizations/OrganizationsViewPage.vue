@@ -20,7 +20,7 @@
             </GuiValue>
         </GuiContainer>
 
-        <ContractsListPage v-if="tab === 'contracts'"/>
+        <OrganizationContracts v-if="tab === 'contracts'" :organization-id="organizationId"/>
     </LayoutPage>
 </template>
 
@@ -34,11 +34,11 @@ import GuiContainer from "@/Components/GUI/GuiContainer";
 import GuiValue from "@/Components/GUI/GuiValue";
 import GuiActivityIndicator from "@/Components/GUI/GuiActivityIndicator";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs.vue";
-import ContractsListPage from "@/Pages/Admin/Contracts/ContractsListPage.vue";
+import OrganizationContracts from "./OrganizationContracts";
 
 export default {
     components: {
-        ContractsListPage,
+        OrganizationContracts,
         LayoutRoutedTabs,
         GuiActivityIndicator,
         GuiValue,

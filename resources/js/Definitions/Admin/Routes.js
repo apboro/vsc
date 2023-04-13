@@ -24,8 +24,6 @@ import ClientsViewPage from "@/Pages/Admin/Clients/ClientsViewPage";
 import SubscriptionsListPage from "@/Pages/Admin/Subscriptions/SubscriptionsListPage";
 import SubscriptionsViewPage from "@/Pages/Admin/Subscriptions/SubscriptionsViewPage";
 import ClientSubscriptionsViewPage from "@/Pages/Admin/Clients/ClientSubscriptionsViewPage";
-import ContractsListPage from "@/Pages/Admin/Contracts/ContractsListPage.vue";
-import ContractsEditPage from "@/Pages/Admin/Contracts/ContractsEditPage.vue";
 
 export default [
     {path: '/', name: 'home', component: TasksListPage, meta: {title: 'Список задач'}},
@@ -49,9 +47,6 @@ export default [
     {path: '/organizations', name: 'organizations-list', component: OrganizationsListPage, meta: {title: 'Организации', role: 'super'}},
     {path: '/organizations/:id', name: 'organizations-view', component: OrganizationsViewPage, meta: {title: 'Карточка организации', role: 'super'}},
     {path: '/organizations/:id/edit', name: 'organizations-edit', component: OrganizationsEditPage, meta: {title: 'Редактирование организации', role: 'super'}},
-
-    {path: '/contract', name: 'contracts-list', component: ContractsListPage, meta: {title: 'Договоры', role: 'super'}},
-    {path: '/contracts/:id/edit', name: 'contracts-edit', component: ContractsEditPage, meta: {title: 'Редактирование договора', role: 'super'}},
 
     {path: '/services', name: 'services-list', component: ServicesListPage, meta: {title: 'Список услуг', permission: ['services.view','services.edit','services.delete']}},
     {path: '/services/:id', name: 'services-view', component: ServicesViewPage, meta: {title: 'Карточка услуги', permission: ['services.view','services.edit','services.delete'], change: 'services-list'}},

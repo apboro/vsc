@@ -78,16 +78,18 @@ class ServicesViewController extends ApiController
         ];
     }
 
-    public function typePrograms(): JsonResponse
+    public function typePrograms(Request $request): JsonResponse
     {
-        $regulars = ServiceProgram::select('id')
+        $current = Current::get($request);
+
+        $regulars = ServiceProgram::query($current)
+            ->select('id')
             ->where('service_type_id', ServiceTypes::regular)
-            ->get()
             ->pluck('id')
             ->toArray();
-        $singleType = ServiceProgram::select('id')
+        $singleType = ServiceProgram::query($current)
+            ->select('id')
             ->where('service_type_id', ServiceTypes::one_time)
-            ->get()
             ->pluck('id')
             ->toArray();
 

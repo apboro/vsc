@@ -8,6 +8,17 @@ use App\Models\Dictionaries\ServiceTypes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * @property int $id
+ * @property int $service_type_id
+ * @property int $service_category_id
+ * @property int $organization_id
+ * @property int $name
+ * @property int $order
+ * @property int $enabled
+ *
+ * @property-read string $type
+ * @property-read string $category
+ *
  * @property ServiceTypes $serviceType
  * @property ServiceCategories $serviceCategory
  */
