@@ -187,18 +187,22 @@ class ServicesEditController extends ApiEditController
         /** @var Service|null $service */
         $service = $this->firstOrNew(Service::class, $request, [], [], ['organization_id' => $current->organizationId()]);
 
-        $regulars = ServiceProgram::query()->select('id')
+        $regulars = ServiceProgram::select('id')
             ->where('service_type_id', ServiceTypes::regular)
+            ->where('organization_id', $current->organizationId())
             ->get()
             ->pluck('id')
             ->toArray();
-        $singleType = ServiceProgram::query()->select('id')
+
+        $singleType = ServiceProgram::select('id')
             ->where('service_type_id', ServiceTypes::one_time)
+            ->where('organization_id', $current->organizationId())
             ->get()
             ->pluck('id')
             ->toArray();
 
         $rules = $this->rules;
+
         if (in_array($data['type_program_id'], $regulars)) {
             $rules['monthly_price'] = 'required';
             $rules['training_price'] = 'required';
