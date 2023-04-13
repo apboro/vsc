@@ -45,10 +45,9 @@
                     :dictionary="'service_types'"
                     v-model="list.filters['service_type_id']"
                     :original="list.filters_original['service_type_id']"
-                    :placeholder="'Выберите значение (по умолчанию)'"
+                    :placeholder="'Все'"
                     :has-null="true"
                     :small="true"
-                    :search="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
@@ -60,7 +59,6 @@
                     :placeholder="'Все'"
                     :has-null="true"
                     :small="true"
-                    :search="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
