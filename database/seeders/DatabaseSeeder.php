@@ -13,11 +13,10 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     protected array $seeders = [
-        StatusesSeeder::class,
-        RolesSeeder::class,
+//        StatusesSeeder::class,
+//        RolesSeeder::class,
         ServiceSeeder::class,
         PatternSeeder::class,
-        ContractSeeder::class,
     ];
 
     /**

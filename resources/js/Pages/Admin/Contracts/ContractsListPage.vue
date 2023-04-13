@@ -1,25 +1,15 @@
 <template>
-        <div class="action__block-right">
-            <GuiActionsMenu v-if="can('staff.edit')">
-                <router-link class="link" :to="{ name: 'contracts-edit', params: { id: 0 }}">Добавить договор</router-link>
-            </GuiActionsMenu>
-        </div>
 
-    <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
-        <ListTableRow v-for="(contract, key) in list.list" :key="key">
-            <ListTableCell>
-                <GuiActivityIndicator :active="contract['active']"/>
-                {{ contract['id'] }}
-            </ListTableCell>
-            <ListTableCell>
-                <RouterLink class="link" :to="{name: 'contracts-edit', params: {id: contract['id']}}">{{ contract['title'] }}</RouterLink>
-            </ListTableCell>
-        </ListTableRow>
-    </ListTable>
+    <GuiContainer v-if="data.data.patterns != null" w-50 mt-30>
+        <template v-for="patterns in data.data.patterns">
+                <FieldCheckBox v-model="data.data.patternIDs" :label="patterns.name" :value="patterns.id" :hide-title="true" :name="patterns.id"/>
+        </template>
+    </GuiContainer>
 
-    <GuiMessage border v-else-if="list.is_loaded">Ничего не найдено</GuiMessage>
+    <GuiContainer mt-30>
+        <GuiButton @click="save" :color="'blue'">Сохранить</GuiButton>
+    </GuiContainer>
 
-    <Pagination :pagination="list.pagination" @pagination="(page, per_page) => list.load(page, per_page)"/>
 </template>
 
 <script>
@@ -41,9 +31,13 @@ import IconEdit from "@/Components/Icons/IconEdit.vue";
 import IconLock from "@/Components/Icons/IconLock.vue";
 import IconCross from "@/Components/Icons/IconCross.vue";
 import IconGripVertical from "@/Components/Icons/IconGripVertical.vue";
+import FieldCheckBox from "@/Components/Fields/FieldCheckBox.vue";
+import GuiButton from "@/Components/GUI/GuiButton.vue";
 
 export default {
     components: {
+        GuiButton,
+        FieldCheckBox,
         IconGripVertical,
         IconCross,
         IconLock,
@@ -63,14 +57,36 @@ export default {
 
     mixins: [Permissions],
 
+    computed: {
+        organizationId() {
+            return Number(this.$route.params.id);
+        },
+    },
+
     data: () => ({
-        list: list('/api/contracts'),
+        data: data('/api/contracts'),
         tab: null,
     }),
 
+
     created() {
-        this.list.initial();
+        this.data.load({
+            organization_id: this.organizationId
+        })
+            .catch(response => response.code === 404 && this.$router.replace({name: '404'}));
     },
+
+    methods: {
+        save() {
+            axios.post('/api/contracts/update', {
+                patternIDs: this.data.data.patternIDs,
+                organization_id: this.organizationId
+            }).catch(error => {
+                this.$toast.error(error.response.data['message'], 5000);
+            });
+        },
+
+    }
 }
 </script>
 

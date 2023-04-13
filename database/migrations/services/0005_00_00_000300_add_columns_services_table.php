@@ -18,7 +18,7 @@ class AddColumnsServicesTable extends Migration
         Schema::table('services', function (Blueprint $table) {
             if (!Schema::hasColumn('services', 'type_program_id')) {
                 Schema::table('services', function (Blueprint $table) {
-                    $table->unsignedTinyInteger('type_program_id')->nullable();
+                    $table->unsignedBigInteger('type_program_id')->nullable();
                     $table->unsignedTinyInteger('contract_id')->nullable();
                     $table->unsignedInteger('price')->nullable();
                     $table->text('description')->nullable();
@@ -29,8 +29,8 @@ class AddColumnsServicesTable extends Migration
                     $table->unsignedInteger('daily_price')->nullable();
                     $table->unsignedInteger('price_deduction_advance')->nullable();
 
-                    $table->foreign('type_program_id')->references('id')->on('service_programs')->restrictOnDelete()->cascadeOnUpdate();
                     $table->foreign('contract_id')->references('id')->on('dictionary_contracts')->restrictOnDelete()->cascadeOnUpdate();
+                    $table->foreign('type_program_id')->references('id')->on('service_programs')->restrictOnDelete()->cascadeOnUpdate();
                 });
             }
         });

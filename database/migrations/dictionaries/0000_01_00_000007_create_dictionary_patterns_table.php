@@ -19,10 +19,8 @@ class CreateDictionaryPatternsTable extends Migration
             $table->text('pattern')->nullable();
             $table->boolean('enabled')->nullable()->default(true);
             $table->unsignedTinyInteger('order')->nullable()->default(0);
-            $table->unsignedSmallInteger('organization_id');
 
             $table->timestamps();
-            $table->foreign('organization_id')->references('id')->on('organizations')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

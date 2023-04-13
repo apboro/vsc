@@ -4,6 +4,8 @@
                 :link="{name: 'organizations-list'}"
                 :link-title="'К списку организаций'"
     >
+        <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
+
         <template v-slot:actions v-if="can(['organizations.edit','organizations.delete'])">
             <GuiActionsMenu>
                 <span class="link" v-if="can('organizations.edit')" @click="edit">Редактировать карточку организации</span>
@@ -11,13 +13,14 @@
             </GuiActionsMenu>
         </template>
 
-        <GuiContainer w-50 mt-30>
+        <GuiContainer  v-if="tab === 'organizations'" w-50 mt-30>
             <GuiValue :title="'Организация'">{{ data.data['full_name'] }}</GuiValue>
             <GuiValue :title="'Статус'">
                 <GuiActivityIndicator :active="data.data['active']"/>{{ data.data['status'] }}
             </GuiValue>
         </GuiContainer>
 
+        <ContractsListPage v-if="tab === 'contracts'"/>
     </LayoutPage>
 </template>
 
@@ -30,9 +33,13 @@ import Permissions from "@/Mixins/Permissions";
 import GuiContainer from "@/Components/GUI/GuiContainer";
 import GuiValue from "@/Components/GUI/GuiValue";
 import GuiActivityIndicator from "@/Components/GUI/GuiActivityIndicator";
+import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs.vue";
+import ContractsListPage from "@/Pages/Admin/Contracts/ContractsListPage.vue";
 
 export default {
     components: {
+        ContractsListPage,
+        LayoutRoutedTabs,
         GuiActivityIndicator,
         GuiValue,
         GuiContainer,
@@ -41,9 +48,9 @@ export default {
     },
 
     mixins: [Permissions, DeleteEntry],
-
     data: () => ({
         data: data('/api/organizations/view'),
+        tab: null,
     }),
 
     computed: {
@@ -55,6 +62,12 @@ export default {
         },
         title() {
             return this.data.is_loaded ? this.data.data['title'] : '...';
+        },
+        tabs() {
+            return {
+                organizations: 'Организации',
+                contracts: 'Договоры',
+            }
         },
     },
 

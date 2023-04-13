@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\Contracts;
+use App\Models\Dictionaries\Pattern;
 use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -22,20 +23,20 @@ class ContractsListController extends ApiController
      */
     public function list(ApiListRequest $request): JsonResponse
     {
-        $current = Current::get($request);
-        $query = Contracts::tap(new ForOrganization($current->organizationId(), true))
+        $patterns = Pattern::queryRaw()
+            ->where(['enabled' => true])
+            ->select(['id', 'name'])
+            ->orderBy('order')
+            ->get();
+
+        $query = Contracts::tap(new ForOrganization($request['organization_id'], true))
             ->orderBy('id');
+        $patternIDs = $query->get()->unique('pattern_id')->pluck('pattern_id')->toArray();
 
-        // current page automatically resolved from request via `page` parameter
-        $contracts = $query->paginate($request->perPage());
-
-        /** @var LengthAwarePaginator $contracts */
-        $contracts->transform(function (Contracts $contract) {
-            return [
-                'id' => $contract->id,
-                'title' => $contract->name,
-            ];
-        });
+        return APIResponse::response([
+            'patterns' => $patterns,
+            'patternIDs' => $patternIDs
+        ], []);
 
         return APIResponse::list($contracts, ['ID', 'Название']);
     }

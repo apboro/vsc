@@ -1,14 +1,31 @@
 <template>
-    <LayoutPage :title="$route.meta['title']">
-        <LayoutRoutedTabs :tabs="tabs" @change="tab = $event"/>
+    <LayoutPage :title="$route.meta['title']" :loading="list.is_loading">
+        <template #actions v-if="can('staff.edit')">
+            <GuiActionsMenu>
+                <router-link class="link" :to="{ name: 'organizations-edit', params: { id: 0 }}">Добавить организацию</router-link>
+            </GuiActionsMenu>
+        </template>
 
+        <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
+            <ListTableRow v-for="(organization, key) in list.list" :key="key">
+                <ListTableCell>
+                    <GuiActivityIndicator :active="organization['active']"/>
+                    {{ organization['id'] }}
+                </ListTableCell>
+                <ListTableCell>
+                    <RouterLink class="link" :to="{name: 'organizations-view', params: {id: organization['id']}}">{{ organization['title'] }}</RouterLink>
+                </ListTableCell>
+            </ListTableRow>
+        </ListTable>
 
-        <OrganizationsTabsPage v-if="tab === 'organizations'"/>
-        <ContractsListPage v-if="tab === 'contracts'"/>
+        <GuiMessage border v-else-if="list.is_loaded">Ничего не найдено</GuiMessage>
+
+        <Pagination :pagination="list.pagination" @pagination="(page, per_page) => list.load(page, per_page)"/>
     </LayoutPage>
 </template>
 
 <script>
+import list from "@/Core/List";
 import LayoutPage from "@/Components/Layout/LayoutPage";
 import GuiActionsMenu from "@/Components/GUI/GuiActionsMenu";
 import ListTable from "@/Components/ListTable/ListTable";
@@ -18,15 +35,9 @@ import GuiActivityIndicator from "@/Components/GUI/GuiActivityIndicator";
 import GuiMessage from "@/Components/GUI/GuiMessage";
 import Pagination from "@/Components/Pagination";
 import Permissions from "@/Mixins/Permissions";
-import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs.vue";
-import OrganizationsTabsPage from "@/Pages/Admin/Organizations/OrganizationsTabsPage.vue";
-import ContractsListPage from "@/Pages/Admin/Contracts/ContractsListPage.vue";
 
 export default {
     components: {
-        ContractsListPage,
-        OrganizationsTabsPage,
-        LayoutRoutedTabs,
         LayoutPage,
         GuiActionsMenu,
         ListTable,
@@ -40,16 +51,11 @@ export default {
     mixins: [Permissions],
 
     data: () => ({
-        tab: null,
+        list: list('/api/organizations'),
     }),
 
-    computed: {
-        tabs() {
-            return {
-                organizations: 'Организации',
-                contracts: 'Договоры',
-            }
-        },
+    created() {
+        this.list.initial();
     },
 }
 </script>

@@ -27,8 +27,4 @@ class Pattern extends AbstractDictionary
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns';
-
-
-    /** @var bool Is bound to organization */
-    protected static bool $organizationBound = true;
 }
