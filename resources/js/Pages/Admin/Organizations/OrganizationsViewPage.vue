@@ -21,6 +21,7 @@
         </GuiContainer>
 
         <OrganizationContracts v-if="tab === 'contracts'" :organization-id="organizationId"/>
+        <OrganizationLetters v-if="tab === 'letters'" :organization-id="organizationId"/>
     </LayoutPage>
 </template>
 
@@ -35,9 +36,11 @@ import GuiValue from "@/Components/GUI/GuiValue";
 import GuiActivityIndicator from "@/Components/GUI/GuiActivityIndicator";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs.vue";
 import OrganizationContracts from "./OrganizationContracts";
+import OrganizationLetters from "@/Pages/Admin/Organizations/OrganizationLetters.vue";
 
 export default {
     components: {
+        OrganizationLetters,
         OrganizationContracts,
         LayoutRoutedTabs,
         GuiActivityIndicator,
@@ -67,6 +70,7 @@ export default {
             return {
                 organizations: 'Организации',
                 contracts: 'Договоры',
+                letters: 'Письма',
             }
         },
     },

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\Dictionaries\ContractSeeder;
 use Database\Seeders\Dictionaries\PatternSeeder;
 use Database\Seeders\Dictionaries\RolesSeeder;
 use Database\Seeders\Dictionaries\StatusesSeeder;
@@ -13,8 +12,8 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     protected array $seeders = [
-//        StatusesSeeder::class,
-//        RolesSeeder::class,
+        StatusesSeeder::class,
+        RolesSeeder::class,
         ServiceSeeder::class,
         PatternSeeder::class,
     ];

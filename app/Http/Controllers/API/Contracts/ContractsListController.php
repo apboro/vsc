@@ -37,7 +37,5 @@ class ContractsListController extends ApiController
             'patterns' => $patterns,
             'patternIDs' => $patternIDs
         ], []);
-
-        return APIResponse::list($contracts, ['ID', 'Название']);
     }
 }

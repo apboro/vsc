@@ -6,6 +6,7 @@ use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Interfaces\AsDictionary;
+use App\Models\Dictionaries\Letters;
 use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SportKind;
@@ -40,6 +41,7 @@ use InvalidArgumentException;
  * @property Carbon $updated_at
  * @property int|null $type_program_id
  * @property int|null $contract_id
+ * @property int|null $letter_id
  * @property string $description
  * @property Carbon $date_deposit_funds
  * @property int|null $advance_payment
@@ -240,5 +242,15 @@ class Service extends Model implements Statusable, AsDictionary
     public function contract(): HasOne
     {
         return $this->hasOne(Contracts::class, 'id', 'contract_id');
+    }
+
+    /**
+     * Letters this service for.
+     *
+     * @return  HasOne
+     */
+    public function letter(): HasOne
+    {
+        return $this->hasOne(Letters::class, 'id', 'letter_id');
     }
 }

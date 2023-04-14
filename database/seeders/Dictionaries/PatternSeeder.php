@@ -2,7 +2,10 @@
 
 namespace Database\Seeders\Dictionaries;
 
+use App\Models\Dictionaries\Contracts;
+use App\Models\Dictionaries\Letters;
 use App\Models\Dictionaries\Pattern;
+use App\Models\Dictionaries\PatternLetters;
 use Database\Seeders\GenericSeeder;
 
 class PatternSeeder extends GenericSeeder
@@ -24,6 +27,38 @@ class PatternSeeder extends GenericSeeder
             Pattern::golovanov => [
                 'name' => 'Голованов',
                 'pattern' => 'pdf/contracts/subscription_golovanov_contract',
+            ],
+        ],
+        PatternLetters::class => [
+            PatternLetters::regular => [
+                'name' => 'Регулярный',
+            ],
+            PatternLetters::one_time => [
+                'name' => 'Разовый',
+            ],
+        ],
+        Letters::class => [
+            Letters::standard_one => [
+                'name' => 'Регулярный',
+                'pattern_id' => PatternLetters::regular,
+                'organization_id' => 1
+            ],
+            Letters::standard_two => [
+                'name' => 'Регулярный',
+                'pattern_id' => PatternLetters::regular,
+                'organization_id' => 2
+            ],
+        ],
+        Contracts::class => [
+            Contracts::standard_one => [
+                'name' => 'Стандартный',
+                'pattern_id' => PatternLetters::regular,
+                'organization_id' => 1
+            ],
+            Contracts::standard_two => [
+                'name' => 'Стандартный',
+                'pattern_id' => PatternLetters::regular,
+                'organization_id' => 2
             ],
         ],
     ];

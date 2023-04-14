@@ -20,6 +20,7 @@ class ServicesEditController extends ApiEditController
         'type_program_id' => 'required',
         'training_base_id' => 'required',
         'contract_id' => 'required',
+        'letter_id' => 'required',
         'sport_kind_id' => 'required',
         'monthly_price' => 'nullable',
         'training_price' => 'nullable',
@@ -80,6 +81,7 @@ class ServicesEditController extends ApiEditController
         'price_deduction_advance' => 'Стоимость услуги за вычетом аванса, руб',
         'requisites_id' => 'Реквизиты для договора',
         'contract_id' => 'Шаблон договора',
+        'letter_id' => 'Шаблон письма',
         'schedule_day_mon' => 'Занятия в пн.',
         'schedule_day_tue' => 'Занятия в вт.',
         'schedule_day_wed' => 'Занятия в ср.',
@@ -122,6 +124,7 @@ class ServicesEditController extends ApiEditController
                 'status_id' => $service->status_id,
                 'type_program_id' => $service->type_program_id,
                 'contract_id' => $service->contract_id,
+                'letter_id' => $service->letter_id,
                 'title' => $service->title,
                 'training_base_id' => $service->training_base_id,
                 'sport_kind_id' => $service->sport_kind_id,
@@ -250,6 +253,7 @@ class ServicesEditController extends ApiEditController
         $service->training_base_id = $data['training_base_id'];
         $service->type_program_id = $data['type_program_id'];
         $service->contract_id = $data['contract_id'];
+        $service->letter_id = $data['letter_id'];
         $service->sport_kind_id = $data['sport_kind_id'];
         $service->monthly_price = $data['monthly_price'];
         $service->training_price = $data['training_price'];

@@ -10,6 +10,7 @@ use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\LeadStatus;
+use App\Models\Dictionaries\Letters;
 use App\Models\Dictionaries\OrganizationRequisites;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\Pattern;
@@ -54,6 +55,7 @@ class DictionaryController extends ApiController
         'discounts' => ['class' => Discount::class, 'allow' => null],
         'service_programs' => ['class' => ServiceProgram::class, 'allow' => null],
         'contracts' => ['class' => Contracts::class, 'allow' => null],
+        'letters' => ['class' => Letters::class, 'allow' => null],
         'patterns' => ['class' => Pattern::class, 'allow' => null],
     ];
 

@@ -65,6 +65,7 @@
         <GuiContainer mt-30>
             <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
             <FormDictionary :form="form" :name="'contract_id'" :dictionary="'contracts'"/>
+            <FormDictionary :form="form" :name="'letter_id'" :dictionary="'letters'"/>
             <FormText :form="form" :name="'description'"/>
         </GuiContainer>
 

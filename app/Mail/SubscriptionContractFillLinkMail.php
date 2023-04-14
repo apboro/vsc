@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Dictionaries\PatternLetters;
 use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Subscriptions\Subscription;
 use Illuminate\Bus\Queueable;
@@ -40,32 +41,17 @@ class SubscriptionContractFillLinkMail extends Mailable
         $this->subscription->loadMissing([
             'organization',
             'client.user.profile',
+            'service.letter',
             'service.trainingBase.info',
         ]);
 
         $id = $this->subscription->id;
 
-        if (!isset($this->subscription->service->typeProgram) || $this->subscription->service->typeProgram->service_type_id === ServiceTypes::regular) {
-            $link = route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
+        if (!isset($this->subscription->service->letter) || $this->subscription->service->letter->pattern_id === PatternLetters::regular) {
+            $lines = $this->regularLines($id);
         } else {
-            $link = route('leads_single.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]);
+            $lines = $this->singleLines($id);
         }
-
-
-        $lines = [
-            'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',
-            'Нам с Вами осталось заполнить договор, перейдя по ссылке:',
-            $link . ', и мы можем начинать тренировки/тренировочные мероприятия/соревнования. Точнее, наши сотрудники - тренировать, Вы сопровождать и встречать будущего Чемпиона (воспитанника), а будущий Чемпион - сможет начинать побеждать.',
-
-            'Наши контакты для связи',
-            '- группа в контакте: ' . $this->subscription->service->trainingBase->info->homepage,
-            '- телефон: '. $this->subscription->service->trainingBase->info->phone,
-            '- почта: '. $this->subscription->service->trainingBase->info->email,
-            '- сайт: vsev-sportcenter.ru',
-            'В начале учебного года обращений много, мы отвечаем с той скоростью на которую физически способны.',
-            'Благодарим за понимание!',
-            'Ваша команда Центра Школьного Спорта',
-        ];
 
         $mail = $this
             ->from(env('MAIL_FROM_ADDRESS'), $this->subscription->organization->title)
@@ -78,5 +64,44 @@ class SubscriptionContractFillLinkMail extends Mailable
         $mail->to(trim($this->subscription->client->user->profile->email), $this->subscription->client->user->profile->compactName);
 
         return $mail;
+    }
+
+    private function regularLines($id): array
+    {
+        return [
+            'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',
+            'Нам с Вами осталось заполнить договор, перейдя по ссылке:',
+            route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]) . ', и мы можем начинать тренировки/тренировочные мероприятия/соревнования. Точнее, наши сотрудники - тренировать, Вы сопровождать и встречать будущего Чемпиона (воспитанника), а будущий Чемпион - сможет начинать побеждать.',
+
+            'Наши контакты для связи',
+            '- группа в контакте: ' . $this->subscription->service->trainingBase->info->homepage,
+            '- телефон: '. $this->subscription->service->trainingBase->info->phone,
+            '- почта: '. $this->subscription->service->trainingBase->info->email,
+            '- сайт: vsev-sportcenter.ru',
+            'В начале учебного года обращений много, мы отвечаем с той скоростью на которую физически способны.',
+            'Благодарим за понимание!',
+            'Ваша команда Центра Школьного Спорта',
+        ];
+    }
+
+    private function singleLines($id): array
+    {
+        return [
+            'Здравствуйте, родители (законные представители), будущего Чемпиона/Чемпионки!',
+            'Нам с Вами осталось заполнить договор, перейдя по ссылке:',
+            route('leads.subscription.contract.fill', ['sbsc' => Crypt::encrypt($id)]) . ', и мы можем начинать тренировки/тренировочные мероприятия/соревнования. Точнее, наши сотрудники - тренировать, Вы сопровождать и встречать будущего Чемпиона (воспитанника), а будущий Чемпион - сможет начинать побеждать.',
+
+            'Обращаем Ваше внимание, что даже на сказочных тренировочных мероприятиях ребенок имеет право скучать по родителям. Просим отнестись к этому с пониманием. ',
+
+            'Наши контакты для связи',
+            '- группа в контакте: ' . $this->subscription->service->trainingBase->info->homepage,
+            '- телефон: '. $this->subscription->service->trainingBase->info->phone,
+            '- почта: '. $this->subscription->service->trainingBase->info->email,
+            '- сайт: vsev-sportcenter.ru',
+            'Обращений много, мы отвечаем с той скоростью на которую физически способны.',
+
+            'Благодарим за понимание!',
+            'Ваша команда Центра Школьного Спорта',
+        ];
     }
 }

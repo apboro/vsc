@@ -26,46 +26,6 @@ class ContractsEditController extends ApiEditController
     ];
 
     /**
-     * Get edit data for the contract.
-     * id === 0 is for new
-     *
-     * @param Request $request
-     *
-     * @return  JsonResponse
-     */
-    public function get(Request $request): JsonResponse
-    {
-        /** @var Contracts|null $contract */
-        $current = Current::get($request);
-        if (!isset($request['id']) || $request['id'] === 0) {
-            $contract = new Contracts();
-        } else {
-            $contract = Contracts::where('id', $request['id'])
-                ->tap(new ForOrganization($current->organizationId(), true))
-                ->first();
-        }
-
-
-        if ($contract === null) {
-            return APIResponse::notFound('Организация не найдена');
-        }
-
-        // send response
-        return APIResponse::form(
-            [
-                'name' => $contract->name,
-                'organization_id' => $contract->organization_id,
-                'pattern_id' => $contract->pattern_id,
-            ],
-            $this->rules,
-            $this->titles,
-            [
-                'title' => $contract->exists ? $contract->name : 'Добавление договора',
-            ]
-        );
-    }
-
-    /**
      * Update excursion data.
      *
      * @param Request $request
@@ -77,7 +37,6 @@ class ContractsEditController extends ApiEditController
         $patternIDs = $request['patternIDs'];
         $organization_id = $request['organization_id'];
 
-        $current = Current::get($request);
         if (!isset($patternIDs) || empty($patternIDs)) {
             Contracts::tap(new ForOrganization($organization_id, true))->delete();
         } else {
@@ -99,7 +58,7 @@ class ContractsEditController extends ApiEditController
                 $items[] = [
                     'name' => $patterns->where('id', $patternID)->first()->name,
                     'pattern_id' => $patternID,
-                    'organization_id' => $current->organizationId()
+                    'organization_id' => $organization_id
                 ];
             }
 
