@@ -23,19 +23,22 @@ class ContractsListController extends ApiController
      */
     public function list(ApiListRequest $request): JsonResponse
     {
+        $current = Current::get($request);
+
         $patterns = Pattern::queryRaw()
             ->where(['enabled' => true])
             ->select(['id', 'name'])
             ->orderBy('order')
             ->get();
 
-        $query = Contracts::tap(new ForOrganization($request['organization_id'], true))
-            ->orderBy('id');
-        $patternIDs = $query->get()->unique('pattern_id')->pluck('pattern_id')->toArray();
+        $patternIDs = Contracts::query($current)
+            ->orderBy('id')
+            ->pluck('pattern_id')
+            ->toArray();
 
         return APIResponse::response([
             'patterns' => $patterns,
-            'patternIDs' => $patternIDs
+            'patternIDs' => $patternIDs,
         ], []);
     }
 }

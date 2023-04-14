@@ -8,8 +8,13 @@ use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Pattern;
 use App\Scopes\ForOrganization;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
 class ContractsEditController extends ApiEditController
 {
@@ -34,35 +39,43 @@ class ContractsEditController extends ApiEditController
      */
     public function update(Request $request): JsonResponse
     {
-        $patternIDs = $request['patternIDs'];
-        $organization_id = $request['organization_id'];
+        $current = Current::get($request);
 
-        if (!isset($patternIDs) || empty($patternIDs)) {
-            Contracts::tap(new ForOrganization($organization_id, true))->delete();
-        } else {
-            //deleteContracts
-            Contracts::tap(new ForOrganization($organization_id, true))
-                ->whereNotIn('pattern_id', $patternIDs)
-                ->delete();
+        $patternIDs = $request->input('patternIDs', []);
 
-            $contracts = Contracts::tap(new ForOrganization($organization_id, true))
-                ->whereIn('pattern_id', $patternIDs)
-                ->get();
-            $oldPatternIDs = $contracts->pluck('pattern_id')->toArray();
-            $createPatternsIDs = array_diff($patternIDs, $oldPatternIDs);
+        try {
+            DB::transaction(static function () use ($current, $patternIDs) {
+                /** @var Collection<Contracts> $remove */
+                $removeContracts = Contracts::query($current)->whereNotIn('pattern_id', $patternIDs)->get();
 
-            $patterns = Pattern::all();
+                foreach ($removeContracts as $contract) {
+                    /** @var Contracts $contract */
+                    try {
+                        $contract->delete();
+                    } catch (QueryException $exception) {
+                        throw new RuntimeException(sprintf('Шаблон %s используется', $contract->name));
+                    }
+                }
 
-            $items = [];
-            foreach ($createPatternsIDs as $patternID) {
-                $items[] = [
-                    'name' => $patterns->where('id', $patternID)->first()->name,
-                    'pattern_id' => $patternID,
-                    'organization_id' => $organization_id
-                ];
-            }
+                $registered = Contracts::query($current)->pluck('pattern_id')->toArray();
 
-            Contracts::upsert($items, 'pattern_id', ['name', 'pattern_id', 'organization_id']);
+                $toRegister = array_diff($patternIDs, $registered);
+
+                $patterns = Pattern::query()->whereIn('id', $toRegister)->get();
+
+                $items = [];
+
+                foreach ($patterns as $pattern) {
+                    /** @var Pattern $pattern */
+                    $contract = new Contracts();
+                    $contract->name = $pattern->name;
+                    $contract->pattern_id = $pattern->id;
+                    $contract->organization_id = $current->organizationId();
+                    $contract->save();
+                }
+            });
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage());
         }
 
         return APIResponse::success('Договоры обновлены');
