@@ -36,7 +36,7 @@ export default {
     },
 
     data: () => ({
-        data: data('/api/contracts'),
+        data: data('/api/organizations/contracts'),
         is_processing: false,
     }),
 
@@ -52,7 +52,7 @@ export default {
         save() {
             this.is_processing = true;
 
-            axios.post('/api/contracts/update', {
+            axios.post('/api/organizations/contracts/update', {
                 patternIDs: this.data.data.patternIDs,
                 organization_id: this.organizationId
             })

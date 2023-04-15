@@ -32,9 +32,13 @@ class PatternSeeder extends GenericSeeder
         PatternLetters::class => [
             PatternLetters::regular => [
                 'name' => 'Регулярный',
+                'link' => 'mail.subscriptions.link.form_link',
+                'contract' => 'mail.subscriptions.contract.contract',
             ],
             PatternLetters::one_time => [
                 'name' => 'Разовый',
+                'link' => 'mail.subscriptions.link.form_single_link',
+                'contract' => 'mail.subscriptions.contract.contract_single',
             ],
         ],
         Letters::class => [

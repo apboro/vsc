@@ -37,19 +37,18 @@ class SubscriptionContractMail extends Mailable
         $this->contract->loadMissing('subscription');
         $this->contract->loadMissing('subscription.organization');
         $this->contract->loadMissing('subscription.client.user.profile');
+        $this->contract->loadMissing('subscription.service.letter');
 
-        if (!isset($this->subscription->service->letter) || $this->subscription->service->letter->pattern_id === PatternLetters::regular) {
-            $text = 'Ура, нашего полку прибыло! Рады будем увидеть Чемпиона в рядах своих воспитанников на ближайшей по расписанию тренировке. Напоминаем, что регулярные занятия можно оплатить по реквизитам, указанным в Договоре.';
+        if (!isset($this->contract->subscription->service->letter)) {
+            $textView = 'mail.subscriptions.contract.contract_single';
         } else {
-            $text = 'Ура, нашего полку прибыло! Рады будем увидеть Чемпиона в своих рядах. Напоминаем, о необходимости выполнять все условия Договора и приобрести билеты на тренировочное мероприятие.';
+            $textView = $this->contract->subscription->service->letter->pattern->contract;
         }
 
         $mail = $this
             ->from(env('MAIL_FROM_ADDRESS'), $this->contract->subscription->organization->title)
             ->subject('Договор на оказание услуг')
-            ->text('mail.subscriptions.contract.contract', [
-                'text' => $text,
-            ]);
+            ->text($textView);
 
         $mail->to(trim($this->contract->subscription->client->user->profile->email), $this->contract->subscription->client->user->profile->compactName);
 

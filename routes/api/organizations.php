@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\Contracts\ContractsEditController;
+use App\Http\Controllers\API\Contracts\ContractsListController;
+use App\Http\Controllers\API\Letters\LettersEditController;
+use App\Http\Controllers\API\Letters\LettersListController;
 use App\Http\Controllers\API\Organizations\OrganizationDeleteController;
 use App\Http\Controllers\API\Organizations\OrganizationEditController;
 use App\Http\Controllers\API\Organizations\OrganizationListController;
@@ -16,3 +20,8 @@ Route::post('/organizations/delete', [OrganizationDeleteController::class, 'dele
 Route::post('/organizations/list', [SwitchOrganizationController::class, 'list'])->middleware('role:super');
 Route::post('/organizations/switch', [SwitchOrganizationController::class, 'switch'])->middleware('role:super');
 
+Route::post('/organizations/contracts', [ContractsListController::class, 'list'])->middleware('role:super');
+Route::post('/organizations/contracts/update', [ContractsEditController::class, 'update'])->middleware('role:super');
+
+Route::post('/organizations/letters', [LettersListController::class, 'list'])->middleware('role:super');
+Route::post('/organizations/letters/update', [LettersEditController::class, 'update'])->middleware('role:super');

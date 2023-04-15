@@ -16,6 +16,8 @@ class CreateDictionaryPatternsLettersTable extends Migration
         Schema::create('dictionary_patterns_letters', static function (Blueprint $table) {
             $table->unsignedTinyInteger('id', true);
             $table->string('name');
+            $table->text('link')->nullable();
+            $table->text('contract')->nullable();
             $table->boolean('enabled')->nullable()->default(true);
             $table->unsignedTinyInteger('order')->nullable()->default(0);
 
