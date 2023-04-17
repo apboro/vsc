@@ -14,14 +14,38 @@
 
         <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'" class="registration-form" ref="registration">
             <GuiContainer>
+                <div style="display: flex">
+                    <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true" :top="false" @change="regionChanged"/>
+                    <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true" :top="false"/>
+                </div>
+            <GuiContainer>
+            <GuiContainer>
+                <div style="display: flex">
+                    <FieldDropDown
+                        v-model="scd"
+                                  :options="clientDuplicates"
+                                  placeholder="Новый клиент"
+                                  :has-null="true"
+                                  identifier="id"
+                                  show="name"
+                                  @change="clientDuplicateSelected"
+                    />
+                </div>
+            </GuiContainer>
+            </GuiContainer>
+<!--                <GuiContainer w-450px mr-20 inline>-->
+<!--                    <FormString :form="duplicate_form"  :name="'lastname'"/>-->
+<!--                    <FormString :form="duplicate_form" :name="'firstname'"/>-->
+<!--                    <FormString :form="duplicate_form" :name="'patronymic'"/>-->
+<!--                    <FormPhone :form="duplicate_form" :name="'phone'"/>-->
+<!--                    <FormString :form="duplicate_form" :name="'email'"/>-->
+<!--                </GuiContainer>-->
                 <GuiContainer w-450px mr-20 inline>
                     <FormString :form="registration_form" :name="'lastname'"/>
                     <FormString :form="registration_form" :name="'firstname'"/>
                     <FormString :form="registration_form" :name="'patronymic'"/>
                     <FormPhone :form="registration_form" :name="'phone'"/>
                     <FormString :form="registration_form" :name="'email'"/>
-                    <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true" :top="true" @change="regionChanged"/>
-                    <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true" :top="true"/>
                 </GuiContainer>
                 <GuiContainer w-450px inline>
                     <FormString :form="registration_form" :name="'ward_lastname'"/>
@@ -49,9 +73,11 @@ import GuiContainer from "@/Components/GUI/GuiContainer";
 import FormDate from "../../../Components/Form/FormDate";
 import FormDropdown from "../../../Components/Form/FormDropdown";
 import FormText from "../../../Components/Form/FormText";
+import FieldDropDown from "@/Components/Fields/FieldDropDown";
 
 export default {
     components: {
+        FieldDropDown,
         FormText,
         FormDropdown,
         FormDate,
@@ -68,6 +94,12 @@ export default {
     data: () => ({
         data: data('/api/leads/view'),
         registration_form: form(null, '/api/leads/register'),
+        clientDuplicates: [
+            {id: 1, name: 'test 1'},
+            {id: 2, name: 'test 2'},
+        ],
+        wardDuplicates: [],
+        scd: null,
     }),
 
     computed: {
@@ -101,6 +133,10 @@ export default {
     methods: {
         load() {
             this.data.load({id: this.leadId})
+                .then(() => {
+                    console.log(333, this.data)
+                    this.getDuplicates()
+                })
                 .catch(response => response.code === 404 && this.$router.replace({name: '404'}));
         },
         register() {
@@ -124,6 +160,26 @@ export default {
         },
         regionChanged() {
             this.registration_form.update('service_id', null);
+        },
+        getDuplicates() {
+            const data = {
+                lastname: this.data.data['lastname'],
+                firstname: this.data.data['firstname'],
+                patronymic: this.data.data['patronymic'],
+                phone: this.data.data['phone'],
+                email: this.data.data['email'],
+                ward_lastname: this.data.data['ward_lastname'],
+                ward_firstname: this.data.data['ward_firstname'],
+                ward_patronymic: this.data.data['ward_patronymic'],
+                ward_birth_date: this.data.data['ward_birth_date'],
+            }
+            axios.post('/api/leads/find-duplicates', data)
+                .then(response => {
+                    console.log(111, response)
+                })
+        },
+        clientDuplicateSelected(id) {
+            console.log(id)
         }
     }
 }

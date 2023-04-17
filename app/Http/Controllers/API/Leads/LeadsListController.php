@@ -233,6 +233,4 @@ class LeadsListController extends ApiController
 
         return  $query;
     }
-
-
 }

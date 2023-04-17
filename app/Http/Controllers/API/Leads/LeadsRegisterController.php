@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\Leads;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
-use App\Mail\SubscriptionContractFillLinkMail;
+use App\Http\Requests\APIListRequest;
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientStatus;
@@ -15,14 +15,13 @@ use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Leads\Lead;
 use App\Models\Subscriptions\Subscription;
 use App\Models\User\User;
+use App\Models\User\UserProfile;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class LeadsRegisterController extends ApiEditController
 {
@@ -132,17 +131,38 @@ class LeadsRegisterController extends ApiEditController
                 $lead->save();
 
                 // send a link to client
-                try {
-                    Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
-                } catch (Exception $exception) {
-                    Log::channel('outgoing_mail_errors')->error($exception->getMessage());
-                    throw $exception;
-                }
+//                try {
+//                    Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
+//                } catch (Exception $exception) {
+//                    Log::channel('outgoing_mail_errors')->error($exception->getMessage());
+//                    throw $exception;
+//                }
             });
         } catch (Exception $exception) {
             return APIResponse::error($exception->getMessage());
         }
 
         return APIResponse::success('Клиент зарегистрирован. Ссылка на заполнение договора отправлена клиенту.');
+    }
+
+    public function findDuplicates(ApiListRequest $request): JsonResponse
+    {
+        $clientUserDuplicateId = UserProfile::query()
+            ->where('lastname', $request->get('lastname'))
+            ->where('firstname', $request->get('firstname'))
+            ->where('patronymic', $request->get('patronymic'))
+            ->where('phone', $request->get('phone'))
+            ->where('email', $request->get('email'))
+            ->select('user_id')
+            ->pluck('user_id')
+            ->first();
+
+        $wardUserDuplicateId = UserProfile::query()
+            ->where();
+
+
+        return APIResponse::response([
+            'result' => $clientUserDuplicateId
+        ]);
     }
 }

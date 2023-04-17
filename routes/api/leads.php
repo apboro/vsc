@@ -11,3 +11,4 @@ Route::post('/leads/view', [LeadsViewController::class, 'view'])->middleware('pe
 Route::post('/leads/register', [LeadsRegisterController::class, 'register'])->middleware('permit:leads.register');
 Route::post('/leads/comment', [LeadsCommentController::class, 'comment'])->middleware('permit:leads.register');
 Route::post('/leads/export', [LeadsListController::class, 'export'])->middleware('permit:leads.view');
+Route::post('/leads/find-duplicates', [LeadsRegisterController::class, 'findDuplicates'])->middleware('permit:leads.view');
