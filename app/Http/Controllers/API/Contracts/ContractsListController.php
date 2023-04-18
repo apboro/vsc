@@ -8,9 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Pattern;
-use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ContractsListController extends ApiController
 {

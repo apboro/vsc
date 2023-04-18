@@ -3,10 +3,8 @@
 namespace App\Mail;
 
 use App\Helpers\SubscriptionContractPdf;
-use App\Models\Dictionaries\PatternLetters;
 use App\Models\Subscriptions\SubscriptionContract;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 

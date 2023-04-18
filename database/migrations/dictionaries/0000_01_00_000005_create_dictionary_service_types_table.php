@@ -30,6 +30,6 @@ class CreateDictionaryServiceTypesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dictionary_sport_kinds');
+        Schema::dropIfExists('dictionary_service_types');
     }
 }

@@ -7,7 +7,6 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Pattern;
-use App\Scopes\ForOrganization;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;

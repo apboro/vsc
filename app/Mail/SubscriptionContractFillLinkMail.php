@@ -2,13 +2,10 @@
 
 namespace App\Mail;
 
-use App\Models\Dictionaries\PatternLetters;
-use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Subscriptions\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Crypt;
 
 class SubscriptionContractFillLinkMail extends Mailable
 {

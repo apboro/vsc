@@ -52,9 +52,6 @@ use Carbon\Carbon;
  *
  * @property string|null $training_base_name
  * @property int|null $trainings_per_week
- * @property int|null $price
- * @property int|null $advance_payment
- * @property int|null $refund_amount
  * @property int|null $trainings_per_month
  * @property int|null $training_duration
  *
@@ -63,6 +60,9 @@ use Carbon\Carbon;
  *
  * @property float|null $monthly_price
  * @property float|null $training_return_price
+ * @property float|null $price
+ * @property float|null $advance_payment
+ * @property float|null $refund_amount
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -136,5 +136,77 @@ class SubscriptionContractData extends Model
     public function setTrainingReturnPriceAttribute(?float $value): void
     {
         $this->attributes['training_return_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setPriceAttribute(?float $value): void
+    {
+        $this->attributes['price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert advance payment from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getAdvancePaymentAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert advance payment to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setAdvancePaymentAttribute(?float $value): void
+    {
+        $this->attributes['advance_payment'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert refund amount from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getRefundAmountAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert refund amount to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setRefundAmountAttribute(?float $value): void
+    {
+        $this->attributes['refund_amount'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 }

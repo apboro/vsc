@@ -14,7 +14,6 @@ use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
-use App\Models\Services\ServiceProgram;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -42,14 +41,14 @@ use InvalidArgumentException;
  * @property int|null $type_program_id
  * @property int|null $contract_id
  * @property int|null $letter_id
- * @property string $description
+ * @property string|null $description
  * @property Carbon $date_deposit_funds
- * @property int|null $advance_payment
+ * @property float|null $advance_payment
  * @property Carbon $date_advance_payment
- * @property int|null $refund_amount
- * @property int|null $daily_price
- * @property int|null $price_deduction_advance
- * @property int|null $price
+ * @property float|null $refund_amount
+ * @property float|null $daily_price
+ * @property float|null $price_deduction_advance
+ * @property float|null $price
  *
  * @property ServiceStatus $status
  * @property Organization $organization
@@ -147,6 +146,127 @@ class Service extends Model implements Statusable, AsDictionary
     public function setTrainingReturnPriceAttribute(?float $value): void
     {
         $this->attributes['training_return_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+
+    /**
+     * Convert price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setPriceAttribute(?float $value): void
+    {
+        $this->attributes['price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert advance payment from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getAdvancePaymentAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert advance payment to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setAdvancePaymentAttribute(?float $value): void
+    {
+        $this->attributes['advance_payment'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert refund amount from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getRefundAmountAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert refund amount to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setRefundAmountAttribute(?float $value): void
+    {
+        $this->attributes['refund_amount'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert daily price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getDailyPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert daily price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setDailyPriceAttribute(?float $value): void
+    {
+        $this->attributes['daily_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert price deduction advance from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getPriceDeductionAdvanceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert price deduction advance to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setPriceDeductionAdvanceAttribute(?float $value): void
+    {
+        $this->attributes['price_deduction_advance'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 
     /**
