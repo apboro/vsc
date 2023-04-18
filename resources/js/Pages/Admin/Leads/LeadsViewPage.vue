@@ -12,48 +12,113 @@
 
         <LeadInfo :data="data.data" :lead-id="leadId" @update="load"/>
 
-        <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'" class="registration-form" ref="registration">
+        <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'"
+                   class="registration-form" ref="registration">
             <GuiContainer>
                 <div style="display: flex">
-                    <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true" :top="false" @change="regionChanged"/>
-                    <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'" :search="true" :top="false"/>
+                    <FormDictionary :form="registration_form" :name="'region_id'" :dictionary="'regions'" :search="true"
+                                    :top="false" @change="regionChanged"/>
+                    <FormDropdown :form="registration_form" :name="'service_id'" :options="regionServices"
+                                  :identifier="'id'" :show="'title'" :search="true" :top="false"/>
                 </div>
-            <GuiContainer>
-            <GuiContainer>
-                <div style="display: flex">
-                    <FieldDropDown
-                        v-model="scd"
-                                  :options="clientDuplicates"
-                                  placeholder="Новый клиент"
-                                  :has-null="true"
-                                  identifier="id"
-                                  show="name"
-                                  @change="clientDuplicateSelected"
-                    />
+                <GuiContainer>
+                    <div style="display: flex">
+                        <FormDropdown
+                            :form="registration_form"
+                            name="client_id"
+                            :options="clientDuplicates"
+                            placeholder="Новый клиент"
+                            :has-null="true"
+                            identifier="id"
+                            show="name"
+                            @change="clientDuplicateSelected"
+                        />
+                        <FormDropdown
+                            :form="registration_form"
+                            name="ward_id"
+                            v-model="scd2"
+                            :options="wardDuplicates"
+                            placeholder="Новый занимающийся"
+                            :has-null="true"
+                            identifier="id"
+                            show="fullName"
+                            @change="clientDuplicateSelected"
+                        />
+                    </div>
+                </GuiContainer>
+                <div style="display: flex; align-items: flex-start">
+                    <table style="width: 50%; margin-right: 20px">
+                        <tr>
+                            <td></td>
+                            <td>Данные лида</td>
+                            <td v-if="registration_form.values['client_id'] !== null">Данные клиента</td>
+                            <td v-if="registration_form.values['client_id'] !== null">Обновить</td>
+                        </tr>
+                        <tr>
+                            <td>Фамилия</td>
+                            <td><FormString :form="registration_form" :name="'lastname'" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormString :form="registration_form" :name="'duplicate_client_lastname'" v-model="client.lastname" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_client_lastname'" v-model="clientCheckbox.lastname" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Имя</td>
+                            <td><FormString :form="registration_form" :name="'firstname'" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormString :form="registration_form" :name="'duplicate_client_firstname'" v-model="client.firstname" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_client_firstname'" v-model="clientCheckbox.firstname" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Отчество</td>
+                            <td><FormString :form="registration_form" :name="'patronymic'" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormString :form="registration_form" :name="'duplicate_client_patronymic'" v-model="client.patronymic" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_client_patronymic'" v-model="clientCheckbox.patronymic" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Телефон</td>
+                            <td><FormPhone :form="registration_form" :name="'phone'" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormPhone :form="registration_form" :name="'duplicate_client_phone'" v-model="client.phone" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_client_phone'" v-model="clientCheckbox.phone" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><FormString :form="registration_form" :name="'email'" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormString :form="registration_form" :name="'duplicate_client_email'" v-model="client.email" hide-title/></td>
+                            <td v-if="registration_form.values['client_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_client_email'" v-model="clientCheckbox.email" hide-title/></td>
+                        </tr>
+                    </table>
+                    <table style="width: 50%">
+                        <tr>
+                            <td></td>
+                            <td>Данные лида</td>
+                            <td v-if="registration_form.values['ward_id'] !== null">Данные занимающегося</td>
+                            <td v-if="registration_form.values['ward_id'] !== null">Обновить</td>
+                        </tr>
+                        <tr>
+                            <td>Фамилия</td>
+                            <td><FormString :form="registration_form" :name="'ward_lastname'" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormString :form="registration_form" :name="'duplicate_ward_lastname'" v-model="ward.lastname" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_ward_lastname'" v-model="wardCheckbox.lastname" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Имя</td>
+                            <td><FormString :form="registration_form" :name="'ward_firstname'" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormString :form="registration_form" :name="'duplicate_ward_firstname'" v-model="ward.firstname" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_ward_firstname'" v-model="wardCheckbox.firstname" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Отчество</td>
+                            <td><FormString :form="registration_form" :name="'ward_patronymic'" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormString :form="registration_form" :name="'duplicate_ward_patronymic'" v-model="ward.patronymic" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_ward_patronymic'" v-model="wardCheckbox.patronymic" hide-title/></td>
+                        </tr>
+                        <tr>
+                            <td>Дата рождения</td>
+                            <td><FormDate :form="registration_form" :name="'ward_birth_date'" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormDate :form="registration_form" :name="'duplicate_ward_birth_date'" v-model="ward.birthday" hide-title/></td>
+                            <td v-if="registration_form.values['ward_id'] !== null"><FormCheckBox :form="registration_form" :name="'update_ward_birth_date'" v-model="wardCheckbox.birthday" hide-title/></td>
+                        </tr>
+                    </table>
                 </div>
-            </GuiContainer>
-            </GuiContainer>
-<!--                <GuiContainer w-450px mr-20 inline>-->
-<!--                    <FormString :form="duplicate_form"  :name="'lastname'"/>-->
-<!--                    <FormString :form="duplicate_form" :name="'firstname'"/>-->
-<!--                    <FormString :form="duplicate_form" :name="'patronymic'"/>-->
-<!--                    <FormPhone :form="duplicate_form" :name="'phone'"/>-->
-<!--                    <FormString :form="duplicate_form" :name="'email'"/>-->
-<!--                </GuiContainer>-->
-                <GuiContainer w-450px mr-20 inline>
-                    <FormString :form="registration_form" :name="'lastname'"/>
-                    <FormString :form="registration_form" :name="'firstname'"/>
-                    <FormString :form="registration_form" :name="'patronymic'"/>
-                    <FormPhone :form="registration_form" :name="'phone'"/>
-                    <FormString :form="registration_form" :name="'email'"/>
-                </GuiContainer>
-                <GuiContainer w-450px inline>
-                    <FormString :form="registration_form" :name="'ward_lastname'"/>
-                    <FormString :form="registration_form" :name="'ward_firstname'"/>
-                    <FormString :form="registration_form" :name="'ward_patronymic'"/>
-                    <FormDate :form="registration_form" :name="'ward_birth_date'"/>
-                    <FormText :form="registration_form" :name="'contract_comment'"/>
-                </GuiContainer>
+                <FormText :form="registration_form" :name="'contract_comment'"/>
             </GuiContainer>
         </FormPopUp>
     </LayoutPage>
@@ -74,9 +139,17 @@ import FormDate from "../../../Components/Form/FormDate";
 import FormDropdown from "../../../Components/Form/FormDropdown";
 import FormText from "../../../Components/Form/FormText";
 import FieldDropDown from "@/Components/Fields/FieldDropDown";
+import InputString from "@/Components/Inputs/InputString";
+import InputPhone from "@/Components/Inputs/InputPhone";
+import InputCheckbox from "@/Components/Inputs/InputCheckbox";
+import FormCheckBox from "@/Components/Form/FormCheckBox";
 
 export default {
     components: {
+        FormCheckBox,
+        InputCheckbox,
+        InputPhone,
+        InputString,
         FieldDropDown,
         FormText,
         FormDropdown,
@@ -94,12 +167,36 @@ export default {
     data: () => ({
         data: data('/api/leads/view'),
         registration_form: form(null, '/api/leads/register'),
-        clientDuplicates: [
-            {id: 1, name: 'test 1'},
-            {id: 2, name: 'test 2'},
-        ],
-        wardDuplicates: [],
+        clientDuplicates: null,
+        wardDuplicates: null,
         scd: null,
+        scd2: null,
+        client: {
+            lastname: '',
+            firstname: '',
+            patronymic: '',
+            phone: '',
+            email: ''
+        },
+        ward: {
+            lastname: '',
+            firstname: '',
+            patronymic: '',
+            birthday: '',
+        },
+        clientCheckbox: {
+            lastname: false,
+            firstname: false,
+            patronymic: false,
+            phone: false,
+            email: false
+        },
+        wardCheckbox: {
+            lastname: false,
+            firstname: false,
+            patronymic: false,
+            birthday: false
+        },
     }),
 
     computed: {
@@ -134,21 +231,40 @@ export default {
         load() {
             this.data.load({id: this.leadId})
                 .then(() => {
-                    console.log(333, this.data)
                     this.getDuplicates()
                 })
                 .catch(response => response.code === 404 && this.$router.replace({name: '404'}));
         },
         register() {
+            this.registration_form.set('client_id', null, null, 'Клиент', true);
+            this.registration_form.set('ward_id', null, null, 'Занимающийся', true);
             this.registration_form.set('lastname', this.data.data['lastname'], 'required', 'Фамилия', true);
             this.registration_form.set('firstname', this.data.data['firstname'], 'required', 'Имя', true);
             this.registration_form.set('patronymic', this.data.data['patronymic'], 'required', 'Отчество', true);
             this.registration_form.set('phone', this.data.data['phone'], 'required', 'Телефон', true);
             this.registration_form.set('email', this.data.data['email'], 'required|email|bail', 'Email', true);
+            this.registration_form.set('duplicate_client_lastname', null, null, 'фамилия дубля клиента', true);
+            this.registration_form.set('duplicate_client_firstname', null, null, 'Имя дубля клиента', true);
+            this.registration_form.set('duplicate_client_patronymic', null, null, 'Отчество дубля клиента', true);
+            this.registration_form.set('duplicate_client_phone', null, null, 'Телефон дубля клиента', true);
+            this.registration_form.set('duplicate_client_email', null, null, 'Email дубля клиента', true);
+            this.registration_form.set('update_client_lastname', null, null, null, true);
+            this.registration_form.set('update_client_firstname', null, null, null, true);
+            this.registration_form.set('update_client_patronymic', null, null, null, true);
+            this.registration_form.set('update_client_phone', null, null, null, true);
+            this.registration_form.set('update_client_email', null, null, null, true);
             this.registration_form.set('ward_lastname', this.data.data['ward_lastname'], 'required', 'Фамилия занимающегося', true);
             this.registration_form.set('ward_firstname', this.data.data['ward_firstname'], 'required', 'Имя занимающегося', true);
             this.registration_form.set('ward_patronymic', this.data.data['ward_patronymic'], 'required', 'Отчество занимающегося', true);
             this.registration_form.set('ward_birth_date', this.data.data['ward_birth_date'], 'required', 'Дата рождения занимающегося', true);
+            this.registration_form.set('duplicate_ward_lastname', null, null, 'фамилия дубля занимающегося', true);
+            this.registration_form.set('duplicate_ward_firstname', null, null, 'Имя дубля занимающегося', true);
+            this.registration_form.set('duplicate_ward_patronymic', null, null, 'Отчество дубля занимающегося', true);
+            this.registration_form.set('duplicate_ward_birth_date', null, null, 'День рождения дубля занимающегося', true);
+            this.registration_form.set('update_ward_lastname', null, null, null, true);
+            this.registration_form.set('update_ward_firstname', null, null, null, true);
+            this.registration_form.set('update_ward_patronymic', null, null, null, true);
+            this.registration_form.set('update_ward_birth_date', null, null, null, true);
             this.registration_form.set('region_id', this.data.data['region_id'], 'required', 'Район', true);
             this.registration_form.set('service_id', this.data.data['service_id'], 'required', 'Услуга', true);
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
@@ -163,24 +279,35 @@ export default {
         },
         getDuplicates() {
             const data = {
-                lastname: this.data.data['lastname'],
-                firstname: this.data.data['firstname'],
-                patronymic: this.data.data['patronymic'],
-                phone: this.data.data['phone'],
-                email: this.data.data['email'],
-                ward_lastname: this.data.data['ward_lastname'],
-                ward_firstname: this.data.data['ward_firstname'],
-                ward_patronymic: this.data.data['ward_patronymic'],
-                ward_birth_date: this.data.data['ward_birth_date'],
+                data: {
+                    lastname: this.data.data['lastname'],
+                    firstname: this.data.data['firstname'],
+                    patronymic: this.data.data['patronymic'],
+                    phone: this.data.data['phone'],
+                    email: this.data.data['email'],
+                    ward_lastname: this.data.data['ward_lastname'],
+                    ward_firstname: this.data.data['ward_firstname'],
+                    ward_patronymic: this.data.data['ward_patronymic'],
+                    ward_birth_date: this.data.data['ward_birth_date'],
+                }
             }
             axios.post('/api/leads/find-duplicates', data)
                 .then(response => {
-                    console.log(111, response)
+                    this.clientDuplicates = response.data.data.result.clients_info;
+                    this.wardDuplicates = response.data.data.result.wards_info;
+                    console.log(this.wardDuplicates)
                 })
         },
         clientDuplicateSelected(id) {
-            console.log(id)
-        }
+            this.client = this.clientDuplicates.find(
+                value => value.id === id
+            );
+        },
+        wardDuplicateSelected(id) {
+            this.ward = this.clientDuplicates.find(
+                value => value.user_id === id
+            );
+        },
     }
 }
 </script>

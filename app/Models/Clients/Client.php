@@ -25,7 +25,7 @@ use InvalidArgumentException;
  * @property ClientStatus $status
  * @property Organization $organization
  * @property User $user
- * @property Collection $wards
+ * @property Collection<ClientWard> $wards
  */
 class Client extends Model implements Statusable
 {

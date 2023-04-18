@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Leads;
 
 use App\Current;
+use App\Helpers\DuplicatesFinder;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Requests\APIListRequest;
@@ -19,6 +20,7 @@ use App\Models\User\UserProfile;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +70,7 @@ class LeadsRegisterController extends ApiEditController
             return APIResponse::notFound('Лид не найден');
         }
 
-        if($lead->subscription_id !== null) {
+        if ($lead->subscription_id !== null) {
             return APIResponse::error('По этому лиду уже создана подписка.');
         }
 
@@ -147,22 +149,60 @@ class LeadsRegisterController extends ApiEditController
 
     public function findDuplicates(ApiListRequest $request): JsonResponse
     {
-        $clientUserDuplicateId = UserProfile::query()
-            ->where('lastname', $request->get('lastname'))
-            ->where('firstname', $request->get('firstname'))
-            ->where('patronymic', $request->get('patronymic'))
-            ->where('phone', $request->get('phone'))
-            ->where('email', $request->get('email'))
-            ->select('user_id')
-            ->pluck('user_id')
-            ->first();
+        $current = Current::get($request);
+        $data = $this->getData($request);
 
-        $wardUserDuplicateId = UserProfile::query()
-            ->where();
+        $clientDuplicates = DuplicatesFinder::clientDuplicates(
+            $current->organizationId(),
+            $data['lastname'],
+            $data['firstname'],
+            $data['patronymic'],
+            $data['phone'],
+            $data['email']
+        );
 
+        if ($clientDuplicates !== null) {
+            $clientDuplicates->transform(function (Client $client) {
+                return [
+                    'id' => $client->id,
+                    'name' => $client->user->profile->fullName,
+                    'email' => $client->user->profile->email,
+                    'phone' => $client->user->profile->phone,
+                    'lastname' => $client->user->profile->lastname,
+                    'firstname' => $client->user->profile->firstname,
+                    'patronymic' => $client->user->profile->patronymic,
+                ];
+            });
+        }
+
+        $wardDuplicates = DuplicatesFinder::wardDuplicates(
+            $current->organizationId(),
+            $data['ward_lastname'],
+            $data['ward_firstname'],
+            $data['ward_patronymic'],
+            $data['ward_birth_date']
+        );
+
+        dd($wardDuplicates->toArray());
+
+        if ($wardDuplicates !== null) {
+            $wardDuplicates->transform(function (Client $client) {
+                return [
+                    'id' => $client->id,
+                    'name' => $client->user->profile->fullName,
+                    'birthdate' => $client->user->profile->birthdate,
+                    'lastname' => $client->user->profile->lastname,
+                    'firstname' => $client->user->profile->firstname,
+                    'patronymic' => $client->user->profile->patronymic,
+                ];
+            });
+        }
 
         return APIResponse::response([
-            'result' => $clientUserDuplicateId
+            'result' => [
+                'clients_info' => $clientDuplicates,
+                'wards_info' => $wardDuplicates
+            ]
         ]);
     }
 }
