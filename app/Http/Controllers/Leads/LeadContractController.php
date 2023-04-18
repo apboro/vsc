@@ -6,8 +6,6 @@ use App\Helpers\SubscriptionContractPdf;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Controllers\Leads\Helpers\LeadSession;
-use App\Models\Clients\ClientWard;
-use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\Subscription;

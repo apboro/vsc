@@ -3,7 +3,6 @@
 namespace App\Classes;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 
 class EmailReceiver
 {

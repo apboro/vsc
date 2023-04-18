@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Subscriptions;
 
 use App\Current;
 use App\Http\APIResponse;
-use App\Http\Controllers\API\Services\ServicesViewController;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
@@ -13,7 +12,6 @@ use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

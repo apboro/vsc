@@ -7,7 +7,6 @@ use App\Http\Controllers\ApiEditController;
 use App\Http\Controllers\Leads\Helpers\LeadSession;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Leads\Lead;
-use App\Models\Services\Service;
 use App\Models\TrainingBase\TrainingBase;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
