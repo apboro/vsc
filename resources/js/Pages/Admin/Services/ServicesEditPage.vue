@@ -43,6 +43,13 @@
         <GuiContainer mt-30>
             <FormNumber :form="form" :name="'group_limit'"/>
             <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
+            <FormDictionary
+                            :form="form"
+                            :name="'sport_kinds'"
+                            :dictionary="'sport_kinds'"
+                            :multi="true"
+                            :placeholder="'Выберите виды спорта'"
+            />
         </GuiContainer>
 
         <GuiContainer mt-30 v-if="regularTypeProgram.includes(form.values['type_program_id'])">

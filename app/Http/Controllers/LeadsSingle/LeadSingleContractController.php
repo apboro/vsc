@@ -136,6 +136,7 @@ class LeadSingleContractController extends ApiEditController
                 $contract->contractData->ward_birth_date = Carbon::parse($data['ward_birth_date']);
                 $contract->contractData->ward_document = trim($data['ward_document']);
                 $contract->contractData->ward_document_date = Carbon::parse($data['ward_document_date']);
+                $contract->contractData->sport_kind = implode(', ', $subscription->service->sportKinds->pluck('name')->toArray());
                 $contract->contractData->service_name = $subscription->service->title;
                 $contract->contractData->training_base_name = $subscription->service->trainingBase->title;
                 $contract->contractData->advance_payment = $subscription->service->advance_payment;

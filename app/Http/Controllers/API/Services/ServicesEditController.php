@@ -22,6 +22,7 @@ class ServicesEditController extends ApiEditController
         'contract_id' => 'required',
         'letter_id' => 'required',
         'sport_kind_id' => 'required',
+        'sport_kinds' => 'required',
         'monthly_price' => 'nullable',
         'training_price' => 'nullable',
         'trainings_per_week' => 'nullable',
@@ -61,6 +62,7 @@ class ServicesEditController extends ApiEditController
         'status_id' => 'Статус услуги',
         'training_base_id' => 'Объект',
         'sport_kind_id' => 'Вид спорта',
+        'sport_kinds' => 'Виды спорта',
         'type_program_id' => 'Тип программы',
         'price' => 'Стоимость услуги руб.',
         'description' => 'Описание услуги',
@@ -128,6 +130,7 @@ class ServicesEditController extends ApiEditController
                 'title' => $service->title,
                 'training_base_id' => $service->training_base_id,
                 'sport_kind_id' => $service->sport_kind_id,
+                'sport_kinds' => $service->sportKinds()->pluck('sport_kind_id')->toArray(),
                 'monthly_price' => $service->monthly_price,
                 'training_price' => $service->training_price,
                 'trainings_per_week' => $service->trainings_per_week,
@@ -277,6 +280,8 @@ class ServicesEditController extends ApiEditController
             $service->organization_id = $current->organizationId();
         }
         $service->save();
+
+        $service->sportKinds()->sync($data['sport_kinds']);
 
         $service->schedule->mon = $data['schedule_day_mon'];
         $service->schedule->tue = $data['schedule_day_tue'];

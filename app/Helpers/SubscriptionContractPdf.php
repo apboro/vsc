@@ -90,7 +90,7 @@ class SubscriptionContractPdf
                 })
             ),
 
-            'sport_kind' => $contract->contractData->sport_kind ?? $contract->subscription->service->sportKind->name,
+            'sport_kind' => $contract->contractData->sport_kind ?? implode(', ', $contract->subscription->service->pluck('name')->toArray()),
             'training_base_address' => $contract->contractData->training_base_address ?? $contract->subscription->service->trainingBase->info->address,
 
             'monthly_price' => $monthlyPrice . ' руб.',

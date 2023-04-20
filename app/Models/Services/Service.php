@@ -16,6 +16,7 @@ use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 
@@ -342,6 +343,16 @@ class Service extends Model implements Statusable, AsDictionary
     public function sportKind(): HasOne
     {
         return $this->hasOne(SportKind::class, 'id', 'sport_kind_id');
+    }
+
+    /**
+     * Sports kinds relation.
+     *
+     * @return  BelongsToMany
+     */
+    public function sportKinds(): BelongsToMany
+    {
+        return $this->belongsToMany(SportKind::class, 'service_has_sport_kind', 'service_id', 'sport_kind_id');
     }
 
     /**

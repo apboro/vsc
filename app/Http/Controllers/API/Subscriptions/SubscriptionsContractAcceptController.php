@@ -195,7 +195,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
             $contract->contractData->trainings_per_week = $contract->subscription->service->trainings_per_week;
             $contract->contractData->trainings_per_month = $contract->subscription->service->trainings_per_month;
             $contract->contractData->training_duration = $contract->subscription->service->training_duration;
-            $contract->contractData->sport_kind = $contract->subscription->service->sportKind->name;
+            $contract->contractData->sport_kind = implode(', ', $contract->subscription->service->sportKinds->pluck('name')->toArray());
             $contract->contractData->training_base_address = $contract->subscription->service->trainingBase->info->address;
             $contract->contractData->monthly_price = $contract->subscription->service->monthly_price;
             $contract->contractData->training_return_price = $contract->subscription->service->training_return_price;
