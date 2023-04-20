@@ -31,7 +31,7 @@
 
                 <div style="margin-top: 20px"/>
 
-                <FormDropdown :top="true" :form="form" :name="'region_id'" :options="regions" :identifier="'id'" :show="'name'" :placeholder="'Любой район'" :has-null="true" @change="regionChanged"/>
+                <FormDropdown :top="true" title="Локация" :form="form" :name="'region_id'" :options="regions" :identifier="'id'" :show="'name'" :placeholder="'Любой район'" :has-null="true" @change="regionChanged"/>
                 <FormDropdown :top="true" class="vsc-services-drop" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
                               :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
                               @change="serviceChanged"
@@ -140,7 +140,7 @@ export default {
         this.form.set('email', null, 'required|email|bail', 'Email', true);
         this.form.set('region_id', null, null, 'Район', true);
         this.form.set('service_id', null, 'required_if:need_help,false', 'Услуга', true);
-        this.form.set('need_help', false, null, 'Не могу определиться, прошу со мной связаться» в обоих формах', true);
+        this.form.set('need_help', false, null, 'Не могу определиться, прошу со мной связаться', true);
 
         this.form.set('client_comments', null, null, 'Комментарии', true);
 

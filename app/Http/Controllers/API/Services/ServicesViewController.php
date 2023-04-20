@@ -75,6 +75,14 @@ class ServicesViewController extends ApiController
             'start_at' => $service->start_at->format('d.m.Y'),
             'end_at' => $service->end_at->format('d.m.Y'),
             'requisites' => $service->requisites ? $service->requisites->name : null,
+            'is_regular' => !isset($service->typeProgram->serviceType) || $service->typeProgram->serviceType->id === ServiceTypes::regular,
+            'price' => $service->price,
+            'date_deposit_funds' => isset($service->date_deposit_funds) ? $service->date_deposit_funds->format('d.m.Y') : null,
+            'advance_payment' => $service->advance_payment,
+            'date_advance_payment' => isset($service->date_advance_payment) ? $service->date_advance_payment->format('d.m.Y') : null,
+            'refund_amount' => $service->refund_amount,
+            'daily_price' => $service->daily_price,
+            'price_deduction_advance' => $service->price_deduction_advance,
         ];
     }
 
