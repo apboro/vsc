@@ -151,14 +151,14 @@
                             </tr>
                         </table>
                         <table style="width: 50%; padding-left: 10px">
-                            <tr style="overflow: hidden; height: 42px;">
+                            <tr v-if="ward" style="overflow: hidden; height: 42px;">
                                 <td style="padding-left: 130px">
                                     <GuiText>Данные лида</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>Данные занимающегося</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>Обновить</GuiText>
                                 </td>
                             </tr>
@@ -166,10 +166,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_lastname'"/>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>{{ ward.lastname }}</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                <td v-if="ward" style="text-align: center">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_lastname'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -178,10 +178,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_firstname'"/>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>{{ ward.firstname }}</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                <td v-if="ward" style="text-align: center">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_firstname'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -190,10 +190,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_patronymic'"/>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>{{ ward.patronymic }}</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                <td v-if="ward" style="text-align: center">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_patronymic'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -202,10 +202,10 @@
                                 <td>
                                     <FormDate :form="registration_form" :name="'ward_birth_date'"/>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null">
+                                <td v-if="ward">
                                     <GuiText>{{ ward.birthdate }}</GuiText>
                                 </td>
-                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                <td v-if="ward" style="text-align: center">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_birth_date'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
