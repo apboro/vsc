@@ -45,6 +45,7 @@ class StatusesSeeder extends GenericSeeder
         LeadStatus::class => [
             LeadStatus::new => ['name' => 'Новый'],
             LeadStatus::client_created => ['name' => 'Создан клиент'],
+            LeadStatus::deleted => ['name' => 'Удален'],
         ],
         ClientStatus::class => [
             ClientStatus::active => ['name' => 'Активный'],

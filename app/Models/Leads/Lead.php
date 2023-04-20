@@ -7,6 +7,7 @@ use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\Region;
 use App\Models\Model;
 use App\Models\Organization\Organization;
+use App\Models\Positions\Position;
 use App\Models\Services\Service;
 use App\Models\Subscriptions\Subscription;
 use App\Traits\HasStatus;
@@ -141,4 +142,13 @@ class Lead extends Model implements Statusable
         return $this->hasOne(Subscription::class, 'id', 'subscription_id');
     }
 
+    public function canDelete(Position $position):bool
+    {
+        return $this->hasStatus(LeadStatus::new) && $position->can('leads.delete');
+    }
+
+    public function canRegister(Position $position):bool
+    {
+        return $this->subscription_id === null && $position->can('leads.register') && !$this->hasStatus(LeadStatus::deleted);
+    }
 }
