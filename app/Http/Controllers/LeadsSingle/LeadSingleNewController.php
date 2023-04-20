@@ -12,8 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use function App\Http\Controllers\Leads\mb_strtolower;
-use function App\Http\Controllers\Leads\mb_strtoupper;
 
 class LeadSingleNewController extends ApiEditController
 {
