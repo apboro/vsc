@@ -107,7 +107,7 @@ class LeadSingleInitController extends ApiEditController
             ->get();
 
         if (isset($services) && count($services) > 0) {
-            $arrRegions = [];
+            $arrRegions = $services->pluck('region_id')->unique()->toArray();
             $regions = Region::queryRaw()
                 ->whereIn('id', $arrRegions)
                 ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
