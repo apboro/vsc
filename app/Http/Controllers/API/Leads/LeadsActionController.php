@@ -26,7 +26,7 @@ class LeadsActionController
             ->first();
 
         if(!$lead) {
-            APIResponse::notFound('');
+            APIResponse::notFound('Лид не найден');
         }
 
         if ($lead->canDelete($current->position())) {

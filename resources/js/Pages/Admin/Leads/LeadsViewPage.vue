@@ -15,224 +15,206 @@
 
         <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'"
                    class="registration-form" ref="registration">
-            <div style="width: 1200px">
-                <GuiContainer>
-                    <GuiContainer w-50 inline>
-                        <FormDictionary :form="registration_form"
-                                        :name="'region_id'"
-                                        :dictionary="'regions'"
-                                        :search="true"
-                                        :top="false"
-                                        @change="regionChanged"
-                                        style="max-width: 400px"
-                        />
+            <div style="width: 1250px">
+                <GuiContainer w-50 inline>
+                    <FormDictionary :form="registration_form"
+                                    :name="'region_id'"
+                                    :dictionary="'regions'"
+                                    :search="true"
+                                    :top="false"
+                                    @change="regionChanged"
+                                    style="max-width: 400px"
+                    />
+                </GuiContainer>
+
+                <GuiContainer w-50 inline>
+                    <FormDropdown :form="registration_form"
+                                  :name="'service_id'"
+                                  :options="regionServices"
+                                  :identifier="'id'"
+                                  :show="'title'"
+                                  :search="true"
+                                  :top="false"
+                                  style="max-width: 400px; padding-left: 15px"
+                    />
+                </GuiContainer>
+
+                <GuiContainer w-100>
+                    <GuiContainer w-50 inline pr-50>
+                        <GuiHeading bold my-10>Клиент</GuiHeading>
+                        <template v-if="clientDuplicates">
+                            <GuiText text-red mb-10>Обнаружены совпадения!</GuiText>
+                            <FormDropdown
+                                :form="registration_form"
+                                name="client_id"
+                                :options="clientDuplicates"
+                                placeholder="Новый клиент"
+                                :has-null="true"
+                                identifier="id"
+                                show="name"
+                                @change="client"
+                            />
+                        </template>
+
+                        <table style="width: 100%">
+                            <tr v-if="client" style="overflow: hidden; height: 42px">
+                                <td style="padding-left: 130px; width: auto;">
+                                    <GuiText>Данные лида</GuiText>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>Данные клиента</GuiText>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>Обновить</GuiText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'lastname'"/>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>{{ client.lastname }}</GuiText>
+                                </td>
+                                <td v-if="client" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_client_lastname'" style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'firstname'"/>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>{{ client.firstname }}</GuiText>
+                                </td>
+                                <td v-if="client" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_client_firstname'" style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'patronymic'"/>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>{{ client.patronymic }}</GuiText>
+                                </td>
+                                <td v-if="client" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_client_patronymic'" style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormPhone :form="registration_form" :name="'phone'"/>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>{{ client.phone }}</GuiText>
+                                </td>
+                                <td v-if="client" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_client_phone'" style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'email'"/>
+                                </td>
+                                <td v-if="client">
+                                    <GuiText>{{ client.email }}</GuiText>
+                                </td>
+                                <td v-if="client" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_client_email'" style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                        </table>
                     </GuiContainer>
+
                     <GuiContainer w-50 inline>
-                        <FormDropdown :form="registration_form"
-                                      :name="'service_id'"
-                                      :options="regionServices"
-                                      :identifier="'id'"
-                                      :show="'title'"
-                                      :search="true"
-                                      :top="false"
-                                      style="max-width: 400px; padding-left: 15px"
-                        />
+                        <GuiHeading><span class="text__title" style="padding-left: 15px">Занимающийся</span></GuiHeading>
+                        <table style="width: 100%; padding-left: 10px">
+                            <tr v-if="wardDuplicates">
+                                <td colspan="2">
+                                    <GuiText><span class="text__warning">Обнаружены совпадения!</span></GuiText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="32">
+                                    <FormDropdown
+                                        :form="registration_form"
+                                        name="ward_id"
+                                        :options="wardDuplicates"
+                                        placeholder="Новый занимающийся"
+                                        :has-null="true"
+                                        identifier="id"
+                                        show="name"
+                                        @change="ward"
+                                    />
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table style="width: 50%; padding-left: 10px">
+                            <tr style="overflow: hidden; height: 42px;">
+                                <td style="padding-left: 130px">
+                                    <GuiText>Данные лида</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>Данные занимающегося</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>Обновить</GuiText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'ward_lastname'"/>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>{{ ward.lastname }}</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_ward_lastname'"
+                                                  style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'ward_firstname'"/>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>{{ ward.firstname }}</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_ward_firstname'"
+                                                  style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormString :form="registration_form" :name="'ward_patronymic'"/>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>{{ ward.patronymic }}</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_ward_patronymic'"
+                                                  style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FormDate :form="registration_form" :name="'ward_birth_date'"/>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null">
+                                    <GuiText>{{ ward.birthdate }}</GuiText>
+                                </td>
+                                <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
+                                    <FormCheckBox :form="registration_form" :name="'update_ward_birth_date'"
+                                                  style="max-width: 20px" hide-title/>
+                                </td>
+                            </tr>
+                        </table>
                     </GuiContainer>
                 </GuiContainer>
-                <GuiContainer>
-                    <div style="display: flex; align-items: flex-start">
-                        <GuiContainer w-50 inline>
-                            <GuiHeading><span class="text__title" style="padding-left: 5px">Клиент</span></GuiHeading>
-                            <table style="width: 100%">
-                                <tr v-if="clientDuplicates">
-                                    <td colspan="2">
-                                        <GuiText><span class="text__warning">Обнаружены совпадения!</span></GuiText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="32">
-                                        <FormDropdown
-                                            :form="registration_form"
-                                            name="client_id"
-                                            :options="clientDuplicates"
-                                            placeholder="Новый клиент"
-                                            :has-null="true"
-                                            identifier="id"
-                                            show="name"
-                                            @change="client"
-                                        />
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <table style="width: 50%">
-                                <tr style="overflow: hidden; height: 42px">
-                                    <td style="padding-left: 130px">
-                                        <GuiText>Данные лида</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>Данные клиента</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>Обновить</GuiText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'lastname'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>{{ client.lastname }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null"
-                                        style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_client_lastname'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'firstname'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>{{ client.firstname }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null"
-                                        style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_client_firstname'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'patronymic'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>{{ client.patronymic }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null"
-                                        style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_client_patronymic'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormPhone :form="registration_form" :name="'phone'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>{{ client.phone }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null"
-                                        style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_client_phone'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'email'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null">
-                                        <GuiText>{{ client.email }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['client_id'] !== null"
-                                        style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_client_email'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </GuiContainer>
-                        <GuiContainer w-50 inline>
-                            <GuiHeading><span class="text__title" style="padding-left: 15px">Занимающийся</span></GuiHeading>
-                            <table style="width: 100%; padding-left: 10px">
-                                <tr v-if="wardDuplicates">
-                                    <td colspan="2">
-                                        <GuiText><span class="text__warning">Обнаружены совпадения!</span></GuiText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="32">
-                                        <FormDropdown
-                                            :form="registration_form"
-                                            name="ward_id"
-                                            :options="wardDuplicates"
-                                            placeholder="Новый занимающийся"
-                                            :has-null="true"
-                                            identifier="id"
-                                            show="name"
-                                            @change="ward"
-                                        />
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <table style="width: 50%; padding-left: 10px">
-                                <tr style="overflow: hidden; height: 42px;">
-                                    <td style="padding-left: 130px">
-                                        <GuiText>Данные лида</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>Данные занимающегося</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>Обновить</GuiText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'ward_lastname'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>{{ ward.lastname }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_ward_lastname'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'ward_firstname'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>{{ ward.firstname }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_ward_firstname'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormString :form="registration_form" :name="'ward_patronymic'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>{{ ward.patronymic }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_ward_patronymic'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <FormDate :form="registration_form" :name="'ward_birth_date'"/>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null">
-                                        <GuiText>{{ ward.birthdate }}</GuiText>
-                                    </td>
-                                    <td v-if="registration_form.values['ward_id'] !== null" style="text-align: center">
-                                        <FormCheckBox :form="registration_form" :name="'update_ward_birth_date'"
-                                                      style="max-width: 20px" hide-title/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </GuiContainer>
-                    </div>
-                </GuiContainer>
-                <GuiContainer>
+
+                <GuiContainer mt-10>
                     <GuiText><span class="text__title">Комментарий менеджера (отобразится в уведомлении клиенту)</span></GuiText>
                     <FormText :form="registration_form" :name="'contract_comment'" hide-title/>
                 </GuiContainer>
@@ -293,6 +275,7 @@ export default {
         registration_form: form(null, '/api/leads/register'),
         clientDuplicates: null,
         wardDuplicates: null,
+        is_duplicates_loading: false,
         clientCheckbox: {
             lastname: false,
             firstname: false,
@@ -313,7 +296,7 @@ export default {
             return Number(this.$route.params.id);
         },
         processing() {
-            return this.data.is_loading;
+            return this.data.is_loading || this.is_duplicates_loading;
         },
         title() {
             return this.data.is_loaded ? this.data.data['title'] : '...';
@@ -360,9 +343,6 @@ export default {
     methods: {
         load() {
             this.data.load({id: this.leadId})
-                .then(() => {
-                    this.getDuplicates()
-                })
                 .catch(response => response.code === 404 && this.$router.replace({name: '404'}));
         },
         register() {
@@ -390,32 +370,37 @@ export default {
             this.registration_form.set('service_id', this.data.data['service_id'], 'required', 'Услуга', true);
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
             this.registration_form.load();
-            this.$refs.registration.show({lead_id: this.leadId})
+            this.is_duplicates_loading = true;
+            this.getDuplicates()
                 .then(() => {
-                    this.load();
-                });
+                    this.$refs.registration.show({lead_id: this.leadId})
+                        .then(() => {
+                            this.load();
+                        });
+                })
+                .finally(() => {
+                    this.is_duplicates_loading = false;
+                })
         },
         regionChanged() {
             this.registration_form.update('service_id', null);
         },
         getDuplicates() {
             const data = {
-                data: {
-                    lastname: this.data.data['lastname'],
-                    firstname: this.data.data['firstname'],
-                    patronymic: this.data.data['patronymic'],
-                    phone: this.data.data['phone'],
-                    email: this.data.data['email'],
-                    ward_lastname: this.data.data['ward_lastname'],
-                    ward_firstname: this.data.data['ward_firstname'],
-                    ward_patronymic: this.data.data['ward_patronymic'],
-                    ward_birth_date: this.data.data['ward_birth_date'],
-                }
+                lastname: this.data.data['lastname'],
+                firstname: this.data.data['firstname'],
+                patronymic: this.data.data['patronymic'],
+                phone: this.data.data['phone'],
+                email: this.data.data['email'],
+                ward_lastname: this.data.data['ward_lastname'],
+                ward_firstname: this.data.data['ward_firstname'],
+                ward_patronymic: this.data.data['ward_patronymic'],
+                ward_birth_date: this.data.data['ward_birth_date'],
             }
-            axios.post('/api/leads/find-duplicates', data)
+            return axios.post('/api/leads/find-duplicates', {data: data})
                 .then(response => {
-                    this.clientDuplicates = response.data.data.result.clients_info;
-                    this.wardDuplicates = response.data.data.result.wards_info;
+                    this.clientDuplicates = response.data.data['clients_info'];
+                    this.wardDuplicates = response.data.data['wards_info'];
                     console.log(this.wardDuplicates)
                 })
         },
@@ -428,11 +413,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-td {
-    padding: 5px 5px 0 5px;
-}
 
 .registration-form {
+    td {
+        padding: 5px 5px 5px 0;
+    }
+
     :deep(.input-field__title) {
         width: 120px;
     }

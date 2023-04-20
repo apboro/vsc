@@ -131,6 +131,7 @@ class LeadsRegisterController extends ApiEditController
                 }
 
                 if ($data['ward_id']) {
+                    /** @var ClientWard|null $ward */
                     $ward = ClientWard::query()->where('id', $data['ward_id'])->with('user.profile')->first();
 
                     if (!$ward) {
@@ -163,13 +164,14 @@ class LeadsRegisterController extends ApiEditController
                     $user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
                     $user->profile->save();
 
-
-                    $ward = new ClientWard;
+                    $ward = new ClientWard();
                     $ward->user_id = $user->id;
                     $ward->setStatus(ClientWardStatus::active, false);
                     $ward->save();
+                }
 
-                    // attach ward to client
+                // attach ward to client
+                if ($client->wards()->where('id', $ward->id)->count() === 0) {
                     $client->wards()->attach($ward->id);
                 }
 
@@ -189,11 +191,13 @@ class LeadsRegisterController extends ApiEditController
                 $lead->save();
 
                 // send a link to client
-                try {
-                    Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
-                } catch (Exception $exception) {
-                    Log::channel('outgoing_mail_errors')->error($exception->getMessage());
-                    throw $exception;
+                if (env('SKIP_LEAD_EMAIL_SENDING', false) === false) {
+                    try {
+                        Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
+                    } catch (Exception $exception) {
+                        Log::channel('outgoing_mail_errors')->error($exception->getMessage());
+                        throw $exception;
+                    }
                 }
             });
         } catch (Exception $exception) {
@@ -206,6 +210,7 @@ class LeadsRegisterController extends ApiEditController
     public function findDuplicates(ApiListRequest $request): JsonResponse
     {
         $current = Current::get($request);
+
         $data = $this->getData($request);
 
         $clientDuplicates = DuplicatesFinder::clientDuplicates(
@@ -253,10 +258,8 @@ class LeadsRegisterController extends ApiEditController
         }
 
         return APIResponse::response([
-            'result' => [
-                'clients_info' => $clientDuplicates,
-                'wards_info' => $wardDuplicates
-            ]
+            'clients_info' => $clientDuplicates,
+            'wards_info' => $wardDuplicates,
         ]);
     }
 }
