@@ -20,8 +20,8 @@ class Pattern extends AbstractDictionary
     /** @var int Лукоморье */
     public const lukomorye = 4;
 
-    /** @var int Голованов */
-    public const golovanov = 5;
+    /** @var int Анапа */
+    public const anapa = 5;
 
 
     /** @var string Referenced table name. */

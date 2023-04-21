@@ -24,8 +24,8 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Лукоморье',
                 'pattern' => 'pdf/contracts/subscription_lukomorye_contract',
             ],
-            Pattern::golovanov => [
-                'name' => 'Голованов',
+            Pattern::anapa => [
+                'name' => 'Анапа',
                 'pattern' => 'pdf/contracts/subscription_golovanov_contract',
             ],
         ],
