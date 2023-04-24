@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property bool $enabled
  * @property int $order
+ *
+ * @property Organization $organization
+ * @property Pattern $pattern
  */
 class Contracts extends AbstractDictionary
 {
