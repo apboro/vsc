@@ -16,6 +16,7 @@ use App\Models\Organization\Organization;
 use App\Models\TrainingBase\TrainingBase;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
@@ -55,6 +56,10 @@ use InvalidArgumentException;
  * @property Organization $organization
  * @property TrainingBase $trainingBase
  * @property SportKind $sportKind
+ * @property Letters $letter
+ * @property ServiceProgram $typeProgram
+ * @property Contracts $contract
+ * @property Collection<SportKind> $sportKinds
  * @property ServiceSchedule $schedule
  * @property OrganizationRequisites $requisites
  */
