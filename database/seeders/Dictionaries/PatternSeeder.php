@@ -13,15 +13,15 @@ class PatternSeeder extends GenericSeeder
     protected array $data = [
         Pattern::class => [
             Pattern::standard_one => [
-                'name' => 'Стандартный',
+                'name' => 'Лен обл',
                 'pattern' => 'pdf/subscription_contract',
             ],
             Pattern::volhov => [
-                'name' => 'Волхов',
+                'name' => 'Карелия',
                 'pattern' => 'pdf/contracts/subscription_volhov_contract',
             ],
             Pattern::lukomorye => [
-                'name' => 'Лукоморье',
+                'name' => 'Псковская область',
                 'pattern' => 'pdf/contracts/subscription_lukomorye_contract',
             ],
             Pattern::anapa => [
