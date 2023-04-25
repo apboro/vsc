@@ -7,8 +7,13 @@ use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\Letters;
 use App\Models\Dictionaries\PatternLetters;
 use App\Scopes\ForOrganization;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
 class LettersEditController extends ApiEditController
 {
@@ -36,32 +41,37 @@ class LettersEditController extends ApiEditController
         $patternIDs = $request['patternIDs'];
         $organization_id = $request['organization_id'];
 
-        if (!isset($patternIDs) || empty($patternIDs)) {
-            Letters::tap(new ForOrganization($organization_id, true))->delete();
-        } else {
-            //deleteContracts
-            Letters::tap(new ForOrganization($organization_id, true))
-                ->whereNotIn('pattern_id', $patternIDs)
-                ->delete();
+        try {
+            DB::transaction(static function () use ($patternIDs, $organization_id) {
+                /** @var Collection<Letters> $remove */
+                $removeLetters = Letters::queryRaw()->tap(new ForOrganization($organization_id, true))->whereNotIn('pattern_id', $patternIDs)->get();
 
-            $letters = Letters::tap(new ForOrganization($organization_id, true))
-                ->whereIn('pattern_id', $patternIDs)
-                ->get();
-            $oldPatternIDs = $letters->pluck('pattern_id')->toArray();
-            $createPatternsIDs = array_diff($patternIDs, $oldPatternIDs);
+                foreach ($removeLetters as $letter) {
+                    /** @var Letters $letter */
+                    try {
+                        $letter->delete();
+                    } catch (QueryException $exception) {
+                        throw new RuntimeException(sprintf('Шаблон %s используется', $letter->name));
+                    }
+                }
 
-            $patterns = PatternLetters::all();
+                $registered = Letters::queryRaw()->tap(new ForOrganization($organization_id, true))->pluck('pattern_id')->toArray();
 
-            $items = [];
-            foreach ($createPatternsIDs as $patternID) {
-                $items[] = [
-                    'name' => $patterns->where('id', $patternID)->first()->name,
-                    'pattern_id' => $patternID,
-                    'organization_id' => $organization_id
-                ];
-            }
+                $toRegister = array_diff($patternIDs, $registered);
 
-            Letters::upsert($items, 'id', ['name', 'pattern_id', 'organization_id']);
+                $patterns = PatternLetters::query()->whereIn('id', $toRegister)->get();
+
+                foreach ($patterns as $pattern) {
+                    /** @var Letters $letter */
+                    $letter = new Letters();
+                    $letter->name = $pattern->name;
+                    $letter->pattern_id = $pattern->id;
+                    $letter->organization_id = $organization_id;
+                    $letter->save();
+                }
+            });
+        } catch (Exception $exception) {
+            return APIResponse::error($exception->getMessage());
         }
 
         return APIResponse::success('Письма обновлены');

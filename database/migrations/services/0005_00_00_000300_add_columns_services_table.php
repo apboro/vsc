@@ -16,23 +16,19 @@ class AddColumnsServicesTable extends Migration
     {
 
         Schema::table('services', function (Blueprint $table) {
-            if (!Schema::hasColumn('services', 'type_program_id')) {
-                Schema::table('services', function (Blueprint $table) {
-                    $table->unsignedBigInteger('type_program_id')->nullable();
-                    $table->unsignedTinyInteger('contract_id')->nullable();
-                    $table->unsignedInteger('price')->nullable();
-                    $table->text('description')->nullable();
-                    $table->date('date_deposit_funds')->nullable();
-                    $table->unsignedInteger('advance_payment')->nullable();
-                    $table->date('date_advance_payment')->nullable();
-                    $table->unsignedInteger('refund_amount')->nullable();
-                    $table->unsignedInteger('daily_price')->nullable();
-                    $table->unsignedInteger('price_deduction_advance')->nullable();
+            $table->unsignedInteger('type_program_id')->nullable();
+            $table->unsignedTinyInteger('contract_id')->nullable();
+            $table->unsignedInteger('price')->nullable();
+            $table->text('description')->nullable();
+            $table->date('date_deposit_funds')->nullable();
+            $table->unsignedInteger('advance_payment')->nullable();
+            $table->date('date_advance_payment')->nullable();
+            $table->unsignedInteger('refund_amount')->nullable();
+            $table->unsignedInteger('daily_price')->nullable();
+            $table->unsignedInteger('price_deduction_advance')->nullable();
 
-                    $table->foreign('contract_id')->references('id')->on('dictionary_contracts')->restrictOnDelete()->cascadeOnUpdate();
-                    $table->foreign('type_program_id')->references('id')->on('service_programs')->restrictOnDelete()->cascadeOnUpdate();
-                });
-            }
+            $table->foreign('contract_id')->references('id')->on('dictionary_contracts')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('type_program_id')->references('id')->on('service_programs')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -43,7 +39,7 @@ class AddColumnsServicesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function(Blueprint $table) {
+        Schema::table('services', function (Blueprint $table) {
             $table->dropForeign(['type_program_id']);
             $table->dropForeign(['contract_id']);
 

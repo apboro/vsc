@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Pattern;
+use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 
 class ContractsListController extends ApiController
@@ -21,15 +22,14 @@ class ContractsListController extends ApiController
      */
     public function list(ApiListRequest $request): JsonResponse
     {
-        $current = Current::get($request);
-
         $patterns = Pattern::queryRaw()
             ->where(['enabled' => true])
             ->select(['id', 'name'])
             ->orderBy('order')
             ->get();
 
-        $patternIDs = Contracts::query($current)
+        $patternIDs = Contracts::queryRaw()
+            ->tap(new ForOrganization($request->input('organization_id'), true))
             ->orderBy('id')
             ->pluck('pattern_id')
             ->toArray();

@@ -41,29 +41,5 @@ class PatternSeeder extends GenericSeeder
                 'contract' => 'mail.subscriptions.contract.contract_single',
             ],
         ],
-        Letters::class => [
-            Letters::standard_one => [
-                'name' => 'Регулярный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 1
-            ],
-            Letters::standard_two => [
-                'name' => 'Регулярный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 2
-            ],
-        ],
-        Contracts::class => [
-            Contracts::standard_one => [
-                'name' => 'Стандартный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 1
-            ],
-            Contracts::standard_two => [
-                'name' => 'Стандартный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 2
-            ],
-        ],
     ];
 }

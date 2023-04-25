@@ -27,8 +27,10 @@ class LettersListController extends ApiController
             ->orderBy('order')
             ->get();
 
-        $query = Letters::tap(new ForOrganization($request['organization_id'], true))
+        $query = Letters::queryRaw()
+            ->tap(new ForOrganization($request->input('organization_id'), true))
             ->orderBy('id');
+
         $patternIDs = $query->get()->unique('pattern_id')->pluck('pattern_id')->toArray();
 
         return APIResponse::response([
