@@ -143,6 +143,7 @@ class LeadSingleContractController extends ApiEditController
                 $contract->contractData->date_advance_payment = $subscription->service->date_advance_payment;
                 $contract->contractData->date_deposit_funds = $subscription->service->date_deposit_funds;
                 $contract->contractData->price = $subscription->service->price;
+                $contract->contractData->daily_price = $subscription->service->daily_price;
                 $contract->contractData->refund_amount = $subscription->service->refund_amount;
                 $contract->contractData->save();
 

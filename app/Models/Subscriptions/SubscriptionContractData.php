@@ -61,6 +61,7 @@ use Carbon\Carbon;
  * @property float|null $monthly_price
  * @property float|null $training_return_price
  * @property float|null $price
+ * @property float|null $daily_price
  * @property float|null $advance_payment
  * @property float|null $refund_amount
  *
@@ -208,5 +209,29 @@ class SubscriptionContractData extends Model
     public function setRefundAmountAttribute(?float $value): void
     {
         $this->attributes['refund_amount'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert daily price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getDailyPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert daily price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setDailyPriceAttribute(?float $value): void
+    {
+        $this->attributes['daily_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 }

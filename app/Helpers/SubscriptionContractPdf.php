@@ -66,6 +66,7 @@ class SubscriptionContractPdf
             'service_end_date' => self::formatDate($contract->contractData->service_end_date ?? $contract->subscription->service->end_at, 'года'),
 
             'price' => $contract->contractData->price,
+            'daily_price' => $contract->contractData->daily_price,
             'advance_payment' => $contract->contractData->advance_payment,
             'refund_amount' => $contract->contractData->refund_amount,
             'date_advance_payment' => self::formatDate($contract->contractData->date_advance_payment, 'года'),
