@@ -16,7 +16,7 @@ class CreateServiceProgramsTable extends Migration
     public function up(): void
     {
         Schema::create('service_programs', static function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->unsignedInteger('id', true);
 
             $table->unsignedTinyInteger('service_type_id')->default(ServiceTypes::regular);
             $table->unsignedTinyInteger('service_category_id')->default(ServiceCategories::paid);

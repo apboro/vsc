@@ -154,7 +154,6 @@ class Service extends Model implements Statusable, AsDictionary
         $this->attributes['training_return_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 
-
     /**
      * Convert price from store value to real price.
      *

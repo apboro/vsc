@@ -13,15 +13,15 @@ class PatternSeeder extends GenericSeeder
     protected array $data = [
         Pattern::class => [
             Pattern::standard_one => [
-                'name' => 'Стандартный',
+                'name' => 'Лен обл',
                 'pattern' => 'pdf/subscription_contract',
             ],
             Pattern::volhov => [
-                'name' => 'Волхов',
+                'name' => 'Карелия',
                 'pattern' => 'pdf/contracts/subscription_volhov_contract',
             ],
             Pattern::lukomorye => [
-                'name' => 'Лукоморье',
+                'name' => 'Псковская область',
                 'pattern' => 'pdf/contracts/subscription_lukomorye_contract',
             ],
             Pattern::anapa => [
@@ -39,30 +39,6 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Разовый',
                 'link' => 'mail.subscriptions.link.form_single_link',
                 'contract' => 'mail.subscriptions.contract.contract_single',
-            ],
-        ],
-        Letters::class => [
-            Letters::standard_one => [
-                'name' => 'Регулярный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 1
-            ],
-            Letters::standard_two => [
-                'name' => 'Регулярный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 2
-            ],
-        ],
-        Contracts::class => [
-            Contracts::standard_one => [
-                'name' => 'Стандартный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 1
-            ],
-            Contracts::standard_two => [
-                'name' => 'Стандартный',
-                'pattern_id' => PatternLetters::regular,
-                'organization_id' => 2
             ],
         ],
     ];

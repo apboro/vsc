@@ -15,13 +15,9 @@ class AddColumnLetterServicesTable extends Migration
     {
 
         Schema::table('services', function (Blueprint $table) {
-            if (!Schema::hasColumn('services', 'letter_id')) {
-                Schema::table('services', function (Blueprint $table) {
-                    $table->unsignedTinyInteger('letter_id')->nullable();
+            $table->unsignedTinyInteger('letter_id')->nullable();
 
-                    $table->foreign('letter_id')->references('id')->on('dictionary_letters')->restrictOnDelete()->cascadeOnUpdate();
-                });
-            }
+            $table->foreign('letter_id')->references('id')->on('dictionary_letters')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -32,7 +28,7 @@ class AddColumnLetterServicesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function(Blueprint $table) {
+        Schema::table('services', function (Blueprint $table) {
             $table->dropForeign(['letter_id']);
             $table->dropColumn('letter_id');
         });

@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Pattern;
+use App\Scopes\ForOrganization;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
@@ -38,14 +39,13 @@ class ContractsEditController extends ApiEditController
      */
     public function update(Request $request): JsonResponse
     {
-        $current = Current::get($request);
-
         $patternIDs = $request->input('patternIDs', []);
+        $organization_id = $request['organization_id'];
 
         try {
-            DB::transaction(static function () use ($current, $patternIDs) {
+            DB::transaction(static function () use ($patternIDs, $organization_id) {
                 /** @var Collection<Contracts> $remove */
-                $removeContracts = Contracts::query($current)->whereNotIn('pattern_id', $patternIDs)->get();
+                $removeContracts = Contracts::queryRaw()->tap(new ForOrganization($organization_id, true))->whereNotIn('pattern_id', $patternIDs)->get();
 
                 foreach ($removeContracts as $contract) {
                     /** @var Contracts $contract */
@@ -56,20 +56,18 @@ class ContractsEditController extends ApiEditController
                     }
                 }
 
-                $registered = Contracts::query($current)->pluck('pattern_id')->toArray();
+                $registered = Contracts::queryRaw()->tap(new ForOrganization($organization_id, true))->pluck('pattern_id')->toArray();
 
                 $toRegister = array_diff($patternIDs, $registered);
 
                 $patterns = Pattern::query()->whereIn('id', $toRegister)->get();
-
-                $items = [];
 
                 foreach ($patterns as $pattern) {
                     /** @var Pattern $pattern */
                     $contract = new Contracts();
                     $contract->name = $pattern->name;
                     $contract->pattern_id = $pattern->id;
-                    $contract->organization_id = $current->organizationId();
+                    $contract->organization_id = $organization_id;
                     $contract->save();
                 }
             });
