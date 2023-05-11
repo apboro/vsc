@@ -38,6 +38,7 @@ class PermissionsSeeder extends Seeder
         'leads' => [
             'leads.view' => 'Просмотр лидов',
             'leads.register' => 'Обработка лидов',
+            'leads.delete' => 'Удаление лидов',
         ],
         'clients' => [
             'clients.view' => 'Просмотр клиентов',

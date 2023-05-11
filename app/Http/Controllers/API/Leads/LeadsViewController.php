@@ -37,8 +37,6 @@ class LeadsViewController extends ApiController
             return APIResponse::notFound('Лид не найден');
         }
 
-        $isRegisterable = $lead->subscription_id === null && $current->can('leads.register');
-
         $values = [
             'title' => "$lead->lastname $lead->firstname $lead->patronymic",
             'status' => $lead->status->name,
@@ -78,10 +76,11 @@ class LeadsViewController extends ApiController
             'client_comments' => $lead->client_comments,
             'comments' => $lead->comments,
 
-            'is_registrable' => $isRegisterable,
+            'can_register' => $lead->canRegister($current->position()),
+            'can_delete' => $lead->canDelete($current->position()),
         ];
 
-        if($isRegisterable) {
+        if($values['can_register']) {
             $services = Service::query()
                 ->leftJoin('training_bases', 'training_bases.id', '=', 'services.training_base_id')
                 ->leftJoin('training_base_info', 'training_bases.id', '=', 'training_base_info.base_id')
