@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Helpers;
-
 
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
@@ -69,7 +67,7 @@ class DuplicatesFinder
         string $lastname,
         string $firstname,
         string $patronymic,
-        string $birthdate,
+        string $birthdate
     ): ?Collection {
         $wardDuplicates = ClientWard::query()
             ->with('user.profile')
