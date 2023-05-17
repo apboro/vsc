@@ -10,9 +10,13 @@ use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\User\User;
 use App\Scopes\ForOrganization;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ClientsListController extends ApiController
 {
@@ -39,36 +43,9 @@ class ClientsListController extends ApiController
 
         $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
 
-        $query = User::query()
-            ->with(['profile', 'client', 'client.status'])
-            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-            ->select('users.*')
-            ->whereHas('client', function (Builder $query) use ($current) {
-                $query->tap(new ForOrganization($current->organizationId(), true));
-            })
-            ->orderBy('user_profiles.lastname')
-            ->orderBy('user_profiles.firstname')
-            ->orderBy('user_profiles.patronymic');
+        $filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey);
 
-        // apply filters
-        if (!empty($filters = $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey)) && !empty($filters['client_status_id'])) {
-            $query->whereHas('client', function (Builder $query) use ($filters) {
-                $query->where('status_id', $filters['client_status_id']);
-            });
-        }
-
-        // apply search
-        if (!empty($search = $request->search())) {
-            foreach ($search as $term) {
-                $query->where(function (Builder $query) use ($term) {
-                    $query->whereHas('profile', function (Builder $query) use ($term) {
-                        $query->where('lastname', 'LIKE', "%$term%")
-                            ->orWhere('firstname', 'LIKE', "%$term%")
-                            ->orWhere('patronymic', 'LIKE', "%$term%");
-                    });
-                });
-            }
-        }
+        $query = $this->getListQuery($request, $filters, $current);
 
         // current page automatically resolved from request via `page` parameter
         $users = $query->paginate($request->perPage(10, $this->rememberKey));
@@ -93,5 +70,106 @@ class ClientsListController extends ApiController
             $this->defaultFilters,
             []
         )->withCookie(cookie($this->rememberKey, $request->getToRemember()));
+    }
+
+    public function export(ApiListRequest $request): JsonResponse
+    {
+        $current = Current::get($request);
+
+        $this->rememberKey = CookieKeys::getKey($this->rememberKey, $current->organizationId());
+
+        $query = $this->getListQuery($request, [], $current);
+
+        $users = $query->get();
+        $now = Carbon::now();
+
+        $titles = [
+            'ID клиента',
+            'ФИО клиента',
+            'Дата создания',
+            'Статус',
+            'Телефон',
+            'Email',
+        ];
+
+        /** @var Collection $users */
+        $users->transform(function (User $user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->profile->fullName,
+                'created_date' => $user->client->created_at->format('d.m.Y'),
+                'status' => $user->client->status->name,
+                'email' => $user->profile->email,
+                'phone' => $user->profile->phone,
+            ];
+        });
+
+        $spreadsheet = new Spreadsheet();
+
+        $spreadsheet->setActiveSheetIndex(0)->setTitle('Клиенты')->setShowRowColHeaders(true);
+
+        $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
+        $spreadsheet->getActiveSheet()->fromArray($users->toArray(), '—', 'A2');
+        foreach(['A', 'B', 'C', 'D', 'E', 'F'] as $col) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        ob_start();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        $export = ob_get_clean();
+
+        return APIResponse::response([
+            'file' => base64_encode($export),
+            'file_name' => 'Клиенты ' . $now->format('Y-m-d H:i'),
+            'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+    }
+
+    /**
+     * Make clients query with filters and search.
+     *
+     * @param APIListRequest $request
+     * @param array $filters
+     * @param Current $current
+     *
+     * @return  Builder
+     */
+    protected function getListQuery(ApiListRequest $request, array $filters, Current $current): Builder
+    {
+        $query = User::query()
+            ->with(['profile', 'client', 'client.status'])
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->select('users.*')
+            ->whereHas('client', function (Builder $query) use ($current) {
+                $query->tap(new ForOrganization($current->organizationId(), true));
+            })
+            ->orderBy('user_profiles.lastname')
+            ->orderBy('user_profiles.firstname')
+            ->orderBy('user_profiles.patronymic');
+
+        $filters = !empty($filters) ? $filters : $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey);
+
+        // apply filters
+        if (!empty($filters) && !empty($filters['client_status_id'])) {
+            $query->whereHas('client', function (Builder $query) use ($filters) {
+                $query->where('status_id', $filters['client_status_id']);
+            });
+        }
+
+        // apply search
+        if (!empty($search = $request->search())) {
+            foreach ($search as $term) {
+                $query->where(function (Builder $query) use ($term) {
+                    $query->whereHas('profile', function (Builder $query) use ($term) {
+                        $query->where('lastname', 'LIKE', "%$term%")
+                            ->orWhere('firstname', 'LIKE', "%$term%")
+                            ->orWhere('patronymic', 'LIKE', "%$term%");
+                    });
+                });
+            }
+        }
+
+        return  $query;
     }
 }
