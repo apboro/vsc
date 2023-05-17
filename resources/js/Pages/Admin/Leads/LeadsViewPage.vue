@@ -13,7 +13,7 @@
 
         <LeadInfo :data="data.data" :lead-id="leadId" @update="load"/>
 
-        <FormPopUp :form="registration_form" :title="'Создать клиента'" :save-button-caption="'Создать'"
+        <FormPopUp :form="registration_form" :title="'Конвертировать лид'" :save-button-caption="'Подтвердить'" :close-on-overlay="'Отменить'" :scrollable="true"
                    class="registration-form" ref="registration">
             <div style="width: 1250px">
                 <GuiContainer w-50 inline>
@@ -23,7 +23,7 @@
                                     :search="true"
                                     :top="false"
                                     @change="regionChanged"
-                                    style="max-width: 400px"
+                                    style="max-width: 400px; flex-direction: row"
                     />
                 </GuiContainer>
 
@@ -35,15 +35,17 @@
                                   :show="'title'"
                                   :search="true"
                                   :top="false"
-                                  style="max-width: 400px; padding-left: 15px"
+                                  style="max-width: 400px; flex-direction: row"
                     />
                 </GuiContainer>
 
                 <GuiContainer w-100>
                     <GuiContainer w-50 inline pr-50>
-                        <GuiHeading bold my-10>Клиент</GuiHeading>
-                        <template v-if="clientDuplicates">
-                            <GuiText text-red mb-10>Обнаружены совпадения!</GuiText>
+                        <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Клиент</span></GuiHeading>
+                        <div>
+                            <div style="min-height: 30px">
+                                <GuiText v-if="clientDuplicates" text-red mb-10>Обнаружены совпадения!</GuiText>
+                            </div>
                             <FormDropdown
                                 :form="registration_form"
                                 name="client_id"
@@ -53,12 +55,13 @@
                                 identifier="id"
                                 show="name"
                                 @change="client"
+                                style="flex-direction: row"
                             />
-                        </template>
+                        </div>
 
                         <table style="width: 100%">
                             <tr v-if="client" style="overflow: hidden; height: 42px">
-                                <td style="padding-left: 130px; width: auto;">
+                                <td style="width: auto;">
                                     <GuiText>Данные лида</GuiText>
                                 </td>
                                 <td v-if="client">
@@ -70,12 +73,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <FormString :form="registration_form" :name="'lastname'"/>
+                                    <FormString class="dropdown-title" :form="registration_form" :name="'lastname'"/>
                                 </td>
-                                <td v-if="client">
+                                <td v-if="client" style="padding-top: 30px">
                                     <GuiText>{{ client.lastname }}</GuiText>
                                 </td>
-                                <td v-if="client" style="text-align: center">
+                                <td v-if="client" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_client_lastname'" style="max-width: 20px" hide-title/>
                                 </td>
                             </tr>
@@ -83,10 +86,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'firstname'"/>
                                 </td>
-                                <td v-if="client">
+                                <td v-if="client" style="padding-top: 30px">
                                     <GuiText>{{ client.firstname }}</GuiText>
                                 </td>
-                                <td v-if="client" style="text-align: center">
+                                <td v-if="client" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_client_firstname'" style="max-width: 20px" hide-title/>
                                 </td>
                             </tr>
@@ -94,10 +97,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'patronymic'"/>
                                 </td>
-                                <td v-if="client">
+                                <td v-if="client" style="padding-top: 30px">
                                     <GuiText>{{ client.patronymic }}</GuiText>
                                 </td>
-                                <td v-if="client" style="text-align: center">
+                                <td v-if="client" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_client_patronymic'" style="max-width: 20px" hide-title/>
                                 </td>
                             </tr>
@@ -105,10 +108,10 @@
                                 <td>
                                     <FormPhone :form="registration_form" :name="'phone'"/>
                                 </td>
-                                <td v-if="client">
+                                <td v-if="client" style="padding-top: 30px">
                                     <GuiText>{{ client.phone }}</GuiText>
                                 </td>
-                                <td v-if="client" style="text-align: center">
+                                <td v-if="client" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_client_phone'" style="max-width: 20px" hide-title/>
                                 </td>
                             </tr>
@@ -116,10 +119,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'email'"/>
                                 </td>
-                                <td v-if="client">
+                                <td v-if="client" style="padding-top: 30px">
                                     <GuiText>{{ client.email }}</GuiText>
                                 </td>
-                                <td v-if="client" style="text-align: center">
+                                <td v-if="client" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_client_email'" style="max-width: 20px" hide-title/>
                                 </td>
                             </tr>
@@ -127,32 +130,26 @@
                     </GuiContainer>
 
                     <GuiContainer w-50 inline>
-                        <GuiHeading><span class="text__title" style="padding-left: 15px">Занимающийся</span></GuiHeading>
-                        <table style="width: 100%; padding-left: 10px">
-                            <tr v-if="wardDuplicates">
-                                <td colspan="2">
-                                    <GuiText><span class="text__warning">Обнаружены совпадения!</span></GuiText>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="32">
-                                    <FormDropdown
-                                        :form="registration_form"
-                                        name="ward_id"
-                                        :options="wardDuplicates"
-                                        placeholder="Новый занимающийся"
-                                        :has-null="true"
-                                        identifier="id"
-                                        show="name"
-                                        @change="ward"
-                                    />
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
-                        <table style="width: 50%; padding-left: 10px">
+                        <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Занимающийся</span></GuiHeading>
+                        <div>
+                            <div style="min-height: 30px">
+                                <GuiText v-if="wardDuplicates" text-red mb-10>Обнаружены совпадения!</GuiText>
+                            </div>
+                            <FormDropdown
+                                :form="registration_form"
+                                name="ward_id"
+                                :options="wardDuplicates"
+                                placeholder="Новый занимающийся"
+                                :has-null="true"
+                                identifier="id"
+                                show="name"
+                                @change="ward"
+                                style="flex-direction: row"
+                            />
+                        </div>
+                        <table style="width: 100%">
                             <tr v-if="ward" style="overflow: hidden; height: 42px;">
-                                <td style="padding-left: 130px">
+                                <td>
                                     <GuiText>Данные лида</GuiText>
                                 </td>
                                 <td v-if="ward">
@@ -166,10 +163,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_lastname'"/>
                                 </td>
-                                <td v-if="ward">
+                                <td v-if="ward" style="padding-top: 30px">
                                     <GuiText>{{ ward.lastname }}</GuiText>
                                 </td>
-                                <td v-if="ward" style="text-align: center">
+                                <td v-if="ward" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_lastname'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -178,10 +175,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_firstname'"/>
                                 </td>
-                                <td v-if="ward">
+                                <td v-if="ward" style="padding-top: 30px">
                                     <GuiText>{{ ward.firstname }}</GuiText>
                                 </td>
-                                <td v-if="ward" style="text-align: center">
+                                <td v-if="ward" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_firstname'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -190,10 +187,10 @@
                                 <td>
                                     <FormString :form="registration_form" :name="'ward_patronymic'"/>
                                 </td>
-                                <td v-if="ward">
+                                <td v-if="ward" style="padding-top: 30px">
                                     <GuiText>{{ ward.patronymic }}</GuiText>
                                 </td>
-                                <td v-if="ward" style="text-align: center">
+                                <td v-if="ward" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_patronymic'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -202,10 +199,10 @@
                                 <td>
                                     <FormDate :form="registration_form" :name="'ward_birth_date'"/>
                                 </td>
-                                <td v-if="ward">
+                                <td v-if="ward" style="padding-top: 30px">
                                     <GuiText>{{ ward.birthdate }}</GuiText>
                                 </td>
-                                <td v-if="ward" style="text-align: center">
+                                <td v-if="ward" style="text-align: center; padding-top: 30px">
                                     <FormCheckBox :form="registration_form" :name="'update_ward_birth_date'"
                                                   style="max-width: 20px" hide-title/>
                                 </td>
@@ -215,8 +212,8 @@
                 </GuiContainer>
 
                 <GuiContainer mt-10>
-                    <GuiText><span class="text__title">Комментарий менеджера (отобразится в уведомлении клиенту)</span></GuiText>
-                    <FormText :form="registration_form" :name="'contract_comment'" hide-title/>
+                    <GuiText><span class="text__subtitle">Комментарий менеджера (отобразится в уведомлении клиенту)</span></GuiText>
+                    <FormText :form="registration_form" :name="'contract_comment'" style="flex-direction: row" hide-title/>
                 </GuiContainer>
             </div>
         </FormPopUp>
@@ -413,14 +410,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .registration-form {
     td {
         padding: 5px 5px 5px 0;
     }
 
+    :deep(.input-field) {
+        flex-direction: column;
+    }
+
     :deep(.input-field__title) {
         width: 120px;
+    }
+
+    :deep(.dialogs__dialog-title) {
+        font-size: 20px;
+        color: #1e1e1e;
+        font-weight: unset !important;
     }
 
     :deep(.input-field__wrapper) {
@@ -430,19 +436,21 @@ export default {
 
 .text {
     &__title {
+        padding-left: 0 !important;
         font-size: 20px;
         line-height: 24px;
         color: #0B68C2;
     }
 
     &__subtitle {
+        padding-left: 0 !important;
         font-size: 16px;
         line-height: 20px;
         color: #0B68C2;
     }
 
     &__warning {
-        font-size: 16px !important;
+        font-size: 14px !important;
         line-height: 20px !important;
         color: red !important;
     }
