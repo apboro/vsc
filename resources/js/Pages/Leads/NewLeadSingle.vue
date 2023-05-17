@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="!message">
-            <GuiHeading>Записаться на разовое тренировочное занятие</GuiHeading>
+            <GuiHeading>Записаться на тренировочные сборы</GuiHeading>
 
             <div style="margin-top: 20px"/>
 
