@@ -28129,9 +28129,8 @@ var validate = function validate(field_name, value, validation_rules, fields) {
 /***/ ((module) => {
 
 module.exports = {
-  // crm_url: 'http://127.0.0.1:8000',
+  crm_url: 'http://127.0.0.1:8000',
   // crm_url: 'https://vsc.opxx.ru',
-  crm_url: 'http://vsc-local.ru',
   debug: true
 };
 

@@ -138,7 +138,7 @@ class ClientsListController extends ApiController
     protected function getListQuery(ApiListRequest $request, array $filters, Current $current): Builder
     {
         $query = User::query()
-            ->with(['profile', 'client', 'client.status'])
+            ->with(['profile', 'client', 'client.status', 'client.subscriptions.service.sportKinds'])
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->select('users.*')
             ->whereHas('client', function (Builder $query) use ($current) {
@@ -151,10 +151,22 @@ class ClientsListController extends ApiController
         $filters = !empty($filters) ? $filters : $request->filters($this->defaultFilters, $this->rememberFilters, $this->rememberKey);
 
         // apply filters
-        if (!empty($filters) && !empty($filters['client_status_id'])) {
-            $query->whereHas('client', function (Builder $query) use ($filters) {
-                $query->where('status_id', $filters['client_status_id']);
-            });
+        if (!empty($filters)) {
+            if (!empty($filters['client_status_id'])) {
+                $query->whereHas('client', function (Builder $query) use ($filters) {
+                    $query->where('status_id', $filters['client_status_id']);
+                });
+            }
+            if (!empty($filters['sport_kinds'])) {
+                $query->whereHas('client.subscriptions.service.sportKinds', function (Builder $query) use ($filters) {
+                    $query->whereIn('id', $filters['sport_kinds']);
+                });
+            }
+            if (!empty($filters['training_base_id'])) {
+                $query->whereHas('client.subscriptions.service', function (Builder $query) use ($filters) {
+                    $query->where('training_base_id', $filters['training_base_id']);
+                });
+            }
         }
 
         // apply search

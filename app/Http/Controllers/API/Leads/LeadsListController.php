@@ -191,6 +191,7 @@ class LeadsListController extends ApiController
                 'service.trainingBase',
                 'subscription.service.trainingBase',
                 'service.sportKind',
+                'service.sportKinds',
                 'subscription.service.sportKind',
                 'subscription.client.user.profile',
             ])
@@ -206,9 +207,10 @@ class LeadsListController extends ApiController
                     $query->where('training_base_id', $filters['training_base_id']);
                 });
             }
-            if (!empty($filters['sport_kind_id'])) {
-                $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('sport_kind_id', $filters['sport_kind_id']);
+            if (!empty($filters['sport_kinds'])) {
+                $query->whereHas('service.sportKinds', function (Builder $query) use ($filters) {
+                    $query->whereIn('id', $filters['sport_kinds']);
+
                 });
             }
             if (!empty($filters['region_id'])) {
