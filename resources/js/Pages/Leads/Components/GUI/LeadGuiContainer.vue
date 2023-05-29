@@ -21,6 +21,10 @@ export default {
     padding: 30px 10px;
 }
 
+.pt-0 {
+    padding-top: 0 !important;
+}
+
 @media screen and (max-width: 769px) {
     .container {
         padding: 30px 0;

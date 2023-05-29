@@ -1,6 +1,8 @@
 <template>
-    <div class="container-form"
-         :class="(leftBall ? 'container-form__left_ball' : '') || (rightBall ? 'container-form__right_ball' : '')">
+    <div class="container-form">
+        <div v-if="leftBall || rightBall" :class="leftBall ? 'container-form__left_ball' : 'container-form__right_ball'">
+            <img src="./../assets/aqua.png" width="80" alt="">
+        </div>
         <div v-if="label !== null" class="container-form__label">
             {{ label }}
             <div class="divider"></div>
@@ -26,6 +28,8 @@ export default {
     background-color: #fff;
     border-radius: 25px;
     padding: 3%;
+    display: block;
+    position: relative;
 
     &__image {
         display: flex;
@@ -39,9 +43,19 @@ export default {
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     }
 
-    &__left {}
+    &__left_ball {
+        display: block;
+        position: absolute;
+        top: -45px;
+        left: -33px;
+    }
 
-    &__right {}
+    &__right_ball {
+        display: block;
+        position: absolute;
+        top: -45px;
+        right: -33px;
+    }
 }
 
 .divider {

@@ -44,6 +44,7 @@ $field_error_color: #fd4afb !default;
         width: 50%;
 
         &__second {
+            margin-left: 1%;
             width: 50%;
 
             &-checkbox {
