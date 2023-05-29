@@ -27,6 +27,12 @@ export default {
     border-radius: 25px;
     padding: 2% 3%;
 
+    &__image {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
     &__label {
         font-size: 23px;
         font-weight: 600;

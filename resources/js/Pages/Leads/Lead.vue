@@ -71,19 +71,27 @@
                     <FormText :form="form" :name="'client_comments'"/>
                 </LeadBlockForm>
 
-            </LeadGuiContainer>
-            <div style="margin-top: 20px"/>
+                <div style="margin-top: 30px"/>
 
+                <LeadBlockForm class="container-form__image">
+                    <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
+                    <img class="ball" src="./assets/ball.png" alt="">
 
-            <GuiContainer>
-                <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
-                <div style="margin-top: 10px"/>
-                <GuiButton :color="'blue'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</GuiButton>
-            </GuiContainer>
+                </LeadBlockForm>
 
-            <div style="margin-top: 20px"/>
+                <div style="margin-top: 15px"/>
 
-            <GuiHint>Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.</GuiHint>
+                <div class="container-center">
+                    <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>
+
+                    <div style="margin-top: 25px"/>
+
+                    <div class="container-wrapper">
+                        <LeadGuiHint>Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.</LeadGuiHint>
+                    </div>
+                </div>
+
+               </LeadGuiContainer>
         </template>
 
         <GuiMessage v-else>{{ message }}</GuiMessage>
@@ -93,10 +101,8 @@
 <script>
 import form from "@/Core/Form";
 import GuiHeading from "@/Components/GUI/GuiHeading";
-import GuiButton from "@/Components/GUI/GuiButton";
 import GuiMessage from "@/Components/GUI/GuiMessage";
 import InputCheckbox from "../../Components/Inputs/InputCheckbox";
-import GuiHint from "../../Components/GUI/GuiHint";
 import GuiValue from "../../Components/GUI/GuiValue";
 import GuiValueArea from "../../Components/GUI/GuiValueArea";
 import FormText from "../../Components/Form/FormText";
@@ -107,9 +113,13 @@ import LeadFormDate from "@/Pages/Leads/Components/LeadFormDate.vue";
 import LeadGuiContainer from "@/Pages/Leads/Components/GUI/LeadGuiContainer.vue";
 import LeadFormCheckBox from "@/Pages/Leads/Components/LeadFormCheckBox.vue";
 import LeadFormDropdown from "@/Pages/Leads/Components/LeadFormDropdown.vue";
+import LeadGuiButton from "@/Pages/Leads/Components/GUI/LeadGuiButton.vue";
+import LeadGuiHint from "@/Pages/Leads/Components/GUI/LeadGuiHint.vue";
 
 export default {
     components: {
+        LeadGuiHint,
+        LeadGuiButton,
         LeadFormDropdown,
         LeadFormCheckBox,
         LeadGuiContainer,
@@ -118,7 +128,7 @@ export default {
         LeadFormString,
         LeadBlockForm,
         FormText,
-        GuiValueArea, GuiValue, GuiHint, InputCheckbox, GuiMessage, GuiButton, GuiHeading},
+        GuiValueArea, GuiValue, InputCheckbox, GuiMessage, GuiHeading},
 
     props: {
         crm_url: {type: String, default: null},
@@ -242,10 +252,41 @@ export default {
     box-sizing: border-box;
 }
 
+.ball {
+    display: block;
+    position: absolute;
+    width: 150px;
+    right: 12%;
+    bottom: 0;
+}
+
+.container {
+    &-wrapper {
+        max-width: 70%;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    &-center {
+        text-align: center;
+    }
+}
+
 
 @media screen and (max-width: 769px) {
     .service_info {
         padding-left: 0;
+    }
+
+    .ball {
+        display: none;
+    }
+
+    .container {
+        &-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+        }
     }
 }
 </style>
