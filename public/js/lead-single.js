@@ -23282,10 +23282,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23294,12 +23294,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Pages_Leads_Components_Fields_Helpers_LeadFieldWrapper_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/Helpers/LeadFieldWrapper.vue */ "./resources/js/Pages/Leads/Components/Fields/Helpers/LeadFieldWrapper.vue");
-/* harmony import */ var _Pages_Leads_Components_Inputs_LeadInputCheckbox_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue");
+/* harmony import */ var _Pages_Leads_Components_Inputs_LeadInputCheckboxSingle_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LeadInputCheckbox: _Pages_Leads_Components_Inputs_LeadInputCheckbox_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    LeadInputCheckboxSingle: _Pages_Leads_Components_Inputs_LeadInputCheckboxSingle_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     LeadFieldWrapper: _Pages_Leads_Components_Fields_Helpers_LeadFieldWrapper_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
@@ -23477,10 +23477,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23489,12 +23489,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Pages_Leads_Components_Fields_Helpers_LeadFieldWrapper_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/Helpers/LeadFieldWrapper.vue */ "./resources/js/Pages/Leads/Components/Fields/Helpers/LeadFieldWrapper.vue");
-/* harmony import */ var _Pages_Leads_Components_Inputs_LeadInputDropDown_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/LeadInputDropDown.vue */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue");
+/* harmony import */ var _Pages_Leads_Components_Inputs_LeadInputDropDownSingle_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LeadInputDropDown: _Pages_Leads_Components_Inputs_LeadInputDropDown_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    LeadInputDropDownSingle: _Pages_Leads_Components_Inputs_LeadInputDropDownSingle_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     LeadFieldWrapper: _Pages_Leads_Components_Fields_Helpers_LeadFieldWrapper_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
@@ -24003,10 +24003,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js ***!
-  \*********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \***************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24585,10 +24585,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24597,12 +24597,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Core_Helpers_Empty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Core/Helpers/Empty */ "./resources/js/Core/Helpers/Empty.js");
-/* harmony import */ var _Pages_Leads_Components_Inputs_Helpers_LeadCheckBox_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue");
+/* harmony import */ var _Pages_Leads_Components_Inputs_Helpers_LeadCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LeadCheckBox: _Pages_Leads_Components_Inputs_Helpers_LeadCheckBox_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LeadCheckBoxSingle: _Pages_Leads_Components_Inputs_Helpers_LeadCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     name: String,
@@ -24750,10 +24750,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25403,10 +25403,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25415,12 +25415,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Pages_Leads_Components_Helpers_LeadFormMixin_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Leads/Components/Helpers/LeadFormMixin.vue */ "./resources/js/Pages/Leads/Components/Helpers/LeadFormMixin.vue");
-/* harmony import */ var _Pages_Leads_Components_Fields_LeadFieldCheckBox_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue");
+/* harmony import */ var _Pages_Leads_Components_Fields_LeadFieldCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LeadFieldCheckBox: _Pages_Leads_Components_Fields_LeadFieldCheckBox_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LeadFieldCheckBoxSingle: _Pages_Leads_Components_Fields_LeadFieldCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     disabled: {
@@ -25507,10 +25507,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25519,12 +25519,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Pages_Leads_Components_Helpers_LeadFormMixin_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Leads/Components/Helpers/LeadFormMixin.vue */ "./resources/js/Pages/Leads/Components/Helpers/LeadFormMixin.vue");
-/* harmony import */ var _Pages_Leads_Components_Fields_LeadFieldDropDown_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/LeadFieldDropDown.vue */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue");
+/* harmony import */ var _Pages_Leads_Components_Fields_LeadFieldDropDownSingle_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LeadFieldDropDown: _Pages_Leads_Components_Fields_LeadFieldDropDown_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LeadFieldDropDownSingle: _Pages_Leads_Components_Fields_LeadFieldDropDownSingle_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     name: {
@@ -25700,8 +25700,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_Leads_Components_LeadFormString_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormString.vue */ "./resources/js/Pages/Leads/Components/LeadFormString.vue");
 /* harmony import */ var _Pages_Leads_Components_LeadFormPhone_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormPhone.vue */ "./resources/js/Pages/Leads/Components/LeadFormPhone.vue");
 /* harmony import */ var _Pages_Leads_Components_LeadFormDate_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormDate.vue */ "./resources/js/Pages/Leads/Components/LeadFormDate.vue");
-/* harmony import */ var _Pages_Leads_Components_LeadFormCheckBox_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormCheckBox.vue */ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue");
-/* harmony import */ var _Pages_Leads_Components_LeadFormDropdown_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormDropdown.vue */ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue");
+/* harmony import */ var _Pages_Leads_Components_LeadFormCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormCheckBoxSingle.vue */ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue");
+/* harmony import */ var _Pages_Leads_Components_LeadFormDropdownSingle_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @/Pages/Leads/Components/LeadFormDropdownSingle.vue */ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue");
 /* harmony import */ var _Pages_Leads_Components_GUI_LeadGuiButton_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @/Pages/Leads/Components/GUI/LeadGuiButton.vue */ "./resources/js/Pages/Leads/Components/GUI/LeadGuiButton.vue");
 /* harmony import */ var _Pages_Leads_Components_GUI_LeadGuiHint_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @/Pages/Leads/Components/GUI/LeadGuiHint.vue */ "./resources/js/Pages/Leads/Components/GUI/LeadGuiHint.vue");
 
@@ -25733,8 +25733,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     LeadGuiHint: _Pages_Leads_Components_GUI_LeadGuiHint_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
     LeadGuiButton: _Pages_Leads_Components_GUI_LeadGuiButton_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
-    LeadFormDropdown: _Pages_Leads_Components_LeadFormDropdown_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
-    LeadFormCheckBox: _Pages_Leads_Components_LeadFormCheckBox_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+    LeadFormDropdownSingle: _Pages_Leads_Components_LeadFormDropdownSingle_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
+    LeadFormCheckBoxSingle: _Pages_Leads_Components_LeadFormCheckBoxSingle_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
     LeadFormDate: _Pages_Leads_Components_LeadFormDate_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
     LeadFormPhone: _Pages_Leads_Components_LeadFormPhone_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
     LeadFormString: _Pages_Leads_Components_LeadFormString_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
@@ -28431,10 +28431,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3 ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -28445,7 +28445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_LeadInputCheckbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadInputCheckbox");
+  var _component_LeadInputCheckboxSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadInputCheckboxSingle");
 
   var _component_LeadFieldWrapper = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldWrapper");
 
@@ -28458,7 +28458,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     errors: $props.errors
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadInputCheckbox, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadInputCheckboxSingle, {
         modelValue: $options.proxyValue,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $options.proxyValue = $event;
@@ -28544,10 +28544,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -28558,7 +28558,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_LeadInputDropDown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadInputDropDown");
+  var _component_LeadInputDropDownSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadInputDropDownSingle");
 
   var _component_LeadFieldWrapper = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldWrapper");
 
@@ -28571,7 +28571,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     errors: $props.errors
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadInputDropDown, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadInputDropDownSingle, {
         modelValue: $options.proxyValue,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $options.proxyValue = $event;
@@ -28892,10 +28892,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192 ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29180,10 +29180,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3 ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29197,9 +29197,9 @@ var _hoisted_1 = {
   "class": "input-checkbox"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_LeadCheckBox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadCheckBox");
+  var _component_LeadCheckBoxSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadCheckBoxSingle");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadCheckBox, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadCheckBoxSingle, {
     "class": "input-checkbox__input",
     value: $props.value,
     modelValue: $options.proxyValue,
@@ -29283,10 +29283,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61 ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29676,10 +29676,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29690,9 +29690,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_LeadFieldCheckBox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldCheckBox");
+  var _component_LeadFieldCheckBoxSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldCheckBoxSingle");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeadFieldCheckBox, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeadFieldCheckBoxSingle, {
     "model-value": _ctx.value,
     name: _ctx.name,
     title: $props.withoutTitle ? null : _ctx.title,
@@ -29756,10 +29756,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21 ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29770,9 +29770,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_LeadFieldDropDown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldDropDown");
+  var _component_LeadFieldDropDownSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFieldDropDownSingle");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeadFieldDropDown, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeadFieldDropDownSingle, {
     "model-value": _ctx.value,
     name: $props.name,
     title: _ctx.title,
@@ -30001,9 +30001,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_LeadFormDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFormDate");
 
-  var _component_LeadFormCheckBox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFormCheckBox");
+  var _component_LeadFormCheckBoxSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFormCheckBoxSingle");
 
-  var _component_LeadFormDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFormDropdown");
+  var _component_LeadFormDropdownSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LeadFormDropdownSingle");
 
   var _component_GuiValue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("GuiValue");
 
@@ -30097,27 +30097,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         label: "Пожалуйста, укажите, если у ребенка есть особенности"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBox, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBoxSingle, {
             form: _ctx.form,
             name: 'ward_spe',
             "hide-title": true,
             "class": "input-field-50"
           }, null, 8
           /* PROPS */
-          , ["form"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBox, {
+          , ["form"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBoxSingle, {
             form: _ctx.form,
             name: 'ward_uch',
             "hide-title": true,
             "class": "input-field-50__second-checkbox"
           }, null, 8
           /* PROPS */
-          , ["form"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBox, {
+          , ["form"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBoxSingle, {
             form: _ctx.form,
             name: 'ward_inv',
             "hide-title": true
           }, null, 8
           /* PROPS */
-          , ["form"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormDropdown, {
+          , ["form"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormDropdownSingle, {
             top: true,
             form: _ctx.form,
             "class": "input-field-50",
@@ -30130,7 +30130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onChange: $options.regionChanged
           }, null, 8
           /* PROPS */
-          , ["form", "options", "onChange"]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormDropdown, {
+          , ["form", "options", "onChange"]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormDropdownSingle, {
             top: true,
             "class": "vsc-services-drop input-field-50",
             form: _ctx.form,
@@ -30143,7 +30143,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onChange: $options.serviceChanged
           }, null, 8
           /* PROPS */
-          , ["form", "options", "disabled", "onChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBox, {
+          , ["form", "options", "disabled", "onChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadFormCheckBoxSingle, {
             form: _ctx.form,
             "class": "input-field-50__second-checkbox",
             name: 'need_help',
@@ -38427,10 +38427,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".hint {\n  font-family: -apple-system,
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38444,7 +38444,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".checkbox {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  position: relative;\n}\n.checkbox__disabled {\n  cursor: not-allowed;\n}\n.checkbox__input {\n  visibility: hidden;\n  opacity: 0;\n  position: absolute;\n  width: 0;\n  height: 0;\n}\n.checkbox__check {\n  width: 40px;\n  height: 40px;\n  margin-right: 20px;\n  border: none;\n  border-radius: 6px;\n  background-color: #dddddd;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n}\n.checkbox__check-checked {\n  color: inherit;\n  display: none;\n  width: 75%;\n  height: 75%;\n}\n.checkbox__error:not(.checkbox__disabled) .checkbox__check {\n  border-color: #FF1E00 !important;\n}\n.checkbox__disabled .checkbox__check {\n  border-color: rgba(98, 98, 98, 0.5) !important;\n  color: #626262 !important;\n  background-color: rgba(98, 98, 98, 0.25) !important;\n}\n.checkbox__input:checked + .checkbox__check {\n  border-color: #b61b21;\n  background-color: #b61b21;\n  color: #fdc93c;\n}\n.checkbox__input:checked + .checkbox__check > .checkbox__check-checked {\n  display: block;\n}\n.checkbox__label {\n  margin: 0 7px 0 7px;\n  font-size: 16px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  display: inline-block;\n  color: #1e1e1e;\n  position: relative;\n  top: 1px;\n}\n.checkbox__label-small {\n  font-size: 14px;\n}\n.checkbox__disabled .checkbox__label {\n  color: #626262;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".checkbox {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  position: relative;\n}\n.checkbox__disabled {\n  cursor: not-allowed;\n}\n.checkbox__input {\n  visibility: hidden;\n  opacity: 0;\n  position: absolute;\n  width: 0;\n  height: 0;\n}\n.checkbox__check {\n  width: 40px;\n  height: 40px;\n  margin-right: 20px;\n  border: none;\n  border-radius: 6px;\n  background-color: #dddddd;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n}\n.checkbox__check-checked {\n  color: inherit;\n  display: none;\n  width: 75%;\n  height: 75%;\n}\n.checkbox__error:not(.checkbox__disabled) .checkbox__check {\n  border-color: #FF1E00 !important;\n}\n.checkbox__disabled .checkbox__check {\n  border-color: rgba(98, 98, 98, 0.5) !important;\n  color: #626262 !important;\n  background-color: rgba(98, 98, 98, 0.25) !important;\n}\n.checkbox__input:checked + .checkbox__check {\n  border-color: #4a678a;\n  background-color: #4a678a;\n  color: #fdc93c;\n}\n.checkbox__input:checked + .checkbox__check > .checkbox__check-checked {\n  display: block;\n}\n.checkbox__label {\n  margin: 0 7px 0 7px;\n  font-size: 16px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  display: inline-block;\n  color: #1e1e1e;\n  position: relative;\n  top: 1px;\n}\n.checkbox__label-small {\n  font-size: 14px;\n}\n.checkbox__disabled .checkbox__label {\n  color: #626262;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38523,10 +38523,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".input-wrapper {\n  background-color: 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38571,10 +38571,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".input-date {\n  height: 40px;\n}", ""
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38588,7 +38588,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.input-dropdown {\n  height: 40px !important;\n}\n.input-dropdown:not(.input-dropdown__disabled) {\n  cursor: pointer;\n}\n.input-dropdown__multiple {\n  height: unset;\n  min-height: 40px !important;\n}\n.input-dropdown__value {\n  width: 0;\n  background-color: transparent;\n  color: inherit;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 1;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 16px;\n  height: 100%;\n  line-height: calc(40px - 2px) !important;\n  overflow: hidden;\n  padding: 0 0 0 50px !important;\n  white-space: nowrap;\n}\n.input-dropdown__value-small {\n  font-size: 14px;\n}\n.input-dropdown__value-placeholder {\n  color: #757575;\n}\n.input-dropdown__values {\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  box-sizing: border-box;\n  padding: 2px;\n  align-items: center;\n  color: inherit;\n}\n.input-dropdown__values-item {\n  display: inline-flex;\n  align-items: center;\n  font-size: 14px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  color: inherit;\n  border: 1px solid rgba(183, 183, 183, 0.5);\n  background-color: #ffffff;\n  height: 30px !important;\n  box-sizing: border-box;\n  border-radius: 4px;\n  margin: 2px;\n  padding: 0 0 0 8px;\n}\n.input-dropdown__values-item-remove {\n  display: inline-block;\n  width: 20px !important;\n  height: 100%;\n  cursor: pointer;\n  margin: 0 0 0 2px;\n  position: relative;\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  opacity: 0.6;\n}\n.input-dropdown__values-item-remove:hover {\n  opacity: 1;\n}\n.input-dropdown__values-item-remove:before, .input-dropdown__values-item-remove:after {\n  content: \"\";\n  width: 50%;\n  height: 2px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background-color: #FF1E00;\n}\n.input-dropdown__values-item-remove:before {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n.input-dropdown__values-item-remove:after {\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.input-dropdown__toggle {\n  align-items: flex-start;\n  box-sizing: border-box;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  justify-content: center;\n  position: absolute !important;\n  background-color: #b61b21;\n  color: #fdc93c;\n  border-radius: 15px;\n  width: 10% !important;\n  padding: 6px !important;\n  height: auto;\n  top: 4px;\n  left: 4px;\n}\n.input-dropdown__toggle > svg {\n  transition: transform cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  position: relative;\n  top: 1px !important;\n}\n.input-dropdown__toggle-expanded > svg {\n  transform: rotate(-180deg);\n}\n.input-dropdown__list {\n  background-color: #ffffff;\n  bottom: -1px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  left: -1px;\n  max-height: 320px !important;\n  min-width: calc(100% + 2px);\n  opacity: 0;\n  padding: 0;\n  position: absolute;\n  transform: translateY(100%);\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, visibility cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  visibility: hidden;\n  z-index: 10;\n}\n.input-dropdown__list-shown {\n  opacity: 1;\n  visibility: visible;\n}\n.input-dropdown__list-top {\n  bottom: unset;\n  top: -1px;\n  transform: translateY(-100%);\n}\n.input-dropdown__list-right {\n  left: unset;\n  right: -1px;\n}\n.input-dropdown__list-center {\n  left: 50%;\n  right: unset;\n  transform: translate(-50%, 100%);\n}\n.input-dropdown__list-top.input-dropdown__list-center {\n  transform: translate(-50%, -100%);\n}\n.input-dropdown__list-search {\n  box-sizing: border-box;\n  margin: 5px;\n}\n.input-dropdown__list-wrapper {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* W3C standard - сейчас только для Firefox */\n  scrollbar-color: #8c82ce #ededed;\n  scrollbar-width: thin;\n  /* для Chrome/Edge/Safari */\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar {\n  height: 5px;\n  width: 5px;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-track {\n  background: #ededed;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-thumb {\n  background-color: #8c82ce;\n  border-radius: 2px;\n}\n.input-dropdown__list-item {\n  box-sizing: border-box;\n  color: #1e1e1e;\n  cursor: pointer;\n  display: block;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  line-height: 20px !important;\n  padding: 4px 10px;\n  transition: color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n}\n.input-dropdown__list-item-current {\n  color: #0D74D7;\n}\n.input-dropdown__list-item:hover {\n  color: #258ef2;\n}\n.input-dropdown__list-item:first-child {\n  margin-top: 5px;\n}\n.input-dropdown__list-item:last-child {\n  margin-bottom: 5px;\n}\n.input-dropdown__list-item-value {\n  white-space: nowrap;\n}\n.input-dropdown__list-item-hint {\n  font-style: italic;\n  opacity: 0.7;\n  display: block;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.input-dropdown {\n  height: 40px !important;\n}\n.input-dropdown:not(.input-dropdown__disabled) {\n  cursor: pointer;\n}\n.input-dropdown__multiple {\n  height: unset;\n  min-height: 40px !important;\n}\n.input-dropdown__value {\n  width: 0;\n  background-color: transparent;\n  color: inherit;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 1;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 16px;\n  height: 100%;\n  line-height: calc(40px - 2px) !important;\n  overflow: hidden;\n  padding: 0 0 0 50px !important;\n  white-space: nowrap;\n}\n.input-dropdown__value-small {\n  font-size: 14px;\n}\n.input-dropdown__value-placeholder {\n  color: #757575;\n}\n.input-dropdown__values {\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  box-sizing: border-box;\n  padding: 2px;\n  align-items: center;\n  color: inherit;\n}\n.input-dropdown__values-item {\n  display: inline-flex;\n  align-items: center;\n  font-size: 14px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  color: inherit;\n  border: 1px solid rgba(183, 183, 183, 0.5);\n  background-color: #ffffff;\n  height: 30px !important;\n  box-sizing: border-box;\n  border-radius: 4px;\n  margin: 2px;\n  padding: 0 0 0 8px;\n}\n.input-dropdown__values-item-remove {\n  display: inline-block;\n  width: 20px !important;\n  height: 100%;\n  cursor: pointer;\n  margin: 0 0 0 2px;\n  position: relative;\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  opacity: 0.6;\n}\n.input-dropdown__values-item-remove:hover {\n  opacity: 1;\n}\n.input-dropdown__values-item-remove:before, .input-dropdown__values-item-remove:after {\n  content: \"\";\n  width: 50%;\n  height: 2px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background-color: #FF1E00;\n}\n.input-dropdown__values-item-remove:before {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n.input-dropdown__values-item-remove:after {\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.input-dropdown__toggle {\n  align-items: flex-start;\n  box-sizing: border-box;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  justify-content: center;\n  position: absolute !important;\n  background-color: #4a678a;\n  color: #fdc93c;\n  border-radius: 15px;\n  width: 10% !important;\n  padding: 6px !important;\n  height: auto;\n  top: 4px;\n  left: 4px;\n}\n.input-dropdown__toggle__blue {\n  background-color: #4a678a !important;\n  color: #fdc93c !important;\n}\n.input-dropdown__toggle > svg {\n  transition: transform cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  position: relative;\n  top: 1px !important;\n}\n.input-dropdown__toggle-expanded > svg {\n  transform: rotate(-180deg);\n}\n.input-dropdown__list {\n  background-color: #ffffff;\n  bottom: -1px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  left: -1px;\n  max-height: 320px !important;\n  min-width: calc(100% + 2px);\n  opacity: 0;\n  padding: 0;\n  position: absolute;\n  transform: translateY(100%);\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, visibility cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  visibility: hidden;\n  z-index: 10;\n}\n.input-dropdown__list-shown {\n  opacity: 1;\n  visibility: visible;\n}\n.input-dropdown__list-top {\n  bottom: unset;\n  top: -1px;\n  transform: translateY(-100%);\n}\n.input-dropdown__list-right {\n  left: unset;\n  right: -1px;\n}\n.input-dropdown__list-center {\n  left: 50%;\n  right: unset;\n  transform: translate(-50%, 100%);\n}\n.input-dropdown__list-top.input-dropdown__list-center {\n  transform: translate(-50%, -100%);\n}\n.input-dropdown__list-search {\n  box-sizing: border-box;\n  margin: 5px;\n}\n.input-dropdown__list-wrapper {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* W3C standard - сейчас только для Firefox */\n  scrollbar-color: #8c82ce #ededed;\n  scrollbar-width: thin;\n  /* для Chrome/Edge/Safari */\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar {\n  height: 5px;\n  width: 5px;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-track {\n  background: #ededed;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-thumb {\n  background-color: #8c82ce;\n  border-radius: 2px;\n}\n.input-dropdown__list-item {\n  box-sizing: border-box;\n  color: #1e1e1e;\n  cursor: pointer;\n  display: block;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  line-height: 20px !important;\n  padding: 4px 10px;\n  transition: color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n}\n.input-dropdown__list-item-current {\n  color: #0D74D7;\n}\n.input-dropdown__list-item:hover {\n  color: #258ef2;\n}\n.input-dropdown__list-item:first-child {\n  margin-top: 5px;\n}\n.input-dropdown__list-item:last-child {\n  margin-bottom: 5px;\n}\n.input-dropdown__list-item-value {\n  white-space: nowrap;\n}\n.input-dropdown__list-item-hint {\n  font-style: italic;\n  opacity: 0.7;\n  display: block;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67705,10 +67705,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -67718,7 +67718,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_style_index_0_id_e8243192_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_style_index_0_id_5ad4b05f_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss");
 
             
 
@@ -67727,11 +67727,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_style_index_0_id_e8243192_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_style_index_0_id_5ad4b05f_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_style_index_0_id_e8243192_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_style_index_0_id_5ad4b05f_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -67825,10 +67825,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -67838,7 +67838,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_style_index_0_id_61dfc6f3_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_style_index_0_id_c29259ca_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss");
 
             
 
@@ -67847,11 +67847,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_style_index_0_id_61dfc6f3_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_style_index_0_id_c29259ca_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_style_index_0_id_61dfc6f3_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_style_index_0_id_c29259ca_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -67885,10 +67885,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -67898,7 +67898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_style_index_0_id_36557c61_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_style_index_0_id_0a3e3e09_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss");
 
             
 
@@ -67907,11 +67907,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_style_index_0_id_36557c61_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_style_index_0_id_0a3e3e09_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_style_index_0_id_36557c61_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_style_index_0_id_0a3e3e09_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -70565,10 +70565,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -70576,15 +70576,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadFieldCheckBox_vue_vue_type_template_id_4aacc0d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3 */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3");
-/* harmony import */ var _LeadFieldCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFieldCheckBox.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadFieldCheckBoxSingle_vue_vue_type_template_id_10ce360a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a");
+/* harmony import */ var _LeadFieldCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFieldCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFieldCheckBox_vue_vue_type_template_id_4aacc0d3__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFieldCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFieldCheckBoxSingle_vue_vue_type_template_id_10ce360a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -70621,10 +70621,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -70632,15 +70632,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadFieldDropDown_vue_vue_type_template_id_882c433e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFieldDropDown.vue?vue&type=template&id=882c433e */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e");
-/* harmony import */ var _LeadFieldDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFieldDropDown.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadFieldDropDownSingle_vue_vue_type_template_id_33812009__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFieldDropDownSingle.vue?vue&type=template&id=33812009 */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009");
+/* harmony import */ var _LeadFieldDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFieldDropDownSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFieldDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFieldDropDown_vue_vue_type_template_id_882c433e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFieldDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFieldDropDownSingle_vue_vue_type_template_id_33812009__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -70908,10 +70908,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue ***!
-  \*****************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -70919,9 +70919,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadCheckBox_vue_vue_type_template_id_e8243192__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadCheckBox.vue?vue&type=template&id=e8243192 */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192");
-/* harmony import */ var _LeadCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadCheckBox.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js");
-/* harmony import */ var _LeadCheckBox_vue_vue_type_style_index_0_id_e8243192_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss");
+/* harmony import */ var _LeadCheckBoxSingle_vue_vue_type_template_id_5ad4b05f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f");
+/* harmony import */ var _LeadCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadCheckBoxSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadCheckBoxSingle_vue_vue_type_style_index_0_id_5ad4b05f_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
@@ -70930,7 +70930,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadCheckBox_vue_vue_type_template_id_e8243192__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadCheckBoxSingle_vue_vue_type_template_id_5ad4b05f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -71032,10 +71032,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -71043,9 +71043,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadInputCheckbox_vue_vue_type_template_id_61dfc6f3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3 */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3");
-/* harmony import */ var _LeadInputCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadInputCheckbox.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js");
-/* harmony import */ var _LeadInputCheckbox_vue_vue_type_style_index_0_id_61dfc6f3_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss");
+/* harmony import */ var _LeadInputCheckboxSingle_vue_vue_type_template_id_c29259ca__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca");
+/* harmony import */ var _LeadInputCheckboxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadInputCheckboxSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadInputCheckboxSingle_vue_vue_type_style_index_0_id_c29259ca_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
@@ -71054,7 +71054,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadInputCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadInputCheckbox_vue_vue_type_template_id_61dfc6f3__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadInputCheckboxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadInputCheckboxSingle_vue_vue_type_template_id_c29259ca__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -71094,10 +71094,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -71105,9 +71105,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadInputDropDown_vue_vue_type_template_id_36557c61__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadInputDropDown.vue?vue&type=template&id=36557c61 */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61");
-/* harmony import */ var _LeadInputDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadInputDropDown.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js");
-/* harmony import */ var _LeadInputDropDown_vue_vue_type_style_index_0_id_36557c61_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss");
+/* harmony import */ var _LeadInputDropDownSingle_vue_vue_type_template_id_0a3e3e09__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09 */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09");
+/* harmony import */ var _LeadInputDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadInputDropDownSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadInputDropDownSingle_vue_vue_type_style_index_0_id_0a3e3e09_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss */ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
@@ -71116,7 +71116,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadInputDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadInputDropDown_vue_vue_type_template_id_36557c61__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LeadInputDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadInputDropDownSingle_vue_vue_type_template_id_0a3e3e09__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -71249,10 +71249,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue ***!
-  \******************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -71260,15 +71260,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadFormCheckBox_vue_vue_type_template_id_403b540b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFormCheckBox.vue?vue&type=template&id=403b540b */ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b");
-/* harmony import */ var _LeadFormCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFormCheckBox.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadFormCheckBoxSingle_vue_vue_type_template_id_5deba39a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a */ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a");
+/* harmony import */ var _LeadFormCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFormCheckBoxSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFormCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFormCheckBox_vue_vue_type_template_id_403b540b__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/LeadFormCheckBox.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFormCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFormCheckBoxSingle_vue_vue_type_template_id_5deba39a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -71305,10 +71305,10 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdown.vue ***!
-  \******************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -71316,15 +71316,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LeadFormDropdown_vue_vue_type_template_id_a4c3e50e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFormDropdown.vue?vue&type=template&id=a4c3e50e */ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e");
-/* harmony import */ var _LeadFormDropdown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFormDropdown.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js");
+/* harmony import */ var _LeadFormDropdownSingle_vue_vue_type_template_id_48ab9d21__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21 */ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21");
+/* harmony import */ var _LeadFormDropdownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeadFormDropdownSingle.vue?vue&type=script&lang=js */ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js");
 /* harmony import */ var D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFormDropdown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFormDropdown_vue_vue_type_template_id_a4c3e50e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/LeadFormDropdown.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_OSPanel_domains_vsc_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LeadFormDropdownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LeadFormDropdownSingle_vue_vue_type_template_id_48ab9d21__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -72263,18 +72263,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldCheckBox.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72295,18 +72295,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldDropDown.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldDropDownSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72455,18 +72455,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js ***!
-  \*****************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBox.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBoxSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72519,18 +72519,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckbox.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckboxSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72551,18 +72551,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDown.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDownSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72631,18 +72631,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormCheckBox.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBoxSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormCheckBoxSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -72663,18 +72663,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdown_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormDropdown.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdownSingle_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormDropdownSingle.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -73511,18 +73511,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3 ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBox_vue_vue_type_template_id_4aacc0d3__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBoxSingle_vue_vue_type_template_id_10ce360a__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBox_vue_vue_type_template_id_4aacc0d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBox.vue?vue&type=template&id=4aacc0d3");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldCheckBoxSingle_vue_vue_type_template_id_10ce360a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldCheckBoxSingle.vue?vue&type=template&id=10ce360a");
 
 
 /***/ }),
@@ -73543,18 +73543,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009 ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDown_vue_vue_type_template_id_882c433e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDownSingle_vue_vue_type_template_id_33812009__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDown_vue_vue_type_template_id_882c433e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldDropDown.vue?vue&type=template&id=882c433e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDown.vue?vue&type=template&id=882c433e");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFieldDropDownSingle_vue_vue_type_template_id_33812009__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFieldDropDownSingle.vue?vue&type=template&id=33812009 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Fields/LeadFieldDropDownSingle.vue?vue&type=template&id=33812009");
 
 
 /***/ }),
@@ -73687,18 +73687,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192 ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f ***!
+  \*****************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_template_id_e8243192__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_template_id_5ad4b05f__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_template_id_e8243192__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBox.vue?vue&type=template&id=e8243192 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=template&id=e8243192");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_template_id_5ad4b05f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=template&id=5ad4b05f");
 
 
 /***/ }),
@@ -73751,18 +73751,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3 ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_template_id_61dfc6f3__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_template_id_c29259ca__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_template_id_61dfc6f3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=template&id=61dfc6f3");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_template_id_c29259ca__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=template&id=c29259ca");
 
 
 /***/ }),
@@ -73783,18 +73783,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61 ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09 ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_template_id_36557c61__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_template_id_0a3e3e09__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_template_id_36557c61__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDown.vue?vue&type=template&id=36557c61 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=template&id=36557c61");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_template_id_0a3e3e09__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=template&id=0a3e3e09");
 
 
 /***/ }),
@@ -73863,18 +73863,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b ***!
-  \************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a ***!
+  \******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBox_vue_vue_type_template_id_403b540b__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBoxSingle_vue_vue_type_template_id_5deba39a__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBox_vue_vue_type_template_id_403b540b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormCheckBox.vue?vue&type=template&id=403b540b */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBox.vue?vue&type=template&id=403b540b");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormCheckBoxSingle_vue_vue_type_template_id_5deba39a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormCheckBoxSingle.vue?vue&type=template&id=5deba39a");
 
 
 /***/ }),
@@ -73895,18 +73895,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e ***!
-  \************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21 ***!
+  \******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdown_vue_vue_type_template_id_a4c3e50e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdownSingle_vue_vue_type_template_id_48ab9d21__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdown_vue_vue_type_template_id_a4c3e50e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormDropdown.vue?vue&type=template&id=a4c3e50e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdown.vue?vue&type=template&id=a4c3e50e");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadFormDropdownSingle_vue_vue_type_template_id_48ab9d21__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/LeadFormDropdownSingle.vue?vue&type=template&id=48ab9d21");
 
 
 /***/ }),
@@ -74316,15 +74316,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss ***!
-  \**************************************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss":
+/*!********************************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss ***!
+  \********************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBox_vue_vue_type_style_index_0_id_e8243192_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBox.vue?vue&type=style&index=0&id=e8243192&lang=scss");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadCheckBoxSingle_vue_vue_type_style_index_0_id_5ad4b05f_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/Helpers/LeadCheckBoxSingle.vue?vue&type=style&index=0&id=5ad4b05f&lang=scss");
 
 
 /***/ }),
@@ -74368,15 +74368,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss":
-/*!***********************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss ***!
-  \***********************************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss ***!
+  \*****************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckbox_vue_vue_type_style_index_0_id_61dfc6f3_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckbox.vue?vue&type=style&index=0&id=61dfc6f3&lang=scss");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputCheckboxSingle_vue_vue_type_style_index_0_id_c29259ca_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputCheckboxSingle.vue?vue&type=style&index=0&id=c29259ca&lang=scss");
 
 
 /***/ }),
@@ -74394,15 +74394,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss":
-/*!***********************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss ***!
-  \***********************************************************************************************************************/
+/***/ "./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss ***!
+  \*****************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDown_vue_vue_type_style_index_0_id_36557c61_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDown.vue?vue&type=style&index=0&id=36557c61&lang=scss");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LeadInputDropDownSingle_vue_vue_type_style_index_0_id_0a3e3e09_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Leads/Components/Inputs/LeadInputDropDownSingle.vue?vue&type=style&index=0&id=0a3e3e09&lang=scss");
 
 
 /***/ }),

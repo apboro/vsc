@@ -390,7 +390,7 @@ $input_remove_color: #FF1E00 !default;
         flex-shrink: 0;
         justify-content: center;
         position: absolute !important;
-        background-color: #b61b21;
+        background-color: #4a678a;
         color: #fdc93c;
 
         border-radius: 15px;
@@ -399,6 +399,11 @@ $input_remove_color: #FF1E00 !default;
         height: auto;
         top: 4px;
         left: 4px;
+
+        &__blue {
+            background-color: #4a678a !important;
+            color: #fdc93c !important;
+        }
 
         & > svg {
             transition: transform $animation $animation_time;

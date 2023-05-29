@@ -28,12 +28,12 @@
 
             <LeadBlockForm label="Пожалуйста, укажите, если у ребенка есть особенности">
                 <div class="container-lead-form-center">
-                    <LeadFormCheckBox :form="form" :name="'ward_spe'" :hide-title="true" class="input-field-50"/>
-                    <LeadFormCheckBox :form="form" :name="'ward_uch'" :hide-title="true" class="input-field-50__second-checkbox"/>
+                    <LeadFormCheckBoxSingle :form="form" :name="'ward_spe'" :hide-title="true" class="input-field-50"/>
+                    <LeadFormCheckBoxSingle :form="form" :name="'ward_uch'" :hide-title="true" class="input-field-50__second-checkbox"/>
                 </div>
-                <LeadFormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>
+                <LeadFormCheckBoxSingle :form="form" :name="'ward_inv'" :hide-title="true"/>
 
-                <LeadFormDropdown :top="true"
+                <LeadFormDropdownSingle :top="true"
                                   :form="form"
                                   class="input-field-50"
                                   :name="'region_id'"
@@ -45,13 +45,13 @@
                 <div class="input-field-50__second"></div>
 
                 <div class="container-lead-form-center">
-                    <LeadFormDropdown :top="true"
+                    <LeadFormDropdownSingle :top="true"
                                       class="vsc-services-drop input-field-50" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
                                       :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
                                       @change="serviceChanged"
                     />
 
-                    <LeadFormCheckBox :form="form"
+                    <LeadFormCheckBoxSingle :form="form"
                                       class="input-field-50__second-checkbox"
                                       :name="'need_help'"
                                       :hide-title="true"
@@ -122,8 +122,8 @@ import LeadBlockForm from "@/Pages/Leads/Components/LeadBlockForm.vue";
 import LeadFormString from "@/Pages/Leads/Components/LeadFormString.vue";
 import LeadFormPhone from "@/Pages/Leads/Components/LeadFormPhone.vue";
 import LeadFormDate from "@/Pages/Leads/Components/LeadFormDate.vue";
-import LeadFormCheckBox from "@/Pages/Leads/Components/LeadFormCheckBox.vue";
-import LeadFormDropdown from "@/Pages/Leads/Components/LeadFormDropdown.vue";
+import LeadFormCheckBoxSingle from "@/Pages/Leads/Components/LeadFormCheckBoxSingle.vue";
+import LeadFormDropdownSingle from "@/Pages/Leads/Components/LeadFormDropdownSingle.vue";
 import LeadGuiButton from "@/Pages/Leads/Components/GUI/LeadGuiButton.vue";
 import LeadGuiHint from "@/Pages/Leads/Components/GUI/LeadGuiHint.vue";
 
@@ -131,8 +131,8 @@ export default {
     components: {
         LeadGuiHint,
         LeadGuiButton,
-        LeadFormDropdown,
-        LeadFormCheckBox,
+        LeadFormDropdownSingle,
+        LeadFormCheckBoxSingle,
         LeadFormDate,
         LeadFormPhone,
         LeadFormString,
