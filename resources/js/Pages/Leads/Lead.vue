@@ -79,10 +79,12 @@
 
                 </LeadBlockForm>
 
-                <div style="margin-top: 15px"/>
+                <div style="margin-top: 30px"/>
 
                 <div class="container-center">
-                    <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>
+                    <div class="btn_fon">
+                        <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>
+                    </div>
 
                     <div style="margin-top: 25px"/>
 
@@ -245,6 +247,20 @@ export default {
 </script>
 
 <style lang="scss">
+$base_button_color: #fdc93c !default;
+$base_disabled_color: #b4902e !default;
+
+.btn_fon {
+    background-color: $base_button_color;
+    width: min-content;
+    border-radius: 50px;
+    margin: 0 auto;
+    transform: rotate(356deg);
+}
+
+.button__lead {
+    transform: rotate(3deg);
+}
 
 .service_info {
     margin-top: 10px;
@@ -262,7 +278,7 @@ export default {
 
 .container {
     &-wrapper {
-        max-width: 70%;
+        max-width: 90%;
         margin: 0 auto;
         text-align: left;
     }

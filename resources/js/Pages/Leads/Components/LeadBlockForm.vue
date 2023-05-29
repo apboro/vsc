@@ -25,7 +25,7 @@ export default {
 .container-form {
     background-color: #fff;
     border-radius: 25px;
-    padding: 2% 3%;
+    padding: 3%;
 
     &__image {
         display: flex;

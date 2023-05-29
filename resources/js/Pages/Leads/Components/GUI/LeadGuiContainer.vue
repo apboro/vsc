@@ -17,6 +17,7 @@ export default {
 .container {
     vertical-align: top;
     box-sizing: border-box;
+    max-width: 1000px !important;
     padding: 30px 10px;
 }
 

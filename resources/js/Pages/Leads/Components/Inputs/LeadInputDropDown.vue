@@ -310,7 +310,7 @@ $input_remove_color: #FF1E00 !default;
         line-height: calc(#{$base_size_unit} - 2px) !important;
         overflow: hidden;
         //padding: 0 0 0 math.div($base_size_unit, 4) !important;
-        padding: 0 0 0 40px !important;
+        padding: 0 0 0 50px !important;
         white-space: nowrap;
 
         &-small {
@@ -388,17 +388,24 @@ $input_remove_color: #FF1E00 !default;
         flex-grow: 0;
         flex-shrink: 0;
         justify-content: center;
-        padding: math.div($base_size_unit, 4) !important;
-        width: $base_size_unit * 0.75 !important;
+        //padding: math.div($base_size_unit, 4) !important;
+        //width: $base_size_unit  !important;
         position: absolute !important;
-        height: 40px;
+        //height: 40px;
         background-color: #b61b21;
         color: #fdc93c;
+
+        border-radius: 15px;
+        width: 10% !important;
+        padding: 6px !important;
+        height: auto;
+        top: 4px;
+        left: 4px;
 
         & > svg {
             transition: transform $animation $animation_time;
             position: relative;
-            top: 4px;
+            top: 1px !important;
         }
 
         &-expanded {

@@ -60,17 +60,19 @@ $base_disabled_color: #b4902e !default;
     line-height: $base_size_unit;
     text-align: center;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 50px !important;
+    text-transform: uppercase;
+    font-weight: 700;
     box-sizing: border-box;
     padding: 0 math.div($base_size_unit, 2);
     letter-spacing: 0.03rem;
     color: $base_black_color;
-    border: 1px solid $base_button_color;
-    background-color: $base_button_color;
+    border: transparent !important;
+    background-color: transparent !important;
     transition: background-color $animation $animation_time, border-color $animation $animation_time, box-shadow $animation $animation_time;
     font-family: $project_font;
     font-size: 14px;
-    box-shadow: $shadow_1;
+    box-shadow: transparent;
     white-space: nowrap;
 
     &:not(:last-child) {
@@ -88,10 +90,10 @@ $base_disabled_color: #b4902e !default;
     }
 
     &__disabled {
-        background-color: $base_disabled_color !important;
-        border-color: $base_disabled_color !important;
         cursor: not-allowed;
-        box-shadow: $shadow_1 !important;
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
         color: $base_black_color;
 
         &:hover {

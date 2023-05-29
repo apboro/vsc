@@ -30,8 +30,8 @@ export default {
 
 $project_font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !default;
 $field_title_color: #1e1e1e !default;
-$field_required_color: #FF1E00 !default;
-$field_error_color: #FF1E00 !default;
+$field_required_color: #fd4afb !default;
+$field_error_color: #fd4afb !default;
 
 .input-field {
     display: inline-flex;

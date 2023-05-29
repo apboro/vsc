@@ -28502,13 +28502,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  viewBox: "0 0 320 320",
-  xmlns: "http://www.w3.org/2000/svg"
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "currentColor",
+  "class": "bi bi-chevron-down",
+  viewBox: "0 0 16 16"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  fill: "currentColor",
-  d: "M 40.999997,76.475002 H 279 c 21.4,0 32.1,25.899998 17,40.999998 l -119,119 c -9.4,9.4 -24.6,9.4 -33.9,0 l -119.100003,-119 c -15.0999992,-15.1 -4.4,-40.999999 17,-40.999998 z"
+  "fill-rule": "evenodd",
+  d: "M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
 }, null, -1
 /* HOISTED */
 );
@@ -30123,7 +30125,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
-    "margin-top": "15px"
+    "margin-top": "30px"
   }
 }, null, -1
 /* HOISTED */
@@ -30132,10 +30134,13 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_10 = {
   "class": "container-center"
 };
+var _hoisted_11 = {
+  "class": "btn_fon"
+};
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить заявку");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить заявку");
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "25px"
   }
@@ -30143,11 +30148,11 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "container-wrapper"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_GuiHeading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("GuiHeading");
@@ -30449,22 +30454,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiButton, {
+      }), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiButton, {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('center'),
         onClicked: $options.sendLead,
         disabled: !_ctx.agreement
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_11];
+          return [_hoisted_12];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["onClicked", "disabled"]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiHint, null, {
+      , ["onClicked", "disabled"])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiHint, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_14];
+          return [_hoisted_15];
         }),
         _: 1
         /* STABLE */
@@ -37836,7 +37841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".input-field {\n  display: inline-flex;\n  flex-direction: row;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 5px 0;\n}\n.input-field-50 {\n  width: 50%;\n}\n.input-field-50__second {\n  width: 50%;\n}\n.input-field-50__second-checkbox {\n  width: 50%;\n  padding-left: 30px;\n}\n.input-field-50__second .input-field__title {\n  padding-left: 25px;\n}\n.input-field__title {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 15px;\n  margin: 0 10px 0 0;\n  width: auto;\n  min-width: 125px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n  color: #1e1e1e;\n}\n.input-field__required .input-field__title:after {\n  content: \"*\";\n  color: #FF1E00;\n  margin-left: 3px;\n}\n.input-field__wrapper {\n  flex-grow: 1;\n}\n.input-field__input {\n  flex-grow: 1;\n  display: flex;\n}\n.input-field__errors {\n  display: flex;\n  flex-direction: column;\n  min-height: 8px;\n}\n.input-field__errors-error {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  margin-top: 5px;\n  text-transform: lowercase;\n  color: #FF1E00;\n}\n@media screen and (max-width: 769px) {\n.input-field-50 {\n    width: 100%;\n}\n.input-field-50__second {\n    width: 100%;\n}\n.input-field-50__second-checkbox {\n    padding-left: 0;\n}\n.input-field-50__second .input-field__title {\n    padding-left: 0;\n}\n.input-field__title {\n    min-width: 75px;\n    max-width: 200px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".input-field {\n  display: inline-flex;\n  flex-direction: row;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 5px 0;\n}\n.input-field-50 {\n  width: 50%;\n}\n.input-field-50__second {\n  width: 50%;\n}\n.input-field-50__second-checkbox {\n  width: 50%;\n  padding-left: 30px;\n}\n.input-field-50__second .input-field__title {\n  padding-left: 25px;\n}\n.input-field__title {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 15px;\n  margin: 0 10px 0 0;\n  width: auto;\n  min-width: 125px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n  color: #1e1e1e;\n}\n.input-field__required .input-field__title:after {\n  content: \"*\";\n  color: #fd4afb;\n  margin-left: 3px;\n}\n.input-field__wrapper {\n  flex-grow: 1;\n}\n.input-field__input {\n  flex-grow: 1;\n  display: flex;\n}\n.input-field__errors {\n  display: flex;\n  flex-direction: column;\n  min-height: 8px;\n}\n.input-field__errors-error {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  margin-top: 5px;\n  text-transform: lowercase;\n  color: #fd4afb;\n}\n@media screen and (max-width: 769px) {\n.input-field-50 {\n    width: 100%;\n}\n.input-field-50__second {\n    width: 100%;\n}\n.input-field-50__second-checkbox {\n    padding-left: 0;\n}\n.input-field-50__second .input-field__title {\n    padding-left: 0;\n}\n.input-field__title {\n    min-width: 75px;\n    max-width: 200px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37860,7 +37865,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".button__lead {\n  display: inline-block;\n  text-decoration: none;\n  height: 40px;\n  line-height: 40px;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 2px;\n  box-sizing: border-box;\n  padding: 0 20px;\n  letter-spacing: 0.03rem;\n  color: #000000;\n  border: 1px solid #fdc93c;\n  background-color: #fdc93c;\n  transition: background-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, border-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, box-shadow cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  white-space: nowrap;\n}\n.button__lead:not(:last-child) {\n  margin-right: 20px;\n}\n.button__lead:not(.button__lead__disabled):active {\n  box-shadow: none;\n}\n.button__lead__disabled {\n  background-color: #b4902e !important;\n  border-color: #b4902e !important;\n  cursor: not-allowed;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;\n  color: #000000;\n}\n.center {\n  margin: 0 auto !important;\n  display: flex;\n  flex-direction: row;\n  box-sizing: border-box;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".button__lead {\n  display: inline-block;\n  text-decoration: none;\n  height: 40px;\n  line-height: 40px;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 50px !important;\n  text-transform: uppercase;\n  font-weight: 700;\n  box-sizing: border-box;\n  padding: 0 20px;\n  letter-spacing: 0.03rem;\n  color: #000000;\n  border: transparent !important;\n  background-color: transparent !important;\n  transition: background-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, border-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, box-shadow cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  box-shadow: transparent;\n  white-space: nowrap;\n}\n.button__lead:not(:last-child) {\n  margin-right: 20px;\n}\n.button__lead:not(.button__lead__disabled):active {\n  box-shadow: none;\n}\n.button__lead__disabled {\n  cursor: not-allowed;\n  background-color: transparent !important;\n  border-color: transparent !important;\n  box-shadow: none !important;\n  color: #000000;\n}\n.center {\n  margin: 0 auto !important;\n  display: flex;\n  flex-direction: row;\n  box-sizing: border-box;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38052,7 +38057,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.input-dropdown {\n  height: 40px !important;\n}\n.input-dropdown:not(.input-dropdown__disabled) {\n  cursor: pointer;\n}\n.input-dropdown__multiple {\n  height: unset;\n  min-height: 40px !important;\n}\n.input-dropdown__value {\n  background-color: transparent;\n  color: inherit;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 1;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 16px;\n  height: 100%;\n  line-height: calc(40px - 2px) !important;\n  overflow: hidden;\n  padding: 0 0 0 40px !important;\n  white-space: nowrap;\n}\n.input-dropdown__value-small {\n  font-size: 14px;\n}\n.input-dropdown__value-placeholder {\n  color: #757575;\n}\n.input-dropdown__values {\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  box-sizing: border-box;\n  padding: 2px;\n  align-items: center;\n  color: inherit;\n}\n.input-dropdown__values-item {\n  display: inline-flex;\n  align-items: center;\n  font-size: 14px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  color: inherit;\n  border: 1px solid rgba(183, 183, 183, 0.5);\n  background-color: #ffffff;\n  height: 30px !important;\n  box-sizing: border-box;\n  border-radius: 4px;\n  margin: 2px;\n  padding: 0 0 0 8px;\n}\n.input-dropdown__values-item-remove {\n  display: inline-block;\n  width: 20px !important;\n  height: 100%;\n  cursor: pointer;\n  margin: 0 0 0 2px;\n  position: relative;\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  opacity: 0.6;\n}\n.input-dropdown__values-item-remove:hover {\n  opacity: 1;\n}\n.input-dropdown__values-item-remove:before, .input-dropdown__values-item-remove:after {\n  content: \"\";\n  width: 50%;\n  height: 2px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background-color: #FF1E00;\n}\n.input-dropdown__values-item-remove:before {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n.input-dropdown__values-item-remove:after {\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.input-dropdown__toggle {\n  align-items: flex-start;\n  box-sizing: border-box;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  justify-content: center;\n  padding: 10px !important;\n  width: 30px !important;\n  position: absolute !important;\n  height: 40px;\n  background-color: #b61b21;\n  color: #fdc93c;\n}\n.input-dropdown__toggle > svg {\n  transition: transform cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  position: relative;\n  top: 4px;\n}\n.input-dropdown__toggle-expanded > svg {\n  transform: rotate(-180deg);\n}\n.input-dropdown__list {\n  background-color: #ffffff;\n  bottom: -1px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  left: -1px;\n  max-height: 320px !important;\n  min-width: calc(100% + 2px);\n  opacity: 0;\n  padding: 0;\n  position: absolute;\n  transform: translateY(100%);\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, visibility cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  visibility: hidden;\n  z-index: 10;\n}\n.input-dropdown__list-shown {\n  opacity: 1;\n  visibility: visible;\n}\n.input-dropdown__list-top {\n  bottom: unset;\n  top: -1px;\n  transform: translateY(-100%);\n}\n.input-dropdown__list-right {\n  left: unset;\n  right: -1px;\n}\n.input-dropdown__list-center {\n  left: 50%;\n  right: unset;\n  transform: translate(-50%, 100%);\n}\n.input-dropdown__list-top.input-dropdown__list-center {\n  transform: translate(-50%, -100%);\n}\n.input-dropdown__list-search {\n  box-sizing: border-box;\n  margin: 5px;\n}\n.input-dropdown__list-wrapper {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* W3C standard - сейчас только для Firefox */\n  scrollbar-color: #8c82ce #ededed;\n  scrollbar-width: thin;\n  /* для Chrome/Edge/Safari */\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar {\n  height: 5px;\n  width: 5px;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-track {\n  background: #ededed;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-thumb {\n  background-color: #8c82ce;\n  border-radius: 2px;\n}\n.input-dropdown__list-item {\n  box-sizing: border-box;\n  color: #1e1e1e;\n  cursor: pointer;\n  display: block;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  line-height: 20px !important;\n  padding: 4px 10px;\n  transition: color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n}\n.input-dropdown__list-item-current {\n  color: #0D74D7;\n}\n.input-dropdown__list-item:hover {\n  color: #258ef2;\n}\n.input-dropdown__list-item:first-child {\n  margin-top: 5px;\n}\n.input-dropdown__list-item:last-child {\n  margin-bottom: 5px;\n}\n.input-dropdown__list-item-value {\n  white-space: nowrap;\n}\n.input-dropdown__list-item-hint {\n  font-style: italic;\n  opacity: 0.7;\n  display: block;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.input-dropdown {\n  height: 40px !important;\n}\n.input-dropdown:not(.input-dropdown__disabled) {\n  cursor: pointer;\n}\n.input-dropdown__multiple {\n  height: unset;\n  min-height: 40px !important;\n}\n.input-dropdown__value {\n  background-color: transparent;\n  color: inherit;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 1;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 16px;\n  height: 100%;\n  line-height: calc(40px - 2px) !important;\n  overflow: hidden;\n  padding: 0 0 0 50px !important;\n  white-space: nowrap;\n}\n.input-dropdown__value-small {\n  font-size: 14px;\n}\n.input-dropdown__value-placeholder {\n  color: #757575;\n}\n.input-dropdown__values {\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  box-sizing: border-box;\n  padding: 2px;\n  align-items: center;\n  color: inherit;\n}\n.input-dropdown__values-item {\n  display: inline-flex;\n  align-items: center;\n  font-size: 14px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  color: inherit;\n  border: 1px solid rgba(183, 183, 183, 0.5);\n  background-color: #ffffff;\n  height: 30px !important;\n  box-sizing: border-box;\n  border-radius: 4px;\n  margin: 2px;\n  padding: 0 0 0 8px;\n}\n.input-dropdown__values-item-remove {\n  display: inline-block;\n  width: 20px !important;\n  height: 100%;\n  cursor: pointer;\n  margin: 0 0 0 2px;\n  position: relative;\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  opacity: 0.6;\n}\n.input-dropdown__values-item-remove:hover {\n  opacity: 1;\n}\n.input-dropdown__values-item-remove:before, .input-dropdown__values-item-remove:after {\n  content: \"\";\n  width: 50%;\n  height: 2px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background-color: #FF1E00;\n}\n.input-dropdown__values-item-remove:before {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n.input-dropdown__values-item-remove:after {\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.input-dropdown__toggle {\n  align-items: flex-start;\n  box-sizing: border-box;\n  cursor: inherit;\n  display: flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  justify-content: center;\n  position: absolute !important;\n  background-color: #b61b21;\n  color: #fdc93c;\n  border-radius: 15px;\n  width: 10% !important;\n  padding: 6px !important;\n  height: auto;\n  top: 4px;\n  left: 4px;\n}\n.input-dropdown__toggle > svg {\n  transition: transform cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  position: relative;\n  top: 1px !important;\n}\n.input-dropdown__toggle-expanded > svg {\n  transform: rotate(-180deg);\n}\n.input-dropdown__list {\n  background-color: #ffffff;\n  bottom: -1px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  left: -1px;\n  max-height: 320px !important;\n  min-width: calc(100% + 2px);\n  opacity: 0;\n  padding: 0;\n  position: absolute;\n  transform: translateY(100%);\n  transition: opacity cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, visibility cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  visibility: hidden;\n  z-index: 10;\n}\n.input-dropdown__list-shown {\n  opacity: 1;\n  visibility: visible;\n}\n.input-dropdown__list-top {\n  bottom: unset;\n  top: -1px;\n  transform: translateY(-100%);\n}\n.input-dropdown__list-right {\n  left: unset;\n  right: -1px;\n}\n.input-dropdown__list-center {\n  left: 50%;\n  right: unset;\n  transform: translate(-50%, 100%);\n}\n.input-dropdown__list-top.input-dropdown__list-center {\n  transform: translate(-50%, -100%);\n}\n.input-dropdown__list-search {\n  box-sizing: border-box;\n  margin: 5px;\n}\n.input-dropdown__list-wrapper {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* W3C standard - сейчас только для Firefox */\n  scrollbar-color: #8c82ce #ededed;\n  scrollbar-width: thin;\n  /* для Chrome/Edge/Safari */\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar {\n  height: 5px;\n  width: 5px;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-track {\n  background: #ededed;\n}\n.input-dropdown__list-wrapper::-webkit-scrollbar-thumb {\n  background-color: #8c82ce;\n  border-radius: 2px;\n}\n.input-dropdown__list-item {\n  box-sizing: border-box;\n  color: #1e1e1e;\n  cursor: pointer;\n  display: block;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  line-height: 20px !important;\n  padding: 4px 10px;\n  transition: color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n}\n.input-dropdown__list-item-current {\n  color: #0D74D7;\n}\n.input-dropdown__list-item:hover {\n  color: #258ef2;\n}\n.input-dropdown__list-item:first-child {\n  margin-top: 5px;\n}\n.input-dropdown__list-item:last-child {\n  margin-bottom: 5px;\n}\n.input-dropdown__list-item-value {\n  white-space: nowrap;\n}\n.input-dropdown__list-item-hint {\n  font-style: italic;\n  opacity: 0.7;\n  display: block;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38148,7 +38153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".container-form[data-v-50b3141d] {\n  background-color: #fff;\n  border-radius: 25px;\n  padding: 2% 3%;\n}\n.container-form__image[data-v-50b3141d] {\n  display: flex;\n  align-items: center;\n  position: relative;\n}\n.container-form__label[data-v-50b3141d] {\n  font-size: 23px;\n  font-weight: 600;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n}\n.divider[data-v-50b3141d] {\n  height: 1px;\n  background-color: #d1d0d0;\n  width: 75%;\n  margin: 10px 0 15px;\n}\n@media screen and (max-width: 769px) {\n.container-form[data-v-50b3141d] {\n    padding: 5% 3%;\n}\n.container-form__label[data-v-50b3141d] {\n    font-size: 18px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".container-form[data-v-50b3141d] {\n  background-color: #fff;\n  border-radius: 25px;\n  padding: 3%;\n}\n.container-form__image[data-v-50b3141d] {\n  display: flex;\n  align-items: center;\n  position: relative;\n}\n.container-form__label[data-v-50b3141d] {\n  font-size: 23px;\n  font-weight: 600;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n}\n.divider[data-v-50b3141d] {\n  height: 1px;\n  background-color: #d1d0d0;\n  width: 75%;\n  margin: 10px 0 15px;\n}\n@media screen and (max-width: 769px) {\n.container-form[data-v-50b3141d] {\n    padding: 5% 3%;\n}\n.container-form__label[data-v-50b3141d] {\n    font-size: 18px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38172,7 +38177,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".service_info {\n  margin-top: 10px;\n  padding-left: 150px;\n  box-sizing: border-box;\n}\n.ball {\n  display: block;\n  position: absolute;\n  width: 150px;\n  right: 12%;\n  bottom: 0;\n}\n.container-wrapper {\n  max-width: 70%;\n  margin: 0 auto;\n  text-align: left;\n}\n.container-center {\n  text-align: center;\n}\n@media screen and (max-width: 769px) {\n.service_info {\n    padding-left: 0;\n}\n.ball {\n    display: none;\n}\n.container-wrapper {\n    max-width: 100%;\n    margin: 0 auto;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".btn_fon {\n  background-color: #fdc93c;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n  border-radius: 50px;\n  margin: 0 auto;\n  transform: rotate(356deg);\n}\n.button__lead {\n  transform: rotate(3deg);\n}\n.service_info {\n  margin-top: 10px;\n  padding-left: 150px;\n  box-sizing: border-box;\n}\n.ball {\n  display: block;\n  position: absolute;\n  width: 150px;\n  right: 12%;\n  bottom: 0;\n}\n.container-wrapper {\n  max-width: 90%;\n  margin: 0 auto;\n  text-align: left;\n}\n.container-center {\n  text-align: center;\n}\n@media screen and (max-width: 769px) {\n.service_info {\n    padding-left: 0;\n}\n.ball {\n    display: none;\n}\n.container-wrapper {\n    max-width: 100%;\n    margin: 0 auto;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38220,7 +38225,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container {\n    vertical-align: top;\n    box-sizing: border-box;\n    padding: 30px 10px;\n}\n@media screen and (max-width: 769px) {\n.container {\n        padding: 30px 0;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container {\n    vertical-align: top;\n    box-sizing: border-box;\n    max-width: 1000px !important;\n    padding: 30px 10px;\n}\n@media screen and (max-width: 769px) {\n.container {\n        padding: 30px 0;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
