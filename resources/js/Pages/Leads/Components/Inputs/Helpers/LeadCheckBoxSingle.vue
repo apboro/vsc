@@ -74,8 +74,8 @@ $input_error_color: #FF1E00 !default;
     }
 
     &__check {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         margin-right: 20px;
         border: none;
         border-radius: 6px;

@@ -29894,8 +29894,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _assets_ball_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/ball.png */ "./resources/js/Pages/Leads/assets/ball.png");
-
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -29951,15 +29949,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "ball",
-  src: _assets_ball_png__WEBPACK_IMPORTED_MODULE_1__["default"],
-  alt: ""
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "30px"
   }
@@ -29967,16 +29957,16 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "container-center"
 };
-var _hoisted_13 = {
+var _hoisted_12 = {
   "class": "btn_fon"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить заявку");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить заявку");
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "25px"
   }
@@ -29984,11 +29974,11 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_15 = {
   "class": "container-wrapper"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Если Вы хотите записать более одного ребенка, Вам необходимо оставить несколько отдельных заявок");
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Если Вы хотите записать более одного ребенка, Вам необходимо оставить несколько отдельных заявок");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_HeaderSingle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("HeaderSingle");
@@ -30251,7 +30241,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       }), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadBlockForm, {
-        "class": "container-form__image"
+        "class": "container-form__no-image"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
@@ -30262,27 +30252,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             label: 'Подтверждаю свое согласие на обработку моих персональных данных'
           }, null, 8
           /* PROPS */
-          , ["modelValue"]), _hoisted_10];
+          , ["modelValue"])];
         }),
         _: 1
         /* STABLE */
 
-      }), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiButton, {
+      }), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiButton, {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('center'),
         onClicked: $options.sendLead,
         disabled: !_ctx.agreement
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_14];
+          return [_hoisted_13];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["onClicked", "disabled"])]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiHint, null, {
+      , ["onClicked", "disabled"])]), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LeadGuiHint, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_17];
+          return [_hoisted_16];
         }),
         _: 1
         /* STABLE */
@@ -30332,7 +30322,7 @@ var _hoisted_1 = {
   "class": "header"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"header__first-container\" data-v-0468a765><div class=\"header__title\" data-v-0468a765><div class=\"header__title_first\" data-v-0468a765> Записаться </div><div class=\"header__title_second\" data-v-0468a765> на тренировочные сборы </div></div></div><div class=\"header__second-container\" data-v-0468a765><img class=\"logo\" src=\"" + _assets_logo_png__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" width=\"90\" alt=\"\" data-v-0468a765></div>", 2);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"header__first-container\" data-v-0468a765><div class=\"header__title\" data-v-0468a765><div class=\"header__title_first\" data-v-0468a765> Записаться </div><div class=\"header__title_second\" data-v-0468a765> на тренировочные сборы </div></div></div><div class=\"header__second-container\" data-v-0468a765><img class=\"logo\" src=\"" + _assets_logo_png__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" width=\"80\" alt=\"\" data-v-0468a765></div>", 2);
 
 var _hoisted_4 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -38372,7 +38362,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".input-field {\n  display: inline-flex;\n  flex-direction: row;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 5px 0;\n}\n.input-field-50 {\n  width: 50%;\n}\n.input-field-50__second {\n  margin-left: 1%;\n  width: 50%;\n}\n.input-field-50__second-checkbox {\n  width: 50%;\n  padding-left: 30px;\n}\n.input-field-50__second .input-field__title {\n  padding-left: 25px;\n}\n.input-field__title {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 15px;\n  margin: 0 10px 0 0;\n  width: auto;\n  min-width: 125px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n  color: #1e1e1e;\n}\n.input-field__required .input-field__title:after {\n  content: \"*\";\n  color: #fd4afb;\n  margin-left: 3px;\n}\n.input-field__wrapper {\n  flex-grow: 1;\n}\n.input-field__input {\n  flex-grow: 1;\n  display: flex;\n}\n.input-field__errors {\n  display: flex;\n  flex-direction: column;\n  min-height: 8px;\n}\n.input-field__errors-error {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  margin-top: 5px;\n  text-transform: lowercase;\n  color: #fd4afb;\n}\n@media screen and (max-width: 769px) {\n.input-field-50 {\n    width: 100%;\n}\n.input-field-50__second {\n    width: 100%;\n}\n.input-field-50__second-checkbox {\n    padding-left: 0;\n}\n.input-field-50__second .input-field__title {\n    padding-left: 0;\n}\n.input-field__title {\n    min-width: 75px;\n    max-width: 200px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.input-field {\n  display: inline-flex;\n  flex-direction: row;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 5px 0;\n}\n.input-field-50 {\n  width: 50%;\n}\n.input-field-50__second {\n  margin-left: 1%;\n  width: 50%;\n}\n.input-field-50__second-checkbox {\n  width: 50%;\n  padding-left: 30px;\n}\n.input-field-50__second .input-field__title {\n  padding-left: 25px;\n}\n.input-field__title {\n  font-family: \"TTNorms-Regular\";\n  font-size: 15px;\n  margin: 0 10px 0 0;\n  width: auto;\n  min-width: 125px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n  color: #1e1e1e;\n}\n.input-field__required .input-field__title:after {\n  content: \"*\";\n  color: #fd4afb;\n  margin-left: 3px;\n}\n.input-field__wrapper {\n  flex-grow: 1;\n}\n.input-field__input {\n  flex-grow: 1;\n  display: flex;\n}\n.input-field__errors {\n  display: flex;\n  flex-direction: column;\n  min-height: 8px;\n}\n.input-field__errors-error {\n  font-family: \"TTNorms-Regular\";\n  font-size: 14px;\n  margin-top: 5px;\n  text-transform: lowercase;\n  color: #fd4afb;\n}\n@media screen and (max-width: 769px) {\n.input-field-50 {\n    width: 100%;\n}\n.input-field-50__second {\n    width: 100%;\n}\n.input-field-50__second-checkbox {\n    padding-left: 0;\n}\n.input-field-50__second .input-field__title {\n    padding-left: 0;\n}\n.input-field__title {\n    min-width: 75px;\n    max-width: 200px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38396,7 +38386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".button__lead {\n  display: inline-block;\n  text-decoration: none;\n  height: 40px;\n  line-height: 40px;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 50px !important;\n  text-transform: uppercase;\n  font-weight: 700;\n  box-sizing: border-box;\n  padding: 0 20px;\n  letter-spacing: 0.03rem;\n  color: #000000;\n  border: transparent !important;\n  background-color: transparent !important;\n  transition: background-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, border-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, box-shadow cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  box-shadow: transparent;\n  white-space: nowrap;\n}\n.button__lead:not(:last-child) {\n  margin-right: 20px;\n}\n.button__lead:not(.button__lead__disabled):active {\n  box-shadow: none;\n}\n.button__lead__disabled {\n  cursor: not-allowed;\n  background-color: transparent !important;\n  border-color: transparent !important;\n  box-shadow: none !important;\n  color: #000000;\n}\n.center {\n  margin: 0 auto !important;\n  display: flex;\n  flex-direction: row;\n  box-sizing: border-box;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.button__lead {\n  display: inline-block;\n  text-decoration: none;\n  height: 40px;\n  line-height: 40px;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 50px !important;\n  text-transform: uppercase;\n  font-weight: 700;\n  box-sizing: border-box;\n  padding: 0 20px;\n  letter-spacing: 0.03rem;\n  color: #000000;\n  border: transparent !important;\n  background-color: transparent !important;\n  transition: background-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, border-color cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms, box-shadow cubic-bezier(0.24, 0.19, 0.28, 1.29) 150ms;\n  font-family: \"TTTravels-Black\";\n  font-size: 14px;\n  box-shadow: transparent;\n  white-space: nowrap;\n}\n.button__lead:not(:last-child) {\n  margin-right: 20px;\n}\n.button__lead:not(.button__lead__disabled):active {\n  box-shadow: none;\n}\n.button__lead__disabled {\n  cursor: not-allowed;\n  background-color: transparent !important;\n  border-color: transparent !important;\n  box-shadow: none !important;\n  color: #000000;\n}\n.center {\n  margin: 0 auto !important;\n  display: flex;\n  flex-direction: row;\n  box-sizing: border-box;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38420,7 +38410,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".hint {\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 14px;\n  color: #000000;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.hint {\n  font-family: \"TTNorms-Regular\";\n  font-size: 14px;\n  font-weight: 600;\n  letter-spacing: 0.03em;\n  color: #000000;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38444,7 +38434,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".checkbox {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  position: relative;\n}\n.checkbox__disabled {\n  cursor: not-allowed;\n}\n.checkbox__input {\n  visibility: hidden;\n  opacity: 0;\n  position: absolute;\n  width: 0;\n  height: 0;\n}\n.checkbox__check {\n  width: 40px;\n  height: 40px;\n  margin-right: 20px;\n  border: none;\n  border-radius: 6px;\n  background-color: #dddddd;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n}\n.checkbox__check-checked {\n  color: inherit;\n  display: none;\n  width: 75%;\n  height: 75%;\n}\n.checkbox__error:not(.checkbox__disabled) .checkbox__check {\n  border-color: #FF1E00 !important;\n}\n.checkbox__disabled .checkbox__check {\n  border-color: rgba(98, 98, 98, 0.5) !important;\n  color: #626262 !important;\n  background-color: rgba(98, 98, 98, 0.25) !important;\n}\n.checkbox__input:checked + .checkbox__check {\n  border-color: #4a678a;\n  background-color: #4a678a;\n  color: #fdc93c;\n}\n.checkbox__input:checked + .checkbox__check > .checkbox__check-checked {\n  display: block;\n}\n.checkbox__label {\n  margin: 0 7px 0 7px;\n  font-size: 16px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  display: inline-block;\n  color: #1e1e1e;\n  position: relative;\n  top: 1px;\n}\n.checkbox__label-small {\n  font-size: 14px;\n}\n.checkbox__disabled .checkbox__label {\n  color: #626262;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".checkbox {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  position: relative;\n}\n.checkbox__disabled {\n  cursor: not-allowed;\n}\n.checkbox__input {\n  visibility: hidden;\n  opacity: 0;\n  position: absolute;\n  width: 0;\n  height: 0;\n}\n.checkbox__check {\n  width: 35px;\n  height: 35px;\n  margin-right: 20px;\n  border: none;\n  border-radius: 6px;\n  background-color: #dddddd;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n}\n.checkbox__check-checked {\n  color: inherit;\n  display: none;\n  width: 75%;\n  height: 75%;\n}\n.checkbox__error:not(.checkbox__disabled) .checkbox__check {\n  border-color: #FF1E00 !important;\n}\n.checkbox__disabled .checkbox__check {\n  border-color: rgba(98, 98, 98, 0.5) !important;\n  color: #626262 !important;\n  background-color: rgba(98, 98, 98, 0.25) !important;\n}\n.checkbox__input:checked + .checkbox__check {\n  border-color: #4a678a;\n  background-color: #4a678a;\n  color: #fdc93c;\n}\n.checkbox__input:checked + .checkbox__check > .checkbox__check-checked {\n  display: block;\n}\n.checkbox__label {\n  margin: 0 7px 0 7px;\n  font-size: 16px;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  display: inline-block;\n  color: #1e1e1e;\n  position: relative;\n  top: 1px;\n}\n.checkbox__label-small {\n  font-size: 14px;\n}\n.checkbox__disabled .checkbox__label {\n  color: #626262;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38660,7 +38650,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".input-string {\n  height: 40px !important;\n}\n.input-string__input {\n  border: none !important;\n  outline: none !important;\n  box-sizing: border-box;\n  height: 40px !important;\n  line-height: 40px !important;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  font-size: 16px;\n  color: inherit;\n  padding: 0 10px;\n  flex-grow: 1;\n  flex-shrink: 1;\n  width: 100%;\n  background-color: transparent;\n  display: block;\n  cursor: inherit;\n}\n.input-string__input-small {\n  font-size: 14px;\n}\n.input-string__input::-moz-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n  color: #757575;\n  opacity: 1; /* Firefox */\n}\n.input-string__input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n  color: #757575;\n  opacity: 1; /* Firefox */\n}\n.input-string__input:-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #757575;\n}\n.input-string__input::-ms-input-placeholder { /* Microsoft Edge */\n  color: #757575;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.input-string {\n  height: 40px !important;\n}\n.input-string__input {\n  border: none !important;\n  outline: none !important;\n  box-sizing: border-box;\n  height: 40px !important;\n  line-height: 40px !important;\n  font-size: 16px;\n  color: inherit;\n  padding: 0 10px;\n  flex-grow: 1;\n  flex-shrink: 1;\n  width: 100%;\n  background-color: transparent;\n  display: block;\n  cursor: inherit;\n}\n.input-string__input-small {\n  font-size: 14px;\n}\n.input-string__input::-moz-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n  color: #757575;\n  opacity: 1; /* Firefox */\n}\n.input-string__input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n  color: #757575;\n  opacity: 1; /* Firefox */\n}\n.input-string__input:-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #757575;\n}\n.input-string__input::-ms-input-placeholder { /* Microsoft Edge */\n  color: #757575;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38684,7 +38674,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".container-form[data-v-50b3141d] {\n  background-color: #fff;\n  border-radius: 25px;\n  padding: 3%;\n  display: block;\n  position: relative;\n}\n.container-form__image[data-v-50b3141d] {\n  display: flex;\n  align-items: center;\n  position: relative;\n}\n.container-form__label[data-v-50b3141d] {\n  font-size: 23px;\n  font-weight: 600;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n}\n.container-form__left_ball[data-v-50b3141d] {\n  display: block;\n  position: absolute;\n  top: -45px;\n  left: -33px;\n}\n.container-form__right_ball[data-v-50b3141d] {\n  display: block;\n  position: absolute;\n  top: -45px;\n  right: -33px;\n}\n.divider[data-v-50b3141d] {\n  height: 1px;\n  background-color: #d1d0d0;\n  width: 75%;\n  margin: 10px 0 15px;\n}\n@media screen and (max-width: 769px) {\n.container-form[data-v-50b3141d] {\n    padding: 5% 3%;\n}\n.container-form__label[data-v-50b3141d] {\n    font-size: 18px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.container-form[data-v-50b3141d] {\n  background-color: #fff;\n  border-radius: 25px;\n  padding: 3%;\n  display: block;\n  position: relative;\n}\n.container-form__no-image[data-v-50b3141d] {\n  display: flex;\n  align-items: center;\n  padding: 2%;\n  position: relative;\n}\n.container-form__image[data-v-50b3141d] {\n  display: flex;\n  align-items: center;\n  position: relative;\n}\n.container-form__label[data-v-50b3141d] {\n  font-size: 26px;\n  font-family: \"heading\";\n  letter-spacing: 0.02em;\n  line-height: 0.5;\n}\n.container-form__left_ball[data-v-50b3141d] {\n  display: block;\n  position: absolute;\n  top: -45px;\n  left: -33px;\n}\n.container-form__right_ball[data-v-50b3141d] {\n  display: block;\n  position: absolute;\n  top: -45px;\n  right: -33px;\n}\n.divider[data-v-50b3141d] {\n  height: 1px;\n  background-color: #d1d0d0;\n  width: 75%;\n  margin: 10px 0 15px;\n}\n@media screen and (max-width: 769px) {\n.container-form[data-v-50b3141d] {\n    padding: 5% 3%;\n}\n.container-form__label[data-v-50b3141d] {\n    font-size: 18px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38732,7 +38722,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".header[data-v-0468a765] {\n  display: flex;\n  width: 100%;\n  align-items: flex-end;\n}\n.header__first-container[data-v-0468a765] {\n  background-color: #f6ac2e;\n  width: 56%;\n  display: flex;\n  align-items: flex-end;\n  height: 55px;\n  padding-bottom: 15px;\n}\n.header__second-container[data-v-0468a765] {\n  display: flex;\n  justify-content: flex-end;\n  width: 44%;\n}\n.header__title[data-v-0468a765] {\n  padding-left: 20px;\n}\n.header__title_first[data-v-0468a765] {\n  text-transform: uppercase;\n  font-size: 45px;\n  font-weight: bold;\n}\n.header__title_second[data-v-0468a765] {\n  text-transform: uppercase;\n  font-size: 20px;\n  font-weight: bold;\n}\n.logo[data-v-0468a765] {\n  padding-right: 15px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"heading\";\n  font-weight: 400;\n  font-style: normal;\n  font-display: auto;\n  unicode-range: U+000-5FF;\n  src: local(\"heading\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"ttf\"), url(\"/fonts/Heading-Now-35-Medium-trial.ttf\") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTNorms-Regular\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTNorms-Regular\"), url(\"/fonts/TTNorms-Regular.ttf\") format(\"ttf\"), url(\"/fonts/TTNorms-Regular.woff\") format(\"woff\"), url(\"/fonts/TTNorms-Regular.woff2\") format(\"woff2\");\n}\n@font-face {\n  font-family: \"TTTravels-Black\";\n  font-style: normal;\n  font-weight: normal;\n  src: local(\"TTTravels-Black\"), url(\"/fonts/TTTravels-Black.ttf\") format(\"ttf\"), url(\"/fonts/TTTravels-Black.woff\") format(\"woff\"), url(\"/fonts/TTTravels-Black.woff2\") format(\"woff2\");\n}\n.header[data-v-0468a765] {\n  display: flex;\n  width: 100%;\n  align-items: flex-end;\n}\n.header__first-container[data-v-0468a765] {\n  background-color: #f6ac2e;\n  width: 44%;\n  display: flex;\n  align-items: flex-end;\n  height: 66px;\n  padding-bottom: 15px;\n}\n.header__second-container[data-v-0468a765] {\n  display: flex;\n  justify-content: flex-end;\n  width: 56%;\n}\n.header__title[data-v-0468a765] {\n  padding-left: 20px;\n}\n.header__title_first[data-v-0468a765] {\n  font-family: \"heading\";\n  text-transform: uppercase;\n  font-size: 72px;\n  line-height: 1;\n}\n.header__title_second[data-v-0468a765] {\n  font-family: \"heading\";\n  text-transform: uppercase;\n  font-size: 38px;\n  line-height: 1;\n}\n.logo[data-v-0468a765] {\n  padding-right: 15px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38780,7 +38770,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container {\n    vertical-align: top;\n    box-sizing: border-box;\n    max-width: 1000px !important;\n    padding: 30px 10px;\n}\n.pt-0 {\n    padding-top: 0 !important;\n}\n@media screen and (max-width: 769px) {\n.container {\n        padding: 30px 0;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container {\r\n    vertical-align: top;\r\n    box-sizing: border-box;\r\n    max-width: 1000px !important;\r\n    padding: 30px 10px;\n}\n.pt-0 {\r\n    padding-top: 0 !important;\n}\n@media screen and (max-width: 769px) {\n.container {\r\n        padding: 30px 0;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38875,21 +38865,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/aqua.png?9ad7de93bad081bbc0f1fd0cda212f81");
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Leads/assets/ball.png":
-/*!**************************************************!*\
-  !*** ./resources/js/Pages/Leads/assets/ball.png ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/ball.png?0fd16c8dccdfb676af7ccfdaaac2cecd");
 
 /***/ }),
 

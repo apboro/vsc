@@ -31,6 +31,7 @@ export default {
 
 <style lang="scss">
 @use "sass:math";
+@import "../../../../../css/fonts";
 
 $project_font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !default;
 $animation_time: 150ms !default;
@@ -70,7 +71,7 @@ $base_disabled_color: #b4902e !default;
     border: transparent !important;
     background-color: transparent !important;
     transition: background-color $animation $animation_time, border-color $animation $animation_time, box-shadow $animation $animation_time;
-    font-family: $project_font;
+    font-family: $travels_black_font;
     font-size: 14px;
     box-shadow: transparent;
     white-space: nowrap;

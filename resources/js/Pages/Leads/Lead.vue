@@ -252,6 +252,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../../css/fonts";
+
 $base_button_color: #fdc93c !default;
 $base_disabled_color: #b4902e !default;
 
@@ -286,6 +288,7 @@ $base_disabled_color: #b4902e !default;
         max-width: 90%;
         margin: 0 auto;
         text-align: left;
+        font-family: $heading_now_font;
     }
 
     &-center {

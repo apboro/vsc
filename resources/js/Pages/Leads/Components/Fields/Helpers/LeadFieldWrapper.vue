@@ -27,8 +27,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../../../../../css/fonts";
 
-$project_font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !default;
 $field_title_color: #1e1e1e !default;
 $field_required_color: #fd4afb !default;
 $field_error_color: #fd4afb !default;
@@ -61,7 +61,7 @@ $field_error_color: #fd4afb !default;
     }
 
     &__title {
-        font-family: $project_font;
+        font-family: $norms_regular_font;
         font-size: 15px;
         margin: 0 10px 0 0;
         width: auto;
@@ -92,7 +92,7 @@ $field_error_color: #fd4afb !default;
         min-height: 8px;
 
         &-error {
-            font-family: $project_font;
+            font-family: $norms_regular_font;
             font-size: 14px;
             margin-top: 5px;
             text-transform: lowercase;

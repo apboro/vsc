@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "sass:math";
+@import "../../../../css/fonts";
 
 .container-form {
     background-color: #fff;
@@ -31,6 +32,13 @@ export default {
     display: block;
     position: relative;
 
+    &__no-image {
+        display: flex;
+        align-items: center;
+        padding: 2%;
+        position: relative;
+    }
+
     &__image {
         display: flex;
         align-items: center;
@@ -38,9 +46,11 @@ export default {
     }
 
     &__label {
-        font-size: 23px;
-        font-weight: 600;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        font-size: 26px;
+        font-family: $heading_now_font;
+        letter-spacing: 0.02em;
+        line-height: 0.5;
+
     }
 
     &__left_ball {

@@ -44,6 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../../../../../css/fonts";
 
 $project_font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !default;
 $base_size_unit: 40px !default;
@@ -74,8 +75,8 @@ $input_error_color: #FF1E00 !default;
     }
 
     &__check {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         margin-right: 20px;
         border: none;
         border-radius: 6px;
@@ -116,7 +117,7 @@ $input_error_color: #FF1E00 !default;
     &__label {
         margin: 0 7px 0 7px;
         font-size: 16px;
-        font-family: $project_font;
+        font-family: $norms_regular_font;
         display: inline-block;
         color: $input_color;
         position: relative;

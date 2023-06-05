@@ -75,10 +75,8 @@
 
             <div style="margin-top: 30px"/>
 
-            <LeadBlockForm class="container-form__image">
+            <LeadBlockForm class="container-form__no-image">
                 <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
-                <img class="ball" src="./assets/ball.png" alt="">
-
             </LeadBlockForm>
 
             <div style="margin-top: 30px"/>

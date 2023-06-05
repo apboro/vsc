@@ -14,14 +14,16 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../../../../css/fonts";
 
-$project_font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !default;
 $base_text_gray_color: #3f3f3f !default;
 $base_text_black_color: #000000 !default;
 
 .hint {
-    font-family: $project_font;
+    font-family: $norms_regular_font;
     font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     color: $base_text_black_color;
 }
 </style>

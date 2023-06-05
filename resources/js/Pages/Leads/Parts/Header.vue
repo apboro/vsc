@@ -13,7 +13,7 @@
         </div>
 
         <div class="header__second-container">
-            <img class="logo" src="./../assets/logo.png" width="90" alt="">
+            <img class="logo" src="./../assets/logo.png" width="80" alt="">
         </div>
     </div>
 </template>
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@import "../../../../css/fonts";
 
 .header {
     display: flex;
@@ -75,32 +75,33 @@ export default {
 
     &__first-container {
         background-color: #f6ac2e;
-        width: 56%;
+        width: 54%;
         display: flex;
         align-items: flex-end;
-        height: 55px;
-        padding-bottom: 15px;
+        height: 70px;
     }
 
     &__second-container {
         display: flex;
         justify-content: flex-end;
-        width: 44%;
+        width: 46%;
     }
 
     &__title {
         padding-left: 20px;
 
         &_first {
+            font-family: $heading_now_font;
             text-transform: uppercase;
-            font-size: 45px;
-            font-weight: bold;
+            font-size: 72px;
+            line-height: 1;
         }
 
         &_second {
+            font-family: $heading_now_font;
             text-transform: uppercase;
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 38px;
+            line-height: 1;
         }
     }
 }
