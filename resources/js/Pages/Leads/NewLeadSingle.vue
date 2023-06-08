@@ -1,97 +1,142 @@
 <template>
-    <div>
-        <template v-if="!message">
-            <GuiHeading>Записаться на тренировочные сборы</GuiHeading>
+    <template v-if="!message">
+        <LeadGuiContainer>
+            <HeaderSingle/>
 
-            <div style="margin-top: 20px"/>
+            <div style="margin-top: 30px"/>
 
-            <GuiContainer>
-                <FormString :form="form" :name="'lastname'"/>
-                <FormString :form="form" :name="'firstname'"/>
-                <FormString :form="form" :name="'patronymic'" :autocomplete="'additional-name'"/>
-                <FormPhone :form="form" :name="'phone'"/>
-                <FormString :form="form" :name="'email'"/>
-
-                <div style="margin-top: 20px"/>
-
-                <FormString :form="form" :name="'ward_lastname'"/>
-                <FormString :form="form" :name="'ward_firstname'"/>
-                <FormString :form="form" :name="'ward_patronymic'" :autocomplete="'additional-name'"/>
-                <FormDate :form="form" :name="'ward_birth_date'"/>
-
-                <div style="margin-top: 20px"/>
-
-                <GuiHeading>Пожалуйста, укажите, если у ребенка есть особенности</GuiHeading>
-
-                <div style="margin-top: 10px"/>
-
-                <FormCheckBox :form="form" :name="'ward_spe'" :hide-title="true"/>
-                <FormCheckBox :form="form" :name="'ward_uch'" :hide-title="true"/>
-                <FormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>
-
-                <div style="margin-top: 20px"/>
-
-                <FormDropdown :top="true" title="Локация" :form="form" :name="'region_id'" :options="regions" :identifier="'id'" :show="'name'" :placeholder="'Любой район'" :has-null="true" @change="regionChanged"/>
-                <FormDropdown :top="true" class="vsc-services-drop" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
-                              :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
-                              @change="serviceChanged"
-                />
-                <FormCheckBox :form="form" :name="'need_help'" :without-title="true" @change="needHelpChanged"/>
-            </GuiContainer>
-
-            <GuiContainer v-if="service_info">
-                <div style="margin-top: 10px; padding-left: 200px; box-sizing: border-box;">
-                    <GuiValue :title="'Тренировочная база'">{{ service_info['training_base_title'] }}</GuiValue>
-                    <GuiValue :title="'Адрес'">{{ service_info['training_base_address'] }}</GuiValue>
-                    <GuiValue :title="'Стоимость услуги руб.'">{{ service_info['price'] }} руб.</GuiValue>
-                    <GuiValue :title="'Дата внесения средств'">{{ service_info['date_deposit_funds'] }}</GuiValue>
-                    <GuiValue :title="'Авансовый платеж'">{{ service_info['advance_payment'] }}</GuiValue>
-                    <GuiValue :title="'Дата внесения аванса'">{{ service_info['date_advance_payment'] }}</GuiValue>
-                    <GuiValue :title="'Период пребывания'">{{ service_info['service_start_at'] }} - {{ service_info['service_end_at'] }}</GuiValue>
+            <LeadBlockForm label="ФИО и данные законного представителя">
+                <LeadFormString :form="form" :name="'lastname'"/>
+                <LeadFormString :form="form" :name="'firstname'"/>
+                <LeadFormString :form="form" :name="'patronymic'" :autocomplete="'additional-name'"/>
+                <div class="container-lead-form-center">
+                    <LeadFormPhone :form="form" :name="'phone'" class="input-field-50"/>
+                    <LeadFormString :form="form" :name="'email'" class="input-field-50__second"/>
                 </div>
-            </GuiContainer>
+            </LeadBlockForm>
 
+            <div style="margin-top: 30px"/>
 
-            <div style="margin-top: 20px"/>
+            <LeadBlockForm label="ФИО и данные будущего чемпиона" :right-ball="true">
+                <LeadFormString :form="form" :name="'ward_lastname'"/>
+                <LeadFormString :form="form" :name="'ward_firstname'"/>
+                <LeadFormString :form="form" :name="'ward_patronymic'" :autocomplete="'additional-name'"/>
+                <LeadFormDate :form="form" :name="'ward_birth_date'"/>
+            </LeadBlockForm>
 
-            <FormText :form="form" :name="'client_comments'"/>
+            <div style="margin-top: 30px"/>
 
-            <div style="margin-top: 20px"/>
+            <LeadBlockForm label="Пожалуйста, укажите, если у ребенка есть особенности">
+                <div class="container-lead-form-center">
+                    <LeadFormCheckBoxSingle :form="form" :name="'ward_spe'" :hide-title="true" class="input-field-50"/>
+                    <LeadFormCheckBoxSingle :form="form" :name="'ward_uch'" :hide-title="true" class="input-field-50__second-checkbox"/>
+                </div>
+                <LeadFormCheckBoxSingle :form="form" :name="'ward_inv'" :hide-title="true"/>
 
-            <GuiContainer>
+                <LeadFormDropdownSingle :top="true"
+                                  :form="form"
+                                  class="input-field-50"
+                                  :name="'region_id'"
+                                  :options="regions"
+                                  :identifier="'id'"
+                                  :show="'name'"
+                                  :placeholder="'Любой район'"
+                                  :has-null="true" @change="regionChanged"/>
+                <div class="input-field-50__second"></div>
+
+                <div class="container-lead-form-center">
+                    <LeadFormDropdownSingle :top="true"
+                                      class="vsc-services-drop input-field-50" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
+                                      :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
+                                      @change="serviceChanged"
+                    />
+
+                    <LeadFormCheckBoxSingle :form="form"
+                                      class="input-field-50__second-checkbox"
+                                      :name="'need_help'"
+                                      :hide-title="true"
+                                      @change="needHelpChanged"/>
+                </div>
+
+                <GuiContainer v-if="service_info" service_info>
+                    <div class="service_info">
+                        <GuiValue :title="'Тренировочная база'">{{ service_info['training_base_title'] }}</GuiValue>
+                        <GuiValue :title="'Адрес'">{{ service_info['training_base_address'] }}</GuiValue>
+                        <GuiValue :title="'Стоимость услуги руб.'">{{ service_info['price'] }} руб.</GuiValue>
+                        <GuiValue :title="'Дата внесения средств'">{{ service_info['date_deposit_funds'] }}</GuiValue>
+                        <GuiValue :title="'Авансовый платеж'">{{ service_info['advance_payment'] }}</GuiValue>
+                        <GuiValue :title="'Дата внесения аванса'">{{ service_info['date_advance_payment'] }}</GuiValue>
+                        <GuiValue :title="'Период пребывания'">{{ service_info['service_start_at'] }} - {{ service_info['service_end_at'] }}</GuiValue>
+                    </div>
+                </GuiContainer>
+
+                <FormText :form="form" :name="'client_comments'"/>
+            </LeadBlockForm>
+
+            <div style="margin-top: 30px"/>
+
+            <LeadBlockForm class="container-form__no-image">
                 <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
-                <div style="margin-top: 10px"/>
-                <GuiButton :color="'blue'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</GuiButton>
-            </GuiContainer>
+            </LeadBlockForm>
 
-            <div style="margin-top: 20px"/>
+            <div style="margin-top: 30px"/>
 
-            <GuiHint>Если Вы хотите записать более одного ребенка, Вам необходимо оставить несколько отдельных заявок</GuiHint>
-        </template>
+            <div class="container-center">
+                <div class="btn_fon">
+                    <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>
+                </div>
 
-        <GuiMessage v-else>{{ message }}</GuiMessage>
-    </div>
+                <div style="margin-top: 25px"/>
+
+                <div class="container-wrapper">
+                    <LeadGuiHint>Если Вы хотите записать более одного ребенка, Вам необходимо оставить несколько отдельных заявок</LeadGuiHint>
+                </div>
+            </div>
+        </LeadGuiContainer>
+    </template>
+
+    <GuiMessage v-else>{{ message }}</GuiMessage>
 </template>
 
 <script>
 import form from "@/Core/Form";
-import GuiContainer from "@/Components/GUI/GuiContainer";
-import GuiHeading from "@/Components/GUI/GuiHeading";
-import FormString from "@/Components/Form/FormString";
-import FormPhone from "@/Components/Form/FormPhone";
-import GuiButton from "@/Components/GUI/GuiButton";
-import FormDropdown from "@/Components/Form/FormDropdown";
-import GuiMessage from "@/Components/GUI/GuiMessage";
-import FormDate from "../../Components/Form/FormDate";
-import FormCheckBox from "../../Components/Form/FormCheckBox";
-import InputCheckbox from "../../Components/Inputs/InputCheckbox";
-import GuiHint from "../../Components/GUI/GuiHint";
-import GuiValue from "../../Components/GUI/GuiValue";
-import GuiValueArea from "../../Components/GUI/GuiValueArea";
-import FormText from "../../Components/Form/FormText";
+import GuiContainer from "@/Components/GUI/GuiContainer.vue";
+import GuiHeading from "@/Components/GUI/GuiHeading.vue";
+import FormString from "@/Components/Form/FormString.vue";
+import FormPhone from "@/Components/Form/FormPhone.vue";
+import GuiButton from "@/Components/GUI/GuiButton.vue";
+import FormDropdown from "@/Components/Form/FormDropdown.vue";
+import GuiMessage from "@/Components/GUI/GuiMessage.vue";
+import FormDate from "../../Components/Form/FormDate.vue";
+import FormCheckBox from "../../Components/Form/FormCheckBox.vue";
+import InputCheckbox from "../../Components/Inputs/InputCheckbox.vue";
+import GuiHint from "../../Components/GUI/GuiHint.vue";
+import GuiValue from "../../Components/GUI/GuiValue.vue";
+import GuiValueArea from "../../Components/GUI/GuiValueArea.vue";
+import FormText from "../../Components/Form/FormText.vue";
+import HeaderSingle from "@/Pages/Leads/Parts/HeaderSingle.vue";
+import LeadGuiContainer from "@/Pages/Leads/Components/GUI/LeadGuiContainer.vue";
+import LeadBlockForm from "@/Pages/Leads/Components/LeadBlockForm.vue";
+import LeadFormString from "@/Pages/Leads/Components/LeadFormString.vue";
+import LeadFormPhone from "@/Pages/Leads/Components/LeadFormPhone.vue";
+import LeadFormDate from "@/Pages/Leads/Components/LeadFormDate.vue";
+import LeadFormCheckBoxSingle from "@/Pages/Leads/Components/LeadFormCheckBoxSingle.vue";
+import LeadFormDropdownSingle from "@/Pages/Leads/Components/LeadFormDropdownSingle.vue";
+import LeadGuiButton from "@/Pages/Leads/Components/GUI/LeadGuiButton.vue";
+import LeadGuiHint from "@/Pages/Leads/Components/GUI/LeadGuiHint.vue";
 
 export default {
     components: {
+        LeadGuiHint,
+        LeadGuiButton,
+        LeadFormDropdownSingle,
+        LeadFormCheckBoxSingle,
+        LeadFormDate,
+        LeadFormPhone,
+        LeadFormString,
+        LeadBlockForm,
+        LeadGuiContainer,
+        HeaderSingle,
         FormText,
         GuiValueArea, GuiValue, GuiHint, InputCheckbox, FormCheckBox, FormDate, GuiMessage, FormDropdown, GuiButton, GuiContainer, GuiHeading, FormString, FormPhone},
 
@@ -122,13 +167,13 @@ export default {
 
     created() {
         this.form.save_url = this.url('/leads-single/send');
-        this.form.set('lastname', null, 'required', 'Фамилия (законного представителя)', true);
-        this.form.set('firstname', null, 'required', 'Имя (законного представителя)', true);
-        this.form.set('patronymic', null, 'required', 'Отчество (законного представителя)', true);
+        this.form.set('lastname', null, 'required', 'Фамилия', true);
+        this.form.set('firstname', null, 'required', 'Имя', true);
+        this.form.set('patronymic', null, 'required', 'Отчество', true);
 
-        this.form.set('ward_lastname', null, 'required', 'Фамилия (будущего чемпиона)', true);
-        this.form.set('ward_firstname', null, 'required', 'Имя (будущего чемпиона)', true);
-        this.form.set('ward_patronymic', null, 'required', 'Отчество (будущего чемпиона)', true);
+        this.form.set('ward_lastname', null, 'required', 'Фамилия', true);
+        this.form.set('ward_firstname', null, 'required', 'Имя', true);
+        this.form.set('ward_patronymic', null, 'required', 'Отчество', true);
         this.form.set('ward_birth_date', null, 'required', 'Дата рождения (будущего чемпиона)', true);
 
         this.form.set('ward_inv', null, null, 'Наличие инвалидности', true);
@@ -208,3 +253,74 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+$base_button_color: #fdc93c !default;
+$base_disabled_color: #b4902e !default;
+
+.btn_fon {
+    background-color: $base_button_color;
+    width: min-content;
+    border-radius: 50px;
+    margin: 0 auto;
+    transform: rotate(356deg);
+}
+
+.button__lead {
+    transform: rotate(3deg);
+}
+
+.service_info {
+    margin-top: 10px;
+    padding-left: 150px;
+    box-sizing: border-box;
+}
+
+.ball {
+    display: block;
+    position: absolute;
+    width: 150px;
+    right: 12%;
+    bottom: 0;
+}
+
+.container {
+    &-wrapper {
+        max-width: 90%;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    &-center {
+        text-align: center;
+    }
+
+    &-lead {
+        &-form {
+            &-center{
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 769px) {
+    .service_info {
+        padding-left: 0;
+    }
+
+    .ball {
+        display: none;
+    }
+
+    .container {
+        &-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    }
+}
+</style>
+

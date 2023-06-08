@@ -19,6 +19,30 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Виды спорта'">
+                <DictionaryDropDown
+                    :dictionary="'sport_kinds'"
+                    v-model="list.filters['sport_kinds']"
+                    :original="list.filters_original['sport_kinds']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    :multi="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Объект'" class="w-200px">
+                <DictionaryDropDown
+                    :dictionary="'training_bases'"
+                    v-model="list.filters['training_base_id']"
+                    :original="list.filters_original['training_base_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    :search="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
             <template #search>
                 <LayoutFiltersItem :title="'Поиск по ФИО'">
                     <InputSearch v-model="list.search" @change="list.load()"/>

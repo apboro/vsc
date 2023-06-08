@@ -1,7 +1,7 @@
 <template>
     <GuiContainer>
         <LoadingProgress :loading="is_initializing">
-            <NewLead v-if="!is_initializing && subscription_id === null && message === null"
+            <Lead v-if="!is_initializing && subscription_id === null && message === null"
                      :session="session"
                      :crm_url="crmUrl"
                      :debug="debug"
@@ -30,13 +30,13 @@
 
 <script>
 import GuiContainer from "@/Components/GUI/GuiContainer";
-import NewLead from "@/Pages/Leads/NewLead";
+import Lead from "@/Pages/Leads/Lead.vue";
 import LoadingProgress from "@/Components/LoadingProgress";
 import ContractForm from "@/Pages/Leads/ContractForm";
 import GuiMessage from "@/Components/GUI/GuiMessage";
 
 export default {
-    components: {GuiMessage, ContractForm, LoadingProgress, NewLead, GuiContainer},
+    components: {GuiMessage, ContractForm, LoadingProgress, Lead, GuiContainer},
     props: {
         crm_url: {type: String, default: null},
         debug: {type: Boolean, default: false},

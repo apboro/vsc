@@ -8,8 +8,10 @@ use App\Http\Controllers\Leads\Helpers\LeadSession;
 use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Services\Service;
+use App\Models\Services\ServiceProgram;
 use App\Models\Subscriptions\Subscription;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -101,10 +103,18 @@ class LeadInitController extends ApiEditController
             ->orderBy('order')
             ->get();
 
+        $regularType = ServiceProgram::select('id')
+            ->where('service_type_id', ServiceTypes::regular)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
         $services = Service::query()
             ->leftJoin('training_bases', 'training_bases.id', '=', 'services.training_base_id')
             ->leftJoin('training_base_info', 'training_bases.id', '=', 'training_base_info.base_id')
             ->where(['services.organization_id' => $key['organization_id'], 'services.status_id' => ServiceStatus::enabled])
+            ->whereIn('type_program_id', $regularType)
+            ->orWhereNull('type_program_id')
             ->select([
                 'services.id',
                 'services.title',

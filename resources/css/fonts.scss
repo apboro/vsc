@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "heading";
+    font-weight: 400;
+    font-style: normal;
+    font-display: auto;
+    unicode-range: U+000-5FF;
+    src: local("heading"), url("/fonts/Heading-Now-35-Medium-trial.ttf") format("ttf"), url("/fonts/Heading-Now-35-Medium-trial.ttf") format("woff");
+}
+
+@font-face {
+    font-family: 'TTNorms-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('TTNorms-Regular'), url('/fonts/TTNorms-Regular.ttf') format('ttf'), url('/fonts/TTNorms-Regular.woff') format('woff'), url('/fonts/TTNorms-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'TTTravels-Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('TTTravels-Black'), url('/fonts/TTTravels-Black.ttf') format('ttf'), url('/fonts/TTTravels-Black.woff') format('woff'), url('/fonts/TTTravels-Black.woff2') format('woff2');
+}
+
+$heading_now_font: "heading";
+$norms_regular_font: "TTNorms-Regular";
+$travels_black_font: "TTTravels-Black";

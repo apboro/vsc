@@ -19,14 +19,15 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
-            <LayoutFiltersItem :title="'Вид спорта'">
+            <LayoutFiltersItem :title="'Виды спорта'">
                 <DictionaryDropDown
                     :dictionary="'sport_kinds'"
-                    v-model="list.filters['sport_kind_id']"
-                    :original="list.filters_original['sport_kind_id']"
+                    v-model="list.filters['sport_kinds']"
+                    :original="list.filters_original['sport_kinds']"
                     :placeholder="'Все'"
                     :has-null="true"
                     :small="true"
+                    :multi="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>

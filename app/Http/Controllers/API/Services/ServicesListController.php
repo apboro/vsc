@@ -45,7 +45,7 @@ class ServicesListController extends ApiController
 
         $query = Service::query()
             ->tap(new ForOrganization($current->organizationId()))
-            ->with(['status', 'trainingBase', 'trainingBase.info', 'sportKind'])
+            ->with(['status', 'trainingBase', 'trainingBase.info', 'sportKind', 'sportKinds'])
             ->orderBy('created_at', 'desc');
 
         // apply filters
@@ -56,8 +56,10 @@ class ServicesListController extends ApiController
             if (!empty($filters['training_base_id'])) {
                 $query->where('training_base_id', $filters['training_base_id']);
             }
-            if (!empty($filters['sport_kind_id'])) {
-                $query->where('sport_kind_id', $filters['sport_kind_id']);
+            if (!empty($filters['sport_kinds'])) {
+                $query->whereHas('sportKinds', function (Builder $query) use ($filters) {
+                    $query->whereIn('id', $filters['sport_kinds']);
+                });
             }
             if (!empty($filters['service_type_id'])) {
                 $query->whereHas('typeProgram', function (Builder $query) use ($filters) {

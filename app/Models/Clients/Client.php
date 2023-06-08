@@ -6,11 +6,13 @@ use App\Interfaces\Statusable;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
+use App\Models\Subscriptions\Subscription;
 use App\Models\User\User;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 
@@ -95,5 +97,15 @@ class Client extends Model implements Statusable
     public function wards(): BelongsToMany
     {
         return $this->belongsToMany(ClientWard::class, 'client_has_wards', 'client_id', 'client_ward_id');
+    }
+
+    /**
+     * Subscriptions of this client.
+     *
+     * @return  HasMany
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'client_id', 'id');
     }
 }
