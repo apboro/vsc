@@ -103,14 +103,19 @@ $field_error_color: #fd4afb !default;
 
 
 @media screen and (max-width: 769px) {
+    .container-lead-form-center {
+        display: block !important;
+    }
+
     .input-field {
         &-50 {
-            width: 100%;
+            width: 100% !important;
 
             &__second {
                 width: 100%;
 
                 &-checkbox {
+                    width: 100%;
                     padding-left: 0;
                 }
 
@@ -124,7 +129,7 @@ $field_error_color: #fd4afb !default;
 
         &__title {
             min-width: 75px;
-            max-width: 200px;
+            max-width: 160px;
         }
     }
 }

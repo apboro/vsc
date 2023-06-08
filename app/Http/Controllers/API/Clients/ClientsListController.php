@@ -90,10 +90,31 @@ class ClientsListController extends ApiController
             'Статус',
             'Телефон',
             'Email',
+            'Виды спорта',
+            'Объект',
         ];
 
         /** @var Collection $users */
         $users->transform(function (User $user) {
+            $sportKinds = '';
+            $training_base = '';
+            $subscriptions = $user->client->subscriptions;
+
+            if (!empty($subscriptions)) {
+                $arrTrainingBase = $subscriptions->pluck('service.trainingBase')->toArray();
+                $training_base = $arrTrainingBase[0]['short_title'];
+
+                $arrSportKinds = $subscriptions->pluck('service.sportKinds')->toArray();
+                $result = [];
+                array_walk_recursive($arrSportKinds, function($item, $key) use (&$result) {
+                    if ($key === 'name') {
+                        $result[] = $item;
+                    }
+                });
+                $result = array_unique($result);
+                $sportKinds = implode(', ', $result);
+            }
+
             return [
                 'id' => $user->id,
                 'name' => $user->profile->fullName,
@@ -101,6 +122,8 @@ class ClientsListController extends ApiController
                 'status' => $user->client->status->name,
                 'email' => $user->profile->email,
                 'phone' => $user->profile->phone,
+                'sportKinds' => $sportKinds,
+                'training_base' => $training_base,
             ];
         });
 
@@ -110,7 +133,7 @@ class ClientsListController extends ApiController
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
         $spreadsheet->getActiveSheet()->fromArray($users->toArray(), '—', 'A2');
-        foreach(['A', 'B', 'C', 'D', 'E', 'F'] as $col) {
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
 
