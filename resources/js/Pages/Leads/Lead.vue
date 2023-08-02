@@ -5,97 +5,105 @@
 
             <div style="margin-top: 30px"/>
 
-            <LeadBlockForm label="ФИО и данные законного представителя">
-                <LeadFormString :form="form" :name="'lastname'"/>
-                <LeadFormString :form="form" :name="'firstname'"/>
-                <LeadFormString :form="form" :name="'patronymic'" :autocomplete="'additional-name'"/>
-                <div class="container-lead-form-center">
-                    <LeadFormPhone :form="form" :name="'phone'" class="input-field-50"/>
-                    <LeadFormString :form="form" :name="'email'" class="input-field-50__second"/>
-                </div>
-            </LeadBlockForm>
-
-            <div style="margin-top: 30px"/>
-
-            <LeadBlockForm label="ФИО и данные будущего чемпиона">
-                <LeadFormString :form="form" :name="'ward_lastname'"/>
-                <LeadFormString :form="form" :name="'ward_firstname'"/>
-                <LeadFormString :form="form" :name="'ward_patronymic'" :autocomplete="'additional-name'"/>
-                <LeadFormDate :form="form" :name="'ward_birth_date'"/>
-            </LeadBlockForm>
-
-            <div style="margin-top: 30px"/>
-
-            <LeadBlockForm label="Пожалуйста, укажите, если у ребенка есть особенности" :left-ball="true">
-                <div class="container-lead-form-center">
-                    <LeadFormCheckBox :form="form" :name="'ward_spe'" :hide-title="true" class="input-field-50"/>
-                    <LeadFormCheckBox :form="form" :name="'ward_uch'" :hide-title="true" class="input-field-50__second-checkbox"/>
-                </div>
-                <LeadFormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>
-
-                <LeadFormDropdown :top="true"
-                              :form="form"
-                              class="input-field-50"
-                              :name="'region_id'"
-                              :options="regions"
-                              :identifier="'id'"
-                              :show="'name'"
-                              :placeholder="'Любой район'"
-                              :has-null="true" @change="regionChanged"/>
-                <div class="input-field-50__second"></div>
-
-                <div class="container-lead-form-center">
-                    <LeadFormDropdown :top="true"
-                                      class="vsc-services-drop input-field-50" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
-                                      :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
-                                      @change="serviceChanged"
-                    />
-
-                    <LeadFormCheckBox :form="form"
-                                      class="input-field-50__second-checkbox"
-                                      :name="'need_help'"
-                                      :hide-title="true"
-                                      @change="needHelpChanged"/>
-                </div>
-
-                <GuiContainer v-if="service_info" service_info>
-                    <div class="service_info">
-                        <GuiValue :title="'Тренировочная база'">{{ service_info['training_base_title'] }}</GuiValue>
-                        <GuiValue :title="'Адрес'">{{ service_info['training_base_address'] }}</GuiValue>
-                        <GuiValue :title="'Вид спорта'">{{ service_info['service_sport_kind'] }}</GuiValue>
-                        <GuiValue :title="'Стоимость в мес.'">{{ service_info['service_monthly_price'] }} руб.</GuiValue>
-                        <GuiValue :title="'Занятий в неделю'">{{ service_info['service_trainings_per_week'] }}</GuiValue>
-                        <GuiValue :title="'Занятий в месяц'">{{ service_info['service_trainings_per_month'] }}</GuiValue>
-                        <GuiValue :title="'Продолжительность занятия'">{{ service_info['service_training_duration'] }} мин.</GuiValue>
-                        <GuiValue :title="'Период занятий'">{{ service_info['service_start_at'] }} - {{ service_info['service_end_at'] }}</GuiValue>
-                        <GuiValueArea :title="'Расписание занятий'" :text-content="service_info['schedule']"></GuiValueArea>
-                    </div>
-                </GuiContainer>
-
-                <FormText :form="form" :name="'client_comments'"/>
-            </LeadBlockForm>
-
-            <div style="margin-top: 30px"/>
-
-            <LeadBlockForm class="container-form__image">
-                <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>
-                <img class="ball" src="./assets/ball.png" alt="">
-
-            </LeadBlockForm>
-
-            <div style="margin-top: 30px"/>
-
-            <div class="container-center">
-                <div class="btn_fon">
-                    <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>
-                </div>
-
-                <div style="margin-top: 25px"/>
-
-                <div class="container-wrapper">
-                    <LeadGuiHint>Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.</LeadGuiHint>
-                </div>
+            <div class="container-wrapper">
+                <LeadGuiHint>
+                    <p style="font-size:40px">
+                        Дорогие друзья! Мы ушли на каникулы, запись на пробные занятия возобновиться в новом учебном году
+                    </p>
+                </LeadGuiHint>
             </div>
+
+<!--            <LeadBlockForm label="ФИО и данные законного представителя">-->
+<!--                <LeadFormString :form="form" :name="'lastname'"/>-->
+<!--                <LeadFormString :form="form" :name="'firstname'"/>-->
+<!--                <LeadFormString :form="form" :name="'patronymic'" :autocomplete="'additional-name'"/>-->
+<!--                <div class="container-lead-form-center">-->
+<!--                    <LeadFormPhone :form="form" :name="'phone'" class="input-field-50"/>-->
+<!--                    <LeadFormString :form="form" :name="'email'" class="input-field-50__second"/>-->
+<!--                </div>-->
+<!--            </LeadBlockForm>-->
+
+<!--            <div style="margin-top: 30px"/>-->
+
+<!--            <LeadBlockForm label="ФИО и данные будущего чемпиона">-->
+<!--                <LeadFormString :form="form" :name="'ward_lastname'"/>-->
+<!--                <LeadFormString :form="form" :name="'ward_firstname'"/>-->
+<!--                <LeadFormString :form="form" :name="'ward_patronymic'" :autocomplete="'additional-name'"/>-->
+<!--                <LeadFormDate :form="form" :name="'ward_birth_date'"/>-->
+<!--            </LeadBlockForm>-->
+
+<!--            <div style="margin-top: 30px"/>-->
+
+<!--            <LeadBlockForm label="Пожалуйста, укажите, если у ребенка есть особенности" :left-ball="true">-->
+<!--                <div class="container-lead-form-center">-->
+<!--                    <LeadFormCheckBox :form="form" :name="'ward_spe'" :hide-title="true" class="input-field-50"/>-->
+<!--                    <LeadFormCheckBox :form="form" :name="'ward_uch'" :hide-title="true" class="input-field-50__second-checkbox"/>-->
+<!--                </div>-->
+<!--                <LeadFormCheckBox :form="form" :name="'ward_inv'" :hide-title="true"/>-->
+
+<!--                <LeadFormDropdown :top="true"-->
+<!--                              :form="form"-->
+<!--                              class="input-field-50"-->
+<!--                              :name="'region_id'"-->
+<!--                              :options="regions"-->
+<!--                              :identifier="'id'"-->
+<!--                              :show="'name'"-->
+<!--                              :placeholder="'Любой район'"-->
+<!--                              :has-null="true" @change="regionChanged"/>-->
+<!--                <div class="input-field-50__second"></div>-->
+
+<!--                <div class="container-lead-form-center">-->
+<!--                    <LeadFormDropdown :top="true"-->
+<!--                                      class="vsc-services-drop input-field-50" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"-->
+<!--                                      :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"-->
+<!--                                      @change="serviceChanged"-->
+<!--                    />-->
+
+<!--                    <LeadFormCheckBox :form="form"-->
+<!--                                      class="input-field-50__second-checkbox"-->
+<!--                                      :name="'need_help'"-->
+<!--                                      :hide-title="true"-->
+<!--                                      @change="needHelpChanged"/>-->
+<!--                </div>-->
+
+<!--                <GuiContainer v-if="service_info" service_info>-->
+<!--                    <div class="service_info">-->
+<!--                        <GuiValue :title="'Тренировочная база'">{{ service_info['training_base_title'] }}</GuiValue>-->
+<!--                        <GuiValue :title="'Адрес'">{{ service_info['training_base_address'] }}</GuiValue>-->
+<!--                        <GuiValue :title="'Вид спорта'">{{ service_info['service_sport_kind'] }}</GuiValue>-->
+<!--                        <GuiValue :title="'Стоимость в мес.'">{{ service_info['service_monthly_price'] }} руб.</GuiValue>-->
+<!--                        <GuiValue :title="'Занятий в неделю'">{{ service_info['service_trainings_per_week'] }}</GuiValue>-->
+<!--                        <GuiValue :title="'Занятий в месяц'">{{ service_info['service_trainings_per_month'] }}</GuiValue>-->
+<!--                        <GuiValue :title="'Продолжительность занятия'">{{ service_info['service_training_duration'] }} мин.</GuiValue>-->
+<!--                        <GuiValue :title="'Период занятий'">{{ service_info['service_start_at'] }} - {{ service_info['service_end_at'] }}</GuiValue>-->
+<!--                        <GuiValueArea :title="'Расписание занятий'" :text-content="service_info['schedule']"></GuiValueArea>-->
+<!--                    </div>-->
+<!--                </GuiContainer>-->
+
+<!--                <FormText :form="form" :name="'client_comments'"/>-->
+<!--            </LeadBlockForm>-->
+
+<!--            <div style="margin-top: 30px"/>-->
+
+<!--            <LeadBlockForm class="container-form__image">-->
+<!--                <InputCheckbox v-model="agreement" :label="'Подтверждаю свое согласие на обработку моих персональных данных'"/>-->
+<!--                <img class="ball" src="./assets/ball.png" alt="">-->
+
+<!--            </LeadBlockForm>-->
+
+<!--            <div style="margin-top: 30px"/>-->
+
+<!--            <div class="container-center">-->
+<!--                <div class="btn_fon">-->
+<!--                    <LeadGuiButton :class="'center'" @clicked="sendLead" :disabled="!agreement">Отправить заявку</LeadGuiButton>-->
+<!--                </div>-->
+
+<!--                <div style="margin-top: 25px"/>-->
+
+<!--                <div class="container-wrapper">-->
+<!--                    <LeadGuiHint>Если Вы хотите записать более одного ребенка, или записаться на несколько секций, Вам необходимо оставить несколько отдельных заявок.</LeadGuiHint>-->
+<!--                </div>-->
+<!--            </div>-->
 
            </LeadGuiContainer>
     </template>
