@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -188,6 +189,7 @@ class ClientsAddSubscriptionController extends ApiEditController
                 $subscription->save();
 
                 // send a link to client
+
                 try {
                     Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
                 } catch (Exception $exception) {

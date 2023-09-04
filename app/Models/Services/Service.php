@@ -13,6 +13,7 @@ use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
+use App\Models\ServicePhone;
 use App\Models\TrainingBase\TrainingBase;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
@@ -51,6 +52,7 @@ use InvalidArgumentException;
  * @property float|null $daily_price
  * @property float|null $price_deduction_advance
  * @property float|null $price
+ * @property string|null $email
  *
  * @property ServiceStatus $status
  * @property Organization $organization
@@ -387,5 +389,15 @@ class Service extends Model implements Statusable, AsDictionary
     public function letter(): HasOne
     {
         return $this->hasOne(Letters::class, 'id', 'letter_id');
+    }
+
+
+    public function phones()
+    {
+        return $this->hasMany(ServicePhone::class);
+    }
+
+    public function phonesList(){
+        return !empty($this->phones()) ? $this->phones()->pluck('phone')->implode(',') : null;
     }
 }

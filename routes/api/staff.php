@@ -10,6 +10,7 @@ use App\Http\Controllers\API\Staff\StaffEditController;
 use App\Http\Controllers\API\Staff\StaffDeleteController;
 
 Route::post('/staff', [StaffListController::class, 'list'])->middleware('permit:staff.view,staff.edit,staff.delete,staff.access,staff.permissions');
+Route::get('/staff/get-staff-list', [StaffListController::class, 'getStaffList'])->middleware('permit:staff.view');
 
 Route::post('/staff/view', [StaffViewController::class, 'view'])->middleware('permit:staff.view,staff.edit,staff.delete,staff.access,staff.permissions');
 

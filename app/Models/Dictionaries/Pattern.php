@@ -23,6 +23,10 @@ class Pattern extends AbstractDictionary
     /** @var int Анапа */
     public const anapa = 5;
 
+    public const berezovay1=6;
+
+    public const stolichnay9=7;
+
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns';

@@ -26,7 +26,7 @@ export default {
 
     props: {
         name: String,
-        modelValue: {type: String, default: null},
+        modelValue: {type: [String,Object], default: null},
         original: {type: String, default: null},
         valid: {type: Boolean, default: true},
         disabled: {type: Boolean, default: false},

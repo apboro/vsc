@@ -394,6 +394,12 @@ export default {
 }
 </script>
 
+<style>
+.dialogs__dialog{
+    overflow: auto;
+}
+</style>
+
 <style lang="scss" scoped>
 @use "sass:math";
 

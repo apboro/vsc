@@ -35,6 +35,8 @@ class SubscriptionContractPdf
         $monthlyPrice = $contract->contractData->monthly_price ?? $contract->subscription->service->monthly_price;
         $trainingReturnPrice = $contract->contractData->training_return_price ?? $contract->subscription->service->training_return_price;
 
+        $requisites = $contract->subscription->service->requisites;
+
         $view = View::make($view, [
             'signed' => $signed,
 
@@ -106,10 +108,13 @@ class SubscriptionContractPdf
             'discount_3_monthly_price' => ($monthlyPrice * 0.9) . ' руб.',
             'discount_3_monthly_price_string' => PriceConverter::toString(($monthlyPrice * 0.9)),
 
-            'training_base_phone' => $contract->subscription->service->trainingBase->info->phone,
-            'training_base_email' => $contract->subscription->service->trainingBase->info->email,
+            //'training_base_phone' => $contract->subscription->service->trainingBase->info->phone,
+            'training_base_phone' => $contract->subscription->service->phonesList(),
+            //'training_base_email' => $contract->subscription->service->trainingBase->info->email,
+            'training_base_email' => $contract->subscription->service->email,
             'training_base_homepage' => $contract->subscription->service->trainingBase->info->homepage,
 
+            'header_of_contract'=>!empty($requisites->header_of_contract) ? $requisites->header_of_contract : null,
             'organization_title' => $contract->contractData->organization_title ?? $contract->subscription->service->requisites->organization_title,
             'organization_inn' => $contract->contractData->organization_inn ?? $contract->subscription->service->requisites->organization_inn,
             'organization_kpp' => $contract->contractData->organization_kpp ?? $contract->subscription->service->requisites->organization_kpp,
@@ -118,9 +123,10 @@ class SubscriptionContractPdf
             'bank_bik' => $contract->contractData->bank_bik ?? $contract->subscription->service->requisites->bank_bik,
             'bank_ks' => $contract->contractData->bank_ks ?? $contract->subscription->service->requisites->bank_ks,
 
-            'organization_phone' => '89500332309',
-            'organization_email' => 'kudrovo.sport.doc@yandex.ru',
-            'organization_homepage' => 'https://vk.com/cskudrovo',
+            'organization_phone' => !empty($requisites->phone) ? $requisites->phone : null,
+            'organization_email' => !empty($requisites->email) ? $requisites->phone : null,
+            'organization_homepage' => !empty($requisites->web_site) ? $requisites->web_site : null,
+            'sign'=>!empty($requisites->sign) ? $requisites->sign : null,
         ]);
         $html = $view->render();
 

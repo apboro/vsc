@@ -10,6 +10,7 @@ use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\User\User;
 use App\Scopes\ForOrganization;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -98,5 +99,29 @@ class StaffListController extends ApiController
             $this->defaultFilters,
             []
         )->withCookie(cookie($this->rememberKey, $request->getToRemember()));
+    }
+
+    public function getStaffList(Request $request)
+    {
+        $current = Current::get($request);
+        $users = User::query()
+            ->with(['profile', 'position', 'position.info'])
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->whereHas('position', function (Builder $query) use ($current){
+                $query->tap(new ForOrganization($current->organizationId(), true));
+            })
+            ->select('users.*')
+            ->orderBy('user_profiles.lastname')
+            ->orderBy('user_profiles.firstname')
+            ->orderBy('user_profiles.patronymic')->get();
+
+        $users->transform(function (User $user) {
+
+            return [
+                'id' => $user->id,
+                'name' => $user->profile->fullName ?? null,
+            ];
+        });
+        return APIResponse::response($users);
     }
 }

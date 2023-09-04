@@ -28,6 +28,14 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Анапа',
                 'pattern' => 'pdf/contracts/subscription_golovanov_contract',
             ],
+            Pattern::berezovay1 => [
+                'name' => 'Березовая 1',
+                'pattern' => 'pdf/contracts/subscription_berezovay1_contract',
+            ],
+            Pattern::stolichnay9 => [
+                'name' => 'Столичная 9',
+                'pattern' => 'pdf/contracts/subscription_stolichnay9_contract',
+            ],
         ],
         PatternLetters::class => [
             PatternLetters::regular => [

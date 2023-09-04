@@ -77,9 +77,43 @@
         </GuiContainer>
 
         <GuiContainer mt-30>
+            <FormDropdown
+                :name="'responsible_user_ids'"
+                :multi="true"
+                :form="form"
+                :options="staffList"
+                identifier="id"
+                show="name"
+            />
+        </GuiContainer>
+        <GuiContainer>
+            <FormString :form="form" :name="'email'"/>
+            <div v-for="(phone, index) in phones">
+                <div style="width: 70%;float:left">
+                    <FormPhone
+                        :form="form"
+                        :name="index"
+                        title="Телефон"
+                        placeholder="Телефон"
+                        @change="addPhoneArr"
+                    />
+                </div>
+                <div style="width:30%; float:left" v-if="index>0">
+                <GuiButton :color="'red'" v-on:click="removePhone(index)" class="m-5">
+                    Удалить
+                </GuiButton>
+                </div>
+            </div>
+        </GuiContainer>
+        <div class="clearfix"></div>
+        <GuiContainer>
+            <GuiButton :color="'green'" @click="addNewPhone">Добавить телефон</GuiButton>
+        </GuiContainer>
+        <GuiContainer mt-30>
             <GuiButton @click="save" :color="'blue'">Сохранить</GuiButton>
             <GuiButton @click="cancel">Отмена</GuiButton>
         </GuiContainer>
+
     </LayoutPage>
 </template>
 
@@ -98,9 +132,20 @@ import FormDateTime from "../../../Components/Form/FormDateTime";
 import FormTime from "../../../Components/Form/FormTime";
 import FormCheckBox from "../../../Components/Form/FormCheckBox";
 import FieldText from "@/Components/Fields/FieldText.vue";
+import FieldPhone from "@/Components/Fields/FieldPhone.vue";
+import InputPhone from "@/Components/Inputs/InputPhone.vue";
+import FormPhone from "@/Components/Form/FormPhone.vue";
+import FormPhones from "@/Components/Form/FormPhones.vue";
+import FormDropdown from "@/Components/Form/FormDropdown.vue";
+
 
 export default {
     components: {
+        FormDropdown,
+        FormPhones,
+        FormPhone,
+        InputPhone,
+        FieldPhone,
         FieldText,
         FormCheckBox,
         FormTime,
@@ -120,6 +165,8 @@ export default {
         form: form('/api/services/get', '/api/services/update'),
         regularTypeProgram: [],
         singleTypeProgram: [],
+        phones:[''],
+        staffList:[],
     }),
 
     computed: {
@@ -135,13 +182,23 @@ export default {
         this.form.toaster = this.$toast;
         this.form.load({id: this.serviceId});
         this.typePrograms();
+        this.getStaffList()
     },
 
     methods: {
+        getStaffList(){
+            axios.get('/api/staff/get-staff-list')
+                .then(response => {
+                    this.staffList = response.data.data;
+                });
+        },
         save() {
+            console.log(this.phones)
+            /*
             if (!this.form.validate()) {
                 return;
-            }
+            }*/
+            this.form.set('phones',this.phones)
             this.form.save({id: this.serviceId})
                 .then(response => {
                     if (this.serviceId === 0) {
@@ -164,7 +221,27 @@ export default {
                     this.regularTypeProgram = response.data.data['regulars'];
                     this.singleTypeProgram = response.data.data['singleType'];
                 });
+        },
+        addNewPhone(){
+            this.phones.push(
+                ''
+            )
+        },
+        removePhone(index){
+            this.form.set(index,'')
+            this.phones[index] = '';
+            this.phones.splice(index,1)
+        },
+        addPhoneArr(value,name){
+            this.phones[name]=value
         }
     }
 }
 </script>
+<style>
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+</style>
