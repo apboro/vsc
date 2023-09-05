@@ -399,7 +399,7 @@ class Service extends Model implements Statusable, AsDictionary
     }
 
     public function phonesList(){
-        return !empty($this->phones()) ? $this->phones()->pluck('phone')->implode(',') : null;
+        return !empty($this->phones) ? $this->phones->pluck('phone')->implode(',') : null;
     }
 
     public function positions(){
