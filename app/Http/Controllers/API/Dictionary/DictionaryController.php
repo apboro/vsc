@@ -25,6 +25,7 @@ use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Dictionaries\TrainingBaseContractStatus;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Dictionaries\UserStatus;
+use App\Models\Positions\Position;
 use App\Models\Services\Service;
 use App\Models\Services\ServiceProgram;
 use App\Models\TrainingBase\TrainingBase;
@@ -57,6 +58,7 @@ class DictionaryController extends ApiController
         'contracts' => ['class' => Contracts::class, 'allow' => null],
         'letters' => ['class' => Letters::class, 'allow' => null],
         'patterns' => ['class' => Pattern::class, 'allow' => null],
+        'positions'=>['class'=>Position::class, 'allow'=>null]
     ];
 
     /**

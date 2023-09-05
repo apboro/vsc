@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\ServiceTypes;
+use App\Models\PositionServices;
 use App\Models\ServicePhone;
 use App\Models\Services\Service;
 use App\Models\Services\ServiceProgram;
@@ -290,23 +291,18 @@ class ServicesEditController extends ApiEditController
         }
         $service->save();
 
+        $service->phones()->delete();
         if(!empty($data['phones'])){
-            ServicePhone::where('service_id',$service->id)->delete();
-            foreach($data['phones'] as $row){
-                ServicePhone::create([
-                    'service_id'=>$service->id,
-                    'phone'=>$row
-                ]);
+            foreach($data['phones'] as $row) {
+                $service->phones()->create(['phone'=>$row]);
             }
         }
 
+
+        $service->positions()->delete();
         if(!empty($data['responsible_user_ids'])){
-            UserService::where('service_id',$service->id)->delete();
             foreach($data['responsible_user_ids'] as $row){
-                UserService::create([
-                    'service_id'=>$service->id,
-                    'user_id'=>$row
-                ]);
+                $service->positions()->create(['position_id'=>$row]);
             }
         }
 

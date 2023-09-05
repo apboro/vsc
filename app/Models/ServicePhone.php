@@ -10,4 +10,5 @@ class ServicePhone extends Model
     use HasFactory;
 
     protected $guarded=[];
+
 }

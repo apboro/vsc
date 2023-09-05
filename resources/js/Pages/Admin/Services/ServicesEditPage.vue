@@ -77,14 +77,16 @@
         </GuiContainer>
 
         <GuiContainer mt-30>
-            <FormDropdown
+
+            <FormDictionary :dictionary="'positions'" :name="'responsible_user_ids'" :form="form" :multi="true"/>
+            <!--<FormDropdown
                 :name="'responsible_user_ids'"
                 :multi="true"
                 :form="form"
                 :options="staffList"
                 identifier="id"
                 show="name"
-            />
+            />-->
         </GuiContainer>
         <GuiContainer>
             <FormString :form="form" :name="'email'"/>

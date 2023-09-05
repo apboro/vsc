@@ -13,6 +13,7 @@ use App\Models\Dictionaries\SportKind;
 use App\Models\Dictionaries\TrainingBaseStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
+use App\Models\PositionService;
 use App\Models\ServicePhone;
 use App\Models\TrainingBase\TrainingBase;
 use App\Traits\HasStatus;
@@ -399,5 +400,9 @@ class Service extends Model implements Statusable, AsDictionary
 
     public function phonesList(){
         return !empty($this->phones()) ? $this->phones()->pluck('phone')->implode(',') : null;
+    }
+
+    public function positions(){
+        return $this->hasMany(PositionService::class);
     }
 }

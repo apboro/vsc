@@ -2,21 +2,27 @@
 
 namespace App\Models\Positions;
 
+use App\Current;
 use App\Exceptions\Positions\WrongPositionStatusException;
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\Interfaces\AsDictionary;
 use App\Models\Dictionaries\PositionStatus;
 use App\Models\Dictionaries\PositionTitle;
+use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Permissions\Permission;
 use App\Models\Permissions\Role;
 use App\Models\User\User;
+use App\Scopes\ForOrganization;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
@@ -34,7 +40,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property PositionInfo $info
  * @property Collection $roles
  */
-class Position extends Model implements Statusable
+class Position extends Model implements Statusable, AsDictionary
 {
     use HasStatus, HasFactory;
 
@@ -215,5 +221,27 @@ class Position extends Model implements Statusable
     public function info(): HasOne
     {
         return $this->hasOne(PositionInfo::class, 'position_id', 'id')->withDefault();
+    }
+
+
+    public static function asDictionary(?Current $current = null): Builder
+    {
+        $query = Position::query()->tap(new ForOrganization($current ? $current->organizationId() : null))
+                                ->leftJoin('users', 'users.id', '=', 'positions.user_id')
+                                ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+                                ->select('user_profiles.firstname as order')
+                                ->addSelect(DB::raw('CONCAT(user_profiles.lastname," ",user_profiles.firstname," ",user_profiles.patronymic) as name'))
+                                 ->addSelect('positions.*');
+        return $query;
+    }
+
+    /**
+     * Is bound to organization
+     *
+     * @return  bool
+     */
+    public static function isOrganizationBound(): bool
+    {
+        return true;
     }
 }
