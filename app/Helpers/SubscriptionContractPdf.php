@@ -126,6 +126,8 @@ class SubscriptionContractPdf
             'organization_phone' => !empty($requisites->phone) ? $requisites->phone : null,
             'organization_email' => !empty($requisites->email) ? $requisites->phone : null,
             'organization_homepage' => !empty($requisites->web_site) ? $requisites->web_site : null,
+            'organization_ogrn' => !empty($requisites->organization_ogrn) ? $requisites->organization_ogrn : null,
+            'legal_address' => !empty($requisites->legal_address) ? $requisites->legal_address : null,
             'sign'=>!empty($requisites->sign) ? $requisites->sign : null,
         ]);
         $html = $view->render();

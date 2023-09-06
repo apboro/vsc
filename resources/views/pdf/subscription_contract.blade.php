@@ -193,14 +193,19 @@
 
         <p>Наименование: {{ $organization_title }}</p>
         <p>ИНН: {{ $organization_inn }}</p>
+        @if(!empty($organization_kpp))
         <p>КПП: {{ $organization_kpp }}</p>
+        @endif
         <p>р/с №{{ $bank_account }}</p>
         <p>{{ $bank_title }}</p>
         <p>БИК: {{ $bank_bik }}</p>
+        <p>ОГРН: {{$organization_ogrn}}</p>
         <p>Корр. счет: {{ $bank_ks }}</p>
+        <p>Юр. адрес: {{ $legal_address }}</p>
+        @if(!empty($organization_email))
         <p>Почтовый ящик: {{ $organization_email }}</p>
+        @endif
         <p>Страница в сети интернет: {{$organization_homepage}}</p>
-        <p>Председатель Совета</p>
         <p>Подпись</p>
         <div style="position: relative;">
             <p style="margin-top: 15pt; opacity: 0.99; z-index: 10;">___________________________________/{{$sign}}/</p>
