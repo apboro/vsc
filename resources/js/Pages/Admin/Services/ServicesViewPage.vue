@@ -7,6 +7,7 @@
         <template v-slot:actions v-if="can(['services.edit','services.delete'])">
             <GuiActionsMenu>
                 <span class="link" v-if="can('services.edit')" @click="edit">Редактировать услугу</span>
+                <span class="link" v-if="can('services.edit')" @click="copy">Копировать услугу</span>
                 <span class="link" v-if="can('services.delete')" @click="remove">Удалить услугу</span>
             </GuiActionsMenu>
         </template>
@@ -73,6 +74,9 @@ export default {
                 .then(() => {
                     this.$router.push({name: 'services-list'});
                 });
+        },
+        copy() {
+            this.$router.push({name: 'services-copy', params: {id: this.serviceId,newId:-1}});
         },
     }
 }

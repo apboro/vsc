@@ -51,6 +51,7 @@ export default [
     {path: '/services', name: 'services-list', component: ServicesListPage, meta: {title: 'Список услуг', permission: ['services.view','services.edit','services.delete']}},
     {path: '/services/:id', name: 'services-view', component: ServicesViewPage, meta: {title: 'Карточка услуги', permission: ['services.view','services.edit','services.delete'], change: 'services-list'}},
     {path: '/services/:id/edit', name: 'services-edit', component: ServicesEditPage, meta: {title: 'Редактирование услуги', permission: 'services.edit', change: 'services-list'}},
+    {path: '/services/:id/copy/:newId', name: 'services-copy', component: ServicesEditPage, meta: {title: 'Копирование услуги', permission: 'services.edit', change: 'services-list'}},
 
     {path: '/leads', name: 'leads-list', component: LeadsListPage, meta: {title: 'Список лидов', permission: ['leads.view','leads.register']}},
     {path: '/leads/:id', name: 'leads-view', component: LeadsViewPage, meta: {title: 'Лид', change: 'leads-list', permission: ['leads.view','leads.register']}},

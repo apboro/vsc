@@ -29,9 +29,10 @@ class ApiEditController extends ApiController
 
         $id = (int)$id;
 
-        if ($id === 0) {
+        if ($id === 0 || $id === -1) {
             return new $class;
         }
+
 
         /** @var Model $model */
         $model = $class::query()->where('id', $id)->where($where)->with($with)->withCount($withCount)->first();

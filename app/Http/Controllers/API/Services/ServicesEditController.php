@@ -172,6 +172,8 @@ class ServicesEditController extends ApiEditController
                 'schedule_time_fri' => $service->schedule->fri_start_time ? $service->schedule->fri_start_time->format('H:i') : null,
                 'schedule_time_sat' => $service->schedule->sat_start_time ? $service->schedule->sat_start_time->format('H:i') : null,
                 'schedule_time_sun' => $service->schedule->sun_start_time ? $service->schedule->sun_start_time->format('H:i') : null,
+                'email'=>$service->email,
+                'phones'=>$service->phones()->pluck('phone')
 
             ],
             $this->rules,

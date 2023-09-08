@@ -15,7 +15,8 @@
 
         <FormPopUp :form="registration_form" :title="'Конвертировать лид'" :save-button-caption="'Подтвердить'" :close-on-overlay="'Отменить'" :scrollable="true"
                    class="registration-form" ref="registration">
-            <div style="width: 1250px">
+            <div style="width: 100%;height:100%; overflow: scroll;">
+            <div style="width: 1250px;">
                 <GuiContainer w-50 inline>
                     <FormDictionary :form="registration_form"
                                     :name="'region_id'"
@@ -216,7 +217,9 @@
                     <FormText :form="registration_form" :name="'contract_comment'" style="flex-direction: row" hide-title/>
                 </GuiContainer>
             </div>
+            </div>
         </FormPopUp>
+
     </LayoutPage>
 </template>
 

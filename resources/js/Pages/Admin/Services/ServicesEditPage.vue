@@ -93,6 +93,7 @@
             <div v-for="(phone, index) in phones">
                 <div style="width: 70%;float:left">
                     <FormPhone
+                        v-model="phones[index]"
                         :form="form"
                         :name="index"
                         title="Телефон"
@@ -109,7 +110,7 @@
         </GuiContainer>
         <div class="clearfix"></div>
         <GuiContainer>
-            <GuiButton :color="'green'" @click="addNewPhone">Добавить телефон</GuiButton>
+            <GuiButton :color="'green'" @click="addNewPhone('')">Добавить телефон</GuiButton>
         </GuiContainer>
         <GuiContainer mt-30>
             <GuiButton @click="save" :color="'blue'">Сохранить</GuiButton>
@@ -175,6 +176,10 @@ export default {
         serviceId() {
             return Number(this.$route.params.id);
         },
+        newServiceId(){
+            console.log(this.$route.params.newId)
+            return Number(this.$route.params.newId);
+        },
         processing() {
             return this.form.is_loading || this.form.is_saving;
         },
@@ -182,26 +187,21 @@ export default {
 
     created() {
         this.form.toaster = this.$toast;
-        this.form.load({id: this.serviceId});
+        this.form.load({id: this.serviceId}).then((response)=>{
+            if(response.values !== null && response.values.phones !== null && response.values.phones.length>0){
+                this.phones = []
+                for (let index in response.values.phones){
+                    this.addNewPhone(response.values.phones[index])
+                }
+            }
+        });
         this.typePrograms();
-        this.getStaffList()
     },
 
     methods: {
-        getStaffList(){
-            axios.get('/api/staff/get-staff-list')
-                .then(response => {
-                    this.staffList = response.data.data;
-                });
-        },
         save() {
-            console.log(this.phones)
-            /*
-            if (!this.form.validate()) {
-                return;
-            }*/
             this.form.set('phones',this.phones)
-            this.form.save({id: this.serviceId})
+            this.form.save({id: (this.newServiceId ===-1 ? this.newServiceId : this.serviceId)})
                 .then(response => {
                     if (this.serviceId === 0) {
                         this.$router.push({name: 'services-view', params: {id: response.payload['id']}});
@@ -224,9 +224,9 @@ export default {
                     this.singleTypeProgram = response.data.data['singleType'];
                 });
         },
-        addNewPhone(){
+        addNewPhone(value){
             this.phones.push(
-                ''
+                value
             )
         },
         removePhone(index){
