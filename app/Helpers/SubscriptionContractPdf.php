@@ -124,7 +124,7 @@ class SubscriptionContractPdf
             'bank_ks' => $contract->contractData->bank_ks ?? $contract->subscription->service->requisites->bank_ks,
 
             'organization_phone' => !empty($requisites->phone) ? $requisites->phone : null,
-            'organization_email' => !empty($requisites->email) ? $requisites->phone : null,
+            'organization_email' => !empty($requisites->email) ? $requisites->email : null,
             'organization_homepage' => !empty($requisites->web_site) ? $requisites->web_site : null,
             'organization_ogrn' => !empty($requisites->organization_ogrn) ? $requisites->organization_ogrn : null,
             'legal_address' => !empty($requisites->legal_address) ? $requisites->legal_address : null,
