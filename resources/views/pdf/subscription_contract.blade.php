@@ -205,6 +205,9 @@
         @if(!empty($organization_email))
         <p>Почтовый ящик: {{ $organization_email }}</p>
         @endif
+        @if(!empty($organization_phone))
+            <p>Телефон: {{ $organization_phone }}</p>
+        @endif
         <p>Страница в сети интернет: {{$organization_homepage}}</p>
         <p>Подпись</p>
         <div style="position: relative;">
