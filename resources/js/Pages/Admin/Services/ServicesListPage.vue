@@ -70,6 +70,20 @@
             </template>
         </LayoutFilters>
 
+        <LayoutFilters>
+            <LayoutFiltersItem :title="'ФИО менеджера'">
+                <DictionaryDropDown
+                  :dictionary="'positions'"
+                  v-model="list.filters['responsible_id']"
+                  :original="list.filters_original['responsible_id']"
+                  :placeholder="'Все'"
+                  :has-null="true"
+                  :small="true"
+                  @change="list.load()"
+                />
+            </LayoutFiltersItem>
+        </LayoutFilters>
+
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
             <ListTableRow v-for="service in list.list">
                 <ListTableCell>

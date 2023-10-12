@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API\Leads;
 use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
+use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Leads\Lead;
 use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LeadsCommentController extends ApiEditController
 {
@@ -30,7 +32,14 @@ class LeadsCommentController extends ApiEditController
         $data = $this->getData($request);
 
         $lead->comments = $data['comments'] ?? null;
-        $lead->save();
+
+        DB::transaction(function () use ($lead, $data) {
+            if ($lead->subscription && $lead->subscription->client) {
+                $lead->subscription->client->addcomment($data['comments'], ClientCommentActionType::lead_card);
+            }
+
+            $lead->save();
+        });
 
         // send response
         return APIResponse::success('Комментарий обновлён');

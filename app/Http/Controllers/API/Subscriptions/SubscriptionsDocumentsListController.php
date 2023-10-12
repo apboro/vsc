@@ -8,6 +8,7 @@ use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Dictionaries\SubscriptionContractStatus;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\SubscriptionContract;
 use App\Scopes\ForOrganization;
 use Illuminate\Database\Eloquent\Builder;
@@ -56,9 +57,11 @@ class SubscriptionsDocumentsListController extends ApiController
                 'is_acceptable' => $contract->hasStatus(SubscriptionContractStatus::draft) && $current->can('subscriptions.accept.document'),
                 'discount' => $contract->discount->name ?? null,
                 'discount_amount' => $contract->discount->discount ?? null,
+                'client_id' => $contract->subscription->client->id,
                 'is_repeatable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.send.document'),
                 'is_closeable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.close.document'),
                 'is_editable' =>$contract->hasStatus(SubscriptionContractStatus::accepted) && $current->can('subscriptions.edit.document'),
+                'is_client_data_updatable' => $contract->subscription->hasStatus(SubscriptionStatus::sent) && $current->can('subscriptions.edit.document'),
             ];
         });
 

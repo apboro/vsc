@@ -12,6 +12,7 @@ class CookieKeys
     public const leads_list = 'leads_list';
     public const clients_list = 'clients_list';
     public const clients_wards_list = 'clients_wards_list';
+    public const clients_comments_list = 'clients_comments_list';
     public const subscriptions_list = 'subscriptions_list';
     public const subscriptions_documents_list = 'subscriptions_documents_list';
 

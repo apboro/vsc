@@ -6,9 +6,11 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Clients\Client;
+use App\Models\Dictionaries\SubscriptionStatus;
 use App\Scopes\ForOrganization;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientsEditController extends ApiEditController
 {
@@ -101,7 +103,18 @@ class ClientsEditController extends ApiEditController
         $profile->patronymic = $data['patronymic'];
         $profile->phone = $data['phone'];
         $profile->email = $data['email'];
-        $profile->save();
+
+        DB::transaction(function () use ($profile, $client) {
+            $profile->save();
+
+            $client->refresh();
+
+            $client->updateContractsData([
+                SubscriptionStatus::new,
+                SubscriptionStatus::fill,
+                SubscriptionStatus::filled,
+            ]);
+        });
 
         return APIResponse::success('Данные клиента обновлены');
     }

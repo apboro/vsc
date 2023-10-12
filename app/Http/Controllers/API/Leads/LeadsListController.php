@@ -123,7 +123,10 @@ class LeadsListController extends ApiController
             'Район',
             'Адрес (объекта)',
             'Услуга',
-            'Дата конвертации лида'
+            'Дата конвертации лида',
+            'Год рождения ребенка',
+            'Телефон родителя',
+            'Комментарий',
         ];
 
         /** @var Collection $leads */
@@ -145,6 +148,9 @@ class LeadsListController extends ApiController
                 'training_base' => $trainingBase ? $trainingBase->info->address : "—",
                 'service' => $service,
                 'lead_converted_to_client' => $lead->converted_at ? $lead->converted_at->format('d.m.Y') : "—",
+                'ward_birth_date' => $lead->ward_birth_date ? $lead->ward_birth_date->format('Y') : null,
+                'parent_phone' => $lead->phone,
+                'comment' => $lead->comments,
             ];
         });
 
@@ -154,7 +160,7 @@ class LeadsListController extends ApiController
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
         $spreadsheet->getActiveSheet()->fromArray($leads->toArray(), '—', 'A2');
-        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as $col) {
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
 
@@ -204,7 +210,7 @@ class LeadsListController extends ApiController
             }
             if (!empty($filters['training_base_id'])) {
                 $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('training_base_id', $filters['training_base_id']);
+                    $query->whereIn('training_base_id', $filters['training_base_id']);
                 });
             }
             if (!empty($filters['sport_kinds'])) {
@@ -214,7 +220,7 @@ class LeadsListController extends ApiController
                 });
             }
             if (!empty($filters['region_id'])) {
-                $query->where('region_id', $filters['region_id']);
+                $query->whereIn('region_id', $filters['region_id']);
             }
         }
 
@@ -228,7 +234,8 @@ class LeadsListController extends ApiController
                         ->orWhere('patronymic', 'LIKE', "%$term%")
                         ->where('ward_lastname', 'LIKE', "%$term%")
                         ->orWhere('ward_firstname', 'LIKE', "%$term%")
-                        ->orWhere('ward_patronymic', 'LIKE', "%$term%");
+                        ->orWhere('ward_patronymic', 'LIKE', "%$term%")
+                        ->orWhere('phone', 'LIKE', "%$term%");;
                 });
             }
         }

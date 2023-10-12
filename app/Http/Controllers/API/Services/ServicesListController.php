@@ -71,6 +71,11 @@ class ServicesListController extends ApiController
                     $query->where('service_category_id', $filters['service_category_id']);
                 });
             }
+            if (!empty($filters['responsible_id'])) {
+                $query->whereHas('positions', function (Builder $query) use ($filters) {
+                    $query->where('position_id', $filters['responsible_id']);
+                });
+            }
         }
 
         // apply search

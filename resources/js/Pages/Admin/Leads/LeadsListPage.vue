@@ -40,6 +40,7 @@
                     :has-null="true"
                     :small="true"
                     :search="true"
+                    :multi="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
@@ -51,11 +52,12 @@
                     :placeholder="'Все'"
                     :has-null="true"
                     :small="true"
+                    :multi="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
             <template #search>
-                <LayoutFiltersItem :title="'Поиск по ФИО'">
+                <LayoutFiltersItem :title="'Поиск по ФИО / (или) номеру телефона'">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
                 <div style="display: flex; align-items: flex-end; margin-left: 10px;">

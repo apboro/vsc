@@ -7,6 +7,8 @@ use App\Http\APIResponse;
 use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
+use App\Models\Clients\ClientComment;
+use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\User\User;
 use App\Scopes\ForOrganization;
@@ -92,10 +94,15 @@ class ClientsListController extends ApiController
             'Email',
             'Виды спорта',
             'Объект',
+            'Занимающийся',
+            'Год рождения ребенка',
+            'Комментарий',
         ];
 
-        /** @var Collection $users */
-        $users->transform(function (User $user) {
+        $transformedUsers = collect();
+
+        /** @var User $user */
+        foreach ($users as $user) {
             $sportKinds = '';
             $training_base = '';
             $subscriptions = $user->client->subscriptions;
@@ -115,25 +122,34 @@ class ClientsListController extends ApiController
                 $sportKinds = implode(', ', $result);
             }
 
-            return [
-                'id' => $user->id,
-                'name' => $user->profile->fullName,
-                'created_date' => $user->client->created_at->format('d.m.Y'),
-                'status' => $user->client->status->name,
-                'email' => $user->profile->email,
-                'phone' => $user->profile->phone,
-                'sportKinds' => $sportKinds,
-                'training_base' => $training_base,
-            ];
-        });
+            $wards = $user->client->wards;
+
+            foreach ($wards as $ward) {
+                $transformedUsers->add([
+                    'id' => $user->id,
+                    'name' => $user->profile->fullName,
+                    'created_date' => $user->client->created_at->format('d.m.Y'),
+                    'status' => $user->client->status->name,
+                    'phone' => $user->profile->phone,
+                    'email' => $user->profile->email,
+                    'sportKinds' => $sportKinds,
+                    'training_base' => $training_base,
+                    'ward_name' => $ward->user->profile->fullName ?? null,
+                    'ward_birth_dates' => ($ward->user->profile->birthdate ?? false) ? Carbon::parse($ward->user->profile->birthdate)->format('Y') : null,
+                    'comment' => $user->client->comments->map(function (ClientComment $c) {
+                        return $c->text;
+                    })->join(', '),
+                ]);
+            }
+        }
 
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->setActiveSheetIndex(0)->setTitle('Клиенты')->setShowRowColHeaders(true);
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
-        $spreadsheet->getActiveSheet()->fromArray($users->toArray(), '—', 'A2');
-        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as $col) {
+        $spreadsheet->getActiveSheet()->fromArray($transformedUsers->toArray(), '—', 'A2');
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
 
@@ -187,7 +203,7 @@ class ClientsListController extends ApiController
             }
             if (!empty($filters['training_base_id'])) {
                 $query->whereHas('client.subscriptions.service', function (Builder $query) use ($filters) {
-                    $query->where('training_base_id', $filters['training_base_id']);
+                    $query->whereIn('training_base_id', $filters['training_base_id']);
                 });
             }
         }
@@ -199,7 +215,8 @@ class ClientsListController extends ApiController
                     $query->whereHas('profile', function (Builder $query) use ($term) {
                         $query->where('lastname', 'LIKE', "%$term%")
                             ->orWhere('firstname', 'LIKE', "%$term%")
-                            ->orWhere('patronymic', 'LIKE', "%$term%");
+                            ->orWhere('patronymic', 'LIKE', "%$term%")
+                            ->orWhere('phone', 'LIKE', "%$term%");
                     });
                 });
             }

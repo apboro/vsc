@@ -17,6 +17,8 @@
             <SubscriptionsList :client-id="clientId" :ready="data.is_loaded" ref="subscriptions"/>
         </div>
 
+        <ClientCommentsList v-if="tab === 'comments'" :client-id="clientId"/>
+
         <FormPopUp :form="subscription_form" :title="'Добавить подписку'" :save-button-caption="'Добавить'" class="subscription-form" ref="subscription">
             <GuiContainer w-600px client-subscription-add>
                 <FormDictionary :form="subscription_form" :name="'region_id'" :dictionary="'regions'" :search="true" @change="regionChanged" :has-null="true"
@@ -45,6 +47,7 @@ import ClientInfo from "@/Pages/Admin/Clients/Parts/ClientInfo";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
 import SubscriptionsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsList";
 import ClientWardsList from "@/Pages/Admin/Clients/Parts/ClientWardsList";
+import ClientCommentsList from "@/Pages/Admin/Clients/Parts/ClientCommentsList";
 import Permissions from "../../../Mixins/Permissions";
 import GuiActionsMenu from "../../../Components/GUI/GuiActionsMenu";
 import FormPopUp from "../../../Components/FormPopUp";
@@ -72,6 +75,7 @@ export default {
         ClientInfo,
         GuiContainer,
         LayoutPage,
+        ClientCommentsList,
     },
 
     mixins: [Permissions],
@@ -98,6 +102,7 @@ export default {
                 general: 'Данные клиента',
                 wards: 'Занимающиеся',
                 subscriptions: 'Подписки на услуги',
+                comments: 'Комментарии',
             }
         },
         objects() {

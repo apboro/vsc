@@ -37,6 +37,7 @@
                                   :search="true"
                                   :top="false"
                                   style="max-width: 400px; flex-direction: row"
+                                  @change="serviceChanged"
                     />
                 </GuiContainer>
 
@@ -312,7 +313,7 @@ export default {
             return this.data.payload['services'].filter(
                 service => this.registration_form.values['region_id'] === null || service.region_id === this.registration_form.values['region_id']
             ).map(
-                service => ({id: service['id'], title: service['title'], hint: service['address']})
+                service => ({id: service['id'], title: service['title'], hint: service['address'], description: service['description']})
             );
         },
         client() {
@@ -384,6 +385,13 @@ export default {
         },
         regionChanged() {
             this.registration_form.update('service_id', null);
+        },
+        serviceChanged(id) {
+            let service = this.regionServices.filter(el => el.id === id)
+
+            service = service.length > 0 ? service[0]['description'] : null;
+
+            this.registration_form.update('contract_comment', service)
         },
         getDuplicates() {
             const data = {

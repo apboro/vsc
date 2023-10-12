@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractFillLinkMail;
+use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
@@ -116,6 +117,9 @@ class SubscriptionsChangeController extends ApiEditController
                 $newSubscription->client_ward_id = $subscription->client_ward_id;
                 $newSubscription->service_id = $data['service_id'];
                 $newSubscription->save();
+
+                // attach comment to client
+                $subscription->client->addComment($data['contract_comment'], ClientCommentActionType::change_subscription);
 
                 // send a link to client
                 try {

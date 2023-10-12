@@ -88,6 +88,7 @@ class LeadsViewController extends ApiController
                 ->select([
                     'services.id',
                     'services.title',
+                    'services.description',
                     DB::raw('IFNULL(training_bases.short_title, training_bases.title) as base'),
                     'training_base_info.address',
                     'training_bases.region_id',

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Dictionaries\ClientCommentsSeeder;
 use Database\Seeders\Dictionaries\PatternSeeder;
 use Database\Seeders\Dictionaries\RolesSeeder;
 use Database\Seeders\Dictionaries\StatusesSeeder;
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
         RolesSeeder::class,
         ServiceSeeder::class,
         PatternSeeder::class,
+        ClientCommentsSeeder::class,
     ];
 
     /**

@@ -3,7 +3,7 @@
         <div style="text-align: right; margin-bottom: 10px;">
             <GuiActionsMenu v-if="can('subscriptions.create.document') && subscriptionRepeatable">
                 <span class="link" @click="sendLink">Отправить ссылку на заполнение договора</span>
-            </GuiActionsMenu>
+                </GuiActionsMenu>
         </div>
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles" :has-action="true">
             <ListTableRow v-for="document in list.list">
@@ -34,6 +34,7 @@
                 <ListTableCell>
                     <GuiActionsMenu :title="null" v-if="document['is_acceptable'] || document['is_repeatable'] || document['is_closeable']">
                         <span class="link" v-if="document['is_editable']" @click="edit(document)">Изменить данные</span>
+                        <span class="link" v-if="document['is_client_data_updatable']" @click="updateClientData(document)">Обновить данные клиента</span>
                         <span class="link" v-if="document['is_acceptable']" @click="accept(document)">Подтвердить данные</span>
                         <span class="link" v-if="document['is_repeatable']" @click="resend(document)">Отправить договор повторно</span>
                         <span class="link" v-if="document['is_closeable']" @click="close(document)">Закрыть договор</span>
@@ -206,6 +207,14 @@ export default {
         sendLink() {
             this.processEntry('Отправить ссылку на заполнение договора повторно на почту клиента?', 'Отправить повторно',
                 '/api/subscriptions/documents/send_link', {subscription_id: this.subscriptionId})
+                .then(() => {
+                    this.$emit('update');
+                });
+        },
+
+        updateClientData(document) {
+            this.processEntry('Обновить данные клиента?', 'Обновить',
+                '/api/subscriptions/documents/update_client_data', {client_id: document['client_id']})
                 .then(() => {
                     this.$emit('update');
                 });

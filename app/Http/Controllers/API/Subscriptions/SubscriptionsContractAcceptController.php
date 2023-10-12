@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractMail;
+use App\Models\Clients\Client;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\SubscriptionContract;
@@ -230,5 +231,32 @@ class SubscriptionsContractAcceptController extends ApiEditController
         }
 
         return APIResponse::success($isCreatingNew ? 'Договор на оказание услуг сформирован и отправлен клиенту' : 'Данные договора обновлены');
+    }
+
+    /**
+     * Update clients data automatically from clients card
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function updateClientData(Request $request): JsonResponse
+    {
+        $clientId = $request->input('client_id');
+
+        if ($clientId === null) {
+            return APIResponse::notFound('Клиент не найден');
+        }
+
+        /** @var Client|null $client */
+        $client = Client::query()->find($clientId);
+
+        if ($client === null) {
+            return APIResponse::notFound('Клиент не найден');
+        }
+
+        $client->updateContractsData([SubscriptionStatus::sent]);
+
+        return APIResponse::success('Данные обновлены');
     }
 }

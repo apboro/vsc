@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractFillLinkMail;
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
+use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
@@ -188,8 +189,10 @@ class ClientsAddSubscriptionController extends ApiEditController
                 $subscription->service_id = $data['service_id'];
                 $subscription->save();
 
-                // send a link to client
+                // attach comment to client
+                $client->addComment($data['contract_comment'], ClientCommentActionType::add_subscription);
 
+                // send a link to client
                 try {
                     Mail::send(new SubscriptionContractFillLinkMail($subscription, $data['contract_comment']));
                 } catch (Exception $exception) {

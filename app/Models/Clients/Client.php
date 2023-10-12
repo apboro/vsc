@@ -3,10 +3,12 @@
 namespace App\Models\Clients;
 
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\ClientCommentType;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Subscriptions\Subscription;
+use App\Models\Subscriptions\SubscriptionContract;
 use App\Models\User\User;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
@@ -28,6 +30,7 @@ use InvalidArgumentException;
  * @property Organization $organization
  * @property User $user
  * @property Collection<ClientWard> $wards
+ * @property Collection<ClientComment> $comments
  */
 class Client extends Model implements Statusable
 {
@@ -107,5 +110,59 @@ class Client extends Model implements Statusable
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class, 'client_id', 'id');
+    }
+
+    /**
+     * Subscriptions of this client.
+     *
+     * @return  HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ClientComment::class, 'client_id', 'id');
+    }
+
+    /**
+     * Create system comment
+     *
+     * @param string $text
+     *
+     * @param int $action
+     */
+    public function addComment(string $text, int $action)
+    {
+        $this->comments()->create([
+            'text' => $text,
+            'action_id' => $action,
+            'type_id' => ClientCommentType::outer,
+        ]);
+    }
+
+    /**
+     * Update client's data in contracts
+     *
+     * @param array $subscriptionStatuses
+     */
+    public function updateContractsData(array $subscriptionStatuses)
+    {
+        /** @var Collection<Subscription> $subscriptions */
+        $subscriptions = $this->subscriptions()
+            ->with(['contracts', 'contracts.contractData'])
+            ->whereIn('status_id', $subscriptionStatuses)
+            ->get();
+
+        /** @var Subscription $subscription */
+        foreach ($subscriptions as $subscription) {
+            /** @var SubscriptionContract $contract */
+            foreach ($subscription->contracts as $contract) {
+                $contract->contractData()->update([
+                    'firstname' => $this->user->profile->firstname,
+                    'lastname' => $this->user->profile->lastname,
+                    'patronymic' => $this->user->profile->patronymic,
+                    'phone' => $this->user->profile->phone,
+                    'email'  => $this->user->profile->email,
+                ]);
+            }
+        }
     }
 }

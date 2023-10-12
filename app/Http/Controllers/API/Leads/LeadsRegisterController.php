@@ -10,6 +10,7 @@ use App\Http\Requests\APIListRequest;
 use App\Mail\SubscriptionContractFillLinkMail;
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
+use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\LeadStatus;
@@ -189,6 +190,9 @@ class LeadsRegisterController extends ApiEditController
                 $lead->converted_at = Carbon::now();
                 $lead->setStatus(LeadStatus::client_created, false);
                 $lead->save();
+
+                // attach comment to client
+                $client->addComment($data['contract_comment'], ClientCommentActionType::lead_convert);
 
                 // send a link to client
                 if (env('SKIP_LEAD_EMAIL_SENDING', false) === false) {

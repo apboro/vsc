@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
+use App\Models\Clients\ClientComment;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Subscriptions\Subscription;
 use App\Models\Subscriptions\SubscriptionContract;
@@ -127,9 +128,12 @@ class SubscriptionsListController extends ApiController
             'Услуга',
             'Вид спорта',
             'Объект',
-            'Адрес',
             'Дата создания ЛИДА',
             'Район',
+            'Дата создания договора',
+            'Год рождения ребенка',
+            'Телефон родителя',
+            'Комментарий',
         ];
 
         /** @var Collection $subscriptions */
@@ -145,6 +149,15 @@ class SubscriptionsListController extends ApiController
                 ]));
             });
 
+            $now = Carbon::now();
+
+            /** @var SubscriptionContract $actualContract */
+            $actualContract = $subscription->contracts()
+                ->whereNotNull('number')
+                ->whereDate('start_at', '<=', $now)
+                ->whereDate('end_at', '>=', $now)
+                ->first();
+
             return [
                 'id' => $subscription->id,
                 'client_id' => $subscription->client_id,
@@ -155,9 +168,14 @@ class SubscriptionsListController extends ApiController
                 'service' => "{$subscription->service->title} ($subscription->service_id)",
                 'sport_kind' => $subscription->service->sportKind->name,
                 'training_base' => $subscription->service->trainingBase->short_title ?? $subscription->service->trainingBase->title,
-                'training_base_address' => $subscription->service->trainingBase->info->address,
                 'date_lead_created_at' => $subscription->lead && $subscription->lead->created_at ? $subscription->lead->created_at->format('d.m.Y, H:i') : null,
                 'district' => $subscription->service->trainingBase->region->name ?? '—',
+                'date_contract_created_at' => $actualContract ? $actualContract->start_at->format('d.m.Y') ?? null : null,
+                'ward_birth_year' => $subscription->clientWard->user->profile->birthdate ? Carbon::parse($subscription->clientWard->user->profile->birthdate)->format('Y') : null,
+                'parent_phone' => $subscription->client->user->profile->phone,
+                'comment' => $subscription->client->comments->map(function (ClientComment $c) {
+                    return $c->text;
+                })->join(', '),
             ];
         });
 
@@ -167,7 +185,7 @@ class SubscriptionsListController extends ApiController
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
         $spreadsheet->getActiveSheet()->fromArray($subscriptions->toArray(), '—', 'A2');
-        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L'] as $col) {
+        foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
 
@@ -217,7 +235,7 @@ class SubscriptionsListController extends ApiController
             }
             if (!empty($filters['training_base_id'])) {
                 $query->whereHas('service', function (Builder $query) use ($filters) {
-                    $query->where('training_base_id', $filters['training_base_id']);
+                    $query->whereIn('training_base_id', $filters['training_base_id']);
                 });
             }
             if (!empty($filters['service_id'])) {
@@ -235,7 +253,8 @@ class SubscriptionsListController extends ApiController
                                 $query->whereHas('profile', function (Builder $query) use ($term) {
                                     $query->where('lastname', 'LIKE', "%$term%")
                                         ->orWhere('firstname', 'LIKE', "%$term%")
-                                        ->orWhere('patronymic', 'LIKE', "%$term%");
+                                        ->orWhere('patronymic', 'LIKE', "%$term%")
+                                        ->orWhere('phone', 'LIKE', "%$term%");
                                 });
                             });
                         })
@@ -244,7 +263,8 @@ class SubscriptionsListController extends ApiController
                                 $query->whereHas('profile', function (Builder $query) use ($term) {
                                     $query->where('lastname', 'LIKE', "%$term%")
                                         ->orWhere('firstname', 'LIKE', "%$term%")
-                                        ->orWhere('patronymic', 'LIKE', "%$term%");
+                                        ->orWhere('patronymic', 'LIKE', "%$term%")
+                                        ->orWhere('phone', 'LIKE', "%$term%");
                                 });
                             });
                         });

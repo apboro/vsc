@@ -326,6 +326,7 @@ $input_remove_color: #FF1E00 !default;
     }
 
     &__values {
+        max-width: 100%;
         display: flex;
         flex-grow: 1;
         flex-wrap: wrap;
@@ -335,7 +336,11 @@ $input_remove_color: #FF1E00 !default;
         color: inherit;
 
         &-item {
-            display: inline-flex;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            position:relative;
+            //display: inline-flex;
             align-items: center;
             font-size: 14px;
             font-family: $project_font;
@@ -346,15 +351,17 @@ $input_remove_color: #FF1E00 !default;
             box-sizing: border-box;
             border-radius: 4px;
             margin: 2px;
-            padding: 0 0 0 8px;
+            padding: 0 15px 0 8px;
 
             &-remove {
+                position: absolute;
+                right: -2px;
                 display: inline-block;
                 width: math.div($base_size_unit, 2);
                 height: 100%;
                 cursor: pointer;
                 margin: 0 0 0 2px;
-                position: relative;
+                //position: relative;
                 transition: opacity $animation $animation_time;
                 opacity: 0.6;
 

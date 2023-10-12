@@ -33,11 +33,12 @@
                     :has-null="true"
                     :small="true"
                     :search="true"
+                    :multi="true"
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
             <template #search>
-                <LayoutFiltersItem :title="'Поиск по ФИО'" v-if="clientId === null">
+                <LayoutFiltersItem :title="'Поиск по ФИО / (или) номеру телефона'" v-if="clientId === null">
                     <InputSearch v-model="list.search" @change="list.load()"/>
                 </LayoutFiltersItem>
                 <div v-if="clientId === null" style="display: flex; align-items: flex-end; margin-left: 10px;">

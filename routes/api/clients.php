@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\Clients\ClientsAddSubscriptionController;
+use App\Http\Controllers\API\Clients\ClientsCommentsEditController;
+use App\Http\Controllers\API\Clients\ClientsCommentsListController;
 use App\Http\Controllers\API\Clients\ClientsEditController;
 use App\Http\Controllers\API\Clients\ClientsListController;
 use App\Http\Controllers\API\Clients\ClientsViewController;
@@ -19,3 +21,10 @@ Route::post('/clients/export', [ClientsListController::class, 'export'])->middle
 
 Route::post('/clients/add_subscription/get', [ClientsAddSubscriptionController::class, 'get'])->middleware('permit:subscriptions.create');
 Route::post('/clients/add_subscription/update', [ClientsAddSubscriptionController::class, 'update'])->middleware('permit:subscriptions.create');
+
+Route::prefix('/clients/comments')->group(function () {
+   Route::post('/', [ClientsCommentsListController::class, 'list']);
+   Route::post('/get', [ClientsCommentsEditController::class, 'get']);
+   Route::post('/update', [ClientsCommentsEditController::class, 'update']);
+   Route::post('/destroy', [ClientsCommentsEditController::class, 'destroy']);
+});

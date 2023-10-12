@@ -91,6 +91,11 @@ class SubscriptionContractData extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected $fillable = [
+        'firstname', 'lastname', 'patronymic',
+        'email', 'phone',
+    ];
+
     /**
      * Convert monthly price from store value to real price.
      *

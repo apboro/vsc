@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Mail\SubscriptionContractFillLinkMail;
 use App\Mail\SubscriptionContractMail;
+use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\Subscription;
@@ -17,6 +18,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -64,8 +66,12 @@ class SubscriptionContractController extends ApiController
         }
 
         $contract->closed_at = Carbon::now();
-        $contract->setStatus(SubscriptionContractStatus::closed, false);
-        $contract->save();
+        DB::transaction(function () use ($contract) {
+            $contract->subscription->client->addComment('', ClientCommentActionType::close_contract);
+
+            $contract->setStatus(SubscriptionContractStatus::closed, false);
+            $contract->save();
+        });
 
         return APIResponse::success('Договор закрыт');
     }
