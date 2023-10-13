@@ -34,6 +34,14 @@ class ClientsCommentsEditController extends ApiEditController
     {
         $current = Current::get($request);
 
+        if (
+            ($request->input('comment_id') && !$current->can('client_comments.edit'))
+            ||
+            (!$request->input('comment_id') && !$current->can('client_comments.create'))
+        ) {
+            return APIResponse::forbidden();
+        }
+
         /** @var ClientComment|null $comment */
         $comment = ClientComment::query()
             ->where('id', $request->input('comment_id'))
@@ -66,6 +74,14 @@ class ClientsCommentsEditController extends ApiEditController
     public function update(Request $request): JsonResponse
     {
         $current = Current::get($request);
+
+        if (
+            ($request->input('comment_id') && !$current->can('client_comments.edit'))
+            ||
+            (!$request->input('comment_id') && !$current->can('client_comments.create'))
+        ) {
+            return APIResponse::forbidden();
+        }
 
         /** @var ClientComment $comment */
         if ($request->input('comment_id')) {

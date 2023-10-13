@@ -23,8 +23,8 @@ Route::post('/clients/add_subscription/get', [ClientsAddSubscriptionController::
 Route::post('/clients/add_subscription/update', [ClientsAddSubscriptionController::class, 'update'])->middleware('permit:subscriptions.create');
 
 Route::prefix('/clients/comments')->group(function () {
-   Route::post('/', [ClientsCommentsListController::class, 'list']);
-   Route::post('/get', [ClientsCommentsEditController::class, 'get']);
-   Route::post('/update', [ClientsCommentsEditController::class, 'update']);
-   Route::post('/destroy', [ClientsCommentsEditController::class, 'destroy']);
+   Route::post('/', [ClientsCommentsListController::class, 'list'])->middleware('permit:client_comments.view');
+   Route::post('/get', [ClientsCommentsEditController::class, 'get']);  // Permissions checked inside controller
+   Route::post('/update', [ClientsCommentsEditController::class, 'update']);  // Permissions checked inside controller
+   Route::post('/destroy', [ClientsCommentsEditController::class, 'destroy'])->middleware('permit:client_comments.delete');
 });

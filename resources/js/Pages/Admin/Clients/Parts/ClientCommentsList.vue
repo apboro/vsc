@@ -1,5 +1,5 @@
 <template>
-    <div v-if="can('subscriptions.create')" style="text-align: right; padding-bottom: 20px">
+    <div v-if="can('client_comments.create')" style="text-align: right; padding-bottom: 20px">
         <GuiActionsMenu>
             <span class="link" @click="editComment(null)">Добавить комментарий</span>
         </GuiActionsMenu>

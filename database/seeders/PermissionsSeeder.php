@@ -44,6 +44,12 @@ class PermissionsSeeder extends Seeder
             'clients.view' => 'Просмотр клиентов',
             'clients.edit' => 'Изменение данных клиента',
         ],
+        'client_comments' => [
+            'client_comments.view' => 'Просмотр комментариев',
+            'client_comments.create' => 'Создание комментариев',
+            'client_comments.edit' => 'Редактирование комментариев',
+            'client_comments.delete' => 'Удаление комментариев',
+        ],
         'subscriptions' => [
             'subscriptions.view' => 'Просмотр подписок на услуги',
             'subscriptions.close' => 'Закрытие подписки на услугу',

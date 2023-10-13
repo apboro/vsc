@@ -57,7 +57,7 @@ class ClientsCommentsListController extends ApiController
                 'type_id' => $comment->type_id,
                 'action_type_id' => $comment->action_id,
                 'position_id' => $comment->position_id,
-                'can_edit' => $comment->isInner() && $current->can('clients.edit'),
+                'can_edit' => $comment->isInner() && $current->can('client_comments.edit'),
             ];
         });
 
