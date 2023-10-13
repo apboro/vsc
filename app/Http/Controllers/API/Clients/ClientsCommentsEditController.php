@@ -7,6 +7,8 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Clients\ClientComment;
 use App\Models\Dictionaries\ClientCommentType;
+use App\Scopes\ForOrganization;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -30,9 +32,15 @@ class ClientsCommentsEditController extends ApiEditController
      */
     public function get(Request $request): JsonResponse
     {
+        $current = Current::get($request);
+
         /** @var ClientComment|null $comment */
         $comment = ClientComment::query()
             ->where('id', $request->input('comment_id'))
+            ->whereHas('client', function (Builder $query) use ($request, $current) {
+                $query
+                    ->tap(new ForOrganization($current->organizationId(), true));
+            })
             ->first();
 
         $values = [
@@ -63,6 +71,10 @@ class ClientsCommentsEditController extends ApiEditController
         if ($request->input('comment_id')) {
             $comment = ClientComment::query()
             ->where('id', $request->input('comment_id'))
+            ->whereHas('client', function (Builder $query) use ($request, $current) {
+                $query
+                    ->tap(new ForOrganization($current->organizationId(), true));
+            })
             ->first();
         } else {
             $comment = new ClientComment();

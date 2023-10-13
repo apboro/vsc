@@ -43,10 +43,10 @@ class ClientsCommentsListController extends ApiController
             ->orderBy('created_at', 'DESC');
 
         // current page automatically resolved from request via `page` parameter
-        $wards = $query->paginate($request->perPage(10, $this->rememberKey));
+        $comments = $query->paginate($request->perPage(10, $this->rememberKey));
 
-        /** @var LengthAwarePaginator $wards */
-        $wards->transform(function (ClientComment $comment) use ($current){
+        /** @var LengthAwarePaginator $comments */
+        $comments->transform(function (ClientComment $comment) use ($current){
             return [
                 'id' => $comment->id,
                 'created_at' => $comment->created_at->format('d.m.Y'),
@@ -62,7 +62,7 @@ class ClientsCommentsListController extends ApiController
         });
 
         return APIResponse::list(
-            $wards,
+            $comments,
             ['Дата создания', 'Комментарий', 'Тип комментария', 'Связан с действием', 'Менеджер'],
             [],
             [],
