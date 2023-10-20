@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Positions\Position;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property-read Position $position
+ */
 class PositionService extends Model
 {
-    use HasFactory;
-    protected $guarded =[];
+    protected $guarded = [];
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(Position::class, 'position_id','id');
+    }
 }

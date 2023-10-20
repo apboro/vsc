@@ -20,6 +20,7 @@ use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InvalidArgumentException;
 
@@ -65,6 +66,7 @@ use InvalidArgumentException;
  * @property Collection<SportKind> $sportKinds
  * @property ServiceSchedule $schedule
  * @property OrganizationRequisites $requisites
+ * @property-read Collection<PositionService> $positions
  */
 class Service extends Model implements Statusable, AsDictionary
 {
@@ -402,7 +404,8 @@ class Service extends Model implements Statusable, AsDictionary
         return !empty($this->phones) ? $this->phones->pluck('phone')->implode(',') : null;
     }
 
-    public function positions(){
+    public function positions(): HasMany
+    {
         return $this->hasMany(PositionService::class);
     }
 }

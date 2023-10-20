@@ -44,6 +44,18 @@
                     @change="list.load()"
                 />
             </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Район'">
+                <DictionaryDropDown
+                    :dictionary="'regions'"
+                    v-model="list.filters['region_id']"
+                    :original="list.filters_original['region_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    :multi="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
             <template #search>
                 <LayoutFiltersItem :title="'Поиск по ФИО / (или) номеру телефона'">
                     <InputSearch v-model="list.search" @change="list.load()"/>

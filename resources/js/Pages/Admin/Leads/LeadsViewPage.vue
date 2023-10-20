@@ -370,10 +370,12 @@ export default {
             this.registration_form.set('region_id', this.data.data['region_id'], 'required', 'Район', true);
             this.registration_form.set('service_id', this.data.data['service_id'], 'required', 'Услуга', true);
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
+
             this.registration_form.load();
             this.is_duplicates_loading = true;
             this.getDuplicates()
                 .then(() => {
+                    this.serviceChanged(this.data.data['service_id'])
                     this.$refs.registration.show({lead_id: this.leadId})
                         .then(() => {
                             this.load();

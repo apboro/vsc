@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Dictionaries\ServiceTypes;
+use App\Models\PositionService;
 use App\Models\Services\Service;
 use App\Models\Services\ServiceProgram;
 use App\Scopes\ForOrganization;
@@ -44,6 +45,9 @@ class ServicesViewController extends ApiController
         $service->loadMissing('sportKind');
         $service->loadMissing('schedule');
         $service->loadMissing('requisites');
+
+        /** @var PositionService $responsiblePosition */
+        $responsiblePositions = $service->positions();
 
         return [
             'status' => $service->status->name,
@@ -83,6 +87,9 @@ class ServicesViewController extends ApiController
             'refund_amount' => $service->refund_amount,
             'daily_price' => $service->daily_price,
             'price_deduction_advance' => $service->price_deduction_advance,
+            'responsible_users' => $service->positions->map(function (PositionService $ps) {
+                return $ps->position->user->profile->fullName ?? '';
+            })->join(', '),
         ];
     }
 

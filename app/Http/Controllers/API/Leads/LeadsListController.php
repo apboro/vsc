@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -235,7 +236,9 @@ class LeadsListController extends ApiController
                         ->where('ward_lastname', 'LIKE', "%$term%")
                         ->orWhere('ward_firstname', 'LIKE', "%$term%")
                         ->orWhere('ward_patronymic', 'LIKE', "%$term%")
-                        ->orWhere('phone', 'LIKE', "%$term%");;
+
+                        ->orWhere('phone', 'LIKE', "%$term%")
+                        ->orWhereRaw("REGEXP_REPLACE(phone, '[^0-9]+','') LIKE ?", ['%' . $term . '%']);
                 });
             }
         }

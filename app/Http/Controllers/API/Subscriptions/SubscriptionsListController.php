@@ -136,8 +136,10 @@ class SubscriptionsListController extends ApiController
             'Комментарий',
         ];
 
-        /** @var Collection $subscriptions */
-        $subscriptions->transform(function (Subscription $subscription) {
+        $transformedSubscriptions = collect();
+
+        /** @var Subscription $subscription */
+        foreach ($subscriptions as $subscription) {
             $contracts = '';
 
             $subscription->contracts->map(function (SubscriptionContract $contract) use (&$contracts) {
@@ -151,40 +153,22 @@ class SubscriptionsListController extends ApiController
 
             $now = Carbon::now();
 
-            /** @var SubscriptionContract $actualContract */
-            $actualContract = $subscription->contracts()
-                ->whereNotNull('number')
-                ->whereDate('start_at', '<=', $now)
-                ->whereDate('end_at', '>=', $now)
-                ->first();
-
-            return [
-                'id' => $subscription->id,
-                'client_id' => $subscription->client_id,
-                'client' => $subscription->client->user->profile->fullName,
-                'ward' => $subscription->clientWard->user->profile->fullName,
-                'status' => $subscription->status->name,
-                'contracts' => $contracts,
-                'service' => "{$subscription->service->title} ($subscription->service_id)",
-                'sport_kind' => $subscription->service->sportKind->name,
-                'training_base' => $subscription->service->trainingBase->short_title ?? $subscription->service->trainingBase->title,
-                'date_lead_created_at' => $subscription->lead && $subscription->lead->created_at ? $subscription->lead->created_at->format('d.m.Y, H:i') : null,
-                'district' => $subscription->service->trainingBase->region->name ?? '—',
-                'date_contract_created_at' => $actualContract ? $actualContract->start_at->format('d.m.Y') ?? null : null,
-                'ward_birth_year' => $subscription->clientWard->user->profile->birthdate ? Carbon::parse($subscription->clientWard->user->profile->birthdate)->format('Y') : null,
-                'parent_phone' => $subscription->client->user->profile->phone,
-                'comment' => $subscription->client->comments->map(function (ClientComment $c) {
-                    return $c->text;
-                })->join(', '),
-            ];
-        });
+            if ($subscription->contracts->count() === 0) {
+                $transformedSubscriptions->add($this->getArrayForExport($subscription, $contracts, null));
+            } else {
+                /** @var SubscriptionContract $contract */
+                foreach ($subscription->contracts as $contract) {
+                    $transformedSubscriptions->add($this->getArrayForExport($subscription, $contracts, $contract));
+                }
+            }
+        }
 
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->setActiveSheetIndex(0)->setTitle('Подписки')->setShowRowColHeaders(true);
 
         $spreadsheet->getActiveSheet()->fromArray($titles, '—', 'A1');
-        $spreadsheet->getActiveSheet()->fromArray($subscriptions->toArray(), '—', 'A2');
+        $spreadsheet->getActiveSheet()->fromArray($transformedSubscriptions->toArray(), '—', 'A2');
         foreach(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'] as $col) {
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
         }
@@ -199,6 +183,29 @@ class SubscriptionsListController extends ApiController
             'file_name' => 'Подписки ' . $now->format('Y-m-d H:i'),
             'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
+    }
+
+    protected function getArrayForExport(Subscription $subscription, string $contracts, ?SubscriptionContract $contract): array
+    {
+        return [
+            'id' => $subscription->id,
+            'client_id' => $subscription->client_id,
+            'client' => $subscription->client->user->profile->fullName,
+            'ward' => $subscription->clientWard->user->profile->fullName,
+            'status' => $subscription->status->name,
+            'contracts' => $contracts,
+            'service' => "{$subscription->service->title} ($subscription->service_id)",
+            'sport_kind' => $subscription->service->sportKind->name,
+            'training_base' => $subscription->service->trainingBase->short_title ?? $subscription->service->trainingBase->title,
+            'date_lead_created_at' => $subscription->lead && $subscription->lead->created_at ? $subscription->lead->created_at->format('d.m.Y, H:i') : null,
+            'district' => $subscription->service->trainingBase->region->name ?? '—',
+            'date_contract_created_at' => $contract ? $contract->start_at->format('d.m.Y') ?? null : null,
+            'ward_birth_year' => $subscription->clientWard->user->profile->birthdate ? Carbon::parse($subscription->clientWard->user->profile->birthdate)->format('Y') : null,
+            'parent_phone' => $subscription->client->user->profile->phone,
+            'comment' => $subscription->client->comments->map(function (ClientComment $c) {
+                return $c->text;
+            })->join(', '),
+        ];
     }
 
     /**
@@ -240,6 +247,9 @@ class SubscriptionsListController extends ApiController
             }
             if (!empty($filters['service_id'])) {
                 $query->where('service_id', $filters['service_id']);
+            }
+            if (!empty($filters['region_id'])) {
+                $query->whereIn('region_id', $filters['region_id']);
             }
         }
 

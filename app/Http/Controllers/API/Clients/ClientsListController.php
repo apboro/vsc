@@ -206,6 +206,9 @@ class ClientsListController extends ApiController
                     $query->whereIn('training_base_id', $filters['training_base_id']);
                 });
             }
+            if (!empty($filters['region_id'])) {
+                $query->whereIn('region_id', $filters['region_id']);
+            }
         }
 
         // apply search
