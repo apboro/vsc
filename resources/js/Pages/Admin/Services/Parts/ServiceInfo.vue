@@ -8,6 +8,7 @@
                 <GuiActivityIndicator :active="data['active']"/>
                 {{ data['status'] }}
             </GuiValue>
+          <GuiValue :title="'Ответственные менеджеры'">{{ data['responsible_users'] }}</GuiValue>
         </GuiContainer>
         <GuiContainer w-50 mt-30 pr-20 inline>
             <GuiValue :title="'Дата начала услуги'">{{ data['start_at'] }}</GuiValue>

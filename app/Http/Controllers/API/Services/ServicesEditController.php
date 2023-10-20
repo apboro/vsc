@@ -6,6 +6,7 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\ServiceTypes;
+use App\Models\PositionService;
 use App\Models\PositionServices;
 use App\Models\ServicePhone;
 use App\Models\Services\Service;
@@ -173,8 +174,10 @@ class ServicesEditController extends ApiEditController
                 'schedule_time_sat' => $service->schedule->sat_start_time ? $service->schedule->sat_start_time->format('H:i') : null,
                 'schedule_time_sun' => $service->schedule->sun_start_time ? $service->schedule->sun_start_time->format('H:i') : null,
                 'email'=>$service->email,
-                'phones'=>$service->phones()->pluck('phone')
-
+                'phones'=>$service->phones()->pluck('phone'),
+                'responsible_user_ids' => $service->positions->map(function (PositionService $ps) {
+                    return $ps->position->id;
+                })
             ],
             $this->rules,
             $this->titles,
