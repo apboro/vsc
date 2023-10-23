@@ -125,12 +125,16 @@ class Client extends Model implements Statusable
     /**
      * Create system comment
      *
-     * @param string $text
+     * @param string|null $text
      *
      * @param int $action
      */
-    public function addComment(string $text, int $action)
+    public function addComment(?string $text, int $action): void
     {
+        if (empty($text)) {
+            return;
+        }
+
         $this->comments()->create([
             'text' => $text,
             'action_id' => $action,
@@ -160,7 +164,7 @@ class Client extends Model implements Statusable
                     'lastname' => $this->user->profile->lastname,
                     'patronymic' => $this->user->profile->patronymic,
                     'phone' => $this->user->profile->phone,
-                    'email'  => $this->user->profile->email,
+                    'email' => $this->user->profile->email,
                 ]);
             }
         }
