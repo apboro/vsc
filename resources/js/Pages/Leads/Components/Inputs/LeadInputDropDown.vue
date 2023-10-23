@@ -382,6 +382,7 @@ $input_remove_color: #FF1E00 !default;
     }
 
     &__toggle {
+        max-width: 30px;
         align-items: flex-start;
         box-sizing: border-box;
         cursor: inherit;
