@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
- * @property int $partner_id
+ * @property int $client_id
  * @property int $amount
  * @property int $limit
  *
@@ -111,8 +111,8 @@ class Account extends Model
      */
     public function attachTransaction(AccountTransaction $transaction, bool $withoutLimitCheck= false): AccountTransaction
     {
-        if (!$this->exists && (!$this->partner_id || !$this->save())) {
-            throw new AccountException('Лицевой счёт не присоединен к партнёру. Невозможно добавить операцию.');
+        if (!$this->exists && (!$this->client_id || !$this->save())) {
+            throw new AccountException('Лицевой счёт не присоединен к клиенту. Невозможно добавить операцию.');
         }
         if ($transaction->exists) {
             throw new AccountException('Повторное прикрепление операции к лицевому счёту невозможно.');
@@ -121,7 +121,7 @@ class Account extends Model
         /** @var  AccountTransactionType $type */
         $type = AccountTransactionType::get($transaction->type_id);
         if (!$type->final) {
-            throw new AccountException('Не возможно создать операцию с таким типом.');
+            throw new AccountException('Невозможно создать операцию с таким типом.');
         }
 
         if ($type->sign === -1 && ($transaction->amount > ($this->amount - ($withoutLimitCheck ? 0 : $this->limit)))) {
@@ -154,7 +154,7 @@ class Account extends Model
     public function updateTransaction(AccountTransaction $transaction, array $attributes): AccountTransaction
     {
         if (!$this->exists) {
-            throw new AccountException('Лицевой счёт не присоединен к партнёру. Невозможно добавить операцию.');
+            throw new AccountException('Лицевой счёт не присоединен к клиенту. Невозможно добавить операцию.');
         }
         if (!$transaction->exists || $transaction->account_id !== $this->id) {
             throw new AccountException('Операция не привязана к лицевому счёту.');

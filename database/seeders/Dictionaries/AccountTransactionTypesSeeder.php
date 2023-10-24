@@ -41,8 +41,10 @@ class AccountTransactionTypesSeeder extends GenericSeeder
             AccountTransactionType::account_withdrawal_cash => [
                 'name' => 'Наличными',
                 'sign' => -1,
-                'has_reason' => true,
-                'has_reason_date' => true,
+                'parent_type_id' => AccountTransactionType::account_withdrawal,
+                'final' => true,
+                'has_reason' => false,
+                'has_reason_date' => false,
                 'editable' => true,
                 'deletable' => true,
             ],

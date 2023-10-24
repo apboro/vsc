@@ -6,6 +6,10 @@ use App\Current;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Dictionaries\AbstractDictionary;
+use App\Models\Dictionaries\AccountTransactionType;
+use App\Models\Dictionaries\AccountTransactionTypePrimary;
+use App\Models\Dictionaries\AccountTransactionTypeRefill;
+use App\Models\Dictionaries\AccountTransactionTypeWithdrawal;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Discount;
@@ -58,7 +62,11 @@ class DictionaryController extends ApiController
         'contracts' => ['class' => Contracts::class, 'allow' => null],
         'letters' => ['class' => Letters::class, 'allow' => null],
         'patterns' => ['class' => Pattern::class, 'allow' => null],
-        'positions'=>['class'=>Position::class, 'allow'=>null]
+        'positions'=>['class'=>Position::class, 'allow'=>null],
+        'transaction_primary_types' => ['class' => AccountTransactionTypePrimary::class, 'allow' => null],
+        'transaction_refill_types' => ['class' => AccountTransactionTypeRefill::class, 'allow' => null],
+        'transaction_withdrawal_types' => ['class' => AccountTransactionTypeWithdrawal::class, 'allow' => null],
+        'transaction_types' => ['class' => AccountTransactionType::class, 'allow' => null],
     ];
 
     /**

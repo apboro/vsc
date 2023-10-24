@@ -29,7 +29,7 @@ class CreateAccountTransactionsTable extends Migration
             $table->string('reason')->nullable();
             $table->date('reason_date')->nullable();
 
-            $table->unsignedSmallInteger('committer_id')->nullable();
+            $table->unsignedInteger('committer_id')->nullable();
 
             $table->text('comments')->nullable();
 

@@ -15,6 +15,7 @@ class CookieKeys
     public const clients_comments_list = 'clients_comments_list';
     public const subscriptions_list = 'subscriptions_list';
     public const subscriptions_documents_list = 'subscriptions_documents_list';
+    public const transactions_list = 'transactions_list';
 
     public static function getKey(string $key, ?int $organizationId = null): string
     {
