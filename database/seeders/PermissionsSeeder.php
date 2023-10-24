@@ -61,6 +61,12 @@ class PermissionsSeeder extends Seeder
             'subscriptions.close.document' => 'Закрытие договора на оказание услуг',
             'subscriptions.send.document' => 'Повторная отправка договора на оказание услуг',
         ],
+        'account_transactions' => [
+            'account_transactions.view' => 'Просмотр транзакций',
+            'account_transactions.create' => 'Создание транзакций',
+            'account_transactions.edit' => 'Редактирование транзакций',
+            'account_transactions.delete' => 'Удаление транзакций',
+        ],
     ];
 
     /**
