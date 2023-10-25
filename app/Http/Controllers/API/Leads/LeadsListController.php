@@ -238,7 +238,7 @@ class LeadsListController extends ApiController
                         ->orWhere('ward_patronymic', 'LIKE', "%$term%")
 
                         ->orWhere('phone', 'LIKE', "%$term%")
-                        ->orWhereRaw("REGEXP_REPLACE(phone, '[^0-9]+','') LIKE ?", ['%' . $term . '%']);
+                        ->orWhereRaw("REPLACE(REPLACE(REPLACE(REPLACE(phone, '-',''), ' ',''), '(',''), ')','') LIKE ?", ['%' . $term . '%']);
                 });
             }
         }
