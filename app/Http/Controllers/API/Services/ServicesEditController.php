@@ -7,11 +7,8 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Models\Dictionaries\ServiceTypes;
 use App\Models\PositionService;
-use App\Models\PositionServices;
-use App\Models\ServicePhone;
 use App\Models\Services\Service;
 use App\Models\Services\ServiceProgram;
-use App\Models\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,8 +56,9 @@ class ServicesEditController extends ApiEditController
         'refund_amount' => 'nullable',
         'daily_price' => 'nullable',
         'price_deduction_advance' => 'nullable',
-        'email'=>'nullable|email',
-        'phones'=>'nullable'
+        'email' => 'nullable|email',
+        'phones' => 'min:1',
+        'phones.*' => 'required',
     ];
 
     protected array $titles = [
@@ -105,8 +103,8 @@ class ServicesEditController extends ApiEditController
         'schedule_time_sat' => 'Время начала занятий в сб.',
         'schedule_time_sun' => 'Время начала занятий в вс.',
         'email' => 'Email',
-        'phones'=>'Телефон',
-        'responsible_user_ids'=>'Ответственный менеджер'
+        'phones' => 'Телефон',
+        'responsible_user_ids' => 'Ответственный менеджер',
     ];
 
     /**
@@ -173,11 +171,11 @@ class ServicesEditController extends ApiEditController
                 'schedule_time_fri' => $service->schedule->fri_start_time ? $service->schedule->fri_start_time->format('H:i') : null,
                 'schedule_time_sat' => $service->schedule->sat_start_time ? $service->schedule->sat_start_time->format('H:i') : null,
                 'schedule_time_sun' => $service->schedule->sun_start_time ? $service->schedule->sun_start_time->format('H:i') : null,
-                'email'=>$service->email,
-                'phones'=>$service->phones()->pluck('phone'),
+                'email' => $service->email,
+                'phones' => $service->phones()->pluck('phone'),
                 'responsible_user_ids' => $service->positions->map(function (PositionService $ps) {
                     return $ps->position->id;
-                })
+                }),
             ],
             $this->rules,
             $this->titles,
@@ -198,7 +196,8 @@ class ServicesEditController extends ApiEditController
     {
         $data = $this->getData($request);
 
-        if ($errors = $this->validate($data, $this->rules, $this->titles)) {
+        if ($errors = $this->validate($data, $this->rules, $this->titles, ['phones.*.required' => 'Обязательно для заполнения'])) {
+
             return APIResponse::validationError($errors);
         }
 
@@ -290,27 +289,25 @@ class ServicesEditController extends ApiEditController
         $service->daily_price = $data['daily_price'];
         $service->price_deduction_advance = $data['price_deduction_advance'];
         $service->price = $data['price'];
-        $service->email = !empty($data['email']) ?  $data['email'] : null;
+        $service->email = !empty($data['email']) ? $data['email'] : null;
         if (!$service->exists) {
             $service->organization_id = $current->organizationId();
         }
         $service->save();
 
         $service->phones()->delete();
-        if(!empty($data['phones'])){
-            foreach($data['phones'] as $row) {
-                $service->phones()->create(['phone'=>$row]);
+        if (!empty($data['phones'])) {
+            foreach ($data['phones'] as $row) {
+                $service->phones()->create(['phone' => $row]);
             }
         }
-
 
         $service->positions()->delete();
-        if(!empty($data['responsible_user_ids'])){
-            foreach($data['responsible_user_ids'] as $row){
-                $service->positions()->create(['position_id'=>$row]);
+        if (!empty($data['responsible_user_ids'])) {
+            foreach ($data['responsible_user_ids'] as $row) {
+                $service->positions()->create(['position_id' => $row]);
             }
         }
-
 
         $service->sportKinds()->sync($data['sport_kinds']);
         $service->schedule->mon = $data['schedule_day_mon'];

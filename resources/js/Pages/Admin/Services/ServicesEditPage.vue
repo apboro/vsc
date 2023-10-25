@@ -44,11 +44,11 @@
             <FormNumber :form="form" :name="'group_limit'"/>
             <FormDictionary :form="form" :name="'sport_kind_id'" :dictionary="'sport_kinds'"/>
             <FormDictionary
-                            :form="form"
-                            :name="'sport_kinds'"
-                            :dictionary="'sport_kinds'"
-                            :multi="true"
-                            :placeholder="'Выберите виды спорта'"
+                :form="form"
+                :name="'sport_kinds'"
+                :dictionary="'sport_kinds'"
+                :multi="true"
+                :placeholder="'Выберите виды спорта'"
             />
         </GuiContainer>
 
@@ -95,16 +95,16 @@
                     <FormPhone
                         v-model="phones[index]"
                         :form="form"
-                        :name="index"
+                        :name="'phones.' + index"
                         title="Телефон"
                         placeholder="Телефон"
                         @change="addPhoneArr"
                     />
                 </div>
                 <div style="width:30%; float:left" v-if="index>0">
-                <GuiButton :color="'red'" v-on:click="removePhone(index)" class="m-5">
-                    Удалить
-                </GuiButton>
+                    <GuiButton :color="'red'" v-on:click="removePhone(index)" class="m-5">
+                        Удалить
+                    </GuiButton>
                 </div>
             </div>
         </GuiContainer>
@@ -168,15 +168,15 @@ export default {
         form: form('/api/services/get', '/api/services/update'),
         regularTypeProgram: [],
         singleTypeProgram: [],
-        phones:[''],
-        staffList:[],
+        phones: [''],
+        staffList: [],
     }),
 
     computed: {
         serviceId() {
             return Number(this.$route.params.id);
         },
-        newServiceId(){
+        newServiceId() {
             console.log(this.$route.params.newId)
             return Number(this.$route.params.newId);
         },
@@ -187,10 +187,10 @@ export default {
 
     created() {
         this.form.toaster = this.$toast;
-        this.form.load({id: this.serviceId}).then((response)=>{
-            if(response.values !== null && response.values.phones !== null && response.values.phones.length>0){
+        this.form.load({id: this.serviceId}).then((response) => {
+            if (response.values !== null && response.values.phones !== null && response.values.phones.length > 0) {
                 this.phones = []
-                for (let index in response.values.phones){
+                for (let index in response.values.phones) {
                     this.addNewPhone(response.values.phones[index])
                 }
             }
@@ -200,8 +200,8 @@ export default {
 
     methods: {
         save() {
-            this.form.set('phones',this.phones)
-            this.form.save({id: (this.newServiceId ===-1 ? this.newServiceId : this.serviceId)})
+            this.form.set('phones', this.phones)
+            this.form.save({id: (this.newServiceId === -1 ? this.newServiceId : this.serviceId)})
                 .then(response => {
                     if (this.serviceId === 0) {
                         this.$router.push({name: 'services-view', params: {id: response.payload['id']}});
@@ -224,18 +224,18 @@ export default {
                     this.singleTypeProgram = response.data.data['singleType'];
                 });
         },
-        addNewPhone(value){
+        addNewPhone(value) {
             this.phones.push(
                 value
             )
         },
-        removePhone(index){
-            this.form.set(index,'')
+        removePhone(index) {
+            this.form.set(index, '')
             this.phones[index] = '';
-            this.phones.splice(index,1)
+            this.phones.splice(index, 1)
         },
-        addPhoneArr(value,name){
-            this.phones[name]=value
+        addPhoneArr(value, name) {
+            this.phones[name] = value
         }
     }
 }
