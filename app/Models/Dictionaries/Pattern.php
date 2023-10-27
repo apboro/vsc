@@ -27,6 +27,8 @@ class Pattern extends AbstractDictionary
 
     public const stolichnay9=7;
 
+    public const educational = 8;
+
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns';
