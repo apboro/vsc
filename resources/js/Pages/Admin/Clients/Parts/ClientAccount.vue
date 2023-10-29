@@ -46,7 +46,7 @@
         </LayoutFilters>
 
         <GuiContainer w-100>
-            <ListTable v-if="list.list.length > 0" :titles="list.titles">
+            <ListTable v-if="list.list.length > 0" :titles="list.titles" :has-action="true">
                 <ListTableRow v-for="transaction in list.list">
                     <ListTableCell>
                         {{ transaction['timestamp'] }}
