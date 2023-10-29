@@ -3,6 +3,7 @@
 namespace App\Models\Clients;
 
 use App\Interfaces\Statusable;
+use App\Models\Account\Account;
 use App\Models\Dictionaries\ClientCommentType;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Model;
@@ -31,6 +32,7 @@ use InvalidArgumentException;
  * @property User $user
  * @property Collection<ClientWard> $wards
  * @property Collection<ClientComment> $comments
+ * @property-read Account $account
  */
 class Client extends Model implements Statusable
 {
@@ -120,6 +122,16 @@ class Client extends Model implements Statusable
     public function comments(): HasMany
     {
         return $this->hasMany(ClientComment::class, 'client_id', 'id');
+    }
+
+    /**
+     * Clients account.
+     *
+     * @return  HasOne
+     */
+    public function account(): HasOne
+    {
+        return $this->hasOne(Account::class, 'client_id', 'id')->withDefault();
     }
 
     /**

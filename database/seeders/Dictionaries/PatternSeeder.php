@@ -36,6 +36,10 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Столичная 9',
                 'pattern' => 'pdf/contracts/subscription_stolichnay9_contract',
             ],
+            Pattern::educational => [
+                'name' => 'Образовательный',
+                'pattern' => 'pdf/contracts/subscription_educational_contract',
+            ],
         ],
         PatternLetters::class => [
             PatternLetters::regular => [

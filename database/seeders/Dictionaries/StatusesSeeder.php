@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Dictionaries;
 
+use App\Models\Dictionaries\AccountTransactionStatus;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\LeadStatus;
@@ -64,6 +65,9 @@ class StatusesSeeder extends GenericSeeder
             SubscriptionContractStatus::draft => ['name' => 'Заполнен'],
             SubscriptionContractStatus::accepted => ['name' => 'Договор сформирован'],
             SubscriptionContractStatus::closed => ['name' => 'Договор закрыт'],
+        ],
+        AccountTransactionStatus::class => [
+            AccountTransactionStatus::accepted => ['name' => 'Принято'],
         ],
     ];
 }

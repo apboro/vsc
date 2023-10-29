@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Dictionaries\AccountTransactionTypesSeeder;
 use Database\Seeders\Dictionaries\ClientCommentsSeeder;
 use Database\Seeders\Dictionaries\PatternSeeder;
 use Database\Seeders\Dictionaries\RolesSeeder;
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         ServiceSeeder::class,
         PatternSeeder::class,
         ClientCommentsSeeder::class,
+        AccountTransactionTypesSeeder::class,
     ];
 
     /**

@@ -16,7 +16,7 @@
             </div>
             <SubscriptionsList :client-id="clientId" :ready="data.is_loaded" ref="subscriptions"/>
         </div>
-
+        <ClientFinances v-if="tab === 'account'" :client-id="clientId"/>
         <ClientCommentsList v-if="tab === 'comments'" :client-id="clientId"/>
 
         <FormPopUp :form="subscription_form" :title="'Добавить подписку'" :save-button-caption="'Добавить'" class="subscription-form" ref="subscription">
@@ -47,6 +47,7 @@ import ClientInfo from "@/Pages/Admin/Clients/Parts/ClientInfo";
 import LayoutRoutedTabs from "@/Components/Layout/LayoutRoutedTabs";
 import SubscriptionsList from "@/Pages/Admin/Subscriptions/Parts/SubscriptionsList";
 import ClientWardsList from "@/Pages/Admin/Clients/Parts/ClientWardsList";
+import ClientFinances from "@/Pages/Admin/Clients/Parts/ClientFinances";
 import ClientCommentsList from "@/Pages/Admin/Clients/Parts/ClientCommentsList";
 import Permissions from "../../../Mixins/Permissions";
 import GuiActionsMenu from "../../../Components/GUI/GuiActionsMenu";
@@ -76,6 +77,7 @@ export default {
         GuiContainer,
         LayoutPage,
         ClientCommentsList,
+        ClientFinances,
     },
 
     mixins: [Permissions],
@@ -102,6 +104,7 @@ export default {
                 general: 'Данные клиента',
                 wards: 'Занимающиеся',
                 subscriptions: 'Подписки на услуги',
+                account: 'Финансы',
                 comments: 'Комментарии',
             }
         },
