@@ -105,7 +105,7 @@
         >
             <GuiContainer w-500px>
                 <FormDictionary :form="refill_form" :dictionary="'transaction_refill_types'" :name="'type_id'" @change="val => typeChanged(val, true)" :disabled="transaction !== 0"/>
-                <FormDate :form="refill_form" :name="'timestamp'" v-if="refill_form.values['type_id'] !== null"/>
+                <FormDate :form="refill_form" :to="today" :name="'timestamp'" v-if="refill_form.values['type_id'] !== null"/>
                 <FormString :form="refill_form" :name="'reason'" v-if="has_reason && refill_form.values['type_id'] !== null"/>
                 <FormDate :form="refill_form" :name="'reason_date'" v-if="has_reason_date && refill_form.values['type_id'] !== null"/>
                 <FormNumber :form="refill_form" :name="'amount'" :type="'number'" v-if="refill_form.values['type_id'] !== null"/>
@@ -121,7 +121,7 @@
         >
             <GuiContainer w-500px>
                 <FormDictionary :form="withdrawal_form" :dictionary="'transaction_withdrawal_types'" :name="'type_id'" @change="val => typeChanged(val, false)" :disabled="transaction !== 0"/>
-                <FormDate :form="withdrawal_form" :name="'timestamp'" v-if="withdrawal_form.values['type_id'] !== null"/>
+                <FormDate :form="withdrawal_form" :to="today" :name="'timestamp'" v-if="withdrawal_form.values['type_id'] !== null"/>
                 <FormString :form="withdrawal_form" :name="'reason'" v-if="has_reason && withdrawal_form.values['type_id'] !== null"/>
                 <FormDate :form="withdrawal_form" :name="'reason_date'" v-if="has_reason_date && withdrawal_form.values['type_id'] !== null"/>
                 <FormNumber :form="withdrawal_form" :name="'amount'" :type="'number'" v-if="withdrawal_form.values['type_id'] !== null"/>
@@ -202,6 +202,12 @@ export default {
         has_reason: false,
         has_reason_date: false,
     }),
+
+    computed: {
+        today() {
+            return new Date().toJSON().slice(0, 10)
+        },
+    },
 
     created() {
         this.list.options = { client_id: this.clientId }

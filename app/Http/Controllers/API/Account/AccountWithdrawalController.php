@@ -78,6 +78,8 @@ class AccountWithdrawalController extends ApiEditController
             $this->titles['reason_date'] = $type->reason_date_title;
         }
 
+        $this->rules['timestamp'] = 'required|before_or_equal:' . date('Y-m-d');
+
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
             return APIResponse::validationError($errors);
         }
