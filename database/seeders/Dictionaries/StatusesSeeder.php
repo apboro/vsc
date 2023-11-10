@@ -5,6 +5,7 @@ namespace Database\Seeders\Dictionaries;
 use App\Models\Dictionaries\AccountTransactionStatus;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\ClientWardStatus;
+use App\Models\Dictionaries\InvoiceStatus;
 use App\Models\Dictionaries\LeadStatus;
 use App\Models\Dictionaries\OrganizationStatus;
 use App\Models\Dictionaries\PositionStatus;
@@ -68,6 +69,13 @@ class StatusesSeeder extends GenericSeeder
         ],
         AccountTransactionStatus::class => [
             AccountTransactionStatus::accepted => ['name' => 'Принято'],
+        ],
+        InvoiceStatus::class => [
+            InvoiceStatus::draft => ['name' => 'Черновик'],
+            InvoiceStatus::ready => ['name' => 'Счет подготовлен'],
+            InvoiceStatus::sent => ['name' => 'Счет отправлен'],
+            InvoiceStatus::paid => ['name' => 'Счет оплачен'],
+            InvoiceStatus::cancelled => ['name' => 'Счет аннулирован'],
         ],
     ];
 }

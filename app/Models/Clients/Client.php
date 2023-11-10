@@ -33,6 +33,7 @@ use InvalidArgumentException;
  * @property Collection<ClientWard> $wards
  * @property Collection<ClientComment> $comments
  * @property-read Account $account
+ * @property-read Collection<Subscription> $subscriptions
  */
 class Client extends Model implements Statusable
 {

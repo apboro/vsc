@@ -5,12 +5,15 @@ namespace App\Models\Subscriptions;
 use App\Interfaces\Statusable;
 use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\SubscriptionContractStatus;
+use App\Models\Invoices\Invoice;
 use App\Models\Model;
 use App\Scopes\ForOrganization;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 use InvalidArgumentException;
 
 /**
@@ -29,6 +32,9 @@ use InvalidArgumentException;
  * @property Subscription $subscription
  * @property SubscriptionContractData $contractData
  * @property Discount|null $discount
+ * @property-read Collection<Invoice> $invoices
+ *
+ * @method static Illuminate\Database\Eloquent\Builder active()
  */
 class SubscriptionContract extends Model implements Statusable
 {
@@ -47,6 +53,18 @@ class SubscriptionContract extends Model implements Statusable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * Calculate amount for base type invoice
+     * @return int
+     */
+    public function calculateBaseInvoiceTotal(): int
+    {
+        $monthlyPrice = $this->subscription->service->monthly_price;
+        $discount = $this->discount;
+
+        return ceil($monthlyPrice * (1 - ($discount ? $discount->discount / 10000 : 0)));
+    }
 
     /**
      * Subscription contract status.
@@ -119,5 +137,19 @@ class SubscriptionContract extends Model implements Statusable
     public function contractData(): HasOne
     {
         return $this->hasOne(SubscriptionContractData::class, 'subscription_contract_id', 'id')->withDefault();
+    }
+
+    public static function scopeActive(Builder $q)
+    {
+        $today = Carbon::today();
+
+        $q->where('status_id', SubscriptionContractStatus::accepted)
+            ->whereDate('start_at','<=', $today)
+            ->whereDate('end_at','>=', $today);
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'contract_id', 'id');
     }
 }

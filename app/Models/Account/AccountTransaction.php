@@ -9,6 +9,7 @@ use App\Interfaces\Statusable;
 use App\Interfaces\Typeable;
 use App\Models\Dictionaries\AccountTransactionStatus;
 use App\Models\Dictionaries\AccountTransactionType;
+use App\Models\Invoices\Invoice;
 use App\Models\Positions\Position;
 use App\Traits\HasStatus;
 use App\Traits\HasType;
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $reason
  * @property Carbon $reason_date
  * @property int $committer_id
+ * @property int|null $invoice_id
  * @property string $comments
  *
  * @property Carbon $created_at
@@ -37,6 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property AccountTransactionType $type
  * @property AccountTransactionStatus $status
  * @property Position|null $committer
+ * @property Invoice|null $invoice
  *
  * @property-read string|null $reasonTitle
  * @property-read array|null $reasonRaw
@@ -69,6 +72,7 @@ class AccountTransaction extends Model implements Statusable, Typeable
         'reason_date',
         'committer_id',
         'comments',
+        'invoice_id'
     ];
 
     /** @var array Append attributes */
@@ -144,6 +148,16 @@ class AccountTransaction extends Model implements Statusable, Typeable
     public function committer(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'committer_id', 'id');
+    }
+
+    /**
+     * Transaction status.
+     *
+     * @return  BelongsTo
+     */
+    public function invoice(): BelongsTo
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id', 'id');
     }
 
     /**

@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'account'));
+            $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'invoices'));
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'common'));
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'dictionaries'));
             $this->loadMigrationsFrom(database_path('migrations' . DIRECTORY_SEPARATOR . 'permissions'));

@@ -67,6 +67,12 @@ class PermissionsSeeder extends Seeder
             'account_transactions.edit' => 'Редактирование транзакций',
             'account_transactions.delete' => 'Удаление транзакций',
         ],
+        'invoices' => [
+            'invoices.view' => 'Просмотр счетов',
+            'invoices.create' => 'Создание счетов',
+            'invoices.edit' => 'Редактирование счетов',
+            'invoices.delete' => 'Удаление счетов',
+        ],
     ];
 
     /**

@@ -42,7 +42,7 @@ class Account extends Model
     }
 
     /**
-     * The client owning this account.
+     * The client owning this account.f
      *
      * @return  BelongsTo
      */

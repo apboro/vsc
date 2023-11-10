@@ -16,7 +16,7 @@
             </div>
             <SubscriptionsList :client-id="clientId" :ready="data.is_loaded" ref="subscriptions"/>
         </div>
-        <ClientFinances v-if="tab === 'account'" :client-id="clientId"/>
+        <ClientFinances v-if="tab === 'account' || tab === 'invoices'" :client-id="clientId"/>
         <ClientCommentsList v-if="tab === 'comments'" :client-id="clientId"/>
 
         <FormPopUp :form="subscription_form" :title="'Добавить подписку'" :save-button-caption="'Добавить'" class="subscription-form" ref="subscription">

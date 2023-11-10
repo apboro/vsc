@@ -5,12 +5,14 @@ namespace App\Models\Subscriptions;
 use App\Interfaces\Statusable;
 use App\Models\Clients\Client;
 use App\Models\Clients\ClientWard;
+use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Leads\Lead;
 use App\Models\Model;
 use App\Models\Organization\Organization;
 use App\Models\Services\Service;
 use App\Traits\HasStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -30,7 +32,8 @@ use InvalidArgumentException;
  * @property Client $client
  * @property ClientWard $clientWard
  * @property Service $service
- * @property Collection $contracts
+ * @property-read Collection<SubscriptionContract> $contracts
+ * @property-read Collection<SubscriptionContract> $contractsActive
  * @property Lead|null $lead
  */
 class Subscription extends Model implements Statusable
@@ -121,6 +124,16 @@ class Subscription extends Model implements Statusable
     public function contracts(): HasMany
     {
         return $this->hasMany(SubscriptionContract::class, 'subscription_id', 'id');
+    }
+
+    /**
+     * Subscription contracts.
+     *
+     * @return  HasMany
+     */
+    public function contractsActive(): HasMany
+    {
+        return $this->contracts()->active();
     }
 
     /**
