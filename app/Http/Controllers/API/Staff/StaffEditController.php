@@ -125,7 +125,7 @@ class StaffEditController extends ApiEditController
         $profile->phone = $data['phone'];
         $profile->save();
 
-        $position = new Position;
+        $position = $user->position === null ? new Position : $user->position;
         $position->user_id = $user->id;
         $position->setStatus($data['status_id'], false);
         $position->title_id = $data['position_title_id'];
