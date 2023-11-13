@@ -5,6 +5,7 @@ namespace App\Models\Invoices;
 use App\Helpers\PriceConverter;
 use App\Mail\InvoiceMail;
 use App\Models\Account\AccountTransaction;
+use App\Models\Dictionaries\InvoicePaymentStatus;
 use App\Models\Dictionaries\InvoicePaymentType;
 use App\Models\Dictionaries\InvoiceStatus;
 use App\Models\Dictionaries\InvoiceType;
@@ -38,9 +39,15 @@ use Illuminate\Support\Facades\Mail;
  * @property int $status_id
  * @property int $type_id
  * @property int|null $payment_type_id
+ * @property int|null $payment_status_id
+ *
+ * @property int|null $trainings_attended
+ * @property int|null $one_time_discount
+ * @property int|null $recalc_method
  *
  * @property-read SubscriptionContract $contract
  * @property-read InvoiceStatus $status
+ * @property-read InvoicePaymentStatus $paymentStatus
  * @property-read InvoiceType $type
  * @property-read InvoicePaymentType|null $paymentType
  * @property-read Collection<AccountTransaction> $transactions
@@ -51,7 +58,8 @@ class Invoice extends Model
         'date_from', 'date_to', 'moderation_required',
         'amount_to_pay', 'amount_paid', 'paid_at',
         'contract_id', 'status_id', 'type_id', 'payment_type_id',
-        'comment',
+        'comment', 'trainings_attended', 'one_time_discount', 'recalc_method',
+        'payment_status_id',
     ];
 
     protected $dates = [
@@ -78,12 +86,16 @@ class Invoice extends Model
     /**
      * Convert amount from store value to real currency.
      *
-     * @param int $value
+     * @param int|null $value
      *
-     * @return  float
+     * @return  float|null
      */
-    public function getAmountToPayAttribute(int $value): float
+    public function getAmountToPayAttribute(?int $value): ?float
     {
+        if (!$value) {
+            return null;
+        }
+
         return PriceConverter::storeToPrice($value);
     }
 
@@ -111,6 +123,18 @@ class Invoice extends Model
         return $value ? PriceConverter::storeToPrice($value) : null;
     }
 
+    public function isEditable(): bool
+    {
+        return !in_array($this->status_id, [InvoiceStatus::sent, InvoiceStatus::paid, InvoiceStatus::cancelled]) &&
+            $this->payment_status_id === InvoicePaymentStatus::unpaid;
+    }
+
+    public function isPayable(): bool
+    {
+        return !in_array($this->status_id, [InvoiceStatus::draft, InvoiceStatus::paid, InvoiceStatus::cancelled]) &&
+            $this->payment_status_id !== InvoicePaymentStatus::paid;
+    }
+
     public function contract(): BelongsTo
     {
         return $this->belongsTo(SubscriptionContract::class, 'contract_id');
@@ -134,5 +158,10 @@ class Invoice extends Model
     public function transactions(): HasMany
     {
         return $this->hasMany(AccountTransaction::class, 'invoice_id', 'id');
+    }
+
+    public function paymentStatus(): BelongsTo
+    {
+        return $this->belongsTo(InvoicePaymentStatus::class, 'payment_status_id', 'id');
     }
 }
