@@ -39,6 +39,7 @@ export default {
         to: {type: String, default: null},
         clearable: {type: Boolean, default: false},
         pickOnClear: {type: Boolean, default: true},
+        hideTitle: {type: Boolean, default: false},
     },
 
     mixins: [FormMixin],

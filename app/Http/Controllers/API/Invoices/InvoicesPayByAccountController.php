@@ -7,6 +7,7 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Account\AccountTransaction;
 use App\Models\Dictionaries\AccountTransactionType;
+use App\Models\Dictionaries\InvoicePaymentStatus;
 use App\Models\Dictionaries\InvoicePaymentType;
 use App\Models\Dictionaries\InvoiceStatus;
 use App\Models\Invoices\Invoice;
@@ -26,7 +27,7 @@ class InvoicesPayByAccountController extends ApiController
             return APIResponse::notFound('Счет не найден.');
         }
 
-        if (in_array($invoice->status_id, [InvoiceStatus::draft, InvoiceStatus::paid, InvoiceStatus::cancelled])) {
+        if (!$invoice->isPayable()) {
             return APIResponse::error('Нельзя оплатить черновик счета, оплаченный или аннулированный счет.');
         }
 
@@ -74,6 +75,7 @@ class InvoicesPayByAccountController extends ApiController
             $invoice->status_id = InvoiceStatus::paid;
             $invoice->paid_at = Carbon::now();
             $invoice->payment_type_id = InvoicePaymentType::cash;
+            $invoice->payment_status_id = InvoicePaymentStatus::paid;
 
             $invoice->save();
         });

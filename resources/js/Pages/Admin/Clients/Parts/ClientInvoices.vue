@@ -31,7 +31,7 @@
                         {{ invoice['amount_to_pay'] }}
                     </ListTableCell>
                     <ListTableCell>
-                        {{ invoice['status'] }}<br>
+                        {{ invoice['payment_status'] }}<br>
                         {{ invoice['paid_at'] }}
                     </ListTableCell>
                     <ListTableCell>
@@ -42,10 +42,10 @@
                     </ListTableCell>
                     <ListTableCell>
                         <GuiActionsMenu :title="null">
-                            <span class="link" @click="editInvoice(invoice)">Редактировать</span>
-                            <span class="link" @click="removeInvoice(invoice)">Аннулировать</span>
-                            <span class="link" @click="resendInvoice(invoice)">Отправить повторно</span>
-                            <span class="link" @click="payFromAccount(invoice)">Списать с лицевого счета</span>
+                            <span v-if="invoice['can_edit']" class="link" @click="editInvoice(invoice)">Редактировать</span>
+                            <span v-if="invoice['can_remove']" class="link" @click="removeInvoice(invoice)">Аннулировать</span>
+                            <span v-if="invoice['can_resend']" class="link" @click="resendInvoice(invoice)">Отправить повторно</span>
+                            <span v-if="invoice['can_pay_by_account']" class="link" @click="payFromAccount(invoice)">Списать с лицевого счета</span>
                             <span class="link" @click="showComment(invoice)">Просмотр комментария</span>
                         </GuiActionsMenu>
                     </ListTableCell>
@@ -57,7 +57,7 @@
 
         <FormPopUp
             ref="popup_update"
-            :title="(invoiceId ? 'Редактирование' : 'Создание')  + 'счёта'"
+            :title="(invoiceId ? 'Редактирование' : 'Создание')  + ' счёта'"
             :form="update_form"
             :save-button-caption="'Сохранить'"
         >
@@ -69,22 +69,66 @@
                 <FormDropdown :form="update_form" :name="'subscription_id'" :options="subscriptions" :identifier="'id'" :show="'name'" :hint="'ward'"/>
                 <FormDropdown :form="update_form" :name="'contract_id'" :options="contracts" :identifier="'id'" :show="'name'" :disabled="!selectedSubscription"/>
 
-                <FormDictionary :form="update_form" :dictionary="'invoice_types'" :name="'type_id'"/>
+                <FormDictionary :form="update_form" :dictionary="'invoice_types'" :name="'type_id'" :disabled="!selectedContract"/>
 
-                <FormDate :form="update_form" :name="'date_from'" :disabled="invoiceType === 1"/>
-                <FormDate :form="update_form" :name="'date_to'" :disabled="invoiceType === 1"/>
+                <FieldWrapper
+                    :title="'Период'"
+                >
+                    <div
+                        style="display: flex; flex-direction: column"
+                    >
+                        <div style="display: flex;">
+                            <span class="input-field__title" style="width:3px">С</span>
+                            <span class="input-field__title" style="padding-left: 50%">По</span>
+                        </div>
+                        <div style="display: flex">
+                            <FormDate hide-title :form="update_form" :name="'date_from'" :disabled="invoiceType === 1"/>
+                            <FormDate hide-title :form="update_form" :name="'date_to'" :disabled="invoiceType === 1"/>
+                        </div>
+                    </div>
+                </FieldWrapper>
 
                 <FormText :form="update_form" :name="'comment'"/>
 
                 <div v-if="selectedContract">
-                    <br>
-                    <GuiText>Количество занятий: {{ selectedContract['trainings_count'] }}</GuiText>
-                    <br>
-                    <GuiText>Стоимость за одно занятие: {{ selectedContract['training_price'] }} руб.</GuiText>
-                    <br>
-                    <GuiText>Льгота: {{ selectedContract['discount'] }}</GuiText>
-                    <br>
-                    <GuiText>Сумма к оплате: {{ selectedContract['total_price'] }} руб.</GuiText>
+                    <template v-if="invoiceType === 1">
+                        <br>
+                        <GuiText>Количество занятий: {{ selectedContract['trainings_count'] }}</GuiText>
+                        <br>
+                        <GuiText>Стоимость за одно занятие: {{ selectedContract['training_price'] }} руб.</GuiText>
+                        <br>
+                        <GuiText>Льгота: {{ selectedContract['discount'] }}</GuiText>
+                        <br v-if="paidFromAccount">
+                        <GuiText v-if="paidFromAccount">Оплачено с ЛС: {{ paidFromAccount }} руб.</GuiText>
+                        <br>
+                        <GuiText>Сумма к оплате: {{ totalPrice }} руб.</GuiText>
+                    </template>
+                    <template v-else-if="invoiceType === 2">
+                        <br>
+                        <GuiText>Всего занятий за период: {{ selectedContract['trainings_count'] }}</GuiText>
+                        <br>
+                        <FormNumber :form="update_form" :name="'trainings_attended'" :max="selectedContract['trainings_count']" :min="0"/>
+                        <br>
+                        <FormNumber :form="update_form" :name="'one_time_discount'" :min="0" :max="100"/>
+                        <br>
+                        <GuiText>
+                            Стоимость за 4 занятия по базовой ставке: {{ recalcPriceTotalAmount }} руб.
+                            <a href="" @click.prevent="update_form.values['recalc_method'] = 1">
+                                {{ recalcMethod === 1 ? 'Применено' : 'Применить' }}
+                            </a>
+                        </GuiText>
+                        <br>
+                        <GuiText>
+                            Стоимость за 4 занятия с учетом перерасчета: {{ basePriceTotalAmount }} руб.
+                            <a href="" @click.prevent="update_form.values['recalc_method'] = 2">
+                                {{ recalcMethod === 2 ? 'Применено' : 'Применить' }}
+                            </a>
+                        </GuiText>
+                        <br v-if="paidFromAccount">
+                        <GuiText v-if="paidFromAccount">Оплачено с ЛС: {{ paidFromAccount }} руб.</GuiText>
+                        <br>
+                        <GuiText>Сумма к оплате: {{ totalPrice }} руб.</GuiText>
+                    </template>
                 </div>
 
                 <FormCheckBox hide-title without-title :form="update_form" :name="'pay_with_account'"/>
@@ -128,6 +172,7 @@ import FormString from "@/Components/Form/FormString";
 import FormText from "@/Components/Form/FormText";
 import FormDropdown from "@/Components/Form/FormDropdown";
 import FormCheckBox from "@/Components/Form/FormCheckBox";
+import FieldWrapper from "@/Components/Fields/Helpers/FieldWrapper";
 
 export default {
     components: {
@@ -150,21 +195,43 @@ export default {
         FormText,
         FormDropdown,
         FormCheckBox,
-        PopUp
+        PopUp,
+        FieldWrapper,
     },
 
     mixins: [DeleteEntry, ProcessEntry],
 
     watch: {
         invoiceType(newVal) {
-            if (newVal === 1) {
-                this.update_form.values['date_from'] = this.update_form.payload['first_day_of_last_month']
-                this.update_form.values['date_to'] = this.update_form.payload['last_day_of_last_month']
+            if (this.selectedContract) {
+                this.update_form.values['amount_to_pay'] = this.selectedContract['total_price']
+            }
+
+            this.updateSelectedDates(newVal)
+        },
+        selectedContract(newVal, oldVal) {
+            if (newVal) {
+                if (this.invoiceType === 1) {  //  Базовый счет
+                    this.update_form.values['amount_to_pay'] = newVal['total_price']
+                } else if (this.invoiceType === 2) {  //  Перерасчет
+                    this.update_form.values['amount_to_pay'] = (this.recalcMethod === 1 ? this.basePriceTotalAmount : this.recalcPriceTotalAmount)
+                }
+            }
+            this.updateSelectedDates(this.invoiceType)
+        },
+        recalcMethod(newVal) {
+            if (this.selectedContract) {
+                this.update_form.values['amount_to_pay'] = (this.recalcMethod === 1 ? this.basePriceTotalAmount : this.recalcPriceTotalAmount)
             }
         },
-        selectedContract(newVal) {
-            if (newVal) {
-                this.update_form.values['amount_to_pay'] = newVal['total_price']
+        trainingsAttended(newVal) {
+            if (this.selectedContract) {
+                this.update_form.values['amount_to_pay'] = (this.recalcMethod === 1 ? this.basePriceTotalAmount : this.recalcPriceTotalAmount)
+            }
+        },
+        oneTimeDiscount(newVal) {
+            if (this.selectedContract) {
+                this.update_form.values['amount_to_pay'] = (this.recalcMethod === 1 ? this.basePriceTotalAmount : this.recalcPriceTotalAmount)
             }
         },
     },
@@ -202,6 +269,40 @@ export default {
 
             return []
         },
+        trainingsAttended() {
+            return this.update_form.values['trainings_attended'] !== undefined && this.update_form.values['trainings_attended'] !== null ?
+                this.update_form.values['trainings_attended'] :
+                null
+        },
+        oneTimeDiscount() {
+            return this.update_form.values['one_time_discount'] !== undefined && this.update_form.values['one_time_discount'] !== null ?
+                this.update_form.values['one_time_discount'] :
+                null
+        },
+        recalcPriceTotalAmount() {
+            return this.recalculateAmount(this.selectedContract['training_price'])
+        },
+        basePriceTotalAmount() {
+            return this.recalculateAmount(this.selectedContract['training_price_recalc'])
+        },
+        totalPrice() {
+            let total
+
+            if (this.update_form.values['amount_to_pay']) {
+                total = this.update_form.values['amount_to_pay']
+                total -= this.paidFromAccount
+            } else {
+                total = this.update_form.originals['amount_to_pay']
+            }
+
+            return total
+        },
+        paidFromAccount() {
+            return this.update_form.originals['paid_from_account']
+        },
+        recalcMethod() {
+            return this.update_form.values['recalc_method']
+        }
     },
 
     data: () => ({
@@ -225,7 +326,7 @@ export default {
     methods: {
         editInvoice(invoice) {
             this.invoiceId = invoice ? invoice['id'] : 0
-            // update dicts
+
             this.update_form.load({ client_id: this.clientId, invoice_id: this.invoiceId })
                 .then(() => {
                     this.$refs.popup_update.show({ client_id: this.clientId })
@@ -269,7 +370,26 @@ export default {
                 .then(() => {
                     this.list.reload()
                 });
-        }
+        },
+        updateSelectedDates(invoiceType) {
+            //  базовый счет
+            if (invoiceType === 1) {
+                //  ставим фиксированные даты - с даты начала договора или первого дня прошедшего месяца по последний день прошедшего месяца
+                if (this.selectedContract['start_at'] > this.update_form.payload['first_day_of_last_month']) {
+                    this.update_form.values['date_from'] = this.selectedContract['start_at']
+                } else {
+                    this.update_form.values['date_from'] = this.update_form.payload['first_day_of_last_month']
+                }
+                this.update_form.values['date_to'] = this.update_form.payload['last_day_of_last_month']
+            }
+        },
+        recalculateAmount(trainingPrice) {
+            if (this.trainingsAttended === null || this.oneTimeDiscount === null) {
+                return null
+            }
+
+            return Math.ceil(trainingPrice * this.trainingsAttended * (1 - this.oneTimeDiscount / 100))
+        },
     },
 }
 </script>

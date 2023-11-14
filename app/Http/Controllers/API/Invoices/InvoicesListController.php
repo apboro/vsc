@@ -55,7 +55,7 @@ class InvoicesListController extends ApiController
             ->whereIn('contract_id', $contractIds)
             ->paginate($request->perPage(10, $this->rememberKey));
 
-        $invoices->getCollection()->transform(function (Invoice $invoice) {
+        $invoices->getCollection()->transform(function (Invoice $invoice) use ($current) {
             return [
                 'id' => $invoice->id,
                 'created_at' => $invoice->created_at->format('d.m.Y'),
@@ -65,9 +65,15 @@ class InvoicesListController extends ApiController
                 'amount_to_pay' => $invoice->amount_to_pay,
                 'amount_paid' => $invoice->amount_paid,
                 'status' => $invoice->status->name,
+                'payment_status' => $invoice->paymentStatus->name,
                 'paid_at' => $invoice->paid_at ? $invoice->paid_at->format('d.m.Y') : null,
                 'payment_type' => $invoice->paymentType->name ?? null,
                 'comment' => $invoice->comment,
+
+                'can_edit' => $invoice->isEditable() && $current->can('invoices.edit'),
+                'can_remove' => $invoice->isEditable() && $current->can('invoices.remove'),
+                'can_resend' => $invoice->isPayable(),
+                'can_pay_by_account' => $invoice->isPayable() && $current->can('invoices.update'),
             ];
         });
 
