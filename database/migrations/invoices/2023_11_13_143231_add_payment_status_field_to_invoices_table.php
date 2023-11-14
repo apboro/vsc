@@ -15,7 +15,7 @@ class AddPaymentStatusFieldToInvoicesTable extends Migration
     public function up()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->unsignedTinyInteger('payment_status_id')->default(InvoicePaymentStatus::unpaid);
+            $table->unsignedTinyInteger('payment_status_id')->nullable();
 
             $table->foreign('payment_status_id')->references('id')->on('dictionary_invoice_payment_statuses')
                 ->cascadeOnUpdate()->restrictOnDelete();

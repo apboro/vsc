@@ -207,6 +207,8 @@ class InvoicesAddController extends ApiEditController
                 } else {
                     //  Создаем новый счет
                     $invoice = new Invoice();
+                    $invoice->payment_status_id = InvoicePaymentStatus::unpaid;
+                    $invoice->status_id = InvoiceStatus::ready;
                 }
 
                 //  Обновляем/сохраняем данные
@@ -214,7 +216,6 @@ class InvoicesAddController extends ApiEditController
                 $invoice->date_to = $data['date_to'];
                 $invoice->moderation_required = false;
                 $invoice->contract_id = $data['contract_id'];
-                $invoice->status_id = InvoiceStatus::ready;
                 $invoice->type_id = $data['type_id'];
                 $invoice->amount_to_pay = $data['amount_to_pay'];
                 $invoice->comment = $data['comment'];
