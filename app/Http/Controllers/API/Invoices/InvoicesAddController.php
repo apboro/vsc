@@ -36,11 +36,6 @@ class InvoicesAddController extends ApiEditController
         'date_from' => 'required|date|before_or_equal:date_to',
         'date_to' => 'required|date|after_or_equal:date_from',
         'amount_to_pay' => 'required|integer',
-        'comment' => 'required_if:type_id,' . InvoiceType::recalculation . '|string',
-
-        'trainings_attended' => 'required_if:type_id,' . InvoiceType::recalculation . '|integer|min:1',
-        'one_time_discount' => 'required_if:type_id,' . InvoiceType::recalculation . '|integer|min:1|max:100',
-        'recalc_method' => 'required_if:type_id,' . InvoiceType::recalculation . '|integer|exists:dictionary_invoice_types,id',
     ];
 
     protected array $titles = [
@@ -189,6 +184,13 @@ class InvoicesAddController extends ApiEditController
         }
 
         $data = $this->getData($request);
+
+        if ($data['type_id'] === InvoiceType::recalculation) {
+            $this->rules['comment'] = 'required|string';
+            $this->rules['trainings_attended'] = 'required|integer|min:0';
+            $this->rules['one_time_discount'] = 'required|integer|min:0|max:100';
+            $this->rules['recalc_method'] = 'required|integer|exists:dictionary_invoice_types,id';
+        }
 
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
             return APIResponse::validationError($errors);

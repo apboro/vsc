@@ -65,7 +65,7 @@ class InvoicesListController extends ApiController
                 'amount_to_pay' => $invoice->amount_to_pay,
                 'amount_paid' => $invoice->amount_paid,
                 'status' => $invoice->status->name,
-                'payment_status' => $invoice->paymentStatus->name,
+                'payment_status' => $invoice->paymentStatus->name ?? null,
                 'paid_at' => $invoice->paid_at ? $invoice->paid_at->format('d.m.Y') : null,
                 'payment_type' => $invoice->paymentType->name ?? null,
                 'comment' => $invoice->comment,

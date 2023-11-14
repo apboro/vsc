@@ -5,7 +5,7 @@
         <span v-if="isEmpty" class="input-dropdown__value"
               :class="{'input-dropdown__value-placeholder': isEmpty && !hasNull, 'input-dropdown__value-small': small}"
               @click="toggle">{{ placeholder }}</span>
-        <span v-else-if="!multi" class="input-dropdown__value" :class="{'input-dropdown__value-small': small}" :title="value" @click="toggle">{{ value }}</span>
+        <span v-else-if="!multi" class="input-dropdown__value" :class="{'input-dropdown__value-small': small}" v-html="value" :title="value" @click="toggle"></span>
         <div v-else class="input-dropdown__values" @click="toggle">
             <span class="input-dropdown__values-item" v-for="(val, key) in selectedValues" :key="key"
             >{{ val['value'] }}
