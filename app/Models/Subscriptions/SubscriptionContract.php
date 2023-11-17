@@ -67,6 +67,44 @@ class SubscriptionContract extends Model implements Statusable
     }
 
     /**
+     * Calculate amount for recalculation type invoice
+     * @param Carbon $dateFrom
+     * @param Carbon $dateTo
+     *
+     * @return int
+     */
+    public function calculateRecalculationInvoiceTotal(Carbon $dateFrom, Carbon $dateTo): int
+    {
+        $serviceSchedule = $this->subscription->service->schedule;
+        $schedule = [
+            0 => $serviceSchedule->mon,
+            1 => $serviceSchedule->tue,
+            2 => $serviceSchedule->wed,
+            3 => $serviceSchedule->thu,
+            4 => $serviceSchedule->fri,
+            5 => $serviceSchedule->sat,
+            6 => $serviceSchedule->sun,
+        ];
+        $weekdaysCount = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
+
+        while ($dateFrom->lte($dateTo)) {
+            $currDay = $dateFrom->dayOfWeek - 1;
+            if ($currDay === -1) $currDay = 6;
+
+            $weekdaysCount[$currDay]++;
+            $dateFrom->addDay();
+        }
+
+        $trainingsCount = 0;
+
+        for ($i = 0; $i < 7; $i++ ) {
+            $trainingsCount += $weekdaysCount[$i] * $schedule[$i];
+        }
+
+        return ceil($trainingsCount * $this->subscription->service->training_price);
+    }
+
+    /**
      * Subscription contract status.
      *
      * @return  HasOne

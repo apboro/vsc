@@ -101,11 +101,10 @@ class InvoicesAddController extends ApiEditController
             'comment' => $invoice->comment,
 
             'trainings_attended' => $invoice->trainings_attended,
-            'one_time_discount' => $invoice->one_time_discount,
+            'one_time_discount' => $invoice->one_time_discount ?? 0,
             // Стоимость занятия при перерасчете: базовая или перерасчетная
             'recalc_method' => $invoice->recalc_method ?? InvoiceType::recalculation,
             'amount_to_pay' => $invoice->amount_to_pay,
-//            'pay_with_account' => $invoice->transactions()->count() > 0,
 
             'paid_from_account' => PriceConverter::storeToPrice($invoice->transactions()->sum('amount')),
         ];
@@ -132,6 +131,16 @@ class InvoicesAddController extends ApiEditController
                         $trainingPriceRecalc = $service->training_return_price;
                         $discount = $c->discount;
 
+                        $schedule = [
+                            0 => $service->schedule->mon ?? 0,
+                            1 => $service->schedule->tue ?? 0,
+                            2 => $service->schedule->wed ?? 0,
+                            3 => $service->schedule->thu ?? 0,
+                            4 => $service->schedule->fri ?? 0,
+                            5 => $service->schedule->sat ?? 0,
+                            6 => $service->schedule->sun ?? 0,
+                        ];
+
                         $total = $c->calculateBaseInvoiceTotal();
                         return [
                             'id' => $c->id,
@@ -142,6 +151,7 @@ class InvoicesAddController extends ApiEditController
                             'training_price_recalc' => $trainingPriceRecalc,
                             'discount' => $discount->name ?? 'Нет',
                             'total_price' => $total,
+                            'schedule' => $schedule,
                         ];
                     })
                 ];
@@ -193,6 +203,9 @@ class InvoicesAddController extends ApiEditController
         }
 
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
+            if (array_key_exists('comment', $errors)) {
+                $errors['comment'] = ['Поле комментарий обязательно к заполнению, когда выбран тип счета - перерасчет'];
+            }
             return APIResponse::validationError($errors);
         }
 

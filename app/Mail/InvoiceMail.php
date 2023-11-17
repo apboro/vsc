@@ -30,7 +30,7 @@ class InvoiceMail extends Mailable
      *
      * @return $this
      */
-    public function build(): SubscriptionContractFillLinkMail
+    public function build(): InvoiceMail
     {
         $textView = 'mail.subscriptions.contract.contract_single';
 
