@@ -7,6 +7,8 @@ use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Mail\SubscriptionContractMail;
 use App\Models\Clients\Client;
+use App\Models\Dictionaries\InvoiceStatus;
+use App\Models\Dictionaries\InvoiceType;
 use App\Models\Dictionaries\SubscriptionContractStatus;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Subscriptions\SubscriptionContract;
@@ -214,11 +216,25 @@ class SubscriptionsContractAcceptController extends ApiEditController
 
         $contract->save();
 
-        if($isCreatingNew) {
+        if ($isCreatingNew) {
             // Assign contract number
             DB::transaction(function () use ($contract, $current) {
                 $contract->number = SubscriptionContract::getNewNumber($current->organizationId());
                 $contract->save();
+
+                //  Create a recalculation type invoice from current date to the end of month
+                $moderationRequired = $contract->subscription->client->account->amount > 0;
+                $lastDayOfThisMonth = new Carbon('last day of this month');
+
+                $contract->invoices()->create([
+                    'date_from' => $contract->start_at,
+                    'date_to' => $lastDayOfThisMonth,
+                    'moderation_required' => $moderationRequired,
+                    'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,
+                    'type_id' => InvoiceType::recalculation,
+                    'amount_to_pay' => $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth),
+                    'comment' => 'Автоматический созданный счет по контракту ' . $contract->id,
+                ]);
             });
             // send a link to client
             try {

@@ -52,7 +52,7 @@ class CreateInvoicesJob implements ShouldQueue
 
             try {
                 $contract->invoices()->create([
-                    'date_from' => $contract->start_at > $firstDayOfLastMonth ? $contract->start_at : $firstDayOfLastMonth,
+                    'date_from' => $firstDayOfLastMonth,
                     'date_to' => $lastDayOfLastMonth,
                     'moderation_required' => $moderationRequired,
                     'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,

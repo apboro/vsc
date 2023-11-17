@@ -61,7 +61,7 @@
             :form="update_form"
             :save-button-caption="'Сохранить'"
         >
-            <GuiContainer w-500px>
+            <GuiContainer w-700px>
                 <FormDate :form="update_form" :name="'created_at'" disabled/>
 
                 <FormString :form="update_form" :name="'client'" disabled/>
@@ -82,8 +82,8 @@
                             <span class="input-field__title" style="padding-left: 50%">По</span>
                         </div>
                         <div style="display: flex">
-                            <FormDate hide-title :form="update_form" :name="'date_from'" :disabled="invoiceType === 1"/>
-                            <FormDate hide-title :form="update_form" :name="'date_to'" :disabled="invoiceType === 1"/>
+                            <FormDate hide-title :form="update_form" :name="'date_from'" :disabled="!invoiceType || invoiceType === 1"/>
+                            <FormDate hide-title :form="update_form" :name="'date_to'" :disabled="!invoiceType || invoiceType === 1"/>
                         </div>
                     </div>
                 </FieldWrapper>
@@ -105,21 +105,22 @@
                     </template>
                     <template v-else-if="invoiceType === 2">
                         <br>
-                        <GuiText>Всего занятий за период: {{ selectedContract['trainings_count'] }}</GuiText>
+<!--                        <GuiText>Всего занятий за период: {{ selectedContract['trainings_count'] }}</GuiText>-->
+                        <GuiText>Всего занятий за период: {{ trainingsCountForSelectedPeriod }}</GuiText>
                         <br>
                         <FormNumber :form="update_form" :name="'trainings_attended'" :max="selectedContract['trainings_count']" :min="0"/>
                         <br>
                         <FormNumber :form="update_form" :name="'one_time_discount'" :min="0" :max="100"/>
                         <br>
                         <GuiText>
-                            Стоимость за 4 занятия по базовой ставке: {{ recalcPriceTotalAmount }} руб.
+                            Стоимость за {{ trainingsCountForSelectedPeriod }} занятия по базовой ставке: {{ recalcPriceTotalAmount }} руб.
                             <a href="" @click.prevent="update_form.values['recalc_method'] = 1">
                                 {{ recalcMethod === 1 ? 'Применено' : 'Применить' }}
                             </a>
                         </GuiText>
                         <br>
                         <GuiText>
-                            Стоимость за 4 занятия с учетом перерасчета: {{ basePriceTotalAmount }} руб.
+                            Стоимость за {{ trainingsCountForSelectedPeriod }} занятия с учетом перерасчета: {{ basePriceTotalAmount }} руб.
                             <a href="" @click.prevent="update_form.values['recalc_method'] = 2">
                                 {{ recalcMethod === 2 ? 'Применено' : 'Применить' }}
                             </a>
@@ -207,7 +208,11 @@ export default {
                 this.update_form.values['amount_to_pay'] = this.selectedContract['total_price']
             }
 
-            this.updateSelectedDates(newVal)
+            try {
+                this.updateSelectedDates(newVal)
+            } catch (e) {
+                this.$toast.error(e)
+            }
         },
         selectedContract(newVal, oldVal) {
             if (newVal) {
@@ -217,7 +222,11 @@ export default {
                     this.update_form.values['amount_to_pay'] = (this.recalcMethod === 1 ? this.basePriceTotalAmount : this.recalcPriceTotalAmount)
                 }
             }
-            this.updateSelectedDates(this.invoiceType)
+            try {
+                this.updateSelectedDates(this.invoiceType)
+            } catch (e) {
+                this.$toast.error(e)
+            }
         },
         recalcMethod(newVal) {
             if (this.selectedContract) {
@@ -302,7 +311,42 @@ export default {
         },
         recalcMethod() {
             return this.update_form.values['recalc_method']
-        }
+        },
+        trainingsCountForSelectedPeriod() {
+            let fromDate = this.update_form.values['date_from']
+            let toDate = this.update_form.values['date_to']
+
+            //  выходим, если не выбраны даты или контракт
+            if (!fromDate || !toDate || !this.selectedContract) {
+                return
+            }
+            //  создаем Date объекты
+            fromDate = new Date(fromDate)
+            toDate = new Date(toDate)
+            //  считаем количество дней недели за период
+            let weekDaysCount = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, }
+
+            while (fromDate <= toDate) {
+                //  счет начинается с воскресенья
+                let currentDay = fromDate.getDay() - 1
+                if (currentDay === -1) currentDay = 6
+
+                weekDaysCount[currentDay] += 1
+                fromDate.setDate(fromDate.getDate() + 1)
+            }
+            //  считаем количество тренировок за период
+            let count = 0
+            console.log(this.selectedContract['schedule'])
+            for (let i = 0; i < 7; i++) {
+                console.log(weekDaysCount[i], this.selectedContract['schedule'][i])
+                count += weekDaysCount[i] * this.selectedContract['schedule'][i]
+            }
+
+            //  обновляем значение в поле "Занятий посещено"
+            this.update_form.values['trainings_attended'] = count
+
+            return count
+        },
     },
 
     data: () => ({
@@ -374,12 +418,13 @@ export default {
         updateSelectedDates(invoiceType) {
             //  базовый счет
             if (invoiceType === 1) {
-                //  ставим фиксированные даты - с даты начала договора или первого дня прошедшего месяца по последний день прошедшего месяца
+                //  Если контракт заключен ранее первого дня последнего месяца базовый счет создать нельзя
                 if (this.selectedContract['start_at'] > this.update_form.payload['first_day_of_last_month']) {
-                    this.update_form.values['date_from'] = this.selectedContract['start_at']
-                } else {
-                    this.update_form.values['date_from'] = this.update_form.payload['first_day_of_last_month']
+                    throw new Error('Нельзя создать базовый счет для этого контракта. Контракт заключен позднее первого дня прошедшего месяца.')
                 }
+
+                //  ставим фиксированные даты - с даты начала договора или первого дня прошедшего месяца по последний день прошедшего месяца
+                this.update_form.values['date_from'] = this.update_form.payload['first_day_of_last_month']
                 this.update_form.values['date_to'] = this.update_form.payload['last_day_of_last_month']
             }
         },
