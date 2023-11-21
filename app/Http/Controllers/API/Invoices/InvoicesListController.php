@@ -65,10 +65,12 @@ class InvoicesListController extends ApiController
                 'amount_to_pay' => $invoice->amount_to_pay,
                 'amount_paid' => $invoice->amount_paid,
                 'status' => $invoice->status->name,
+                'status_id' => $invoice->status_id,
                 'payment_status' => $invoice->paymentStatus->name ?? null,
                 'paid_at' => $invoice->paid_at ? $invoice->paid_at->format('d.m.Y') : null,
                 'payment_type' => $invoice->paymentType->name ?? null,
                 'comment' => $invoice->comment,
+                'delete_comment' => $invoice->delete_comment,
 
                 'can_edit' => $invoice->isEditable() && $current->can('invoices.edit'),
                 'can_remove' => $invoice->isEditable() && $current->can('invoices.remove'),
@@ -81,6 +83,7 @@ class InvoicesListController extends ApiController
             $invoices,
             [
                 '№ Счета',
+                'Статус счета',
                 'Дата выставления',
                 'Подписка / Занимающийся',
                 'Период',

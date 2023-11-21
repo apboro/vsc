@@ -196,8 +196,8 @@ class InvoicesAddController extends ApiEditController
         $data = $this->getData($request);
 
         if ($data['type_id'] === InvoiceType::recalculation) {
-            $this->rules['comment'] = 'required|string';
             $this->rules['trainings_attended'] = 'required|integer|min:0';
+            $this->rules['comment'] = 'required|string';
             $this->rules['one_time_discount'] = 'required|integer|min:0|max:100';
             $this->rules['recalc_method'] = 'required|integer|exists:dictionary_invoice_types,id';
         }
@@ -217,7 +217,14 @@ class InvoicesAddController extends ApiEditController
                     $invoice = Invoice::query()->find($data['id']);
                     //  Функция редактирования доступна только для неоплаченных счетов
                     if (!$invoice->isEditable()) {
-                        throw new BadRequestHttpException();
+                        throw new BadRequestHttpException('Можно отредактировать только неоплаченный счет.');
+                    }
+                    if (
+                        $data['trainings_attended'] >
+                        $invoice->contract
+                            ->calculateTrainingsCountForPeriod(Carbon::parse($data['date_from']), Carbon::parse($data['date_to']))
+                    ) {
+                        throw new BadRequestHttpException('Колличество тренировок не может превышать фактического количества.');
                     }
                 } else {
                     //  Создаем новый счет
@@ -288,7 +295,7 @@ class InvoicesAddController extends ApiEditController
                 }
             });
         } catch (BadRequestHttpException $e) {
-            return APIResponse::error('Можно отредактировать только неоплаченный счет.');
+            return APIResponse::error($e->getMessage());
         }
         catch (Exception $exception) {
             return APIResponse::error($exception->getMessage());
