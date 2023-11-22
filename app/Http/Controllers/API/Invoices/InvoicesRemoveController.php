@@ -16,7 +16,7 @@ class InvoicesRemoveController extends ApiController
     public function remove(Request $request): JsonResponse
     {
         /** @var Invoice|null $invoice */
-        $invoice = Invoice::query()->find($request->input('id'));
+        $invoice = Invoice::query()->find($request->input('data.id'));
 
         if (!$invoice) {
             return APIResponse::notFound('Счет не найден.');
@@ -26,13 +26,14 @@ class InvoicesRemoveController extends ApiController
             return APIResponse::forbidden('Нельзя удалить отправленный или оплаченный счет.');
         }
 
-        DB::transaction(function () use ($invoice) {
+        DB::transaction(function () use ($invoice, $request) {
             /** @var AccountTransaction $transaction */
             foreach ($invoice->transactions as $transaction) {
                 $invoice->contract->subscription->client->account->detachTransaction($transaction);
             }
 
             $invoice->status_id = InvoiceStatus::cancelled;
+            $invoice->delete_comment = $request->input('data.delete_comment');
             $invoice->save();
         });
 

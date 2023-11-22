@@ -16,6 +16,9 @@
                         {{ invoice['id'] }}
                     </ListTableCell>
                     <ListTableCell>
+                        {{ invoice['status'] }}
+                    </ListTableCell>
+                    <ListTableCell>
                         {{ invoice['created_at'] }}
                     </ListTableCell>
                     <ListTableCell>
@@ -31,7 +34,7 @@
                         {{ invoice['amount_to_pay'] }}
                     </ListTableCell>
                     <ListTableCell>
-                        {{ invoice['payment_status'] }}<br>
+                        {{ invoice['status_id'] === 5 ? '-' : invoice['payment_status'] }}<br>
                         {{ invoice['paid_at'] }}
                     </ListTableCell>
                     <ListTableCell>
@@ -113,14 +116,14 @@
                         <FormNumber :form="update_form" :name="'one_time_discount'" :min="0" :max="100"/>
                         <br>
                         <GuiText>
-                            Стоимость за {{ trainingsCountForSelectedPeriod }} занятия по базовой ставке: {{ recalcPriceTotalAmount }} руб.
+                            Стоимость за {{ trainingsAttended }} занятия по базовой ставке: {{ recalcPriceTotalAmount }} руб.
                             <a href="" @click.prevent="update_form.values['recalc_method'] = 1">
                                 {{ recalcMethod === 1 ? 'Применено' : 'Применить' }}
                             </a>
                         </GuiText>
                         <br>
                         <GuiText>
-                            Стоимость за {{ trainingsCountForSelectedPeriod }} занятия с учетом перерасчета: {{ basePriceTotalAmount }} руб.
+                            Стоимость за {{ trainingsAttended }} занятия с учетом перерасчета: {{ basePriceTotalAmount }} руб.
                             <a href="" @click.prevent="update_form.values['recalc_method'] = 2">
                                 {{ recalcMethod === 2 ? 'Применено' : 'Применить' }}
                             </a>
@@ -138,9 +141,27 @@
 
         <PopUp
             ref="comment_show"
-            :message="commentToShow"
-        />
+        >
+            <div>
+                <div style="padding-bottom: 15px" v-if="commentsToShow['comment']">
+                    <GuiHeading>Комментарий при создании:</GuiHeading>
+                    <GuiText>{{ commentsToShow['comment'] }}</GuiText>
+                </div>
+                <div v-if="commentsToShow['delete_comment']">
+                    <GuiHeading>Комментарий при аннулировании:</GuiHeading>
+                    <GuiText>{{ commentsToShow['delete_comment'] }}</GuiText>
+                </div>
+            </div>
+        </PopUp>
 
+        <FormPopUp
+            ref="popup_delete"
+            :title="'Аннулировать счёт?'"
+            :save-button-caption="'Аннулировать'"
+            :form="delete_form"
+        >
+            <FormText :form="delete_form" :name="'delete_comment'"/>
+        </FormPopUp>
     </LoadingProgress>
 </template>
 
@@ -342,8 +363,10 @@ export default {
                 count += weekDaysCount[i] * this.selectedContract['schedule'][i]
             }
 
-            //  обновляем значение в поле "Занятий посещено"
-            this.update_form.values['trainings_attended'] = count
+            //  обновляем значение в поле "Занятий посещено" если оно не определено
+            if (!this.trainingsAttended) {
+                this.update_form.values['trainings_attended'] = count
+            }
 
             return count
         },
@@ -352,8 +375,9 @@ export default {
     data: () => ({
         list: list('/api/invoices/list'),
         update_form: form('/api/invoices/get', '/api/invoices/save'),
+        delete_form: form(null, '/api/invoices/remove'),
         invoiceId: null,
-        commentToShow: null,
+        commentsToShow: {},
     }),
 
     props: {
@@ -380,14 +404,13 @@ export default {
                 })
         },
         removeInvoice(invoice) {
-            this.deleteEntry(
-                'Удалить счет?',
-                '/api/invoices/remove',
-                { id: invoice['id'] }
-            )
-                .then(() => {
-                    this.list.reload()
-                });
+            this.delete_form.set('delete_comment', null, 'required', 'Комментарий', true)
+            this.delete_form.set('id', invoice['id'], null, null, true)
+            this.delete_form.params
+            this.delete_form.load()
+            this.$refs.popup_delete.show().then(() => {
+                this.list.reload()
+            })
         },
         payFromAccount(invoice) {
             this.processEntry(
@@ -401,7 +424,10 @@ export default {
                 });
         },
         showComment(invoice) {
-            this.commentToShow = invoice['comment']
+            this.commentsToShow = {
+                comment: invoice['comment'],
+                delete_comment: invoice['delete_comment']
+            }
             this.$refs.comment_show.show()
         },
         resendInvoice(invoice) {

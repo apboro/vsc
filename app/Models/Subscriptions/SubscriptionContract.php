@@ -68,12 +68,27 @@ class SubscriptionContract extends Model implements Statusable
 
     /**
      * Calculate amount for recalculation type invoice
+     *
      * @param Carbon $dateFrom
      * @param Carbon $dateTo
      *
      * @return int
      */
     public function calculateRecalculationInvoiceTotal(Carbon $dateFrom, Carbon $dateTo): int
+    {
+        $trainingsCount = $this->calculateTrainingsCountForPeriod($dateFrom, $dateTo);
+
+        return ceil($trainingsCount * $this->subscription->service->training_price);
+    }
+
+    /**
+     * Calculate trainings count for selected period
+     *
+     * @param Carbon $dateFrom
+     * @param Carbon $dateTo
+     * @return int
+     */
+    public function calculateTrainingsCountForPeriod(Carbon $dateFrom, Carbon $dateTo): int
     {
         $serviceSchedule = $this->subscription->service->schedule;
         $schedule = [
@@ -101,7 +116,7 @@ class SubscriptionContract extends Model implements Statusable
             $trainingsCount += $weekdaysCount[$i] * $schedule[$i];
         }
 
-        return ceil($trainingsCount * $this->subscription->service->training_price);
+        return $trainingsCount;
     }
 
     /**

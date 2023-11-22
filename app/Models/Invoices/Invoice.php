@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Mail;
  * @property int $id
  *
  * @property string|null $comment
+ * @property string|null $delete_comment
  *
  * @property Carbon $date_from
  * @property Carbon $date_to
