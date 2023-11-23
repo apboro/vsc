@@ -249,7 +249,11 @@ class SubscriptionsListController extends ApiController
                 $query->where('service_id', $filters['service_id']);
             }
             if (!empty($filters['region_id'])) {
-                $query->whereIn('region_id', $filters['region_id']);
+                $query->whereHas('service', function (Builder $q) use ($filters) {
+                    $q->whereHas('trainingBase', function (Builder $q) use ($filters) {
+                        $q->whereIn('region_id', $filters['region_id']);
+                    });
+                });
             }
         }
 
