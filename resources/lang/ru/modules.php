@@ -10,4 +10,7 @@ return [
     'leads' => 'Лиды',
     'services' => 'Услуги',
     'subscriptions' => 'Подписки',
+    'client_comments' => 'Комментарии к клиенту',
+    'account_transactions' => 'Действия по вкладке "Лицевой счет"',
+    'invoices' => 'Счета',
 ];
