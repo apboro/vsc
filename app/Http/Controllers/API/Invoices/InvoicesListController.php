@@ -73,9 +73,9 @@ class InvoicesListController extends ApiController
                 'delete_comment' => $invoice->delete_comment,
 
                 'can_edit' => $invoice->isEditable() && $current->can('invoices.edit'),
-                'can_remove' => $invoice->isEditable() && $current->can('invoices.remove'),
+                'can_remove' => $invoice->isEditable() && $current->can('invoices.delete'),
                 'can_resend' => $invoice->isPayable(),
-                'can_pay_by_account' => $invoice->isPayable() && $current->can('invoices.update'),
+                'can_pay_by_account' => $invoice->isPayable() && $current->can('invoices.edit'),
             ];
         });
 
