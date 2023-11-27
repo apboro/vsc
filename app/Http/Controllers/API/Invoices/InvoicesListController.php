@@ -91,6 +91,12 @@ class InvoicesListController extends ApiController
                 'Статус оплаты / Дата Оплаты',
                 'Сумма платежа',
                 'Способ оплаты',
-            ])->withCookie(cookie($this->rememberKey, $request->getToRemember()));
+            ],
+            null,
+            null,
+            [
+                'can_create' => $current->can('invoices.create'),
+            ]
+        )->withCookie(cookie($this->rememberKey, $request->getToRemember()));
     }
 }
