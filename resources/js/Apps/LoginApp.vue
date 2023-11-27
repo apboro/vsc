@@ -1,29 +1,39 @@
 <template>
-    <div class="login">
-        <div class="login__logo">
-            <!--
-            <div class="login__logo-img">
-                <Logo/>
+    <div>
+        <div style="width: 430px; margin-bottom: 15px">
+            <div style="text-align: center">ОО "ЦЕНТР ШКОЛЬНОГО СПОРТА ВСЕВОЛОЖСКОГО РАЙОНА"</div>
+            <div></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; " >
+                <div>ОГРН 1174700000947</div>
+                <div>ИНН 4703152036</div>
             </div>
-            -->
-            <div class="login__logo-text">
+        </div>
+        <div class="login">
+            <div class="login__logo">
                 <!--
-                <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>
-                <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Всеволожского района»</div>
+                <div class="login__logo-img">
+                    <Logo/>
+                </div>
                 -->
-                <div class="login__logo-text-description">CRM Управление школьным спортом</div>
+                <div class="login__logo-text">
+                    <!--
+                    <div class="login__logo-text-title">Общественная организация «Центр школьного спорта Ленинградской области»</div>
+                    <div class="login__logo-text-description">Общественная организация «Центр школьного спорта Всеволожского района»</div>
+                    -->
+                    <div class="login__logo-text-description">CRM Управление школьным спортом</div>
+                </div>
             </div>
-        </div>
-        <div class="login__divider"></div>
-        <div class="login__form">
-            <FormString :form="form" :name="'login'" :autocomplete="'username'" @keyup.enter="enter" ref="login"/>
-            <FormString :form="form" :name="'password'" :autocomplete="'current-password'" :type="'password'" @keyup.enter="enter" ref="password"/>
-        </div>
-        <div class="login__actions">
-            <GuiButton :color="'blue'" @clicked="login">Войти</GuiButton>
-        </div>
-        <div class="login__actions">
-            <span class="link" @click="forgot">Забыл пароль</span>
+            <div class="login__divider"></div>
+            <div class="login__form">
+                <FormString :form="form" :name="'login'" :autocomplete="'username'" @keyup.enter="enter" ref="login"/>
+                <FormString :form="form" :name="'password'" :autocomplete="'current-password'" :type="'password'" @keyup.enter="enter" ref="password"/>
+            </div>
+            <div class="login__actions">
+                <GuiButton :color="'blue'" @clicked="login">Войти</GuiButton>
+            </div>
+            <div class="login__actions">
+                <span class="link" @click="forgot">Забыл пароль</span>
+            </div>
         </div>
     </div>
 </template>

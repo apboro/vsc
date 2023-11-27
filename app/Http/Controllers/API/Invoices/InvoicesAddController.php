@@ -182,6 +182,10 @@ class InvoicesAddController extends ApiEditController
     {
         $current = Current::get($request);
 
+        if (!$current->can('invoices.create') && !$current->can('invoices.edit')) {
+            return APIResponse::forbidden();
+        }
+
         /** @var Client|null $client */
         $client = Client::query()
             ->with(['user.profile', 'wards.user.profile'])

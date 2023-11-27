@@ -3,8 +3,8 @@
 
         <LayoutFilters>
             <template #search>
-                <GuiActionsMenu :class="'self-align-end'" :title="'Действия'">
-                    <span class="link" @click="editInvoice(null)">Создать счет</span>
+                <GuiActionsMenu v-if="list.payload['can_create']" :class="'self-align-end'" :title="'Действия'">
+                    <span class="link" v-if="list.payload['can_create']" @click="editInvoice(null)">Создать счет</span>
                 </GuiActionsMenu>
             </template>
         </LayoutFilters>
