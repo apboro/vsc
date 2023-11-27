@@ -1,11 +1,11 @@
 <template>
     <div>
         <div style="width: 430px; margin-bottom: 15px">
-            <div style="text-align: center">ОО "ЦЕНТР ШКОЛЬНОГО СПОРТА ВСЕВОЛОЖСКОГО РАЙОНА"</div>
+            <div class="login__logo-text" style="text-align: center; display: block; font-size: 18px">ОО "ЦЕНТР ШКОЛЬНОГО СПОРТА <br> ВСЕВОЛОЖСКОГО РАЙОНА"</div>
             <div></div>
-            <div style="display: flex; align-items: center; justify-content: space-between; " >
-                <div>ОГРН 1174700000947</div>
-                <div>ИНН 4703152036</div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="login__logo-text" style="font-size: 18px">ОГРН 1174700000947</div>
+                <div class="login__logo-text" style="font-size: 18px">ИНН 4703152036</div>
             </div>
         </div>
         <div class="login">
