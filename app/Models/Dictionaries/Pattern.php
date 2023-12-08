@@ -29,6 +29,10 @@ class Pattern extends AbstractDictionary
 
     public const educational = 8;
 
+    public const standard_ip_babayevskiy = 9;
+
+    public const standard_ip_tkachenko = 10;
+
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns';
