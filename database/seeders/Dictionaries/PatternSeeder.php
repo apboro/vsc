@@ -40,6 +40,14 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Образовательный',
                 'pattern' => 'pdf/contracts/subscription_educational_contract',
             ],
+            Pattern::standard_ip_babayevskiy => [
+                'name' => 'Стандартный ИП Бабаевский',
+                'pattern' => 'pdf/contracts/subscription_babayevskiy',
+            ],
+            Pattern::standard_ip_tkachenko => [
+                'name' => 'Стандартный ИП Ткаченко',
+                'pattern' => 'pdf/contracts/subscription_tkachenko',
+            ],
         ],
         PatternLetters::class => [
             PatternLetters::regular => [
