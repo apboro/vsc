@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SubscriptionsContractAcceptController extends ApiEditController
 {
@@ -233,7 +234,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
                     'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,
                     'type_id' => InvoiceType::recalculation,
                     'amount_to_pay' => $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth),
-                    'comment' => 'Автоматический созданный счет по контракту ' . $contract->id,
+                    'comment' => 'Автоматически созданный счет по контракту ' . $contract->id,
                 ]);
             });
             // send a link to client

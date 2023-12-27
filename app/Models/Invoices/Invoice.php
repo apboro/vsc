@@ -9,13 +9,16 @@ use App\Models\Dictionaries\InvoicePaymentStatus;
 use App\Models\Dictionaries\InvoicePaymentType;
 use App\Models\Dictionaries\InvoiceStatus;
 use App\Models\Dictionaries\InvoiceType;
+use App\Models\Payment;
 use App\Models\Subscriptions\SubscriptionContract;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -52,6 +55,7 @@ use Illuminate\Support\Facades\Mail;
  * @property-read InvoiceType $type
  * @property-read InvoicePaymentType|null $paymentType
  * @property-read Collection<AccountTransaction> $transactions
+ * @property-read Payment|null $payment
  */
 class Invoice extends Model
 {
@@ -60,12 +64,26 @@ class Invoice extends Model
         'amount_to_pay', 'amount_paid', 'paid_at',
         'contract_id', 'status_id', 'type_id', 'payment_type_id',
         'comment', 'trainings_attended', 'one_time_discount', 'recalc_method',
-        'payment_status_id',
+        'payment_status_id', 'hash'
     ];
 
     protected $dates = [
         'date_from', 'date_to', 'paid_at'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(static function (self $approvement) {
+
+            $hash = Str::random(16);
+
+            while (Invoice::where('hash', $hash)->exists()) {
+                $hash = Str::random(16);
+            }
+            $approvement->hash = $hash;
+        });
+    }
 
     public function sendToClient()
     {
@@ -164,5 +182,10 @@ class Invoice extends Model
     public function paymentStatus(): BelongsTo
     {
         return $this->belongsTo(InvoicePaymentStatus::class, 'payment_status_id', 'id');
+    }
+
+    public function payment(): HasOne
+    {
+        return $this->hasOne(Payment::class, 'id', 'payment_id');
     }
 }
