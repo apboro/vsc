@@ -227,13 +227,14 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 $moderationRequired = $contract->subscription->client->account->amount > 0;
                 $lastDayOfThisMonth = new Carbon('last day of this month');
 
+                $amountToPay = $contract->invoices()->exists() ? $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth) : $contract->contractData->price ?? $contract->contractData->monthly_price;
                 $contract->invoices()->create([
                     'date_from' => $contract->start_at,
                     'date_to' => $lastDayOfThisMonth,
                     'moderation_required' => $moderationRequired,
                     'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,
                     'type_id' => InvoiceType::recalculation,
-                    'amount_to_pay' => $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth),
+                    'amount_to_pay' => $amountToPay,
                     'comment' => 'Автоматически созданный счет по контракту ' . $contract->id,
                 ]);
             });

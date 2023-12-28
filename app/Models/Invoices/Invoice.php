@@ -186,6 +186,6 @@ class Invoice extends Model
 
     public function payment(): HasOne
     {
-        return $this->hasOne(Payment::class, 'id', 'payment_id');
+        return $this->hasOne(Payment::class, 'invoice_id', 'id');
     }
 }

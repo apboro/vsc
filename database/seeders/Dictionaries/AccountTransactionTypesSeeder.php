@@ -32,6 +32,16 @@ class AccountTransactionTypesSeeder extends GenericSeeder
                 'editable' => true,
                 'deletable' => true,
             ],
+            AccountTransactionType::account_refill_card => [
+                'name' => 'Карта',
+                'sign' => 1,
+                'parent_type_id' => AccountTransactionType::account_refill,
+                'final' => true,
+                'has_reason' => false,
+                'has_reason_date' => false,
+                'editable' => true,
+                'deletable' => true,
+            ],
             AccountTransactionType::account_withdrawal => [
                 'name' => 'Списание со счета',
                 'sign' => 0,
@@ -40,6 +50,16 @@ class AccountTransactionTypesSeeder extends GenericSeeder
             ],
             AccountTransactionType::account_withdrawal_cash => [
                 'name' => 'Наличными',
+                'sign' => -1,
+                'parent_type_id' => AccountTransactionType::account_withdrawal,
+                'final' => true,
+                'has_reason' => false,
+                'has_reason_date' => false,
+                'editable' => true,
+                'deletable' => true,
+            ],
+            AccountTransactionType::account_withdrawal_card => [
+                'name' => 'Карта',
                 'sign' => -1,
                 'parent_type_id' => AccountTransactionType::account_withdrawal,
                 'final' => true,

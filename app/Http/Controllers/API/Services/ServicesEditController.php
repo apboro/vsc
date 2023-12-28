@@ -86,6 +86,7 @@ class ServicesEditController extends ApiEditController
         'daily_price' => 'Стоимость за 1 день, руб',
         'price_deduction_advance' => 'Стоимость услуги за вычетом аванса, руб',
         'requisites_id' => 'Реквизиты для договора',
+        'acquiring_id' => 'Эквайринг',
         'contract_id' => 'Шаблон договора',
         'letter_id' => 'Шаблон письма',
         'schedule_day_mon' => 'Занятия в пн.',
@@ -281,6 +282,7 @@ class ServicesEditController extends ApiEditController
         $service->start_at = Carbon::parse($data['start_at']);
         $service->end_at = Carbon::parse($data['end_at']);
         $service->requisites_id = $data['requisites_id'];
+        $service->acquiring_id = $data['acquiring_id'];
         $service->description = $data['description'];
         $service->date_deposit_funds = $data['date_deposit_funds'];
         $service->advance_payment = $data['advance_payment'];

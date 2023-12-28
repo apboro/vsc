@@ -4,6 +4,7 @@ namespace App\Models\Services;
 
 use App\Helpers\PriceConverter;
 use App\Interfaces\Statusable;
+use App\Models\Dictionaries\Acquiring;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Interfaces\AsDictionary;
 use App\Models\Dictionaries\Letters;
@@ -322,6 +323,11 @@ class Service extends Model implements Statusable, AsDictionary
     public function requisites(): HasOne
     {
         return $this->hasOne(OrganizationRequisites::class, 'id', 'requisites_id');
+    }
+
+    public function acquiring(): HasOne
+    {
+        return $this->hasOne(Acquiring::class, 'id', 'acquiring_id');
     }
 
     /**
