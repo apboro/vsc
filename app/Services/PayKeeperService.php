@@ -21,7 +21,7 @@ class PayKeeperService
         $acquiring = $this->service->acquiring;
         $this->login = $acquiring->login;
         $this->password = $acquiring->password;
-        $this->server = $acquiring->server;
+        $this->server = $acquiring->host;
     }
 
     /**

@@ -58,8 +58,8 @@ class AccountTransactionTypesSeeder extends GenericSeeder
                 'editable' => true,
                 'deletable' => true,
             ],
-            AccountTransactionType::account_withdrawal_card => [
-                'name' => 'Карта',
+            AccountTransactionType::account_withdrawal_pay_for_service => [
+                'name' => 'Оплата услуги',
                 'sign' => -1,
                 'parent_type_id' => AccountTransactionType::account_withdrawal,
                 'final' => true,

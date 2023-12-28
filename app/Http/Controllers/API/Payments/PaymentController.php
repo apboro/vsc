@@ -65,7 +65,7 @@ class PaymentController extends Controller
             return response("OK $hash", 200);
         }
         $key = md5($request->id
-            . number_format($invoice->amount_to_pay, 2)
+            . number_format($invoice->amount_to_pay, 2,".", "")
             . $invoice->contract->contractData->getClientFullName()
             . $invoice->id
             . $secret);
@@ -93,7 +93,7 @@ class PaymentController extends Controller
         ]));
 
         $account->attachTransaction(new AccountTransaction([
-            'type_id' => AccountTransactionType::account_withdrawal_card,
+            'type_id' => AccountTransactionType::account_withdrawal_pay_for_service,
             'amount' => $request->sum,
             'timestamp' => now(),
             'invoice_id' => $invoice->id,

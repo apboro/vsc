@@ -59,7 +59,7 @@ class CreateInvoicesJob implements ShouldQueue
                     'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,
                     'type_id' => InvoiceType::base,
                     'amount_to_pay' => $contract->calculateBaseInvoiceTotal(),
-                    'comment' => 'Автоматический созданный счет по контракту ' . $contract->id,
+                    'comment' => 'Автоматически созданный счет по контракту ' . $contract->id,
                 ]);
             } catch (Exception $e) {
 

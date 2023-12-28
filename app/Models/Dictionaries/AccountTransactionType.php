@@ -38,7 +38,7 @@ class AccountTransactionType extends AbstractDictionary
     /** @var int The id of partner account withdrawal by cash. Final. */
     public const account_withdrawal_cash = 4;
     /** @var int The id of partner account withdrawal by cash. Final. */
-    public const account_withdrawal_card = 20;
+    public const account_withdrawal_pay_for_service = 20;
 
 
     /** @var string Referenced table name. */
