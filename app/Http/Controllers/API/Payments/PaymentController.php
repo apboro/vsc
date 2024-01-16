@@ -50,7 +50,6 @@ class PaymentController extends Controller
     {
         $invoice = Invoice::query()
             ->where('id', $request->orderid)
-            ->where('status_id','<>', InvoiceStatus::paid)
             ->with([
                 'contract',
                 'contract.subscription',
@@ -61,7 +60,7 @@ class PaymentController extends Controller
         $secret = $invoice->contract->subscription->service->acquiring->secret;
         $hash = md5($request->id . $secret);
 
-        if (!$invoice){
+        if ($invoice->status_id === InvoicePaymentStatus::paid){
             return response("OK $hash", 200);
         }
         $key = md5($request->id

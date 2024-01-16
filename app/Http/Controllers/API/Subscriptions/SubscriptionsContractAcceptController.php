@@ -216,10 +216,11 @@ class SubscriptionsContractAcceptController extends ApiEditController
         }
 
         $contract->save();
+        $invoice = null;
 
         if ($isCreatingNew) {
             // Assign contract number
-            DB::transaction(function () use ($contract, $current) {
+            DB::transaction(function () use ($contract, $current, &$invoice) {
                 $contract->number = SubscriptionContract::getNewNumber($current->organizationId());
                 $contract->save();
 
@@ -228,7 +229,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 $lastDayOfThisMonth = new Carbon('last day of this month');
 
                 $amountToPay = $contract->invoices()->exists() ? $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth) : $contract->contractData->price ?? $contract->contractData->monthly_price;
-                $contract->invoices()->create([
+                $invoice = $contract->invoices()->create([
                     'date_from' => $contract->start_at,
                     'date_to' => $lastDayOfThisMonth,
                     'moderation_required' => $moderationRequired,
@@ -246,6 +247,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 throw $exception;
             }
             $contract->subscription->setStatus(SubscriptionStatus::sent);
+            $invoice->status_id = InvoiceStatus::sent;
         }
 
         return APIResponse::success($isCreatingNew ? 'Договор на оказание услуг сформирован и отправлен клиенту' : 'Данные договора обновлены');
