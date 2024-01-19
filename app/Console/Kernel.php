@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
     {
        $schedule->job(CreateInvoicesJob::class)->dailyAt('00:10');
        $schedule->job(SendInvoicesJob::class)->dailyAt('10:00');
+       $schedule->command('telescope:prune --hours=56')->daily();
     }
 
     /**

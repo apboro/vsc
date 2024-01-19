@@ -59,6 +59,7 @@ class ServicesEditController extends ApiEditController
         'email' => 'nullable|email',
         'phones' => 'min:1',
         'phones.*' => 'required',
+        'acquiring_id' => 'required'
     ];
 
     protected array $titles = [
@@ -149,6 +150,7 @@ class ServicesEditController extends ApiEditController
                 'start_at' => $service->start_at ? $service->start_at->format('Y-m-d') : null,
                 'end_at' => $service->end_at ? $service->end_at->format('Y-m-d') : null,
                 'requisites_id' => $service->requisites_id,
+                'acquiring_id' => $service->acquiring?->id,
                 'description' => $service->description,
                 'price' => $service->price,
                 'date_deposit_funds' => $service->date_deposit_funds,

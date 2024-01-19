@@ -39,6 +39,7 @@
             <GuiValue :title="'Себестоимость за 1 занятие, руб'">{{ data['training_price'] }}</GuiValue>
             <GuiValue :title="'Стоимость за 1 занятие при перерасчете, руб'">{{ data['training_return_price'] }}</GuiValue>
             <GuiValue :title="'Реквизиты для договора'">{{ data['requisites'] ? data['requisites'] : '—' }}</GuiValue>
+            <GuiValue :title="'Эквайринг'">{{ data['acquiring'] ?? '—' }}</GuiValue>
         </GuiContainer>
     </div>
 </template>

@@ -161,8 +161,8 @@ trait EditableDictionaries
             'item_name' => 'настройки',
             'validation' => [
                 'name' => 'required',
-                'bank' => 'required',
-                'host' => 'required',
+                'bank_id' => 'required',
+                'host' => 'nullable',
                 'login' => 'nullable',
                 'password' => 'nullable',
                 'token' => 'nullable',
@@ -170,7 +170,7 @@ trait EditableDictionaries
             ],
             'titles' => [
                 'name' => 'Название',
-                'bank' => 'Банк',
+                'bank_name' => 'Банк',
                 'host' => 'Сервер',
                 'login' => 'Логин',
                 'password' => 'Пароль',
@@ -179,14 +179,15 @@ trait EditableDictionaries
             ],
             'fields' => [
                 'name' => 'string',
-                'bank' => 'string',
+                'bank_name' => null,
+                'bank_id' => 'dictionary|banks|Банк',
                 'host' => 'string',
                 'login' => 'string',
                 'password' => 'string',
                 'token' => 'string',
                 'secret' => 'string',
             ],
-            'hide' => ['password', 'secret', 'host', 'login', 'token'],
+            'hide' => ['password', 'secret', 'host', 'login', 'token', 'bank_id'],
         ],
 
     ];

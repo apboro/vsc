@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account\Account;
 use App\Models\Account\AccountTransaction;
 use App\Models\Dictionaries\AccountTransactionType;
+use App\Models\Dictionaries\Bank;
 use App\Models\Dictionaries\InvoicePaymentStatus;
 use App\Models\Dictionaries\InvoicePaymentType;
 use App\Models\Dictionaries\InvoiceStatus;
@@ -14,12 +15,38 @@ use App\Models\Dictionaries\ServiceStatus;
 use App\Models\Invoices\Invoice;
 use App\Models\Payment;
 use App\Services\PayKeeperService;
+use App\Services\YoukassaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use YooKassa\Client;
+use YooKassa\Common\Exceptions\ApiConnectionException;
+use YooKassa\Common\Exceptions\ApiException;
+use YooKassa\Common\Exceptions\AuthorizeException;
+use YooKassa\Common\Exceptions\BadApiRequestException;
+use YooKassa\Common\Exceptions\ExtensionNotFoundException;
+use YooKassa\Common\Exceptions\ForbiddenException;
+use YooKassa\Common\Exceptions\InternalServerError;
+use YooKassa\Common\Exceptions\NotFoundException;
+use YooKassa\Common\Exceptions\ResponseProcessingException;
+use YooKassa\Common\Exceptions\TooManyRequestsException;
+use YooKassa\Common\Exceptions\UnauthorizedException;
 
 class PaymentController extends Controller
 {
+    /**
+     * @throws NotFoundException
+     * @throws ApiException
+     * @throws ResponseProcessingException
+     * @throws BadApiRequestException
+     * @throws ExtensionNotFoundException
+     * @throws AuthorizeException
+     * @throws InternalServerError
+     * @throws ForbiddenException
+     * @throws TooManyRequestsException
+     * @throws UnauthorizedException
+     * @throws ApiConnectionException
+     */
     public function makePayment(Request $request)
     {
         $invoice = Invoice::where('hash', $request->hash)
@@ -27,86 +54,36 @@ class PaymentController extends Controller
                 'contract',
                 'contract.subscription',
                 'contract.contractData',
-                'contract.subscription.service'
+                'contract.subscription.service',
+                'contract.subscription.service.acquiring',
+                'contract.subscription.service.acquiring.bank',
             ])->first();
 
-        $external_invoice = (new PayKeeperService($invoice->contract->subscription->service))->getInvoice($invoice)['body'];
+        $service = $invoice->contract->subscription->service;
+
+        if ($service->acquiring->bank->id === Bank::TOCHKA) {
+            $response = (new PayKeeperService($service))
+                ->createPayment($invoice);
+            $payment_url = $response['invoice_url'];
+            $external_id = $response['invoice_id'];
+        }
+
+        if ($service->acquiring->bank->id === Bank::SBERBANK) {
+            $response = (new YoukassaService($service))
+                ->createPayment($invoice);
+            $payment_url = $response->getConfirmation()->getConfirmationUrl();
+            $external_id = $response->id;
+        }
 
         Payment::create([
-            'gate' => 'tochka',
+            'gate' => $service->acquiring->bank->name,
             'invoice_id' => $invoice->id,
             'amount' => $invoice->contract->contractData->price ?? $invoice->contract->contractData->monthly_price,
             'status_id' => InvoicePaymentStatus::created,
-            'external_invoice_id' => $external_invoice['invoice_id'],
+            'external_payment_id' => $external_id ?? null,
         ]);
 
-        return redirect($external_invoice['invoice_url']);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function webhook(Request $request)
-    {
-        $invoice = Invoice::query()
-            ->where('id', $request->orderid)
-            ->with([
-                'contract',
-                'contract.subscription',
-                'contract.contractData',
-                'contract.subscription.service',
-                'contract.subscription.client.account'
-            ])->first();
-        $secret = $invoice->contract->subscription->service->acquiring->secret;
-        $hash = md5($request->id . $secret);
-
-        if ($invoice->status_id === InvoicePaymentStatus::paid){
-            return response("OK $hash", 200);
-        }
-        $key = md5($request->id
-            . number_format($invoice->amount_to_pay, 2,".", "")
-            . $invoice->contract->contractData->getClientFullName()
-            . $invoice->id
-            . $secret);
-        if ($key !== $request->key) {
-            Log::channel('paykeeper')->error('Hash mismatch', ['request' => $request, 'invoice' => $invoice]);
-            exit;
-        }
-        Payment::query()->where(['invoice_id' => $invoice->id])
-            ->update([
-                'external_payment_id' => $request->id,
-                'status_id' => InvoicePaymentStatus::paid,
-            ]);
-
-        $account = $invoice->contract->subscription->client->account;
-        if (!$account->id){
-            $account = $invoice->contract->subscription->client->account()->create();
-        }
-
-        $account->attachTransaction(new AccountTransaction([
-            'type_id' => AccountTransactionType::account_refill_card,
-            'amount' => $request->sum,
-            'timestamp' => now(),
-            'invoice_id' => $invoice->id,
-            'comments' => 'Пополнение для оплаты счёта № ' . $invoice->id,
-        ]));
-
-        $account->attachTransaction(new AccountTransaction([
-            'type_id' => AccountTransactionType::account_withdrawal_pay_for_service,
-            'amount' => $request->sum,
-            'timestamp' => now(),
-            'invoice_id' => $invoice->id,
-            'comments' => 'Оплата счёта № ' . $invoice->id,
-        ]));
-
-        $invoice->amount_paid = $request->sum;
-        $invoice->paid_at = now();
-        $invoice->status_id = InvoiceStatus::paid;
-        $invoice->payment_status_id = InvoicePaymentStatus::paid;
-        $invoice->payment_type_id = InvoicePaymentType::acquiring;
-        $invoice->save();
-
-        return response("OK $hash", 200);
+        return redirect($payment_url ?? '');
     }
 
     public function success()

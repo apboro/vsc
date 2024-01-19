@@ -69,10 +69,11 @@ class PayKeeperService
         }
     }
 
-    public function getInvoice(Invoice $invoice): array
+    public function createPayment(Invoice $invoice): array
     {
         $data = $this->createInvoiceQuery($invoice);
-        return $this->post('/change/invoice/preview/', $data);
+
+        return $this->post('/change/invoice/preview/', $data)['body'];
     }
 
     public function createInvoiceQuery(Invoice $invoice): array
