@@ -171,6 +171,7 @@ trait EditableDictionaries
             'titles' => [
                 'name' => 'Название',
                 'bank_name' => 'Банк',
+                'bank_id' => 'Банк',
                 'host' => 'Сервер',
                 'login' => 'Логин',
                 'password' => 'Пароль',
