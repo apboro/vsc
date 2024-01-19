@@ -1,7 +1,7 @@
 {
-    "/js/login.js": "/js/login.js",
-    "/js/admin.js": "/js/admin.js",
-    "/js/lead.js": "/js/lead.js",
-    "/js/lead-single.js": "/js/lead-single.js",
-    "/css/app.css": "/css/app.css"
+    "/js/login.js": "/js/login.js?id=53345d9f44c186f308e61ca30e88502b",
+    "/js/admin.js": "/js/admin.js?id=bb740106ae0adc2da2f280313dfd3ee4",
+    "/js/lead.js": "/js/lead.js?id=b308dc881f8779a81aaf52e4a7754c03",
+    "/js/lead-single.js": "/js/lead-single.js?id=4961882b6b7a1df221132f9329c09dfb",
+    "/css/app.css": "/css/app.css?id=6c0038e253f8c62ee54bddfa817e8112"
 }
