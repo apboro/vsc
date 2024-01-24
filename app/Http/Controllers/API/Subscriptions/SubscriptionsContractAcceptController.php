@@ -248,6 +248,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
             }
             $contract->subscription->setStatus(SubscriptionStatus::sent);
             $invoice->status_id = InvoiceStatus::sent;
+            $invoice->save();
         }
 
         return APIResponse::success($isCreatingNew ? 'Договор на оказание услуг сформирован и отправлен клиенту' : 'Данные договора обновлены');
