@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\PositionService;
 use App\Models\Subscriptions\SubscriptionContract;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
@@ -37,7 +38,7 @@ class SubscriptionContractPdf
 
         $requisites = $contract->subscription->service->requisites;
 
-        $view = View::make($view, [
+        $values = [
             'signed' => $signed,
 
             'contract_number' => $contract->number ?? '*не назначен*',
@@ -129,7 +130,48 @@ class SubscriptionContractPdf
             'organization_ogrn' => !empty($requisites->organization_ogrn) ? $requisites->organization_ogrn : null,
             'legal_address' => !empty($requisites->legal_address) ? $requisites->legal_address : null,
             'sign'=>!empty($requisites->sign) ? $requisites->sign : null,
-        ]);
+        ];
+
+        if ($contract->is_group) {
+            $values = array_merge($values, [
+                'responsible_manager' => $contract->subscription->service->positions->map(function (PositionService $ps) {
+                    return $ps->position->user->profile->fullName ?? '';
+                })->join(', '),
+
+                'service_daily_price' => $contract->contractData->daily_price,
+                'service_price' => $contract->contractData->price,
+                'additional_price' => $contract->contractData->additional_price,
+                'total_price' => $contract->contractData->total_price,
+                'service_description' => $contract->subscription->service->description,
+
+                'is_legal' => $contract->is_legal,
+                'is_trainer_needed' => $contract->subscription->lead->groupData->is_trainer_needed,
+                'additional_conditions' => $contract->contractData->additional_conditions,
+
+                'girls_1_count' => $contract->groupData->girls_1_count,
+                'boys_1_count' => $contract->groupData->boys_1_count,
+                'girls_2_count' => $contract->groupData->girls_2_count,
+                'boys_2_count' => $contract->groupData->boys_2_count,
+                'girls_3_count' => $contract->groupData->girls_3_count,
+                'boys_3_count' => $contract->groupData->boys_3_count,
+                'ward_count' => $contract->groupData->ward_count,
+                'trainer_count' => $contract->groupData->trainer_count,
+                'attendant_count' => $contract->groupData->attendant_count,
+
+                'org_name' => $contract->organizationData->organization_name,
+                'org_in_face' => $contract->organizationData->in_face,
+                'org_inn' => $contract->organizationData->inn,
+                'org_kpp' => $contract->organizationData->kpp,
+                'org_checking_account' => $contract->organizationData->checking_account,
+                'org_bic' => $contract->organizationData->bic,
+                'org_corr_account' => $contract->organizationData->corr_account,
+                'org_email' => $contract->organizationData->org_email,
+                'org_phone' => $contract->organizationData->org_phone,
+                'org_ogrn' => $contract->organizationData->org_ogrn ?? null, // todo
+            ]);
+        }
+
+        $view = View::make($view, $values);
         $html = $view->render();
 
         return Pdf::generate($html, 'a4', 'portrait');

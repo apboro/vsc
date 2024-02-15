@@ -131,7 +131,16 @@
                         </table>
                     </GuiContainer>
 
-                    <GuiContainer w-50 inline>
+                    <GuiContainer v-if="data.data['is_group']" w-50 inline>
+                        <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Организация</span></GuiHeading>
+
+                        <FormCheckBox :form="registration_form" :name="'is_contract_legal'" hide-title/>
+                        <FormString :form="registration_form" :name="'organization_name'"/>
+                        <FormCheckBox :form="registration_form" :name="'is_trainer_needed'" hide-title/>
+
+                    </GuiContainer>
+
+                    <GuiContainer v-else w-50 inline>
                         <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Занимающийся</span></GuiHeading>
                         <div>
                             <div style="min-height: 30px">
@@ -359,10 +368,10 @@ export default {
             this.registration_form.set('update_client_patronymic', null, null, null, true);
             this.registration_form.set('update_client_phone', null, null, null, true);
             this.registration_form.set('update_client_email', null, null, null, true);
-            this.registration_form.set('ward_lastname', this.data.data['ward_lastname'], 'required', 'Фамилия', true);
-            this.registration_form.set('ward_firstname', this.data.data['ward_firstname'], 'required', 'Имя', true);
-            this.registration_form.set('ward_patronymic', this.data.data['ward_patronymic'], 'required', 'Отчество', true);
-            this.registration_form.set('ward_birth_date', this.data.data['ward_birth_date'], 'required', 'Дата рождения', true);
+            this.registration_form.set('ward_lastname', this.data.data['ward_lastname'], this.data.data['is_group'] ? null : 'required', 'Фамилия', true);
+            this.registration_form.set('ward_firstname', this.data.data['ward_firstname'], this.data.data['is_group'] ? null : 'required', 'Имя', true);
+            this.registration_form.set('ward_patronymic', this.data.data['ward_patronymic'], this.data.data['is_group'] ? null : 'required', 'Отчество', true);
+            this.registration_form.set('ward_birth_date', this.data.data['ward_birth_date'], this.data.data['is_group'] ? null : 'required', 'Дата рождения', true);
             this.registration_form.set('update_ward_lastname', null, null, null, true);
             this.registration_form.set('update_ward_firstname', null, null, null, true);
             this.registration_form.set('update_ward_patronymic', null, null, null, true);
@@ -370,6 +379,10 @@ export default {
             this.registration_form.set('region_id', this.data.data['region_id'], 'required', 'Район', true);
             this.registration_form.set('service_id', this.data.data['service_id'], 'required', 'Услуга', true);
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
+            // group
+            this.registration_form.set('is_contract_legal', this.data.data['is_contract_legal'], this.data.data['is_group'] ? 'required' : null, 'Договор оформляется на юр.лицо', true);
+            this.registration_form.set('organization_name', this.data.data['organization_name'], this.data.data['is_group'] ? 'required' : null, 'Название организации', true);
+            this.registration_form.set('is_trainer_needed', false, this.data.data['is_group'] ? 'required' : null, 'Нужно тренерское сопровождение', true);
 
             this.registration_form.load();
             this.is_duplicates_loading = true;
@@ -397,6 +410,7 @@ export default {
         },
         getDuplicates() {
             const data = {
+                lead_id: this.leadId,
                 lastname: this.data.data['lastname'],
                 firstname: this.data.data['firstname'],
                 patronymic: this.data.data['patronymic'],

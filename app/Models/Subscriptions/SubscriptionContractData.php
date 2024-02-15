@@ -65,6 +65,13 @@ use Carbon\Carbon;
  * @property float|null $advance_payment
  * @property float|null $refund_amount
  *
+ * @property integer|null $days_count
+ * @property float|null $group_price
+ * @property float|null $additional_price
+ * @property float|null $total_price
+ *
+ * @property float|null $additional_conditions
+ *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -238,5 +245,77 @@ class SubscriptionContractData extends Model
     public function setDailyPriceAttribute(?float $value): void
     {
         $this->attributes['daily_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert group price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getGroupPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert group price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setGroupPriceAttribute(?float $value): void
+    {
+        $this->attributes['group_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert additional price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getAdditionalPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert additional price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setAdditionalPriceAttribute(?float $value): void
+    {
+        $this->attributes['additional_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
+    }
+
+    /**
+     * Convert total price from store value to real price.
+     *
+     * @param int|null $value
+     *
+     * @return  float
+     */
+    public function getTotalPriceAttribute(?int $value): ?float
+    {
+        return $value !== null ? PriceConverter::storeToPrice($value) : null;
+    }
+
+    /**
+     * Convert total price to store value.
+     *
+     * @param float|null $value
+     *
+     * @return  void
+     */
+    public function setTotalPriceAttribute(?float $value): void
+    {
+        $this->attributes['total_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 }

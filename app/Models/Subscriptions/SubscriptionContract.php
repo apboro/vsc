@@ -31,8 +31,12 @@ use InvalidArgumentException;
  * @property SubscriptionContractStatus $status
  * @property Subscription $subscription
  * @property SubscriptionContractData $contractData
+ * @property SubscriptionContractOrganizationData $organizationData
+ * @property SubscriptionContractGroupData $groupData
  * @property Discount|null $discount
  * @property-read Collection<Invoice> $invoices
+ * @property-read bool $is_group
+ * @property-read bool $is_legal
  *
  * @method static Illuminate\Database\Eloquent\Builder active()
  */
@@ -190,6 +194,40 @@ class SubscriptionContract extends Model implements Statusable
     public function contractData(): HasOne
     {
         return $this->hasOne(SubscriptionContractData::class, 'subscription_contract_id', 'id')->withDefault();
+    }
+
+    /**
+     * Subscription contract group data.
+     *
+     * @return  HasOne
+     */
+    public function groupData(): HasOne
+    {
+        return $this->hasOne(SubscriptionContractGroupData::class, 'subscription_contract_id', 'id')->withDefault();
+    }
+
+    /**
+     * Subscription contract organization data.
+     *
+     * @return  HasOne
+     */
+    public function organizationData(): HasOne
+    {
+        return $this->hasOne(SubscriptionContractOrganizationData::class, 'subscription_contract_id', 'id')->withDefault();
+    }
+
+    public function getIsGroupAttribute(): bool
+    {
+        $this->loadMissing('subscription.lead');
+
+        return $this->subscription->lead->is_group;
+    }
+
+    public function getIsLegalAttribute(): bool
+    {
+        $this->loadMissing('subscription.lead');
+
+        return $this->subscription->lead->is_legal;
     }
 
     public static function scopeActive(Builder $q)

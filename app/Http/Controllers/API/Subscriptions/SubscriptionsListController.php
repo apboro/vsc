@@ -65,7 +65,7 @@ class SubscriptionsListController extends ApiController
                 'id' => $subscription->id,
                 'client' => $subscription->client->user->profile->fullName,
                 'client_id' => $subscription->client_id,
-                'ward' => $subscription->clientWard->user->profile->fullName,
+                'ward' => $subscription->clientWard->user->profile->fullName ?? null, // todo rm ?? if dummy client ward would be created in leadgroupcontractcontroller
                 'ward_id' => $subscription->client_ward_id,
                 'status' => $subscription->status->name,
                 'service' => $subscription->service->title,
@@ -191,7 +191,7 @@ class SubscriptionsListController extends ApiController
             'id' => $subscription->id,
             'client_id' => $subscription->client_id,
             'client' => $subscription->client->user->profile->fullName,
-            'ward' => $subscription->clientWard->user->profile->fullName,
+            'ward' => $subscription->clientWard->user->profile->fullName ?? null,
             'status' => $subscription->status->name,
             'contracts' => $contracts,
             'service' => "{$subscription->service->title} ($subscription->service_id)",
@@ -200,7 +200,7 @@ class SubscriptionsListController extends ApiController
             'date_lead_created_at' => $subscription->lead && $subscription->lead->created_at ? $subscription->lead->created_at->format('d.m.Y, H:i') : null,
             'district' => $subscription->service->trainingBase->region->name ?? '—',
             'date_contract_created_at' => $contract ? $contract->start_at->format('d.m.Y') ?? null : null,
-            'ward_birth_year' => $subscription->clientWard->user->profile->birthdate ? Carbon::parse($subscription->clientWard->user->profile->birthdate)->format('Y') : null,
+            'ward_birth_year' => $subscription->clientWard->user->profile->birthdate ?? null ? Carbon::parse($subscription->clientWard->user->profile->birthdate)->format('Y') : null,
             'parent_phone' => $subscription->client->user->profile->phone,
             'comment' => $subscription->client->comments->map(function (ClientComment $c) {
                 return $c->text;

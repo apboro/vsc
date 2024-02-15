@@ -33,6 +33,8 @@ class Pattern extends AbstractDictionary
 
     public const standard_ip_tkachenko = 10;
 
+    public const group = 11;
+
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns';
