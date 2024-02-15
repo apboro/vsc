@@ -394,7 +394,7 @@ $input_remove_color: #FF1E00 !default;
         color: #fdc93c;
 
         border-radius: 15px;
-        width: 10% !important;
+        width: 30px;
         padding: 6px !important;
         height: auto;
         top: 4px;

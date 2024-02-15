@@ -19,6 +19,9 @@ class ServiceTypes extends AbstractDictionary
     /** @var int Дистанционная */
     public const remote = 3;
 
+    /** @var int Групповая */
+    public const group = 4;
+
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_service_types';

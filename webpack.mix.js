@@ -12,6 +12,7 @@ mix
     .js('resources/js/admin.js', 'js')
     .js('resources/js/lead.js', 'js')
     .js('resources/js/lead-single.js', 'js')
+    .js('resources/js/lead-group.js', 'js')
     .vue()
     .sass('resources/css/app.scss', 'css')
 

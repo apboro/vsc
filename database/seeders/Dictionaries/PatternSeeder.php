@@ -48,6 +48,10 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Стандартный ИП Ткаченко',
                 'pattern' => 'pdf/contracts/subscription_tkachenko',
             ],
+            Pattern::group => [
+                'name' => 'Групповой',
+                'pattern' => 'pdf/contracts/subscription_group',
+            ],
         ],
         PatternLetters::class => [
             PatternLetters::regular => [
@@ -59,6 +63,11 @@ class PatternSeeder extends GenericSeeder
                 'name' => 'Разовый',
                 'link' => 'mail.subscriptions.link.form_single_link',
                 'contract' => 'mail.subscriptions.contract.contract_single',
+            ],
+            PatternLetters::group => [
+                'name' => 'Групповой',
+                'link' => 'mail.subscriptions.link.form_group_link',
+                'contract' => 'mail.subscriptions.contract.contract_group',
             ],
         ],
     ];

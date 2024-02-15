@@ -8,13 +8,13 @@ use App\Http\Controllers\API\CookieKeys;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\APIListRequest;
 use App\Models\Leads\Lead;
+use App\Models\Services\Service;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -25,6 +25,7 @@ class LeadsListController extends ApiController
         'training_base_id' => null,
         'sport_kind_id' => null,
         'region_id' => null,
+        'type_program_id' => null,
     ];
 
     protected array $rememberFilters = [
@@ -32,6 +33,7 @@ class LeadsListController extends ApiController
         'training_base_id',
         'sport_kind_id',
         'region_id',
+        'type_program_id',
     ];
 
     protected string $rememberKey = CookieKeys::leads_list;
@@ -223,6 +225,14 @@ class LeadsListController extends ApiController
             if (!empty($filters['region_id'])) {
                 $query->whereIn('region_id', $filters['region_id']);
             }
+            if (!empty($filters['type_program_id'])) {
+                $query->whereHas('service', function (Builder $q) use ($filters) {
+                    $q->where('type_program_id', $filters['type_program_id']);
+                });
+            }
+            if (!empty($filters['service_id'])) {
+                $query->where('service_id', $filters['service_id']);
+            }
         }
 
         // apply search
@@ -244,5 +254,15 @@ class LeadsListController extends ApiController
         }
 
         return  $query;
+    }
+
+    public function getServicesForFilter(): JsonResponse
+    {
+        /** @var Collection<Service> $services */
+        $services = Service::query()
+            ->select('id', 'title')
+            ->get();
+
+        return APIResponse::success(null, $services->toArray());
     }
 }

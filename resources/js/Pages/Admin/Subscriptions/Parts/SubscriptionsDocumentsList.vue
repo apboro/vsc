@@ -57,24 +57,95 @@
                     <FormPhone :form="form" :name="'phone'"/>
                     <FormString :form="form" :name="'email'"/>
                 </GuiContainer>
-                <GuiContainer mb-15>
-                    <FormString :form="form" :name="'passport_serial'"/>
-                    <FormString :form="form" :name="'passport_number'"/>
-                    <FormString :form="form" :name="'passport_place'"/>
-                    <FormDate :form="form" :name="'passport_date'"/>
-                    <FormString :form="form" :name="'passport_code'"/>
-                    <FormString :form="form" :name="'registration_address'"/>
-                </GuiContainer>
-                <GuiHeading mb-15>Данные занимающегося</GuiHeading>
-                <GuiContainer>
-                    <FormString :form="form" :name="'ward_lastname'"/>
-                    <FormString :form="form" :name="'ward_firstname'"/>
-                    <FormString :form="form" :name="'ward_patronymic'"/>
-                    <FormDate :form="form" :name="'ward_birth_date'"/>
-                    <FormString :form="form" :name="'ward_document'"/>
-                    <FormDate :form="form" :name="'ward_document_date'"/>
-                    <FormDictionary :form="form" :name="'discount_id'" :dictionary="'discounts'" :top="true" :placeholder="'Без льготы'" :has-null="true"/>
-                </GuiContainer>
+
+                <template v-if="!form.payload['is_group'] || form.payload['is_group'] && !form.payload['is_legal']">
+                    <GuiContainer mb-15>
+                        <FormString :form="form" :name="'passport_serial'"/>
+                        <FormString :form="form" :name="'passport_number'"/>
+                        <FormString :form="form" :name="'passport_place'"/>
+                        <FormDate :form="form" :name="'passport_date'"/>
+                        <FormString :form="form" :name="'passport_code'"/>
+                        <FormString :form="form" :name="'registration_address'"/>
+                    </GuiContainer>
+                </template>
+
+                <template v-if="!form.payload['is_group']">
+                    <GuiHeading mb-15>Данные занимающегося</GuiHeading>
+                    <GuiContainer>
+                        <FormString :form="form" :name="'ward_lastname'"/>
+                        <FormString :form="form" :name="'ward_firstname'"/>
+                        <FormString :form="form" :name="'ward_patronymic'"/>
+                        <FormDate :form="form" :name="'ward_birth_date'"/>
+                        <FormString :form="form" :name="'ward_document'"/>
+                        <FormDate :form="form" :name="'ward_document_date'"/>
+                        <FormDictionary :form="form" :name="'discount_id'" :dictionary="'discounts'" :top="true" :placeholder="'Без льготы'" :has-null="true"/>
+                    </GuiContainer>
+                </template>
+
+                <template v-if="form.payload['is_group']">
+                    <template v-if="form.payload['is_legal']">
+                        <GuiHeading mb-15>Данные организации</GuiHeading>
+                        <GuiContainer>
+                            <FormString :form="form" :name="'organization_name'"/>
+                            <FormString :form="form" :name="'in_face'"/>
+                            <FormString :form="form" :name="'inn'"/>
+                            <FormString :form="form" :name="'kpp'"/>
+                            <FormString :form="form" :name="'checking_account'"/>
+                            <FormString :form="form" :name="'bic'"/>
+                            <FormString :form="form" :name="'corr_account'"/>
+                            <FormString :form="form" :name="'org_email'"/>
+                            <FormString :form="form" :name="'org_phone'"/>
+                        </GuiContainer>
+                    </template>
+                  <GuiHeading mb-15>Состав группы</GuiHeading>
+                  <GuiContainer>
+                      <table style="width: 100%;">
+                          <thead>
+                              <tr>
+                                  <th style="width: 33%"></th>
+                                  <th style="width: 33%"></th>
+                                  <th style="width: 33%"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td></td>
+                                  <td><GuiText>Девочек</GuiText></td>
+                                  <td><GuiText>Мальчиков</GuiText></td>
+                              </tr>
+                              <tr>
+                                  <td><GuiText>До 10 лет</GuiText></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'girls_1_count'"/></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'boys_1_count'"/></td>
+                              </tr>
+                              <tr>
+                                  <td><GuiText>10-17 лет</GuiText></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'girls_2_count'"/></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'boys_2_count'"/></td>
+                              </tr>
+                              <tr>
+                                  <td><GuiText>18 лет и старше</GuiText></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'girls_3_count'"/></td>
+                                  <td><FormNumber :form="form" :hide-title="true" :name="'boys_3_count'"/></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      <FormNumber :form="form" :name="'ward_count'"/>
+                      <FormNumber :form="form" :name="'trainer_count'"/>
+                      <FormNumber :form="form" :name="'attendant_count'"/>
+                  </GuiContainer>
+                  <GuiHeading mb-15>Ценовой лист</GuiHeading>
+                  <GuiContainer>
+                    <FormNumber :form="form" :name="'days_count'"/>
+                    <FormNumber :form="form" :name="'group_price'"/>
+                  </GuiContainer>
+                  <GuiHeading mb-15>Дополнительные условия</GuiHeading>
+                  <GuiContainer>
+                      <FormText :form="form" :hide-title="true" :name="'additional_conditions'"/>
+                      <FormNumber :form="form" :name="'additional_price'"/>
+                      <FormNumber :form="form" :name="'total_price'"/>
+                  </GuiContainer>
+                </template>
             </GuiContainer>
         </FormPopUp>
     </LoadingProgress>
@@ -92,7 +163,10 @@ import LoadingProgress from "@/Components/LoadingProgress";
 import FormPopUp from "@/Components/FormPopUp";
 import form from "@/Core/Form";
 import GuiContainer from "@/Components/GUI/GuiContainer";
+import GuiText from "@/Components/GUI/GuiText";
 import GuiHeading from "@/Components/GUI/GuiHeading";
+import FormText from "@/Components/Form/FormText";
+import FormNumber from "@/Components/Form/FormNumber";
 import FormString from "@/Components/Form/FormString";
 import FormPhone from "@/Components/Form/FormPhone";
 import FormDate from "@/Components/Form/FormDate";
@@ -117,7 +191,10 @@ export default {
         FormDate,
         FormPhone,
         FormString,
+        FormNumber,
+        FormText,
         GuiHeading,
+        GuiText,
         GuiContainer,
         FormPopUp,
         LoadingProgress,
@@ -139,6 +216,24 @@ export default {
         this.list.options = {id: this.subscriptionId};
         this.list.initial();
         this.form.toaster = this.$toast;
+    },
+
+    computed: {
+        additionalPrice() {
+          return this.form.values['additional_price']
+        },
+        groupPrice() {
+          return this.form.values['group_price']
+        },
+    },
+
+    watch: {
+        additionalPrice(val) {
+            this.form.values['total_price'] = this.form.values['group_price'] + val
+        },
+        groupPrice(val) {
+            this.form.values['total_price'] = val + this.form.values['additional_price']
+        }
     },
 
     methods: {

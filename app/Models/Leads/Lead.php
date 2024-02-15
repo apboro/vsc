@@ -54,6 +54,9 @@ use InvalidArgumentException;
  * @property Service|null $service
  * @property Subscription|null $subscription
  * @property Carbon $converted_at
+ * @property-read LeadGroupData|null $groupData
+ * @property-read bool $is_group
+ * @property-read bool $is_legal
  */
 class Lead extends Model implements Statusable
 {
@@ -140,6 +143,25 @@ class Lead extends Model implements Statusable
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class, 'id', 'subscription_id');
+    }
+
+    public function groupData(): HasOne
+    {
+        return $this->hasOne(LeadGroupData::class, 'lead_id', 'id');
+    }
+
+    public function getIsGroupAttribute(): bool
+    {
+        $this->loadmissing('groupData');
+
+        return $this->groupData !== null;
+    }
+
+    public function getIsLegalAttribute(): bool
+    {
+        $this->loadmissing('groupData');
+
+        return $this->groupData->is_contract_legal ?? false;
     }
 
     public function canDelete(Position $position):bool

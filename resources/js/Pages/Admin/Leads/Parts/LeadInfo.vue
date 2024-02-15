@@ -23,12 +23,26 @@
             <GuiValue :title="'Отчество'">{{ data['patronymic'] }}</GuiValue>
             <GuiValue :title="'Телефон'">{{ data['phone'] }}</GuiValue>
             <GuiValue :title="'Email'">{{ data['email'] }}</GuiValue>
-            <GuiValue :title="'Фамилия занимающегося'">{{ data['ward_lastname'] }}</GuiValue>
-            <GuiValue :title="'Имя занимающегося'">{{ data['ward_firstname'] }}</GuiValue>
-            <GuiValue :title="'Отчество занимающегося'">{{ data['ward_patronymic'] }}</GuiValue>
-            <GuiValue :title="'Дата рождения занимающегося'">{{ data['ward_birth_date_info'] }} {{ data['ward_age'] ? `(${data['ward_age']})` : '' }}</GuiValue>
+            <template v-if="data['is_group']">
+                <GuiValue :title="'Название огранизации'">{{ data['organization_name'] }}</GuiValue>
+            </template>
+            <template v-else>
+                <GuiValue :title="'Фамилия занимающегося'">{{ data['ward_lastname'] }}</GuiValue>
+                <GuiValue :title="'Имя занимающегося'">{{ data['ward_firstname'] }}</GuiValue>
+                <GuiValue :title="'Отчество занимающегося'">{{ data['ward_patronymic'] }}</GuiValue>
+                <GuiValue :title="'Дата рождения занимающегося'">{{ data['ward_birth_date_info'] }} {{ data['ward_age'] ? `(${data['ward_age']})` : '' }}</GuiValue>
+            </template>
         </GuiContainer>
-        <GuiContainer w-50 mt-30 pr-20 inline>
+        <GuiContainer v-if="data['is_group']" w-50 mt-30 pr-20 inline>
+            <GuiValue :title="'Количество детей общее'">{{ data['ward_count'] }}</GuiValue>
+            <GuiValue>Девочки / Мальчики</GuiValue>
+            <GuiValue :title="'до 10 лет'">{{ data['girls_1_count'] }} / {{ data['boys_1_count'] }}</GuiValue>
+            <GuiValue :title="'10-17 лет'">{{ data['girls_2_count'] }} / {{ data['boys_2_count'] }}</GuiValue>
+            <GuiValue :title="'старше 18 лет'">{{ data['girls_3_count'] }} / {{ data['boys_3_count'] }}</GuiValue>
+            <GuiValue :title="'Количество сопровождающих'">{{ data['attendant_count'] }}</GuiValue>
+            <GuiValueArea :title="'Комментарий клиента (пожелания из поля комментарий в заявке)'" :text-content="data['client_comments']"/>
+        </GuiContainer>
+        <GuiContainer v-else w-50 mt-30 pr-20 inline>
             <GuiValue :title="'Индивидуальные особенности воспитанника (физические, психологические)'"><span
                 :class="{'text-red': data['ward_spe']}">{{ data['ward_spe'] ? 'да' : 'нет' }}</span></GuiValue>
             <GuiValue :title="'Состоит на учете у медицинских специалистов'"><span :class="{'text-red': data['ward_uch']}">{{ data['ward_uch'] ? 'да' : 'нет' }}</span></GuiValue>

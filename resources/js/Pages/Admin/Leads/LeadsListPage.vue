@@ -67,6 +67,34 @@
                 </div>
             </template>
         </LayoutFilters>
+        <LayoutFilters style="padding-top: 0;">
+            <LayoutFiltersItem :title="'Услуга'">
+                <InputDropDown
+                    :options="services"
+                    v-model="list.filters['service_id']"
+                    :original="list.filters_original['service_id']"
+                    :identifier="'id'"
+                    :show="'title'"
+                    :placeholder="'Все'"
+                    :search="true"
+                    :has-null="true"
+                    :small="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
+            <LayoutFiltersItem :title="'Тип программы'">
+                <DictionaryDropDown
+                    :dictionary="'service_programs'"
+                    v-model="list.filters['type_program_id']"
+                    :original="list.filters_original['type_program_id']"
+                    :placeholder="'Все'"
+                    :has-null="true"
+                    :small="true"
+                    :multi="true"
+                    @change="list.load()"
+                />
+            </LayoutFiltersItem>
+        </LayoutFilters>
 
         <ListTable v-if="list.list && list.list.length > 0" :titles="list.titles">
             <ListTableRow v-for="lead in list.list">
@@ -111,6 +139,7 @@ import LayoutFilters from "@/Components/Layout/LayoutFilters";
 import LayoutFiltersItem from "@/Components/Layout/LayoutFiltersItem";
 import DictionaryDropDown from "@/Components/Inputs/DictionaryDropDown";
 import InputSearch from "@/Components/Inputs/InputSearch";
+import InputDropDown from "@/Components/Inputs/InputDropDown";
 import ListTable from "@/Components/ListTable/ListTable";
 import ListTableRow from "@/Components/ListTable/ListTableRow";
 import ListTableCell from "@/Components/ListTable/ListTableCell";
@@ -125,6 +154,7 @@ export default {
         LayoutFiltersItem,
         DictionaryDropDown,
         InputSearch,
+        InputDropDown,
         ListTable,
         ListTableRow,
         ListTableCell,
@@ -134,10 +164,12 @@ export default {
 
     data: () => ({
         list: list('/api/leads'),
+        services: [],
     }),
 
     created() {
         this.list.initial();
+        this.getServices()
     },
 
     methods: {
@@ -181,7 +213,15 @@ export default {
                     }
                 });
         },
-
+        getServices() {
+            axios.post('/api/leads/services')
+                .then(res => {
+                    this.services = res.data.payload
+                })
+                .catch(error => {
+                    this.$toast.error(error.response.data['message']);
+                })
+        }
     },
 }
 </script>

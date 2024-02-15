@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Leads;
 
 use App\Current;
 use App\Helpers\DuplicatesFinder;
+use App\Helpers\PriceConverter;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Requests\APIListRequest;
@@ -35,10 +36,6 @@ class LeadsRegisterController extends ApiEditController
         'patronymic' => 'required',
         'phone' => 'required',
         'email' => 'required|email|bail',
-        'ward_lastname' => 'required',
-        'ward_firstname' => 'required',
-        'ward_patronymic' => 'required',
-        'ward_birth_date' => 'required',
         'service_id' => 'required',
         'contract_comment' => 'nullable',
     ];
@@ -48,10 +45,6 @@ class LeadsRegisterController extends ApiEditController
         'patronymic' => 'Отчество',
         'phone' => 'Телефон',
         'email' => 'Email',
-        'ward_lastname' => 'Фамилия занимающегося',
-        'ward_firstname' => 'Имя занимающегося',
-        'ward_patronymic' => 'Отчество занимающегося',
-        'ward_birth_date' => 'Дата рождения занимающегося',
         'service_id' => 'Услуга',
         'contract_comment' => 'Комментарий клиенту',
     ];
@@ -79,6 +72,27 @@ class LeadsRegisterController extends ApiEditController
 
         // validate data
         $data = $this->getData($request);
+
+        if ($lead->is_group) {
+            $this->rules['is_contract_legal'] = 'required|boolean';
+            $this->rules['organization_name'] = 'required|string';
+            $this->rules['is_trainer_needed'] = 'required|boolean';
+
+            $this->titles['is_contract_legal'] = 'Договор оформляется на юр. лицо';
+            $this->titles['organization_name'] = 'Название организации';
+            $this->titles['is_trainer_needed'] = 'Нужно тренерское сопровождение';
+        } else {
+            $this->rules['ward_lastname'] = 'required';
+            $this->rules['ward_firstname'] = 'required';
+            $this->rules['ward_patronymic'] = 'required';
+            $this->rules['ward_birth_date'] = 'required';
+
+            $this->titles['ward_lastname'] = 'Фамилия занимающегося';
+            $this->titles['ward_firstname'] = 'Имя занимающегося';
+            $this->titles['ward_patronymic'] = 'Отчество занимающегося';
+            $this->titles['ward_birth_date'] = 'Дата рождения занимающегося';
+        }
+
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
             return APIResponse::validationError($errors);
         }
@@ -131,49 +145,56 @@ class LeadsRegisterController extends ApiEditController
                     $client->save();
                 }
 
-                if ($data['ward_id']) {
-                    /** @var ClientWard|null $ward */
-                    $ward = ClientWard::query()->where('id', $data['ward_id'])->with('user.profile')->first();
+                if (!$lead->is_group) {
+                    if ($data['ward_id']) {
+                        /** @var ClientWard|null $ward */
+                        $ward = ClientWard::query()->where('id', $data['ward_id'])->with('user.profile')->first();
 
-                    if (!$ward) {
-                        return APIResponse::error('Клиент не существует');
+                        if (!$ward) {
+                            return APIResponse::error('Клиент не существует');
+                        }
+
+                        if ($data['update_ward_lastname']) {
+                            $client->user->profile->update(['lastname' => $data['ward_lastname']]);
+                        }
+
+                        if ($data['update_ward_firstname']) {
+                            $client->user->profile->update(['firstname' => $data['ward_firstname']]);
+                        }
+
+                        if ($data['update_ward_patronymic']) {
+                            $client->user->profile->update(['patronymic' => $data['ward_patronymic']]);
+                        }
+
+                        if ($data['update_ward_birth_date']) {
+                            $client->user->profile->update(['birthdate' => $data['ward_birth_date']]);
+                        }
+                    } else {
+                        // create client ward
+                        $user = new User();
+                        $user->save();
+
+                        $user->profile->lastname = $data['ward_lastname'];
+                        $user->profile->firstname = $data['ward_firstname'];
+                        $user->profile->patronymic = $data['ward_patronymic'];
+                        $user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
+                        $user->profile->save();
+
+                        $ward = new ClientWard();
+                        $ward->user_id = $user->id;
+                        $ward->setStatus(ClientWardStatus::active, false);
+                        $ward->save();
                     }
 
-                    if ($data['update_ward_lastname']) {
-                        $client->user->profile->update(['lastname' => $data['ward_lastname']]);
-                    }
-
-                    if ($data['update_ward_firstname']) {
-                        $client->user->profile->update(['firstname' => $data['ward_firstname']]);
-                    }
-
-                    if ($data['update_ward_patronymic']) {
-                        $client->user->profile->update(['patronymic' => $data['ward_patronymic']]);
-                    }
-
-                    if ($data['update_ward_birth_date']) {
-                        $client->user->profile->update(['birthdate' => $data['ward_birth_date']]);
+                    // attach ward to client
+                    if ($client->wards()->where('id', $ward->id)->count() === 0) {
+                        $client->wards()->attach($ward->id);
                     }
                 } else {
-                    // create client ward
-                    $user = new User();
-                    $user->save();
-
-                    $user->profile->lastname = $data['ward_lastname'];
-                    $user->profile->firstname = $data['ward_firstname'];
-                    $user->profile->patronymic = $data['ward_patronymic'];
-                    $user->profile->birthdate = Carbon::parse($data['ward_birth_date']);
-                    $user->profile->save();
-
-                    $ward = new ClientWard();
-                    $ward->user_id = $user->id;
-                    $ward->setStatus(ClientWardStatus::active, false);
-                    $ward->save();
-                }
-
-                // attach ward to client
-                if ($client->wards()->where('id', $ward->id)->count() === 0) {
-                    $client->wards()->attach($ward->id);
+                    $lead->groupData->is_contract_legal = $data['is_contract_legal'];
+                    $lead->groupData->organization_name = $data['organization_name'];
+                    $lead->groupData->is_trainer_needed = $data['is_trainer_needed'];
+                    $lead->groupData->save();
                 }
 
                 // create subscription
@@ -181,7 +202,7 @@ class LeadsRegisterController extends ApiEditController
                 $subscription->setStatus(SubscriptionStatus::new, false);
                 $subscription->organization_id = $current->organizationId();
                 $subscription->client_id = $client->id;
-                $subscription->client_ward_id = $ward->id;
+                $subscription->client_ward_id = $ward->id ?? null;
                 $subscription->service_id = $data['service_id'];
                 $subscription->save();
 
@@ -216,6 +237,8 @@ class LeadsRegisterController extends ApiEditController
         $current = Current::get($request);
 
         $data = $this->getData($request);
+        /** @var Lead|null $lead */
+        $lead = Lead::query()->find($data['lead_id']);
 
         $clientDuplicates = DuplicatesFinder::clientDuplicates(
             $current->organizationId(),
@@ -240,30 +263,32 @@ class LeadsRegisterController extends ApiEditController
             });
         }
 
-        $wardDuplicates = DuplicatesFinder::wardDuplicates(
-            $current->organizationId(),
-            $data['ward_lastname'],
-            $data['ward_firstname'],
-            $data['ward_patronymic'],
-            $data['ward_birth_date']
-        );
+        if ($lead && !$lead->is_group) {
+            $wardDuplicates = DuplicatesFinder::wardDuplicates(
+                $current->organizationId(),
+                $data['ward_lastname'],
+                $data['ward_firstname'],
+                $data['ward_patronymic'],
+                $data['ward_birth_date']
+            );
 
-        if ($wardDuplicates !== null) {
-            $wardDuplicates->transform(function (ClientWard $clientWard) {
-                return [
-                    'id' => $clientWard->id,
-                    'name' => $clientWard->user->profile->fullName,
-                    'birthdate' => $clientWard->user->profile->birthdate->format('d.m.Y'),
-                    'lastname' => $clientWard->user->profile->lastname,
-                    'firstname' => $clientWard->user->profile->firstname,
-                    'patronymic' => $clientWard->user->profile->patronymic,
-                ];
-            });
+            if ($wardDuplicates !== null) {
+                $wardDuplicates->transform(function (ClientWard $clientWard) {
+                    return [
+                        'id' => $clientWard->id,
+                        'name' => $clientWard->user->profile->fullName,
+                        'birthdate' => $clientWard->user->profile->birthdate->format('d.m.Y'),
+                        'lastname' => $clientWard->user->profile->lastname,
+                        'firstname' => $clientWard->user->profile->firstname,
+                        'patronymic' => $clientWard->user->profile->patronymic,
+                    ];
+                });
+            }
         }
 
         return APIResponse::response([
             'clients_info' => $clientDuplicates,
-            'wards_info' => $wardDuplicates,
+            'wards_info' => $wardDuplicates ?? null,
         ]);
     }
 }

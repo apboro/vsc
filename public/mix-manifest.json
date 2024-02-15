@@ -1,7 +1,8 @@
 {
-    "/js/login.js": "/js/login.js?id=320b1d42c3a1703909568ee1f84202be",
-    "/js/admin.js": "/js/admin.js?id=9fa6c43cc74087c15565664d37bf6511",
-    "/js/lead.js": "/js/lead.js?id=2112917ba65810417a21c08ba9326c5e",
-    "/js/lead-single.js": "/js/lead-single.js?id=58a022684a4563e7aa2f08aa6107ed73",
-    "/css/app.css": "/css/app.css?id=6c0038e253f8c62ee54bddfa817e8112"
+    "/js/login.js": "/js/login.js",
+    "/js/admin.js": "/js/admin.js",
+    "/js/lead.js": "/js/lead.js",
+    "/js/lead-single.js": "/js/lead-single.js",
+    "/js/lead-group.js": "/js/lead-group.js",
+    "/css/app.css": "/css/app.css"
 }

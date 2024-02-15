@@ -19,6 +19,9 @@ class ServiceSeeder extends GenericSeeder
             ServiceTypes::remote => [
                 'name' => 'Дистанционная',
             ],
+            ServiceTypes::group => [
+                'name' => 'Групповая',
+            ],
         ],
 
         ServiceCategories::class => [
