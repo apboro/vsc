@@ -15,6 +15,8 @@ class PatternLetters extends AbstractDictionary
     public const regular = 1;
     /** @var int Default standard two */
     public const one_time = 2;
+    /** @var int Group */
+    public const group = 3;
 
     /** @var string Referenced table name. */
     protected $table = 'dictionary_patterns_letters';

@@ -29,6 +29,7 @@ class LeadsViewController extends ApiController
                     'region',
                     'subscription.client.user.profile',
                     'subscription.clientWard.user.profile',
+                    'groupData',
                 ])
                 ->where('id', $id)
                 ->tap(new ForOrganization($current->organizationId()))
@@ -64,6 +65,8 @@ class LeadsViewController extends ApiController
             'ward_uch' => $lead->ward_uch,
             'ward_spe' => $lead->ward_spe,
 
+            'is_group' => $lead->is_group,
+
             'region' => $lead->region->name ?? null,
             'region_id' => $lead->region_id,
             'service' => $lead->service->title ?? null,
@@ -79,6 +82,21 @@ class LeadsViewController extends ApiController
             'can_register' => $lead->canRegister($current->position()),
             'can_delete' => $lead->canDelete($current->position()),
         ];
+
+        //  Append group data
+        if ($lead->is_group) {
+            $values['organization_name'] = $lead->groupData->organization_name;
+            $values['is_contract_legal'] = $lead->groupData->is_contract_legal;
+            $values['girls_1_count'] = $lead->groupData->girls_1_count ?? 0;
+            $values['boys_1_count'] = $lead->groupData->boys_1_count ?? 0;
+            $values['girls_2_count'] = $lead->groupData->girls_2_count ?? 0;
+            $values['boys_2_count'] = $lead->groupData->boys_2_count ?? 0;
+            $values['girls_3_count'] = $lead->groupData->girls_3_count ?? 0;
+            $values['boys_3_count'] = $lead->groupData->boys_3_count ?? 0;
+            $values['ward_count'] = $lead->groupData->ward_count ?? 0;
+            $values['trainer_count'] = $lead->groupData->trainer_count;
+            $values['attendant_count'] = $lead->groupData->attendant_count;
+        }
 
         if($values['can_register']) {
             $services = Service::query()
