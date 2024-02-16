@@ -37,7 +37,7 @@ class InvoiceMail extends Mailable
         $mail = $this
             ->from(env('MAIL_FROM_ADDRESS'), $this->invoice->contract->subscription->organization->title)
             ->subject('Договор на оказание услуг')
-            ->text($textView);
+            ->text($textView, ['invoice' => $this->invoice]);
 
         $mail->to(trim($this->invoice->contract->subscription->client->user->profile->email), $this->invoice->contract->subscription->client->user->profile->compactName);
 

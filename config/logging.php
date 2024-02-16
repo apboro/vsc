@@ -54,6 +54,12 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'paykeeper' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/paykeeper.log'),
+            'level' => env('LOG_LEVEL', 'info'),
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

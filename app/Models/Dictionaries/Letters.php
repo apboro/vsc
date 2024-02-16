@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property bool $enabled
  * @property int $order
+ * @property PatternLetters $pattern
  */
 class Letters extends AbstractDictionary
 {

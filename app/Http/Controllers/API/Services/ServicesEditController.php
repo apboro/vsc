@@ -59,6 +59,7 @@ class ServicesEditController extends ApiEditController
         'email' => 'nullable|email',
         'phones' => 'min:1',
         'phones.*' => 'required',
+        'acquiring_id' => 'required'
     ];
 
     protected array $titles = [
@@ -86,6 +87,7 @@ class ServicesEditController extends ApiEditController
         'daily_price' => 'Стоимость за 1 день, руб',
         'price_deduction_advance' => 'Стоимость услуги за вычетом аванса, руб',
         'requisites_id' => 'Реквизиты для договора',
+        'acquiring_id' => 'Эквайринг',
         'contract_id' => 'Шаблон договора',
         'letter_id' => 'Шаблон письма',
         'schedule_day_mon' => 'Занятия в пн.',
@@ -148,6 +150,7 @@ class ServicesEditController extends ApiEditController
                 'start_at' => $service->start_at ? $service->start_at->format('Y-m-d') : null,
                 'end_at' => $service->end_at ? $service->end_at->format('Y-m-d') : null,
                 'requisites_id' => $service->requisites_id,
+                'acquiring_id' => $service->acquiring?->id,
                 'description' => $service->description,
                 'price' => $service->price,
                 'date_deposit_funds' => $service->date_deposit_funds,
@@ -281,6 +284,7 @@ class ServicesEditController extends ApiEditController
         $service->start_at = Carbon::parse($data['start_at']);
         $service->end_at = Carbon::parse($data['end_at']);
         $service->requisites_id = $data['requisites_id'];
+        $service->acquiring_id = $data['acquiring_id'];
         $service->description = $data['description'];
         $service->date_deposit_funds = $data['date_deposit_funds'];
         $service->advance_payment = $data['advance_payment'];

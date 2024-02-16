@@ -46,7 +46,7 @@ class SubscriptionContractMail extends Mailable
         $mail = $this
             ->from(env('MAIL_FROM_ADDRESS'), $this->contract->subscription->organization->title)
             ->subject('Договор на оказание услуг')
-            ->text($textView);
+            ->text($textView, ['invoice' => $this->contract->invoices->last()]);
 
         $mail->to(trim($this->contract->subscription->client->user->profile->email), $this->contract->subscription->client->user->profile->compactName);
 

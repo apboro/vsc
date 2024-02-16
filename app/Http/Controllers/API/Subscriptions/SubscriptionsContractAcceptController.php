@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SubscriptionsContractAcceptController extends ApiEditController
 {
@@ -215,10 +216,11 @@ class SubscriptionsContractAcceptController extends ApiEditController
         }
 
         $contract->save();
+        $invoice = null;
 
         if ($isCreatingNew) {
             // Assign contract number
-            DB::transaction(function () use ($contract, $current) {
+            DB::transaction(function () use ($contract, $current, &$invoice) {
                 $contract->number = SubscriptionContract::getNewNumber($current->organizationId());
                 $contract->save();
 
@@ -226,14 +228,15 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 $moderationRequired = $contract->subscription->client->account->amount > 0;
                 $lastDayOfThisMonth = new Carbon('last day of this month');
 
-                $contract->invoices()->create([
+                $amountToPay = $contract->invoices()->exists() ? $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth) : $contract->contractData->price ?? $contract->contractData->monthly_price;
+                $invoice = $contract->invoices()->create([
                     'date_from' => $contract->start_at,
                     'date_to' => $lastDayOfThisMonth,
                     'moderation_required' => $moderationRequired,
                     'status_id' => $moderationRequired ? InvoiceStatus::draft : InvoiceStatus::ready,
                     'type_id' => InvoiceType::recalculation,
-                    'amount_to_pay' => $contract->calculateRecalculationInvoiceTotal($contract->start_at, $lastDayOfThisMonth),
-                    'comment' => 'Автоматический созданный счет по контракту ' . $contract->id,
+                    'amount_to_pay' => $amountToPay,
+                    'comment' => 'Автоматически созданный счет по контракту ' . $contract->id,
                 ]);
             });
             // send a link to client
@@ -244,6 +247,8 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 throw $exception;
             }
             $contract->subscription->setStatus(SubscriptionStatus::sent);
+            $invoice->status_id = InvoiceStatus::sent;
+            $invoice->save();
         }
 
         return APIResponse::success($isCreatingNew ? 'Договор на оказание услуг сформирован и отправлен клиенту' : 'Данные договора обновлены');
