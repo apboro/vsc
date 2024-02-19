@@ -59,7 +59,7 @@ class ServicesEditController extends ApiEditController
         'email' => 'nullable|email',
         'phones' => 'min:1',
         'phones.*' => 'required',
-        'acquiring_id' => 'required'
+        'acquiring_id' => 'nullable'
     ];
 
     protected array $titles = [

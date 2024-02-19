@@ -71,7 +71,7 @@
 
         <GuiContainer mt-30>
             <FormDictionary :form="form" :name="'requisites_id'" :dictionary="'organization_requisites'"/>
-            <FormDictionary :form="form" :name="'acquiring_id'" :dictionary="'acquiring'"/>
+            <FormDictionary v-if="regularTypeProgram.includes(form.values['type_program_id'])" :form="form" :name="'acquiring_id'" :dictionary="'acquiring'"/>
             <FormDictionary :form="form" :name="'contract_id'" :dictionary="'contracts'"/>
             <FormDictionary :form="form" :name="'letter_id'" :dictionary="'letters'"/>
             <FormText :form="form" :name="'description'"/>
