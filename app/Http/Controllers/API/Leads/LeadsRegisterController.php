@@ -75,7 +75,7 @@ class LeadsRegisterController extends ApiEditController
 
         if ($lead->is_group) {
             $this->rules['is_contract_legal'] = 'required|boolean';
-            $this->rules['organization_name'] = 'required|string';
+            $this->rules['organization_name'] = 'nullable|string';
             $this->rules['is_trainer_needed'] = 'required|boolean';
 
             $this->titles['is_contract_legal'] = 'Договор оформляется на юр. лицо';

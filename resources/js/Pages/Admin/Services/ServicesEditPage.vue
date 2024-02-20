@@ -58,7 +58,7 @@
             <FormNumber :form="form" :name="'training_return_price'"/>
         </GuiContainer>
 
-        <GuiContainer mt-30 v-if="singleTypeProgram.includes(form.values['type_program_id'])">
+        <GuiContainer mt-30 v-if="singleTypeProgram.includes(form.values['type_program_id']) || groupTypeProgram.includes(form.values['type_program_id'])">
             <FormNumber :form="form" :name="'price'"/>
             <FormDate :form="form" :name="'date_deposit_funds'"/>
             <FormNumber :form="form" :name="'advance_payment'"/>
@@ -168,6 +168,7 @@ export default {
         form: form('/api/services/get', '/api/services/update'),
         regularTypeProgram: [],
         singleTypeProgram: [],
+        groupTypeProgram: [],
         phones: [''],
         staffList: [],
     }),
@@ -222,6 +223,7 @@ export default {
                 .then(response => {
                     this.regularTypeProgram = response.data.data['regulars'];
                     this.singleTypeProgram = response.data.data['singleType'];
+                    this.groupTypeProgram = response.data.data['groupType'];
                 });
         },
         addNewPhone(value) {

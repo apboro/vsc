@@ -381,7 +381,7 @@ export default {
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
             // group
             this.registration_form.set('is_contract_legal', this.data.data['is_contract_legal'], this.data.data['is_group'] ? 'required' : null, 'Договор оформляется на юр.лицо', true);
-            this.registration_form.set('organization_name', this.data.data['organization_name'], this.data.data['is_group'] ? 'required' : null, 'Название организации', true);
+            this.registration_form.set('organization_name', this.data.data['organization_name'], this.data.data['is_group'] && this.data.data['is_contract_legal'] ? 'required' : null, 'Название организации', true);
             this.registration_form.set('is_trainer_needed', false, this.data.data['is_group'] ? 'required' : null, 'Нужно тренерское сопровождение', true);
 
             this.registration_form.load();

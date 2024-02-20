@@ -225,6 +225,11 @@ export default {
         groupPrice() {
           return this.form.values['group_price']
         },
+        totalCount() {
+          return parseInt(this.form.values['boys_1_count']) + parseInt(this.form.values['girls_1_count']) +
+            parseInt(this.form.values['boys_2_count']) + parseInt(this.form.values['girls_2_count']) +
+            parseInt(this.form.values['boys_3_count']) + parseInt(this.form.values['girls_3_count'])
+        }
     },
 
     watch: {
@@ -233,6 +238,10 @@ export default {
         },
         groupPrice(val) {
             this.form.values['total_price'] = val + this.form.values['additional_price']
+        },
+        totalCount(val) {
+            this.form.values['group_price'] = this.form.values['per_ward_price'] * val
+            this.form.values['ward_count'] = val
         }
     },
 

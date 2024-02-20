@@ -315,7 +315,7 @@
                     <img style="width: 100%; height: 100%;" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(resource_path('views/pdf/sign.png'))); ?>"
                          alt="stamp"/>
                 </div>
-                <div style="position: absolute; left: 100pt; top: -20pt; width: 120pt; height: 120pt; z-index: 5;">
+                <div style="position: absolute; left: 100pt; top: -50pt; width: 120pt; height: 120pt; z-index: 5;">
                     <img style="width: 100%; height: 100%;" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(resource_path('views/pdf/stamp.png'))); ?>"
                          alt="stamp"/>
                 </div>
