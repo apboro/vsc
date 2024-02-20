@@ -68,6 +68,8 @@ class LeadGroupInitController extends ApiEditController
                 'ward_count' => $subscription->lead->groupData->ward_count,
                 'trainer_count' => $subscription->lead->groupData->trainer_count,
                 'attendant_count' => $subscription->lead->groupData->attendant_count,
+
+                'additional_conditions' => $subscription->lead->client_comments,
             ];
             $discounts = Discount::queryRaw()
                 ->where(['organization_id' => $key['organization_id'], 'enabled' => true])

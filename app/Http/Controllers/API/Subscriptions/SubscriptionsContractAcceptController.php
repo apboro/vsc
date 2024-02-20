@@ -159,6 +159,10 @@ class SubscriptionsContractAcceptController extends ApiEditController
 
         $contract->contractData->additional_conditions = $data['additional_conditions'] ?? null;
 
+        $contract->contractData->total_price = $data['total_price'] ?? null;
+        $contract->contractData->additional_price = $data['additional_price'] ?? null;
+        $contract->contractData->group_price = $data['group_price'] ?? null;
+
         if ($isCreatingNew) {
             $contract->contractData->organization_title = $contract->subscription->service->requisites->organization_title;
             $contract->contractData->organization_inn = $contract->subscription->service->requisites->organization_inn;

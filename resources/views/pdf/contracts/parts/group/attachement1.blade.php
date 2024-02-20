@@ -88,7 +88,8 @@
     <tbody>
     <tr>
       <td><b>ID</b></td>
-      <td>{{ $client_name }} <br>/ {{ $service_start_date }} - {{ $service_end_date }}</td>
+      <td>
+        {{ $is_legal ? $org_name : $client_name }} <br>/ {{ $service_start_date }} - {{ $service_end_date }}</td>
     </tr>
     <tr>
       <td colspan="2"><b>Контактное лицо от Заказчика</b></td>

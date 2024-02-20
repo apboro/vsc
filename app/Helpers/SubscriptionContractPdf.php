@@ -138,8 +138,9 @@ class SubscriptionContractPdf
                     return $ps->position->user->profile->fullName ?? '';
                 })->join(', '),
 
-                'service_daily_price' => $contract->contractData->daily_price,
-                'service_price' => $contract->contractData->price,
+                'service_daily_price' => $contract->contractData->price,
+                'group_price' => $contract->contractData->group_price ?:
+                    ($contract->groupData->ward_count * $contract->subscription->service->price ?? 0),
                 'additional_price' => $contract->contractData->additional_price,
                 'total_price' => $contract->contractData->total_price,
                 'service_description' => $contract->subscription->service->description,
