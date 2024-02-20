@@ -107,10 +107,16 @@ class ServicesViewController extends ApiController
             ->where('service_type_id', ServiceTypes::one_time)
             ->pluck('id')
             ->toArray();
+        $groupType = ServiceProgram::query($current)
+            ->select('id')
+            ->where('service_type_id', ServiceTypes::group)
+            ->pluck('id')
+            ->toArray();
 
         $values = [
             'regulars' => $regulars,
             'singleType' => $singleType,
+            'groupType' => $groupType,
         ];
 
         return APIResponse::response($values);

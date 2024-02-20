@@ -303,6 +303,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
 
                 'additional_conditions' => $contract->contractData->additional_conditions,
 
+                'per_ward_price' => $contract->subscription->service->price ?? 0,
                 'days_count' => $contract->contractData->days_count ?? 14,
                 'group_price' => $contract->contractData->group_price ?:
                     ($contract->groupData->ward_count * $contract->subscription->service->price ?? 0),

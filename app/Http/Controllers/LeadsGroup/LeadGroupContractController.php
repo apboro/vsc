@@ -147,7 +147,7 @@ class LeadGroupContractController extends ApiEditController
             (int)$data['girls_3_count'] + (int)$data['boys_3_count'] !==
             (int)$data['ward_count']
         ) {
-            return APIResponse::error('Общее количество детей не совпадает');
+            return APIResponse::validationError(['ward_count' => ['Общее количество детей не совпадает']]);
         }
 
         try {

@@ -102,6 +102,13 @@
                 </div>
 
                 <div class="group-block-row">
+                    <GuiText group-block-row__title>Общее количество детей</GuiText>
+                    <FormString class="group-block-row__input" :form="form" :hide-title="true" :name="'ward_count'"/>
+                    <div class="group-block-row__input"></div>
+                    <div></div>
+                </div>
+
+                <div class="group-block-row">
                     <GuiText group-block-row__title>Количество тренеров</GuiText>
                     <FormString class="group-block-row__input" :form="form" :hide-title="true" :name="'trainer_count'"/>
                     <div class="group-block-row__input"></div>
@@ -109,7 +116,7 @@
                 </div>
 
                 <div class="group-block-row">
-                    <GuiText group-block-row__title>Количество сопровожждающих</GuiText>
+                    <GuiText group-block-row__title>Количество сопровождающих</GuiText>
                     <FormString class="group-block-row__input" :form="form" :hide-title="true" :name="'attendant_count'"/>
                     <div class="group-block-row__input"></div>
                     <div></div>
@@ -215,8 +222,8 @@ export default {
         this.form.set('girls_3_count', this.getData('girls_3_count'), null, '18 лет и старше', true);
         this.form.set('boys_3_count', this.getData('boys_3_count'), null, null, true);
         this.form.set('ward_count', this.getData('ward_count'), 'required', 'Общее количество детей', true);
-        this.form.set('trainer_count', this.getData('trainer_count'), 'required', 'Количество тренеров', true);
-        this.form.set('attendant_count', this.getData('attendant_count'), 'required', 'Количество сопровождающих', true);
+        this.form.set('trainer_count', this.getData('trainer_count', 0), 'required', 'Количество тренеров', true);
+        this.form.set('attendant_count', this.getData('attendant_count', 0), 'required', 'Количество сопровождающих', true);
 
         this.form.set('additional_conditions', this.getData('additional_conditions'), null, 'Дополнительные условия', true);
 
@@ -248,13 +255,22 @@ export default {
             return this.crm_url + path + (this.debug ? '?XDEBUG_SESSION_START=PHPSTORM' : '');
         },
 
-        getData(key) {
-            return this.subscriptionData && this.subscriptionData[key] ? this.subscriptionData[key] : null;
+        getData(key, defaultValue = null) {
+            return this.subscriptionData && this.subscriptionData[key] ? this.subscriptionData[key] : defaultValue;
         },
 
         sendContract() {
             if (!this.form.validate()) {
                 return;
+            }
+            if (
+              parseInt(this.form.values['girls_1_count']) + parseInt(this.form.values['boys_1_count']) +
+              parseInt(this.form.values['girls_2_count']) + parseInt(this.form.values['boys_2_count']) +
+              parseInt(this.form.values['girls_3_count']) + parseInt(this.form.values['boys_3_count']) !==
+              parseInt(this.form.values['ward_count'])
+            ) {
+              // this.form.errors['ward_count'] = ['Количество детей не совпадает']
+              // return
             }
 
             // override form saving to send headers
@@ -268,7 +284,15 @@ export default {
                     this.message = response.data['message'];
                 })
                 .catch(error => {
-                    this.message = error.response.data['message'];
+                    if (error.response.data['code'] === 422) {
+                      for (let key in error.response.data.errors) {
+                        this.form.valid[key] = false
+                      }
+                      this.form.is_valid = false
+                      this.form.errors = error.response.data.errors
+                    } else {
+                      this.message = error.response.data['message'];
+                    }
                 })
                 .finally(() => {
                     this.form.is_saving = false;
