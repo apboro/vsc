@@ -27,7 +27,7 @@
   <td>{{ $ward_count }}</td>
   <td>14</td>
   <td>{{ $service_daily_price }}</td>
-  <td>{{ $service_price }}</td>
+  <td>{{ $group_price }}</td>
 </tr>
 <tr>
   <td colspan="5">Дополнительные требования</td>

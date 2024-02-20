@@ -218,7 +218,7 @@ export default {
         this.form.set('trainer_count', this.getData('trainer_count'), 'required', 'Количество тренеров', true);
         this.form.set('attendant_count', this.getData('attendant_count'), 'required', 'Количество сопровождающих', true);
 
-        this.form.set('additional_conditions', null, null, 'Дополнительные условия', true);
+        this.form.set('additional_conditions', this.getData('additional_conditions'), null, 'Дополнительные условия', true);
 
         if (this.subscriptionData['is_contract_legal']) {
             this.form.set('organization_name', this.getData('organization_name'), 'required', 'Название организации', true);

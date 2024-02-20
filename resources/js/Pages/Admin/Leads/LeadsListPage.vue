@@ -104,7 +104,7 @@
                 </ListTableCell>
                 <ListTableCell>
                     <RouterLink class="link" :to="{name: 'leads-view', params: {id: lead['id']}}"
-                                v-html="highlight(lead['ward_lastname'] + ' ' + lead['ward_firstname'] + ' ' + lead['ward_patronymic'])"
+                                v-html="highlight(lead['ward_lastname'] || lead['ward_firstname'] || lead['ward_patronymic'] ? lead['ward_lastname'] + ' ' + lead['ward_firstname'] + ' ' + lead['ward_patronymic'] : '—')"
                     />
                 </ListTableCell>
                 <ListTableCell>
