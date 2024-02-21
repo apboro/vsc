@@ -109,7 +109,7 @@
                     </div>
                 </GuiContainer>
 
-                <FormText :form="form" :name="'client_comments'"/>
+                <FormText :form="form" :placeholder="'Здесь вы можете указать особые условия и пожелания, а также Ваши вопросы'" :name="'client_comments'"/>
             </LeadBlockForm>
 
             <div style="margin-top: 30px"/>
@@ -220,12 +220,12 @@ export default {
         this.form.set('girls_3_count', null, null, null, true);
         this.form.set('boys_3_count', null, null, null, true);
         this.form.set('ward_count', null, 'required', 'Общее количество детей', true);
-        this.form.set('trainer_count', null, 'required', 'Количество тренеров', true);
-        this.form.set('attendant_count', null, 'required', 'Количество сопровождающих', true);
+        this.form.set('trainer_count', 0, 'required', 'Количество тренеров', true);
+        this.form.set('attendant_count', 0, 'required', 'Количество сопровождающих', true);
 
         this.form.set('region_id', null, null, 'Локация', true);
 
-        this.form.set('client_comments', 'Здесь вы можете указать особые условия и пожелания, а также Ваши вопросы', null, 'Комментарии или дополнительные пожелания', true);
+        this.form.set('client_comments', null, null, 'Комментарии или дополнительные пожелания', true);
 
 
         let serviceId = null
