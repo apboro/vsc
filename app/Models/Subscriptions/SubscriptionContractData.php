@@ -247,6 +247,11 @@ class SubscriptionContractData extends Model
         $this->attributes['daily_price'] = $value !== null ? PriceConverter::priceToStore($value) : null;
     }
 
+    public function getClientFullName()
+    {
+        return $this->lastname. ' '. $this->firstname. ' '.$this->patronymic;
+    }
+
     /**
      * Convert group price from store value to real price.
      *

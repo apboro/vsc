@@ -82,6 +82,7 @@ class StatusesSeeder extends GenericSeeder
             InvoicePaymentStatus::unpaid => ['name' => 'Не оплачен'],
             InvoicePaymentStatus::partially_paid => ['name' => 'Частично оплачен'],
             InvoicePaymentStatus::paid => ['name' => 'Оплачен'],
+            InvoicePaymentStatus::created => ['name' => 'Создан'],
         ],
     ];
 }

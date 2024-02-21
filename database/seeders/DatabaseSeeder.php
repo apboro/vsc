@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Dictionaries\AccountTransactionTypesSeeder;
+use Database\Seeders\Dictionaries\BanksSeeder;
 use Database\Seeders\Dictionaries\ClientCommentsSeeder;
 use Database\Seeders\Dictionaries\InvoiceTypesSeeder;
 use Database\Seeders\Dictionaries\PatternSeeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         ClientCommentsSeeder::class,
         AccountTransactionTypesSeeder::class,
         InvoiceTypesSeeder::class,
+        BanksSeeder::class
     ];
 
     /**

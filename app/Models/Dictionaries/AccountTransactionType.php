@@ -29,12 +29,16 @@ class AccountTransactionType extends AbstractDictionary
 
     /** @var int The id of partner account refill by cash. Final. */
     public const account_refill_cash = 2;
+    /** @var int The id of partner account refill by card. Final. */
+    public const account_refill_card = 10;
 
     /** @var int The id of partner account withdrawal. Not final. */
     public const account_withdrawal = 3;
 
     /** @var int The id of partner account withdrawal by cash. Final. */
     public const account_withdrawal_cash = 4;
+    /** @var int The id of partner account withdrawal by cash. Final. */
+    public const account_withdrawal_pay_for_service = 20;
 
 
     /** @var string Referenced table name. */

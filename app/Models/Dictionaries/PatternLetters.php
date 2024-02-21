@@ -7,6 +7,7 @@ namespace App\Models\Dictionaries;
  * @property string $name
  * @property bool $enabled
  * @property int $order
+ * @property string $link
  */
 class PatternLetters extends AbstractDictionary
 {

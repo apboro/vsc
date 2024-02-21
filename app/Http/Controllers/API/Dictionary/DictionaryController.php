@@ -10,6 +10,8 @@ use App\Models\Dictionaries\AccountTransactionType;
 use App\Models\Dictionaries\AccountTransactionTypePrimary;
 use App\Models\Dictionaries\AccountTransactionTypeRefill;
 use App\Models\Dictionaries\AccountTransactionTypeWithdrawal;
+use App\Models\Dictionaries\Acquiring;
+use App\Models\Dictionaries\Bank;
 use App\Models\Dictionaries\ClientStatus;
 use App\Models\Dictionaries\Contracts;
 use App\Models\Dictionaries\Discount;
@@ -69,6 +71,8 @@ class DictionaryController extends ApiController
         'transaction_withdrawal_types' => ['class' => AccountTransactionTypeWithdrawal::class, 'allow' => null],
         'transaction_types' => ['class' => AccountTransactionType::class, 'allow' => null],
         'invoice_types' => ['class' => InvoiceType::class, 'allow' => null],
+        'acquiring' => ['class' => Acquiring::class, 'allow' => null],
+        'banks' => ['class' => Bank::class, 'allow' => null],
     ];
 
     /**

@@ -4,10 +4,6 @@ namespace Database\Seeders\Dictionaries;
 
 use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ClientCommentType;
-use App\Models\Dictionaries\Contracts;
-use App\Models\Dictionaries\Letters;
-use App\Models\Dictionaries\Pattern;
-use App\Models\Dictionaries\PatternLetters;
 use Database\Seeders\GenericSeeder;
 
 class ClientCommentsSeeder extends GenericSeeder
