@@ -26040,10 +26040,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.form.set('girls_3_count', null, null, null, true);
     this.form.set('boys_3_count', null, null, null, true);
     this.form.set('ward_count', null, 'required', 'Общее количество детей', true);
-    this.form.set('trainer_count', null, 'required', 'Количество тренеров', true);
-    this.form.set('attendant_count', null, 'required', 'Количество сопровождающих', true);
+    this.form.set('trainer_count', 0, 'required', 'Количество тренеров', true);
+    this.form.set('attendant_count', 0, 'required', 'Количество сопровождающих', true);
     this.form.set('region_id', null, null, 'Локация', true);
-    this.form.set('client_comments', 'Здесь вы можете указать особые условия и пожелания, а также Ваши вопросы', null, 'Комментарии или дополнительные пожелания', true);
+    this.form.set('client_comments', null, null, 'Комментарии или дополнительные пожелания', true);
     var serviceId = null;
 
     if (this.queryParams['service_id']) {
@@ -31322,6 +31322,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
           })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormText, {
             form: _ctx.form,
+            placeholder: 'Здесь вы можете указать особые условия и пожелания, а также Ваши вопросы',
             name: 'client_comments'
           }, null, 8
           /* PROPS */
