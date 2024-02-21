@@ -25790,8 +25790,8 @@ __webpack_require__.r(__webpack_exports__);
     this.form.set('girls_3_count', this.getData('girls_3_count'), null, '18 лет и старше', true);
     this.form.set('boys_3_count', this.getData('boys_3_count'), null, null, true);
     this.form.set('ward_count', this.getData('ward_count'), 'required', 'Общее количество детей', true);
-    this.form.set('trainer_count', this.getData('trainer_count'), 'required', 'Количество тренеров', true);
-    this.form.set('attendant_count', this.getData('attendant_count'), 'required', 'Количество сопровождающих', true);
+    this.form.set('trainer_count', this.getData('trainer_count', 0), 'required', 'Количество тренеров', true);
+    this.form.set('attendant_count', this.getData('attendant_count', 0), 'required', 'Количество сопровождающих', true);
     this.form.set('additional_conditions', this.getData('additional_conditions'), null, 'Дополнительные условия', true);
 
     if (this.subscriptionData['is_contract_legal']) {
@@ -25821,13 +25821,18 @@ __webpack_require__.r(__webpack_exports__);
       return this.crm_url + path + (this.debug ? '?XDEBUG_SESSION_START=PHPSTORM' : '');
     },
     getData: function getData(key) {
-      return this.subscriptionData && this.subscriptionData[key] ? this.subscriptionData[key] : null;
+      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      return this.subscriptionData && this.subscriptionData[key] ? this.subscriptionData[key] : defaultValue;
     },
     sendContract: function sendContract() {
       var _this = this;
 
       if (!this.form.validate()) {
         return;
+      }
+
+      if (parseInt(this.form.values['girls_1_count']) + parseInt(this.form.values['boys_1_count']) + parseInt(this.form.values['girls_2_count']) + parseInt(this.form.values['boys_2_count']) + parseInt(this.form.values['girls_3_count']) + parseInt(this.form.values['boys_3_count']) !== parseInt(this.form.values['ward_count'])) {// this.form.errors['ward_count'] = ['Количество детей не совпадает']
+        // return
       } // override form saving to send headers
 
 
@@ -25843,7 +25848,16 @@ __webpack_require__.r(__webpack_exports__);
         // show message
         _this.message = response.data['message'];
       })["catch"](function (error) {
-        _this.message = error.response.data['message'];
+        if (error.response.data['code'] === 422) {
+          for (var key in error.response.data.errors) {
+            _this.form.valid[key] = false;
+          }
+
+          _this.form.is_valid = false;
+          _this.form.errors = error.response.data.errors;
+        } else {
+          _this.message = error.response.data['message'];
+        }
       })["finally"](function () {
         _this.form.is_saving = false;
       });
@@ -30122,7 +30136,7 @@ var _hoisted_32 = {
   "class": "group-block-row"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Количество тренеров");
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Общее количество детей");
 
 var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "group-block-row__input"
@@ -30138,7 +30152,7 @@ var _hoisted_36 = {
   "class": "group-block-row"
 };
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Количество сопровожждающих");
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Количество тренеров");
 
 var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "group-block-row__input"
@@ -30150,17 +30164,23 @@ var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  style: {
-    "margin-top": "20px"
-  }
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_40 = {
+  "class": "group-block-row"
+};
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Дополнительные условия");
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Количество сопровождающих");
 
 var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "group-block-row__input"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "20px"
   }
@@ -30168,35 +30188,25 @@ var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Дополнительные условия");
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "20px"
   }
 }, null, -1
 /* HOISTED */
 );
-
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Подтверждаю свое согласие на обработку моих персональных данных и персональных данных воспитанника");
-
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  style: {
-    "margin-top": "15px"
-  }
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Подтверждаю свое согласие на фото- и видеосъемку спортивных занятий с возможностью публикации таких материалов в сети Интернет, в том числе, в рекламных и информационных целях ");
 
 var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
-    "margin-top": "15px"
+    "margin-top": "20px"
   }
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Уведомлен о необходимости предоставления справки об отсутствии медицинских противопоказаний для занятия выбранным видом спорта, результаты анализа на энтеробиозу детей до 12 лет в случае посещения бассейна ");
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Подтверждаю свое согласие на обработку моих персональных данных и персональных данных воспитанника");
 
 var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
@@ -30206,7 +30216,7 @@ var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Уведомлен о том, что воспитанник не допускается до занятий в случае наличия признаков острого респираторного заболевания, вирусной инфекции, covid-19, иных симптомов, свидетельствующих о плохом самочувствии воспитанника, в случае нахождения в больничном воспитанника либо лиц, совместно проживающих с воспитанником (состояние временной нетрудоспособности, карантин, самоизоляция) ");
+var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Подтверждаю свое согласие на фото- и видеосъемку спортивных занятий с возможностью публикации таких материалов в сети Интернет, в том числе, в рекламных и информационных целях ");
 
 var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
@@ -30216,13 +30226,33 @@ var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Я ознакомлен с ");
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Уведомлен о необходимости предоставления справки об отсутствии медицинских противопоказаний для занятия выбранным видом спорта, результаты анализа на энтеробиозу детей до 12 лет в случае посещения бассейна ");
 
-var _hoisted_53 = ["href"];
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  style: {
+    "margin-top": "15px"
+  }
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" и подтверждаю свое согласие с всеми правилами и условиями ");
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Уведомлен о том, что воспитанник не допускается до занятий в случае наличия признаков острого респираторного заболевания, вирусной инфекции, covid-19, иных симптомов, свидетельствующих о плохом самочувствии воспитанника, в случае нахождения в больничном воспитанника либо лиц, совместно проживающих с воспитанником (состояние временной нетрудоспособности, карантин, самоизоляция) ");
 
 var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  style: {
+    "margin-top": "15px"
+  }
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Я ознакомлен с ");
+
+var _hoisted_57 = ["href"];
+
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" и подтверждаю свое согласие с всеми правилами и условиями ");
+
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   style: {
     "margin-top": "20px"
   }
@@ -30230,7 +30260,7 @@ var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить");
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отправить");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_GuiHeading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("GuiHeading");
@@ -30604,7 +30634,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "group-block-row__input",
         form: _ctx.form,
         "hide-title": true,
-        name: 'trainer_count'
+        name: 'ward_count'
       }, null, 8
       /* PROPS */
       , ["form"]), _hoisted_34, _hoisted_35]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiText, {
@@ -30620,22 +30650,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "group-block-row__input",
         form: _ctx.form,
         "hide-title": true,
+        name: 'trainer_count'
+      }, null, 8
+      /* PROPS */
+      , ["form"]), _hoisted_38, _hoisted_39]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiText, {
+        "group-block-row__title": ""
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_41];
+        }),
+        _: 1
+        /* STABLE */
+
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormString, {
+        "class": "group-block-row__input",
+        form: _ctx.form,
+        "hide-title": true,
         name: 'attendant_count'
       }, null, 8
       /* PROPS */
-      , ["form"]), _hoisted_38, _hoisted_39])];
+      , ["form"]), _hoisted_42, _hoisted_43])];
     }),
     _: 1
     /* STABLE */
 
-  }), _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiHeading, null, {
+  }), _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiHeading, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_41];
+      return [_hoisted_45];
     }),
     _: 1
     /* STABLE */
 
-  }), _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiContainer, null, {
+  }), _hoisted_46, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiContainer, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormText, {
         form: _ctx.form,
@@ -30647,38 +30693,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
+  }), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
     modelValue: _ctx.agreement_1,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.agreement_1 = $event;
-    })
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_44];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["modelValue"]), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
-    modelValue: _ctx.agreement_2,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.agreement_2 = $event;
-    })
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_46];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["modelValue"]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
-    modelValue: _ctx.agreement_3,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.agreement_3 = $event;
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30690,9 +30708,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["modelValue"]), _hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
-    modelValue: _ctx.agreement_4,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.agreement_4 = $event;
+    modelValue: _ctx.agreement_2,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.agreement_2 = $event;
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30704,25 +30722,53 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["modelValue"]), _hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
-    modelValue: _ctx.agreement_5,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return _ctx.agreement_5 = $event;
+    modelValue: _ctx.agreement_3,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.agreement_3 = $event;
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-        href: $props.crm_url + '/leads/contract/' + $props.subscriptionKey,
-        target: "_blank"
-      }, "Договором и Приложениями", 8
-      /* PROPS */
-      , _hoisted_53), _hoisted_54];
+      return [_hoisted_52];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["modelValue"]), _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiContainer, null, {
+  , ["modelValue"]), _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
+    modelValue: _ctx.agreement_4,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.agreement_4 = $event;
+    })
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_54];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"]), _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputCheckbox, {
+    modelValue: _ctx.agreement_5,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.agreement_5 = $event;
+    })
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        href: $props.crm_url + '/leads/contract/' + $props.subscriptionKey,
+        target: "_blank"
+      }, "Договором и Приложениями", 8
+      /* PROPS */
+      , _hoisted_57), _hoisted_58];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"]), _hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiContainer, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_GuiButton, {
         color: 'blue',
@@ -30730,7 +30776,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: !$options.agree
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_56];
+          return [_hoisted_60];
         }),
         _: 1
         /* STABLE */
