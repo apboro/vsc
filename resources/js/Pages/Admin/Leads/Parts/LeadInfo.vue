@@ -39,6 +39,7 @@
             <GuiValue :title="'до 10 лет'">{{ data['girls_1_count'] }} / {{ data['boys_1_count'] }}</GuiValue>
             <GuiValue :title="'10-17 лет'">{{ data['girls_2_count'] }} / {{ data['boys_2_count'] }}</GuiValue>
             <GuiValue :title="'старше 18 лет'">{{ data['girls_3_count'] }} / {{ data['boys_3_count'] }}</GuiValue>
+            <GuiValue :title="'Количество тренеров'">{{ data['attendant_count'] }}</GuiValue>
             <GuiValue :title="'Количество сопровождающих'">{{ data['attendant_count'] }}</GuiValue>
             <GuiValueArea :title="'Комментарий клиента (пожелания из поля комментарий в заявке)'" :text-content="data['client_comments']"/>
         </GuiContainer>
