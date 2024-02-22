@@ -141,7 +141,7 @@
                   </GuiContainer>
                   <GuiHeading mb-15>Дополнительные условия</GuiHeading>
                   <GuiContainer>
-                      <FormText :form="form" :hide-title="true" :name="'additional_conditions'"/>
+                      <FormText :form="form" :hide-title="true" :placeholder="''" :name="'additional_conditions'"/>
                       <FormNumber :form="form" :name="'additional_price'"/>
                       <FormNumber :form="form" :name="'total_price'"/>
                   </GuiContainer>
