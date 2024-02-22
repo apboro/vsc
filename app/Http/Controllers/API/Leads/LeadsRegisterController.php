@@ -76,11 +76,9 @@ class LeadsRegisterController extends ApiEditController
         if ($lead->is_group) {
             $this->rules['is_contract_legal'] = 'required|boolean';
             $this->rules['organization_name'] = 'nullable|string';
-            $this->rules['is_trainer_needed'] = 'required|boolean';
 
             $this->titles['is_contract_legal'] = 'Договор оформляется на юр. лицо';
             $this->titles['organization_name'] = 'Название организации';
-            $this->titles['is_trainer_needed'] = 'Нужно тренерское сопровождение';
         } else {
             $this->rules['ward_lastname'] = 'required';
             $this->rules['ward_firstname'] = 'required';
@@ -193,7 +191,6 @@ class LeadsRegisterController extends ApiEditController
                 } else {
                     $lead->groupData->is_contract_legal = $data['is_contract_legal'];
                     $lead->groupData->organization_name = $data['organization_name'];
-                    $lead->groupData->is_trainer_needed = $data['is_trainer_needed'];
                     $lead->groupData->save();
                 }
 

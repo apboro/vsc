@@ -4,7 +4,13 @@
             <HeaderGroup/>
 
             <div style="margin-top: 30px"/>
-
+            <LeadBlockForm>
+              <GuiText>
+                Уважаемые организаторы!<br>
+                Не переживайте, все указанные в заявке данные можно будет уточнить и отредактировать с менеджером перед заполнением договора (например, количество, возраст, пол детей, количество сопровождающих и пр.)
+              </GuiText>
+            </LeadBlockForm>
+            <div style="margin-top: 30px"/>
             <LeadBlockForm label="Данные организатора">
                 <GuiHeading>Контактное лицо</GuiHeading>
                 <LeadFormString :form="form" :name="'lastname'"/>
@@ -95,6 +101,13 @@
                       :disabled="form.values['need_help'] === true"
                       @change="serviceChanged"
                     />
+                  <LeadFormCheckBoxSingle
+                      :form="form"
+                      class="input-field-50__second-checkbox"
+                      :name="'need_help'"
+                      :hide-title="true"
+                      @change="needHelpChanged"
+                  />
                 </div>
 
                 <GuiContainer v-if="service_info" service_info>
@@ -226,6 +239,7 @@ export default {
         this.form.set('region_id', null, null, 'Локация', true);
 
         this.form.set('client_comments', null, null, 'Комментарии или дополнительные пожелания', true);
+        this.form.set('need_help', false, null, 'Мне сложно определиться, т.к. очень много вопросов, прошу со мной связаться по указанному номеру', true);
 
 
         let serviceId = null
@@ -234,7 +248,7 @@ export default {
             this.serviceChanged(serviceId)
         }
 
-        this.form.set('service_id', serviceId, 'required', 'Услуга', true);
+        this.form.set('service_id', serviceId, 'required_if:need_help,false', 'Услуга', true);
 
         this.form.load();
     },
@@ -271,6 +285,13 @@ export default {
         regionChanged() {
             this.form.values['service_id'] = null;
             this.serviceChanged(null);
+        },
+
+        needHelpChanged(value) {
+            if (value) {
+                this.form.update('service_id', null);
+                this.serviceChanged(null);
+            }
         },
 
         serviceChanged(service_id) {

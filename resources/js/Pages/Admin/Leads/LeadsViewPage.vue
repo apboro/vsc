@@ -136,7 +136,6 @@
 
                         <FormCheckBox :form="registration_form" :name="'is_contract_legal'" hide-title/>
                         <FormString :form="registration_form" :name="'organization_name'"/>
-                        <FormCheckBox :form="registration_form" :name="'is_trainer_needed'" hide-title/>
 
                     </GuiContainer>
 
@@ -381,8 +380,7 @@ export default {
             this.registration_form.set('contract_comment', null, null, 'Комментарий клиенту', true);
             // group
             this.registration_form.set('is_contract_legal', this.data.data['is_contract_legal'], this.data.data['is_group'] ? 'required' : null, 'Договор оформляется на юр.лицо', true);
-            this.registration_form.set('organization_name', this.data.data['organization_name'], this.data.data['is_group'] && this.data.data['is_contract_legal'] ? 'required' : null, 'Название организации', true);
-            this.registration_form.set('is_trainer_needed', false, this.data.data['is_group'] ? 'required' : null, 'Нужно тренерское сопровождение', true);
+            this.registration_form.set('organization_name', this.data.data['organization_name'], null, 'Название организации', true);
 
             this.registration_form.load();
             this.is_duplicates_loading = true;
