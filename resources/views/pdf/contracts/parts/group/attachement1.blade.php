@@ -23,8 +23,8 @@
     </tr>
     <tr>
       <td rowspan="2"><b>Количество гостей<br><br>До 10 лет</b></td>
-      <td><b>муж.</b></td>
       <td><b>жен.</b></td>
+      <td><b>муж.</b></td>
     </tr>
     <tr>
       <td>{{ $girls_1_count }}</td>
