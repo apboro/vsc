@@ -146,7 +146,6 @@ class SubscriptionContractPdf
                 'service_description' => $contract->subscription->service->description,
 
                 'is_legal' => $contract->is_legal,
-                'is_trainer_needed' => $contract->subscription->lead->groupData->is_trainer_needed,
                 'additional_conditions' => $contract->contractData->additional_conditions,
 
                 'girls_1_count' => $contract->groupData->girls_1_count,
