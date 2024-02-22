@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $organization_name
  * @property bool $is_contract_individual
  * @property bool $is_contract_legal
- * @property bool $is_trainer_needed
  *
  * @property int|null $girls_1_count
  * @property int|null $boys_1_count

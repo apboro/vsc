@@ -53,8 +53,9 @@ class LeadGroupNewController extends ApiEditController
             'attendant_count' => 'required|integer|gte:0',
 
             'region_id' => 'nullable',
-            'service_id' => 'required',
+            'service_id' => 'nullable',
             'clients_comments' => 'nullable',
+            'need_help' => 'nullable',
         ];
         $titles = [
             'lastname' => 'Фамилия (законного представителя)',
@@ -99,6 +100,7 @@ class LeadGroupNewController extends ApiEditController
         } else {
             $lead->region_id = $data['region_id'];
         }
+        $lead->need_help = $data['need_help'];
         $lead->service_id = $data['service_id'];
         $lead->client_comments = $data['client_comments'];
 
