@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LeadsGroup;
 use App\Http\APIResponse;
 use App\Http\Controllers\ApiEditController;
 use App\Http\Controllers\Leads\Helpers\LeadSession;
+use App\Models\Dictionaries\ClientOrigin;
 use App\Models\Dictionaries\Discount;
 use App\Models\Dictionaries\Region;
 use App\Models\Dictionaries\ServiceStatus;
@@ -125,10 +126,13 @@ class LeadGroupInitController extends ApiEditController
                 ->get();
         }
 
+
+
         return APIResponse::response([
             'session' => LeadSession::makeSession((int)$key['organization_id'], $request->ip()),
             'regions' => $regions ?? null,
             'services' => $services,
+            'client_origins' => ClientOrigin::query()->select(['id', 'name'])->get(),
             'subscription_data' => $subscriptionData ?? null,
             'subscription_id' => $subscription->id ?? null,
             'service_data' => $serviceData ?? null,

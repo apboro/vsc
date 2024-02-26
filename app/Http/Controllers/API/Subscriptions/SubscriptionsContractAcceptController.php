@@ -162,6 +162,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
         $contract->contractData->total_price = $data['total_price'] ?? null;
         $contract->contractData->additional_price = $data['additional_price'] ?? null;
         $contract->contractData->group_price = $data['group_price'] ?? null;
+        $contract->contractData->days_count = $data['days_count'] ?? null;
 
         if ($isCreatingNew) {
             $contract->contractData->organization_title = $contract->subscription->service->requisites->organization_title;
@@ -309,7 +310,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
                 'additional_conditions' => $contract->contractData->additional_conditions,
 
                 'per_ward_price' => $contract->subscription->service->price ?? 0,
-                'days_count' => $contract->contractData->days_count ?? 14,
+                'days_count' => $contract->contractData->days_count ?? $contract->subscription->service->days_count,
                 'group_price' => $contract->contractData->group_price ?:
                     ($contract->groupData->ward_count * $contract->subscription->service->price ?? 0),
                 'additional_price' => $contract->contractData->additional_price ?:
@@ -432,7 +433,7 @@ class SubscriptionsContractAcceptController extends ApiEditController
             'boys_2_count' => 'Мальчиков 10-17 лет',
             'girls_3_count' => 'Девочек 18 лет и старше',
             'boys_3_count' => 'Мальчиков 18 лет и старше',
-            'ward_count' => 'Общее количество детей',
+            'ward_count' => 'Общее количество воспитанников',
             'trainer_count' => 'Количество тренеров',
             'attendant_count' => 'Количество сопровождающих',
 

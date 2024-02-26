@@ -78,6 +78,7 @@ class ServicesViewController extends ApiController
             'group_limit' => $service->group_limit,
             'start_at' => $service->start_at->format('d.m.Y'),
             'end_at' => $service->end_at->format('d.m.Y'),
+            'days_count' => $service->days_count,
             'requisites' => $service->requisites ? $service->requisites->name : null,
             'acquiring' => $service->acquiring ? $service->acquiring->name : null,
             'is_regular' => !isset($service->typeProgram->serviceType) || $service->typeProgram->serviceType->id === ServiceTypes::regular,

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class LeadGroupNewController extends ApiEditController
 {
@@ -35,11 +36,11 @@ class LeadGroupNewController extends ApiEditController
 
         // validate
         $rules = [
-            'lastname' => 'required_without:organization_name',
-            'firstname' => 'required_without:organization_name',
-            'patronymic' => 'required_without:organization_name',
-            'phone' => 'required_without:organization_name',
-            'email' => 'required_without:organization_name|email|bail',
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'patronymic' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|bail',
             'is_contract_individual' => 'nullable|bool',
             'organization_name' => 'nullable',
             'girls_1_count' => 'nullable|integer|gte:0',
@@ -56,19 +57,31 @@ class LeadGroupNewController extends ApiEditController
             'service_id' => 'nullable',
             'clients_comments' => 'nullable',
             'need_help' => 'nullable',
+            'client_origin' => 'nullable',
         ];
         $titles = [
-            'lastname' => 'Фамилия (законного представителя)',
-            'firstname' => 'Имя (законного представителя)',
-            'patronymic' => 'Отчество (законного представителя)',
+            'lastname' => 'Фамилия',
+            'firstname' => 'Имя',
+            'patronymic' => 'Отчество',
             'phone' => 'Телефон',
             'email' => 'Email',
             'organization_name' => 'Наименование организации',
+
+            'girls_1_count' => 'Девочек до 10 лет',
+            'boys_1_count' => 'Мальчиков до 10 лет',
+            'girls_2_count' => 'Девочек 10-17 лет',
+            'boys_2_count' => 'Мальчиков 10-17 лет',
+            'girls_3_count' => 'Девочек 18 лет и старше',
+            'boys_3_count' => 'Мальчиков 18 лет и старше',
+            'ward_count' => 'Общее количество детей',
+            'trainer_count' => 'Количество тренеров',
+            'attendant_count' => 'Количество сопровождающих',
 
             'region_id' => 'Район',
             'service_id' => 'Услуга',
             'clients_comments' => 'Комментарии или дополнительные пожелания',
         ];
+
         if ($errors = $this->validate($data, $rules, $titles)) {
             return APIResponse::validationError($errors);
         }
@@ -78,7 +91,7 @@ class LeadGroupNewController extends ApiEditController
             (int)$data['girls_3_count'] + (int)$data['boys_3_count'] !==
             (int)$data['ward_count']
         ) {
-            return APIResponse::error('Общее количество детей не совпадает');
+            return APIResponse::validationError(['ward_count' => ['Общее количество воспитанников не совпадает']]);
         }
 
         // add lead
@@ -103,6 +116,7 @@ class LeadGroupNewController extends ApiEditController
         $lead->need_help = $data['need_help'];
         $lead->service_id = $data['service_id'];
         $lead->client_comments = $data['client_comments'];
+        $lead->client_origin_id = $data['client_origin_id'];
 
         $leadGroupData = new LeadGroupData();
         $leadGroupData->organization_name = $data['organization_name'];
