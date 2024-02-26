@@ -5,10 +5,13 @@
 
 Наша команда готова приступить к тренировкам, сотрудники - для тренировок, вожатые - для сопровождения, родители - для поддержки будущих Чемпионов, а сами будущие Чемпионы смогут начать побеждать, тем более что часто основная победа - это победа над собой.
 Наши контакты для связи
-- группа в контакте: https://vk.com/clubnaslediekudrovo
-- телефон: +7 (911) 714-05-78
-- почта: kkudrovo@gmail.ru
-- сайт: vsev-sportcenter.ru
+@foreach($subscription->service->positions as $position)
+{{$position->user->profile->fullName ?? null}}
+@endforeach
+@foreach($subscription->service->phones as $phone)
+- телефон: {{$phone->phone}}
+@endforeach
+{{$subscription->service->email ? '- почта:' . $subscription->service->email : null}}}
 
 С приближением каникул количество обращений увеличивается, но мы отвечаем на них со всей возможной скоростью. Мы благодарим вас за понимание и с нетерпением ждем начала нашего совместного пути к успеху!
 

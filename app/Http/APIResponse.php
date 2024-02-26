@@ -74,14 +74,14 @@ class APIResponse
      *
      * @return  JsonResponse
      */
-    public static function error(string $message = 'Server error', ?array $payload = null): JsonResponse
+    public static function error(string $message = 'Server error', ?array $payload = null, $statusCode = 500): JsonResponse
     {
         return response()->json([
             'message' => $message,
             'status' => $message,
             'payload' => $payload,
-            'code' => 500,
-        ], 500);
+            'code' => $statusCode,
+        ], $statusCode);
     }
 
     /**

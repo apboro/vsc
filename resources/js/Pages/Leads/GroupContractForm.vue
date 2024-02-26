@@ -6,7 +6,7 @@
             <div style="margin-top: 20px"></div>
             <GuiText>
                 Настоящая анкета является основой для формирования договора об оказании услуг, который в последующем направляется заказчику с резолюцией исполнителя по электронной
-                почте для ответного подписания. При необходимости заказчик может получить получения копию договора на физическом носителе в офисе школы.
+                почте для ответного подписания. При необходимости заказчик может получить получения копию договора на физическом носителе в офисе школы, по адресу Берёзовая улица, 1, Кудрово.
             </GuiText>
             <div style="margin-top: 20px"></div>
             <GuiText>
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="group-block-row">
-                    <GuiText group-block-row__title>Общее количество детей</GuiText>
+                    <GuiText group-block-row__title>Общее количество воспитанников</GuiText>
                     <FormString class="group-block-row__input" :form="form" :hide-title="true" :name="'ward_count'"/>
                     <div class="group-block-row__input"></div>
                     <div></div>
@@ -221,7 +221,7 @@ export default {
         this.form.set('boys_2_count', this.getData('boys_2_count'), null, null, true);
         this.form.set('girls_3_count', this.getData('girls_3_count'), null, '18 лет и старше', true);
         this.form.set('boys_3_count', this.getData('boys_3_count'), null, null, true);
-        this.form.set('ward_count', this.getData('ward_count'), 'required', 'Общее количество детей', true);
+        this.form.set('ward_count', this.getData('ward_count'), 'required', 'Общее количество воспитанников', true);
         this.form.set('trainer_count', this.getData('trainer_count', 0), 'required', 'Количество тренеров', true);
         this.form.set('attendant_count', this.getData('attendant_count', 0), 'required', 'Количество сопровождающих', true);
 

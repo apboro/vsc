@@ -114,7 +114,7 @@ class LeadGroupContractController extends ApiEditController
             'boys_2_count' => 'Мальчиков 10-17 лет',
             'girls_3_count' => 'Девочек 18 лет и старше',
             'boys_3_count' => 'Мальчиков 18 лет и старше',
-            'ward_count' => 'Общее количество детей',
+            'ward_count' => 'Общее количество воспитанников',
             'trainer_count' => 'Количество тренеров',
             'attendant_count' => 'Количество сопровождающих',
 
@@ -147,7 +147,7 @@ class LeadGroupContractController extends ApiEditController
             (int)$data['girls_3_count'] + (int)$data['boys_3_count'] !==
             (int)$data['ward_count']
         ) {
-            return APIResponse::validationError(['ward_count' => ['Общее количество детей не совпадает']]);
+            return APIResponse::validationError(['ward_count' => ['Общее количество воспитанников не совпадает']]);
         }
 
         try {

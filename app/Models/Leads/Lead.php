@@ -19,6 +19,7 @@ use InvalidArgumentException;
  * @property int $id
  * @property int $status_id
  * @property int $organization_id
+ * @property int|null $client_origin_id
  *
  * @property string|null $lastname
  * @property string|null $firstname
