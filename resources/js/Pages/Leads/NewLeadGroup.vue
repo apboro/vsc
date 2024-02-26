@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="group-block-row">
-                  <GuiText group-block-row__title>Общее количество детей</GuiText>
+                  <GuiText group-block-row__title>Общее количество воспитанников</GuiText>
                   <LeadFormString class="group-block-row__input" :form="form" :hide-title="true" :name="'ward_count'"/>
                   <div class="group-block-row__input"></div>
                   <div></div>
@@ -123,6 +123,16 @@
                 </GuiContainer>
 
                 <FormText :form="form" :placeholder="'Здесь вы можете указать особые условия и пожелания, а также Ваши вопросы'" :name="'client_comments'"/>
+
+                <LeadFormDropdownSingle
+                    :top="true"
+                    class="vsc-services-drop input-field"
+                    :form="form"
+                    :name="'client_origin_id'"
+                    :options="clientOrigins"
+                    :identifier="'id'" :show="'name'"
+                    :placeholder="'Выберите источник'"
+                />
             </LeadBlockForm>
 
             <div style="margin-top: 30px"/>
@@ -193,6 +203,7 @@ export default {
         session: {type: String, default: null},
         regions: {type: Array, default: () => ([])},
         services: {type: Array, default: () => ([])},
+        clientOrigins: {type: Array, default: () => ([])},
     },
 
     computed: {
@@ -217,11 +228,11 @@ export default {
 
     created() {
         this.form.save_url = this.url('/leads-group/send');
-        this.form.set('lastname', null, 'required_without:organization_name', 'Фамилия', true);
-        this.form.set('firstname', null, 'required_without:organization_name', 'Имя', true);
-        this.form.set('patronymic', null, 'required_without:organization_name', 'Отчество', true);
-        this.form.set('phone', null, 'required_without:organization_name', 'Телефон', true);
-        this.form.set('email', null, 'required_without:organization_name|email|bail', 'Email', true);
+        this.form.set('lastname', null, 'required', 'Фамилия', true);
+        this.form.set('firstname', null, 'required', 'Имя', true);
+        this.form.set('patronymic', null, 'required', 'Отчество', true);
+        this.form.set('phone', null, 'required', 'Телефон', true);
+        this.form.set('email', null, 'required|email|bail', 'Email', true);
 
         this.form.set('is_contract_individual', null, null, 'Договор будет заключаться на это имя', true);
         this.form.set('organization_name', null, null, 'Наименование организации', true);
@@ -232,7 +243,7 @@ export default {
         this.form.set('boys_2_count', null, null, null, true);
         this.form.set('girls_3_count', null, null, null, true);
         this.form.set('boys_3_count', null, null, null, true);
-        this.form.set('ward_count', null, 'required', 'Общее количество детей', true);
+        this.form.set('ward_count', null, 'required', 'Общее количество воспитанников', true);
         this.form.set('trainer_count', 0, 'required', 'Количество тренеров', true);
         this.form.set('attendant_count', 0, 'required', 'Количество сопровождающих', true);
 
@@ -240,6 +251,7 @@ export default {
 
         this.form.set('client_comments', null, null, 'Комментарии или дополнительные пожелания', true);
         this.form.set('need_help', false, null, 'Мне сложно определиться, т.к. очень много вопросов, прошу со мной связаться по указанному номеру', true);
+        this.form.set('client_origin_id', null, null, 'Откуда вы о нас узнали?', true);
 
 
         let serviceId = null
@@ -275,7 +287,15 @@ export default {
                     this.message = response.data['message'];
                 })
                 .catch(error => {
+                  if (error.response.data['code'] === 422) {
+                    for (let key in error.response.data.errors) {
+                      this.form.valid[key] = false
+                    }
+                    this.form.is_valid = false
+                    this.form.errors = error.response.data.errors
+                  } else {
                     this.message = error.response.data['message'];
+                  }
                 })
                 .finally(() => {
                     this.form.is_saving = false;

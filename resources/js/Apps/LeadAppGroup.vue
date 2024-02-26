@@ -8,6 +8,7 @@
                 :debug="debug"
                 :services="services"
                 :regions="regions"
+                :client-origins="clientOrigins"
             />
             <GroupContractForm
                 v-if="!is_initializing && subscription_id !== null && message === null"
@@ -54,6 +55,7 @@ export default {
         session: null,
         services: [],
         regions: [],
+        clientOrigins: [],
         subscriptionKey: null,
         subscription_id: null,
         subscription_data: null,
@@ -83,6 +85,7 @@ export default {
                 this.session = response.data.data['session'];
                 this.services = response.data.data['services'];
                 this.regions = response.data.data['regions'];
+                this.clientOrigins = response.data.data['client_origins'];
                 this.subscription_id = response.data.data['subscription_id'];
                 this.subscription_data = response.data.data['subscription_data'];
                 this.service_data = response.data.data['service_data'];

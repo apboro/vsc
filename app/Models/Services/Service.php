@@ -67,6 +67,7 @@ use InvalidArgumentException;
  * @property ServiceSchedule $schedule
  * @property OrganizationRequisites $requisites
  * @property-read Collection<PositionService> $positions
+ * @property-read int|null $days_count
  */
 class Service extends Model implements Statusable, AsDictionary
 {
@@ -407,5 +408,14 @@ class Service extends Model implements Statusable, AsDictionary
     public function positions(): HasMany
     {
         return $this->hasMany(PositionService::class);
+    }
+
+    public function getDaysCountAttribute(): ?int
+    {
+        if (!$this->start_at || !$this->end_at) {
+            return null;
+        }
+
+        return Carbon::parse($this->start_at)->diffInDays(Carbon::parse($this->end_at));
     }
 }

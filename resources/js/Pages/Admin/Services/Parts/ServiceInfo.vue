@@ -13,6 +13,7 @@
         <GuiContainer w-50 mt-30 pr-20 inline>
             <GuiValue :title="'Дата начала услуги'">{{ data['start_at'] }}</GuiValue>
             <GuiValue :title="'Дата окончания услуги'">{{ data['end_at'] }}</GuiValue>
+            <GuiValue v-if="data['days_count']" :title="'Количество дней'">{{ data['days_count'] }}</GuiValue>
 
             <template v-if="data['is_regular']">
                 <GuiValueArea :title="'Расписание занятий'" :text-content="data['schedule']"/>

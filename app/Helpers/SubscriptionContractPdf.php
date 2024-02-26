@@ -144,6 +144,7 @@ class SubscriptionContractPdf
                 'additional_price' => $contract->contractData->additional_price,
                 'total_price' => $contract->contractData->total_price,
                 'service_description' => $contract->subscription->service->description,
+                'days_count' => $contract->contractData->days_count ?? $contract->subscription->service->days_count,
 
                 'is_legal' => $contract->is_legal,
                 'additional_conditions' => $contract->contractData->additional_conditions,
