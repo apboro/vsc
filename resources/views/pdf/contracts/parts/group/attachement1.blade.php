@@ -16,7 +16,11 @@
     <tbody>
     <tr>
       <td>Ответственный<br> менеджер:</td>
-      <td colspan="2">{{ $responsible_manager }}</td>
+      <td colspan="2">
+        {{ $responsible_manager }}
+        {{ $service_phone ? ', ' . $service_phone : ''}}
+        {{ $service_email ? ', ' . $service_email : ''}}
+      </td>
     </tr>
     <tr>
       <td colspan="3"><b>Данные по группе</b></td>
