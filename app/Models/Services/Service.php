@@ -422,6 +422,6 @@ class Service extends Model implements Statusable, AsDictionary
             return null;
         }
 
-        return Carbon::parse($this->start_at)->diffInDays(Carbon::parse($this->end_at));
+        return Carbon::parse($this->start_at)->diffInDays(Carbon::parse($this->end_at)) + 1;
     }
 }

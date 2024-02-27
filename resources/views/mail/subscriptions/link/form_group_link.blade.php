@@ -5,13 +5,13 @@
 
 Наша команда готова приступить к тренировкам, сотрудники - для тренировок, вожатые - для сопровождения, родители - для поддержки будущих Чемпионов, а сами будущие Чемпионы смогут начать побеждать, тем более что часто основная победа - это победа над собой.
 Наши контакты для связи
-@foreach($subscription->service->positions as $position)
-{{$position->user->profile->fullName ?? null}}
+@foreach($subscription->service->positions as $ps)
+{{ $ps->position->user->profile->fullName ?? null }}
 @endforeach
 @foreach($subscription->service->phones as $phone)
 - телефон: {{$phone->phone}}
 @endforeach
-{{$subscription->service->email ? '- почта:' . $subscription->service->email : null}}}
+{{ $subscription->service->email ? '- почта: ' . $subscription->service->email : null }}
 
 С приближением каникул количество обращений увеличивается, но мы отвечаем на них со всей возможной скоростью. Мы благодарим вас за понимание и с нетерпением ждем начала нашего совместного пути к успеху!
 
