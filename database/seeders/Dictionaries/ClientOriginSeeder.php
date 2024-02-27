@@ -10,7 +10,7 @@ class ClientOriginSeeder extends GenericSeeder
     protected array $data = [
         ClientOrigin::class => [
             ClientOrigin::email => [
-                'name' => 'Почтоваая рассылка',
+                'name' => 'Почтовая рассылка',
             ],
             ClientOrigin::vk => [
                 'name' => 'Группа ВК',

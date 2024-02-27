@@ -31,7 +31,7 @@ class SubscriptionContractController extends ApiController
      *
      * @return  JsonResponse
      */
-    public function resend(Request $request): JsonResponse
+    public function resend(Request $request)
     {
         $contract = $this->contract($request, $request->input('id'));
 

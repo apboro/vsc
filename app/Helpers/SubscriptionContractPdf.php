@@ -137,6 +137,8 @@ class SubscriptionContractPdf
                 'responsible_manager' => $contract->subscription->service->positions->map(function (PositionService $ps) {
                     return $ps->position->user->profile->fullName ?? '';
                 })->join(', '),
+                'service_email' => $contract->subscription->service->email,
+                'service_phone' => $contract->subscription->service->phonesList(),
 
                 'service_daily_price' => $contract->contractData->price,
                 'group_price' => $contract->contractData->group_price ?:
