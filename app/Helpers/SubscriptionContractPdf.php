@@ -61,6 +61,7 @@ class SubscriptionContractPdf
             'ward_name' => $contract->contractData->ward_lastname . ' ' . $contract->contractData->ward_firstname . ' ' . $contract->contractData->ward_patronymic,
             'ward_birth_date' => $contract->contractData->ward_birth_date ? $contract->contractData->ward_birth_date->format('d.m.Y') : '____',
             'service_name' => $contract->contractData->service_name,
+            'service_email' => $contract->subscription->service->email,
 
             'ward_document' => $contract->contractData->ward_document ?? '____',
             'ward_document_date' => $contract->contractData->ward_document_date ? $contract->contractData->ward_document_date->format('d.m.Y') : '____',
@@ -137,7 +138,6 @@ class SubscriptionContractPdf
                 'responsible_manager' => $contract->subscription->service->positions->map(function (PositionService $ps) {
                     return $ps->position->user->profile->fullName ?? '';
                 })->join(', '),
-                'service_email' => $contract->subscription->service->email,
                 'service_phone' => $contract->subscription->service->phonesList(),
 
                 'service_daily_price' => $contract->contractData->price,
