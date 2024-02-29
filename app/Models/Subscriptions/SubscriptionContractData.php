@@ -251,7 +251,6 @@ class SubscriptionContractData extends Model
     {
         return $this->lastname. ' '. $this->firstname. ' '.$this->patronymic;
     }
-
     /**
      * Convert group price from store value to real price.
      *
