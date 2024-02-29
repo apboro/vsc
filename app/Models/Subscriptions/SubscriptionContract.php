@@ -220,7 +220,7 @@ class SubscriptionContract extends Model implements Statusable
     {
         $this->loadMissing('subscription.lead');
 
-        return $this->subscription->lead->is_group;
+        return $this->subscription->lead->is_group ?? false;
     }
 
     public function getIsLegalAttribute(): bool
