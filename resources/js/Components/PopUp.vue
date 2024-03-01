@@ -164,6 +164,7 @@ $base_light_gray_color: #e5e5e5 !default;
         padding: 15px;
         box-shadow: $shadow_2;
         max-height: 95%;
+        overflow: visible !important;
 
         &-scrollable {
             max-height: unset;
