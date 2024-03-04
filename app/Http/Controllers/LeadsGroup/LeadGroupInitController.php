@@ -56,20 +56,20 @@ class LeadGroupInitController extends ApiEditController
                 'patronymic' => $subscription->client->user->profile->patronymic,
                 'phone' => $subscription->client->user->profile->phone,
                 'email' => $subscription->client->user->profile->email,
-                'organization_name' => $subscription->lead->groupData->organization_name,
-                'is_contract_legal' => $subscription->lead->groupData->is_contract_legal,
+                'organization_name' => $subscription->lead->groupData->organization_name ?? null,
+                'is_contract_legal' => $subscription->lead->groupData->is_contract_legal ?? null,
 
-                'girls_1_count' => $subscription->lead->groupData->girls_1_count,
-                'boys_1_count' => $subscription->lead->groupData->boys_1_count,
-                'girls_2_count' => $subscription->lead->groupData->girls_2_count,
-                'boys_2_count' => $subscription->lead->groupData->boys_2_count,
-                'girls_3_count' => $subscription->lead->groupData->girls_3_count,
-                'boys_3_count' => $subscription->lead->groupData->boys_3_count,
-                'ward_count' => $subscription->lead->groupData->ward_count,
-                'trainer_count' => $subscription->lead->groupData->trainer_count,
-                'attendant_count' => $subscription->lead->groupData->attendant_count,
+                'girls_1_count' => $subscription->lead->groupData->girls_1_count ?? null,
+                'boys_1_count' => $subscription->lead->groupData->boys_1_count ?? null,
+                'girls_2_count' => $subscription->lead->groupData->girls_2_count ?? null,
+                'boys_2_count' => $subscription->lead->groupData->boys_2_count ?? null,
+                'girls_3_count' => $subscription->lead->groupData->girls_3_count ?? null,
+                'boys_3_count' => $subscription->lead->groupData->boys_3_count ?? null,
+                'ward_count' => $subscription->lead->groupData->ward_count ?? null,
+                'trainer_count' => $subscription->lead->groupData->trainer_count ?? null,
+                'attendant_count' => $subscription->lead->groupData->attendant_count ?? null,
 
-                'additional_conditions' => $subscription->lead->client_comments,
+                'additional_conditions' => $subscription->lead->client_comments ?? null,
             ];
             $discounts = Discount::queryRaw()
                 ->where(['organization_id' => $key['organization_id'], 'enabled' => true])
