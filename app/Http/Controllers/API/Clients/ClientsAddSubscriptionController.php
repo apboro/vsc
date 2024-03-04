@@ -11,6 +11,7 @@ use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Services\Service;
 use App\Models\Subscriptions\Subscription;
@@ -150,6 +151,12 @@ class ClientsAddSubscriptionController extends ApiEditController
 
         if ($errors = $this->validate($data, $this->rules, $this->titles)) {
             return APIResponse::validationError($errors);
+        }
+
+        /** @var Service $service */
+        $service = Service::query()->with('typeProgram')->find($data['service_id']);
+        if ($service->typeProgram->service_type_id === ServiceTypes::group) {
+            return APIResponse::error('Нельзя создать подписку вручную для групповых услуг');
         }
 
         try {
