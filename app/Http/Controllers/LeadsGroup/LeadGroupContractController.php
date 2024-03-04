@@ -58,7 +58,7 @@ class LeadGroupContractController extends ApiEditController
 
         /** @var Subscription $subscription */
 
-        $isContractLegal = $subscription->lead->groupData->is_contract_legal;
+        $isContractLegal = $subscription->lead->groupData->is_contract_legal ?? true;
 
         $data = $this->getData($request);
 
