@@ -44,19 +44,25 @@
                                   :has-null="true" @change="regionChanged"/>
                 <div class="input-field-50__second"></div>
 
-                <div class="container-lead-form-center">
-                    <LeadFormDropdownSingle :top="true"
-                                      class="vsc-services-drop input-field-50" :form="form" :name="'service_id'" :options="regionServices" :identifier="'id'" :show="'title'"
-                                      :placeholder="'Выберите услугу'" :disabled="form.values['need_help'] === true"
-                                      @change="serviceChanged"
-                    />
+                <LeadFormDropdownSingle
+                    :top="true"
+                    class="vsc-services-drop input-field"
+                    :form="form"
+                    :name="'service_id'"
+                    :options="regionServices"
+                    :identifier="'id'"
+                    :show="'title'"
+                    :placeholder="'Выберите услугу'"
+                    :disabled="form.values['need_help'] === true"
+                    @change="serviceChanged"
+                />
 
-                    <LeadFormCheckBoxSingle :form="form"
-                                      class="input-field-50__second-checkbox"
-                                      :name="'need_help'"
-                                      :hide-title="true"
-                                      @change="needHelpChanged"/>
-                </div>
+                <LeadFormCheckBoxSingle
+                    :form="form"
+                    :name="'need_help'"
+                    :hide-title="true"
+                    @change="needHelpChanged"
+                />
 
                 <GuiContainer v-if="service_info" service_info>
                     <div class="service_info">
@@ -155,7 +161,11 @@ export default {
             ).map(
                 service => ({id: service['id'], title: service['title'], hint: service['address']})
             );
-        }
+        },
+
+        queryParams() {
+            return this.parseQueryParams(window.location.search.substring(1))
+        },
     },
 
     data: () => ({
@@ -184,11 +194,17 @@ export default {
         this.form.set('phone', null, 'required', 'Телефон', true);
         this.form.set('email', null, 'required|email|bail', 'Email', true);
         this.form.set('region_id', null, null, 'Район', true);
-        this.form.set('service_id', null, 'required_if:need_help,false', 'Услуга', true);
         this.form.set('need_help', false, null, 'Не могу определиться, прошу со мной связаться', true);
 
         this.form.set('client_comments', null, null, 'Комментарии', true);
 
+        let serviceId = null
+        if (this.queryParams['service_id']) {
+            serviceId = parseInt(this.queryParams['service_id'])
+            this.serviceChanged(serviceId)
+        }
+
+        this.form.set('service_id', serviceId, 'required_if:need_help,false', 'Услуга', true);
         this.form.load();
     },
 
@@ -234,6 +250,7 @@ export default {
         },
 
         serviceChanged(service_id) {
+            this.setServiceIdInUrl(service_id)
             if (service_id === null) {
                 this.service_info = null;
                 return;
@@ -250,6 +267,36 @@ export default {
                     this.service_info_loading = false;
                 })
         },
+
+        setServiceIdInUrl(serviceId) {
+            let uri = window.location.pathname
+            let params = this.queryParams
+            if (serviceId) {
+                params['service_id'] = serviceId
+            } else {
+              delete params['service_id']
+            }
+            uri += '?'
+            for (let param in params) {
+                uri += `${param}=${params[param]}&`
+            }
+            uri = uri.replace(/&$/, '');
+
+            window.history.pushState({}, '', uri)
+        },
+        parseQueryParams(queryParams) {
+            const paramsObject = {}
+            const paramsArray = queryParams.split('&')
+
+            for (const param of paramsArray) {
+                const [key, value] = param.split('=')
+                if (key && value) {
+                    paramsObject[key] = decodeURIComponent(value)
+                }
+            }
+
+            return paramsObject
+        }
     }
 }
 </script>

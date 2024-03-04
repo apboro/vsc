@@ -89,26 +89,23 @@
                 />
                 <div class="input-field-50__second"></div>
 
-                <div class="container-lead-form-center">
-                    <LeadFormDropdownSingle
-                      :top="true"
-                      class="vsc-services-drop input-field"
-                      :form="form"
-                      :name="'service_id'"
-                      :options="regionServices"
-                      :identifier="'id'" :show="'title'"
-                      :placeholder="'Выберите услугу'"
-                      :disabled="form.values['need_help'] === true"
-                      @change="serviceChanged"
-                    />
-                  <LeadFormCheckBoxSingle
-                      :form="form"
-                      class="input-field-50__second-checkbox"
-                      :name="'need_help'"
-                      :hide-title="true"
-                      @change="needHelpChanged"
-                  />
-                </div>
+                <LeadFormDropdownSingle
+                    :top="true"
+                    class="vsc-services-drop input-field"
+                    :form="form"
+                    :name="'service_id'"
+                    :options="regionServices"
+                    :identifier="'id'" :show="'title'"
+                    :placeholder="'Выберите услугу'"
+                    :disabled="form.values['need_help'] === true"
+                    @change="serviceChanged"
+                />
+                <LeadFormCheckBoxSingle
+                    :form="form"
+                    :name="'need_help'"
+                    :hide-title="true"
+                    @change="needHelpChanged"
+                />
 
                 <GuiContainer v-if="service_info" service_info>
                     <div class="service_info">
@@ -338,6 +335,8 @@ export default {
           let params = this.queryParams
           if (serviceId) {
             params['service_id'] = serviceId
+          } else {
+            delete params['service_id']
           }
           uri += '?'
           for (let param in params) {

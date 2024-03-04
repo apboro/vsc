@@ -16,8 +16,8 @@
         <FormPopUp :form="registration_form" :title="'Конвертировать лид'" :save-button-caption="'Подтвердить'" :close-on-overlay="'Отменить'" :scrollable="true"
                    class="registration-form" ref="registration">
             <div style="width: 100%;height:100%; overflow: scroll;">
-            <div style="width: 1250px;">
-                <GuiContainer w-50 inline>
+            <div class="registration-container">
+                <div class="inline-container">
                     <FormDictionary :form="registration_form"
                                     :name="'region_id'"
                                     :dictionary="'regions'"
@@ -26,9 +26,9 @@
                                     @change="regionChanged"
                                     style="max-width: 400px; flex-direction: row"
                     />
-                </GuiContainer>
+                </div>
 
-                <GuiContainer w-50 inline>
+                <div class="inline-container">
                     <FormDropdown :form="registration_form"
                                   :name="'service_id'"
                                   :options="regionServices"
@@ -39,10 +39,10 @@
                                   style="max-width: 400px; flex-direction: row"
                                   @change="serviceChanged"
                     />
-                </GuiContainer>
+                </div>
 
                 <GuiContainer w-100>
-                    <GuiContainer w-50 inline pr-50>
+                    <div class="inline-container" pr-50>
                         <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Клиент</span></GuiHeading>
                         <div>
                             <div style="min-height: 30px">
@@ -129,17 +129,17 @@
                                 </td>
                             </tr>
                         </table>
-                    </GuiContainer>
+                    </div>
 
-                    <GuiContainer v-if="data.data['is_group']" w-50 inline>
+                    <div v-if="data.data['is_group']" class="inline-container">
                         <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Организация</span></GuiHeading>
 
                         <FormCheckBox :form="registration_form" :name="'is_contract_legal'" hide-title/>
                         <FormString :form="registration_form" :name="'organization_name'"/>
 
-                    </GuiContainer>
+                    </div>
 
-                    <GuiContainer v-else w-50 inline>
+                    <div v-else class="inline-container">
                         <GuiHeading><span class="text__subtitle" style="padding-left: 15px">Занимающийся</span></GuiHeading>
                         <div>
                             <div style="min-height: 30px">
@@ -218,7 +218,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </GuiContainer>
+                    </div>
                 </GuiContainer>
 
                 <GuiContainer mt-10>
@@ -435,6 +435,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 1024px) {
+  .registration-container {
+    width: 100% !important;
+  }
+  .inline-container {
+    display: block !important;
+  }
+}
+.registration-container {
+  width: 1250px;
+}
+.inline-container {
+  box-sizing: border-box;
+  width: 50%;
+  display: inline-block;
+}
+
 .registration-form {
     td {
         padding: 5px 5px 5px 0;
