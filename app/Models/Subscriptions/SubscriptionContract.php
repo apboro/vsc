@@ -227,7 +227,7 @@ class SubscriptionContract extends Model implements Statusable
     {
         $this->loadMissing('subscription.lead');
 
-        return $this->subscription->lead->is_legal;
+        return $this->subscription->lead->is_legal ?? false;
     }
 
     public static function scopeActive(Builder $q)
