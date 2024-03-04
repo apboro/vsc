@@ -57,7 +57,7 @@ class LeadGroupInitController extends ApiEditController
                 'phone' => $subscription->client->user->profile->phone,
                 'email' => $subscription->client->user->profile->email,
                 'organization_name' => $subscription->lead->groupData->organization_name ?? null,
-                'is_contract_legal' => $subscription->lead->groupData->is_contract_legal ?? null,
+                'is_contract_legal' => $subscription->lead->groupData->is_contract_legal ?? null, #todo
 
                 'girls_1_count' => $subscription->lead->groupData->girls_1_count ?? null,
                 'boys_1_count' => $subscription->lead->groupData->boys_1_count ?? null,
