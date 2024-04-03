@@ -35,6 +35,7 @@
                     <GuiActionsMenu :title="null" v-if="document['is_acceptable'] || document['is_repeatable'] || document['is_closeable']">
                         <span class="link" v-if="document['is_editable']" @click="edit(document)">Изменить данные</span>
                         <span class="link" v-if="document['is_client_data_updatable']" @click="updateClientData(document)">Обновить данные клиента</span>
+                        <span class="link" @click="updateContractData(document)">Обновить данные договора</span>
                         <span class="link" v-if="document['is_acceptable']" @click="accept(document)">Подтвердить данные</span>
                         <span class="link" v-if="document['is_repeatable']" @click="resend(document)">Отправить договор повторно</span>
                         <span class="link" v-if="document['is_closeable']" @click="close(document)">Закрыть договор</span>
@@ -319,6 +320,14 @@ export default {
         updateClientData(document) {
             this.processEntry('Обновить данные клиента?', 'Обновить',
                 '/api/subscriptions/documents/update_client_data', {client_id: document['client_id']})
+                .then(() => {
+                    this.$emit('update');
+                });
+        },
+
+        updateContractData(document) {
+            this.processEntry('Обновить данные договора?', 'Обновить',
+                '/api/subscriptions/documents/update_contract_data', {contract_id: document['id']})
                 .then(() => {
                     this.$emit('update');
                 });

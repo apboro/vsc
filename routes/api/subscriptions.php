@@ -21,6 +21,7 @@ Route::post('/subscriptions/documents', [SubscriptionsDocumentsListController::c
 Route::post('/subscriptions/documents/get', [SubscriptionsContractAcceptController::class, 'get'])->middleware('permit:subscriptions.accept.document');
 Route::post('/subscriptions/documents/update', [SubscriptionsContractAcceptController::class, 'update'])->middleware('permit:subscriptions.accept.document');
 Route::post('/subscriptions/documents/update_client_data', [SubscriptionsContractAcceptController::class, 'updateClientData'])->middleware('permit:subscriptions.accept.document');
+Route::post('/subscriptions/documents/update_contract_data', [SubscriptionsContractAcceptController::class, 'updateContractData'])->middleware('permit:subscriptions.accept.document');
 
 Route::post('/subscriptions/documents/resend', [SubscriptionContractController::class, 'resend'])->middleware('permit:subscriptions.send.document');
 Route::post('/subscriptions/documents/close', [SubscriptionContractController::class, 'close'])->middleware('permit:subscriptions.close.document');
