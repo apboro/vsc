@@ -11,6 +11,7 @@ use App\Models\Clients\ClientWard;
 use App\Models\Dictionaries\ClientCommentActionType;
 use App\Models\Dictionaries\ClientWardStatus;
 use App\Models\Dictionaries\ServiceStatus;
+use App\Models\Dictionaries\ServiceTypes;
 use App\Models\Dictionaries\SubscriptionStatus;
 use App\Models\Services\Service;
 use App\Models\Subscriptions\Subscription;
@@ -18,6 +19,7 @@ use App\Models\User\User;
 use App\Scopes\ForOrganization;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -108,6 +110,9 @@ class ClientsAddSubscriptionController extends ApiEditController
                         'training_base_info.address',
                         'training_bases.region_id',
                     ])
+                    ->whereHas('typeProgram', function (Builder $q) {
+                        $q->where('service_type_id', '!=', ServiceTypes::group);
+                    })
                     ->orderBy('services.title')
                     ->get(),
                 'wards' => $client->wards->map(function (ClientWard $ward) {
