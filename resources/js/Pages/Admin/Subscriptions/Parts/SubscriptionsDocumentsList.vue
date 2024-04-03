@@ -131,7 +131,7 @@
                               </tr>
                           </tbody>
                       </table>
-                      <FormNumber :form="form" :name="'ward_count'"/>
+                      <FormNumber :disabled="true" :form="form" :name="'ward_count'"/>
                       <FormNumber :form="form" :name="'trainer_count'"/>
                       <FormNumber :form="form" :name="'attendant_count'"/>
                   </GuiContainer>
