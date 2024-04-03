@@ -14,7 +14,7 @@ mix
     .js('resources/js/lead-single.js', 'js')
     .js('resources/js/lead-group.js', 'js')
     .vue()
-    .sass('resources/css/app.scss', 'css')
+    .sass('resources/css/app.scss', 'css').disableSuccessNotifications()
 
     .webpackConfig(require('./webpack.config.js'));
 
